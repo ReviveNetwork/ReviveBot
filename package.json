@@ -1,0 +1,11 @@
+{
+  "name": "revivebot",
+  "version": "1.0.0",
+  "description": "Bot for the Revive Network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Melroy",
+  "license": "ISC"
+}
