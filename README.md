@@ -1,6 +1,6 @@
 # ReviveBot
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/apps/revive-bot/deploy/github)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ReviveNetwork/ReviveBot/tree/master)
 
 ## Commands 
  **~ping** - returns a pong 
