@@ -6,6 +6,8 @@
 ## Commands 
  **~ping** - returns a pong 
  
+ **~yo** - returns a yo bro 
+ 
  **~bf2** *PlayerName* - returns bf2 player profile
  
  **~bf2142** *PlayerName* - returns bf2142 player profile
