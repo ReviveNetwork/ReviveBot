@@ -4,9 +4,9 @@
 [![Build Status](https://travis-ci.org/ReviveNetwork/ReviveBot.svg?branch=master)](https://travis-ci.org/ReviveNetwork/ReviveBot)
 
 ## Commands 
- **~ping** - returns a pong 
+ **~ping** - returns a "pong" 
  
- **~yo** - returns a yo bro 
+ **~yo** - returns a "yo bro" 
  
  **~bf2** *PlayerName* - returns bf2 player profile
  
