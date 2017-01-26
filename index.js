@@ -182,6 +182,7 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		}
 	}
 });
+bot.on('error', error => console.log(error));
 /*
 setInterval(function() {
     request("GET", "https://revive-bot.herokuapp.com/");
