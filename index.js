@@ -9,6 +9,10 @@ var guild = bot.guilds.get("256299642180861953");
 
 bot.on('message', message => {
 	if (message.author.bot == true) return; // prevent loop
+if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'hello') {
+		message.reply('hello');
+		return;
+	}
 	if (message.channel.id == '271350052188979201') {
 		bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.content);
 	} else if (message.channel.id == '271349742099759104') {
@@ -27,10 +31,7 @@ bot.on('message', message => {
 		message.reply('yo bro');
 		return;
 	}
-	if (message.content.toLowerCase() === 'hi') {
-		message.reply('hello');
-		return;
-	}
+	
 	if (message.content.toLowerCase() === '~deploy') {
 		if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
 			message.channel.sendMessage("Not for commoners");
