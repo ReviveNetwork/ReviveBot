@@ -22,7 +22,7 @@ if(message.content.startsWith('add')&&message.content.contains('to')) {
 
 var member = message.guild.member(message.mentions.users.first()); 
 var msg = message.content.split(" ");
-member.addRole(message.guild.roles.find("name",msg[msg.length -1]);
+member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('done');
 		return;
 	}
