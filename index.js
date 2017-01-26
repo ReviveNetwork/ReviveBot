@@ -145,7 +145,6 @@ bot.on('message', message => {
         }
     }
 });
-
 /*
 setInterval(function() {
     request("GET", "https://revive-bot.herokuapp.com/");
