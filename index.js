@@ -26,7 +26,7 @@ bot.on('message', message => {
 		return;
 	}
 	if (message.content.toLowerCase() === '~deploy') {
-		if (message.guild.member.roles.indexOf(guild.roles.find("name", "Moderator")) < 0) {
+		if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
 			message.channel.sendMessage("Not for commoners");
 			return;
 
@@ -52,7 +52,7 @@ bot.on('message', message => {
 		return;
 	}
 	if (message.content.toLowerCase() === '~refresh all') {
-		if (message.guild.member.roles.indexOf(guild.roles.find("name", "Moderator")) < 0) {
+		if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
 			return;
 		}
 		for (member in message.guild.members) {
