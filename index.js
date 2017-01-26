@@ -27,6 +27,10 @@ bot.on('message', message => {
 		message.reply('yo bro');
 		return;
 	}
+	if (message.content.toLowerCase() === 'hi') {
+		message.reply('hello');
+		return;
+	}
 	if (message.content.toLowerCase() === '~deploy') {
 		if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
 			message.channel.sendMessage("Not for commoners");
