@@ -5,6 +5,8 @@ const web = require('./web');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 
+var guild = bot.guilds.get("256299642180861953");
+
 bot.on('message', message => {
 	if (message.author.bot == true) return; // prevent loop
 	if (message.channel.id == '271350052188979201') {
