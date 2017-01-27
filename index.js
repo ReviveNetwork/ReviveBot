@@ -21,7 +21,7 @@ if(message.content.startsWith('add')&&message.content.includes('to')) {
 		}
 
 var member = message.guild.member(message.mentions.users.first()); 
-var msg = message.content.split(" ");
+var msg = message.content.split("to ");
 member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('done');
 		return;
@@ -31,7 +31,7 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 	return;
 			                }
 
-		var member = message.guild.member(message.mentions.users.first());                                    var msg = message.content.split(" ");
+		var member = message.guild.member(message.mentions.users.first());                                    var msg = message.content.split("to ");
 		member.removeRole(message.guild.roles.find("name",msg[msg.length -1]));                                                  message.reply('done');                             return;
 		        }
 	if (message.channel.id == '271350052188979201') {
