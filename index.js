@@ -15,7 +15,7 @@ if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'h
 		return;
 	}
 if(message.content.startsWith('add')&&message.content.includes('to')) {
-		if(message.member.roles.has(guild.roles.find("name", "Moderator"))) {
+		if(message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 			message.channel.sendMessage("You aren't  Worthy");
 			return;
 		}
@@ -26,7 +26,7 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('done');
 		return;
 	}
-	if(message.content.startsWith('remove')&&message.content.includes('from')) {                                               if(message.member.roles.has(guild.roles.find("name", "Moderator"))) {                                         message.channel.sendMessage("You aren't  Worthy");
+	if(message.content.startsWith('remove')&&message.content.includes('from')) {                                               if(! message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {                                         message.channel.sendMessage("You aren't  Worthy");
 			                       
 	return;
 			                }
@@ -58,7 +58,7 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 	}
 	
 	if (message.content.toLowerCase() === '~deploy') {
-		if(message.member.roles.has(guild.roles.find("name", "Moderator"))){
+		if(! message.member.roles.has(guild.roles.find("name", "Moderator"))){
 			message.channel.sendMessage("Not for commoners");
 			return;
 
