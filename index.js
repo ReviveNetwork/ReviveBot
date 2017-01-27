@@ -14,7 +14,7 @@ if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'h
 		message.reply('hello');
 		return;
 	}
-if(message.content.startsWith('add')&&message.content.contains('to')) {
+if(message.content.startsWith('add')&&message.content.includes('to')) {
 		if(message.member.roles.has(guild.roles.find("name", "Moderator"))) {
 			message.channel.sendMessage("You aren't  Worthy");
 			return;
