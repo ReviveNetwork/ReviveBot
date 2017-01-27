@@ -26,6 +26,14 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('done');
 		return;
 	}
+	if(message.content.startsWith('remove')&&message.content.includes('from')) {                                               if(message.member.roles.has(guild.roles.find("name", "Moderator"))) {                                         message.channel.sendMessage("You aren't  Worthy");
+			                       
+	return;
+			                }
+
+		var member = message.guild.member(message.mentions.users.first());                                    var msg = message.content.split(" ");
+		member.removeRole(message.guild.roles.find("name",msg[msg.length -1]));                                                  message.reply('done');                             return;
+		        }
 	if (message.channel.id == '271350052188979201') {
 		bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.content);
 	} else if (message.channel.id == '271349742099759104') {
