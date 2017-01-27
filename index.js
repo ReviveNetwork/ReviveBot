@@ -15,7 +15,7 @@ if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'h
 		return;
 	}
 if(message.content.startsWith('add')&&message.content.includes('to')) {
-		if(message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
+		if(! message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 			message.channel.sendMessage("You aren't  Worthy");
 			return;
 		}
