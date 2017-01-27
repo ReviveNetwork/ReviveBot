@@ -1,7 +1,6 @@
 const request = require('sync-request');
 const bot = require('./bot');
 const functions = require('./functions');
-const web = require('./web');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const deploy = require('./autodeploy');
