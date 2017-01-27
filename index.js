@@ -10,7 +10,7 @@ const deploy = require('./autodeploy');
 bot.on('message', message => {
 var guild = bot.guilds.get("256299642180861953");
 	if (message.author.bot == true) return; // prevent loop
-if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'hello') {
+if (message.content.toLowerCase() === 'hi'||message.content.toLowerCase() === 'hello'||message.content.toLowerCase() === 'hey') {
 		message.reply('hello');
 		return;
 	}
@@ -46,18 +46,12 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 	}
 	
 	if (message.content.toLowerCase() === '~deploy') {
-		if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
+		if(message.member.roles.has(guild.roles.find("name", "Moderator"))){
 			message.channel.sendMessage("Not for commoners");
 			return;
 
 		}
-		var exec = require('child_process').exec;
-
-		message.channel.sendMessage("fetching updates");
-
-		function puts(error, stdout, stderr) {
-			message.channel.sendMessage(stdout);
-		}
+		
 		deploy.deploy();
 	}
 	if (message.content.toLowerCase() === '~link') {
