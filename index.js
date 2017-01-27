@@ -44,6 +44,10 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('yo bro');
 		return;
 	}
+	if (message.content.toLowerCase() === '~cookie') {
+		message.reply('crunchcrunch');
+		return;
+	}
 	
 	if (message.content.toLowerCase() === '~deploy') {
 		if(message.member.roles.has(guild.roles.find("name", "Moderator"))){
