@@ -187,7 +187,8 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 });
 process.on('uncaughtException', function(err) {
 	  console.log('Caught exception: ' + err);
-	});
+   bot = require('./bot');
+});
 /*
 setInterval(function() {
     request("GET", "https://revive-bot.herokuapp.com/");
