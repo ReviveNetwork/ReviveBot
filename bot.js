@@ -13,5 +13,5 @@ client.login(dt);
 client.on('ready', () => {
     console.log('Discord bot ready... and logged in!');
 });
-bot.on('error', e => { console.error(e); });
+client.on('error', e => { console.error(e); });
 module.exports = client;
