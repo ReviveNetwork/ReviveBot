@@ -4,7 +4,7 @@ const functions = require('./functions');
 const web = require('./web');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
-
+const deploy = require('./autodeploy);
 
 
 bot.on('message', message => {
@@ -58,9 +58,7 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		function puts(error, stdout, stderr) {
 			message.channel.sendMessage(stdout);
 		}
-		exec("git fetch git@github.com:ReviveNetwork/ReviveBot.git", puts);
-
-
+		deploy.deploy();
 	}
 	if (message.content.toLowerCase() === '~link') {
 		functions.integrate(message.author);
