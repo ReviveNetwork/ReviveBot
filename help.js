@@ -4,7 +4,7 @@ bot.on('message', message => {
 	var channel = message.channel;
 	message = message.content.toLowerCase();
 	//Error updating 
-	if(message.includes('updating') && message.includes('forever') )
+	if(message.includes('updating') && message.includes('forever'))
 	{
 		channel.sendMessage('Follow this article \n http://battlelog.co/wiki.php?article=27');
 	}
@@ -51,6 +51,11 @@ bot.on('message', message => {
 	if(message.includes('howto') && message.includes('report'))
 	{
                  channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=15931');
+	}
+	//Howto Report players
+	if(message.includes('help') && message.includes('me'))
+	{
+                 channel.sendMessage('Me more specific, tell us what the issue is.');
 	}
 }
 );
