@@ -28,7 +28,7 @@ bot.on('message', message => {
 	}
 	if(message.includes('error') && message.includes('api'))
 	{
-                 channel.sendMessage('Follow this article \nhttps://wiki.revive.network/display/KB/Troubleshooting+Revive+Launcher%27s+Login+errors');
+                 channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=17435#p93129');
 	}
 }
 );
