@@ -1,7 +1,7 @@
 const bot = require('./bot');
 
 bot.on('message', message => {
-	var channel = message.channel;/
+	var channel = message.channel;
 	message = message.content.toLowerCase();
 	//Error updating 
 	if(message.includes('updating') && message.includes('forever') )
