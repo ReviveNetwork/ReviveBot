@@ -5,6 +5,7 @@ const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const deploy = require('./autodeploy');
 const help = require('./help');
+const fun = require('./fun');
 
 
 bot.on('message', message => {
