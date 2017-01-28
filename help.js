@@ -17,10 +17,10 @@ bot.on('message', message => {
 		}
 	if(message.includes('invalid') && message.includes('cdkey'))
 	{ channel.sendMessage('follow these articles\nhttps://battlelog.co/post.php?id=16014&page=1\nhttp://battlelog.co/wiki.php?article=28');
+	}
 	if(message.includes('installation') && message.includes('failed'))
 	{ 
 		channel.sendMessage('follow this article\nhttp://battlelog.co/post.php?id=17435#p57246');
-	}
-	}
+	}	
 }
 );
