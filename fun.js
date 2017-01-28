@@ -10,7 +10,7 @@ if(message.content.toLowerCase().startsWith('~count'))
 var count = function(c,message)
 {
 	if(c<=0)
-	{message.edit("Boom");}
+	{message.edit("Boom"); return;} 
 	message.edit(c);
 	setTimeout(count(c-1,message),200);
 };
