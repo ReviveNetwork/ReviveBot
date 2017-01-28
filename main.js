@@ -19,6 +19,7 @@ if(message.content.toLowerCase()==='~start')
 
 	});
 function start(){
+	console.log('Starting?');
 	const exec = require('child_process').exec;
 	exec('node index.js', (error, stdout, stderr) => {
 		  if (error) {
