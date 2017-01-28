@@ -190,6 +190,12 @@ process.on('uncaughtException', function(err) {
 	  console.log('Caught exception: ' + err);
    bot = require('./bot');
 });
+bot.on("guildMemberAdd", (member) =>{
+
+	var member = member.user;
+	member.sendMessage("Welcome to the Revive Nwtowrk");
+	functions.integrate(member);
+});
 /*
 setInterval(function() {
     request("GET", "https://revive-bot.herokuapp.com/");
