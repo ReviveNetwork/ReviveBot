@@ -53,17 +53,7 @@ bot.on('message', message => {
                  channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=15931');
 	}
 	//Howto Report players
-	if(message.includes('help') && message.includes('me'))
-	{
-                 channel.sendMessage('Be more specific, tell us what the issue is.');
-	}
-	//Howto Report players
-	if(message.includes('help'))
-	{
-                 channel.sendMessage('Be more specific, tell us what the issue is.');
-	}
-	//Howto Report players
-	if(message.includes('dont') && message.includes('work') && message.includes('what') && message.includes('problem'));
+	if(message.includes('dont') && message.includes('work') && message.includes('what') && message.includes('problem') && message.includes('help') && message.includes('me'));
 	{
                  channel.sendMessage('Be more specific, tell us what the issue is.');
 	}
