@@ -38,5 +38,9 @@ bot.on('message', message => {
 	{
                  channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=19581');
 	}
+	if(message.includes('howto') && message.includes('report'))
+	{
+                 channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=15931');
+	}
 }
 );
