@@ -1,5 +1,5 @@
 const request = require('sync-request');
-const bot = require('./bot');
+var bot = require('./bot');
 const functions = require('./functions');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
@@ -53,13 +53,14 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('yo bro');
 		return;
 	}
+	if (message.content.toLowerCase() === '~stop') {                                                             process.exit();
+		        }
 	if (message.content.toLowerCase() === '~cookie') {
 		message.reply('crunchcrunch');
 		return;
 	}
-	
 	if (message.content.toLowerCase() === '~deploy') {
-		if(! message.member.roles.has(guild.roles.find("name", "Moderator"))){
+		if(! message.member.roles.has(guild.roles.find("name", "moderator"))){
 			message.channel.sendMessage("Not for commoners");
 			return;
 
