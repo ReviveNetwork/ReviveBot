@@ -12,5 +12,5 @@ var count = function(c,message)
 	if(c<=0)
 	{message.edit("Boom"); return;} 
 	message.edit(c);
-	setTimeout(count(c-1,message),200);
+	setTimeout(count(c-1,message),1000);
 };
