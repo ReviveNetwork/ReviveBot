@@ -57,5 +57,10 @@ bot.on('message', message => {
 	{
                  channel.sendMessage('Be more specific, tell us what the issue is.');
 	}
+	//Howto Report players
+	if(message.includes('help'))
+	{
+                 channel.sendMessage('Be more specific, tell us what the issue is.');
+	}
 }
 );
