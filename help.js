@@ -30,5 +30,9 @@ bot.on('message', message => {
 	{
                  channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=17435#p93129');
 	}
+	if(message.includes('directx9') && message.includes('error'))
+	{
+                 channel.sendMessage('Follow this article \n https://battlelog.co/wiki.php?article=14');
+	}
 }
 );
