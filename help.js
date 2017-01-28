@@ -34,5 +34,9 @@ bot.on('message', message => {
 	{
                  channel.sendMessage('Follow this article \n https://battlelog.co/wiki.php?article=14');
 	}
+	if(message.includes('server') && message.includes('rules'))
+	{
+                 channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=19581');
+	}
 }
 );
