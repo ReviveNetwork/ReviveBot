@@ -55,7 +55,7 @@ bot.on('message', message => {
 	//Howto Report players
 	if(message.includes('help') && message.includes('me'))
 	{
-                 channel.sendMessage('Me more specific, tell us what the issue is.');
+                 channel.sendMessage('Be more specific, tell us what the issue is.');
 	}
 }
 );
