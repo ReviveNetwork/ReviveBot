@@ -53,7 +53,8 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('yo bro');
 		return;
 	}
-	if (message.content.toLowerCase() === '~stop') {                                                             process.exit();
+	if (message.content.toLowerCase() === '~stop') {                                                        if(message.guild !=bot.guilds.find("name","Revive Network Dev")){return;};    
+		process.exit();
 		        }
 	if (message.content.toLowerCase() === '~cookie') {
 		message.reply('crunchcrunch');

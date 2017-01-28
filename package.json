@@ -2,10 +2,10 @@
   "name": "revivebot",
   "version": "1.0.0",
   "description": "Bot for the Revive Network",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "start": "node index.js"
+    "start": "node main.js"
   },
   "author": "Melroy",
   "license": "MIT",
