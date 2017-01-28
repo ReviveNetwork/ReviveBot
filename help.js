@@ -21,6 +21,10 @@ bot.on('message', message => {
 	if(message.includes('installation') && message.includes('failed'))
 	{ 
 		channel.sendMessage('follow this article\nhttp://battlelog.co/post.php?id=17435#p57246');
-	}	
+	}
+	if(message.includes('black screen') && message.includes('help'))
+	{
+                 channel.sendMessage('Follow this article \nhttp://battlelog.co/post.php?id=9744');
+	}
 }
 );
