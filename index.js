@@ -77,8 +77,8 @@ bot.on('message', message => {
         if (message.member.roles.has(guild.roles.find("name", "Moderator"))) {
             return;
         }
-        for (member in message.guild.members) {
-            setTimeout( functions.refreshUser(member.user), 0 );
+        for(var i=0;i<guild.members.size; i++) {
+            functions.refreshUser(guild.members.array()[i].user)
         }
         message.reply("Refreshed");
         return;
