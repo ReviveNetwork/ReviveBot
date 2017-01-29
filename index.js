@@ -78,7 +78,7 @@ bot.on('message', message => {
             return;
         }
         for(var i=0;i<guild.members.size; i++) {
-            functions.refreshUser(guild.members.array()[i].user,guild.members.array()[i]);
+            setTimeout(functions.refreshUser(guild.members.array()[i].user,guild.members.array()[i]),1000);
         }
         message.reply("Refreshed");
         return;
