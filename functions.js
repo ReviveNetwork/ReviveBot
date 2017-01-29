@@ -21,10 +21,12 @@ exports.refreshUser = function(user,member) {
     console.log(user);
     var id = user.id;
     console.log(id);
+    var guild = member.guild;
+    member.addRole(guild.roles.find("name", "members"));
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
 	console.log(info);
     var info = JSON.parse(body.getBody());
-    var guild = member.guild;
+    member.addRole(guild.roles.find("name", "verified members"));
     if (info.is_donator) {
         member.addRole(guild.roles.find("name", "donators"));
     } else {
@@ -46,5 +48,5 @@ exports.refreshAll = function(array) {
 		var member = array.pop();
 		exports.refreshUser(member.user,member)
 		exports.refreshAll(array)
-		},1000);
+		},10);
 };
