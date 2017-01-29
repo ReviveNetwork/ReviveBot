@@ -40,6 +40,7 @@ exports.refreshUser = function(user) {
     {
         console.log(error+":"+response.statusCode);
     }
+        console.log(body);
         var info = JSON.parse(body);
     if (info.is_donator == true) {
         exports.addRole("Donator", user);
