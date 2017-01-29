@@ -21,14 +21,6 @@ if(message.content.toLowerCase()==='~start')
 function start(){
 	var dt = process.env.DISCORD_TOKEN || process.argv[2];
 	console.log('Starting?');
-	const exec = require('child_process').exec;
-	exec('node ' + require('path').join(__dirname, 'index.js') + ' ' + process.argv[2], (error, stdout, stderr) => {
-		  if (error) {
-			  console.log("error");
-              console.log(error);
-			      start; return;
-			    }
-		  console.log(`stdout: ${stdout}`);
-		  console.log(`stderr: ${stderr}`);
-		});
+	const fork = require('child_process').fork;
+	fork(require('path').join(__dirname, 'index.js'), [process.argv[2]]);
 };

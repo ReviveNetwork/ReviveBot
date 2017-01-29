@@ -10,6 +10,7 @@ const web = require('./web');
 var config = require('./config');
 
 bot.on('ready', () => {
+    console.log('Bot ready');
     bot.channels.get('id', config.log_channel).sendMessage('Started up :)');
 });
 
