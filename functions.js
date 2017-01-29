@@ -41,7 +41,7 @@ exports.refreshUser = function(user) {
     request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+user.id,function (error, response, body) {
     if(error)
     {
-        console.log(error+":"response.statusCode);
+        console.log(error+":"+response.statusCode);
     }
     if (info.is_donator == true) {
         addRole("Donator", user.id);
