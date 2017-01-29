@@ -44,5 +44,5 @@ exports.refreshAll = function(array) {
     setTimeout(function{
 		exports.refreshUser(array.pop().user,array()[i])
 		exports.refreshAll(array)
-		,1000);
+		},1000);
 };
