@@ -15,7 +15,7 @@ exports.integrate = function(user) {
     user.sendMessage(res);
 };
 
-exports.refreshUser = function(user) {
+exports.refreshUser = function(user,member) {
     //user is an user onject. get it using message.author
     //dont execute the statements untill api implemented
     console.log(user);
@@ -23,8 +23,7 @@ exports.refreshUser = function(user) {
     console.log(id);
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
     var info = JSON.parse(body.getBody());
-    var guild = bot.guilds.find("name", "Revive Network");
-    var member = guild.member(user);
+    var guild = member.guild;
     if (info.is_donator) {
         member.addRole(guild.roles.find("name", "donators"));
     } else {

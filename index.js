@@ -69,7 +69,7 @@ bot.on('message', message => {
         return;
     }
     if (message.content.toLowerCase() === '~refresh') {
-        functions.refreshUser(message.author);
+        functions.refreshUser(message.author,guild.member(message.author));
         message.reply("Refreshed");
         return;
     }
