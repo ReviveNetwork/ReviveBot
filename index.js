@@ -115,6 +115,7 @@ bot.on('message', message => {
             "\n ~add PlayerName to roleName - adds a player to a role"+
             "\n ~remove PlayerName from roleName - remove a player to a role"+
             "\n ~count int - counts from int to 0 and returns boom"+
+            "\n ~calc expression - calculates the expression"+
             "\n ```");
         return;
     }
