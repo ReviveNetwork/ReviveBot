@@ -59,7 +59,7 @@ exports.refreshUser = function(user) {
     {
         exports.addRole("ingame moderator", user);
     }
-    var guild = bot.guilds.get("256299642180861953");
+    var guild = bot.guilds.find("name", "Revive Network");
     var member  = guild.member(user);
     member.setNickname(info.username);
     });
