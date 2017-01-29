@@ -48,5 +48,5 @@ exports.refreshAll = function(array) {
 		var member = array.pop();
 		exports.refreshUser(member.user,member)
 		exports.refreshAll(array)
-		},10);
+		},3000);
 };
