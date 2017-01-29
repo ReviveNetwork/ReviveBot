@@ -25,6 +25,7 @@ function start(){
 	exec('node index.js '+process.argv[2], (error, stdout, stderr) => {
 		  if (error) {
 			  console.log("error");
+              console.log(error);
 			      start; return;
 			    }
 		  console.log(`stdout: ${stdout}`);
