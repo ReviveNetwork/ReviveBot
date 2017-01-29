@@ -30,7 +30,7 @@ exports.refreshUser = function(user) {
         var guild = bot.guilds.find("name", "Revive Network");
         var member = guild.member(user);
         if (info.is_donator == true) {
-            member.addRole(guild.roles.get('273105185566359562));
+            member.addRole(guild.roles.get('273105185566359562'));
         } else {
             member.removeRole(guild.roles.get("273105185566359562"));
         }
