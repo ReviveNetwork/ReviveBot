@@ -29,10 +29,10 @@ exports.refreshUser = function(user) {
         var info = JSON.parse(body);
         var guild = bot.guilds.find("name", "Revive Network");
         var member = guild.member(user);
-        if (info.is_donator == true) {
-            member.addRole(guild.roles.get('273105185566359562'));
+        if (info.is_donator) {
+            member.addRole(guild.roles.find("name", "donators"));
         } else {
-            member.removeRole(guild.roles.get("273105185566359562"));
+            member.removeRole(guild.roles.find("name", "donators"));
         }
         if (info.is_admin) {
             member.addRole(guild.roles.find("name", "discordadmins"));
