@@ -1,6 +1,6 @@
 const urlencode = require('urlencode');
 const bot = require('./bot');
-const request = require('sync-request');
+const request = require('request');
 
 module.exports = {};
 exports = module.exports;
@@ -38,7 +38,11 @@ exports.integrate = function(user) {
 exports.refreshUser = function(user) {
     //user is an user onject. get it using message.author
     //dont execute the statements untill api implemented
-    var info = JSON.parse(request('GET',"http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+user.id).getBody('utf8'));
+    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+user.id,function (error, response, body) {
+    if(error)
+    {
+        console.log(error+":"response.statusCode);
+    }
     if (info.is_donator == true) {
         addRole("Donator", user.id);
     } else {
@@ -59,4 +63,5 @@ exports.refreshUser = function(user) {
     var guild = bot.guilds.get("256299642180861953");
     var member  = guild.member(user);
     member.setNickname(info.username);
+    });
 };
