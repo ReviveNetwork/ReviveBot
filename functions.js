@@ -21,32 +21,28 @@ exports.refreshUser = function(user) {
     console.log(user);
     var id = user.id;
     console.log(id);
-    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+id,function (error, response, body) {
-    if(error)
-    {
-        console.log(error+":"+response.statusCode);
-    }
+    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id, function(error, response, body) {
+        if (error) {
+            console.log(error + ":" + response.statusCode);
+        }
         console.log(body);
         var info = JSON.parse(body);
         var guild = bot.guilds.find("name", "Revive Network");
-    var member  = guild.member(user);
-    if (info.is_donator == true) {
-        member.addRole(guild.roles.find("name", "donators"));
-    } else {
-        member.removeRole(guild.roles.find("name", "donators"));
-    }
-    if(info.is_admin)
-    {
-        exports.addRole(guild.roles.find("name", "discordadmins"));
-    }
-    if(info.is_mod)
-    {
-        exports.addRole(guild.roles.find("name", "moderator"));;
-    }
-    if(info.usergroup == 8)
-    {
-        exports.addRole(guild.roles.find("name", "ingame moderator"));
-    }
-    member.setNickname(info.username);
+        var member = guild.member(user);
+        if (info.is_donator == true) {
+            member.addRole(guild.roles.find("name", "donators"));
+        } else {
+            member.removeRole(guild.roles.find("name", "donators"));
+        }
+        if (info.is_admin) {
+            member.addRole(guild.roles.find("name", "discordadmins"));
+        }
+        if (info.is_mod) {
+            member.addRole(guild.roles.find("name", "moderator"));;
+        }
+        if (info.usergroup == 8) {
+            member.addRole(guild.roles.find("name", "ingame moderator"));
+        }
+        member.setNickname(info.username);
     });
 };
