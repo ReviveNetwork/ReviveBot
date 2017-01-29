@@ -41,7 +41,7 @@ exports.refreshUser = function(user,member) {
     member.setNickname(info.username);
 };
 exports.refreshAll = function(array) {
-    setTimeout(function{
+    setTimeout(function(){
 		exports.refreshUser(array.pop().user,array()[i])
 		exports.refreshAll(array)
 		},1000);
