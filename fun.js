@@ -8,6 +8,7 @@ bot.on('message', message => {
     }
     if (message.content.toLowerCase().startsWith('~calc')) {
        var res = message.content.match(/[ 0-9\/\+\-\*]+/);
+        res = res..join(' ')
        message.channel.sendMessage(math.eval(res));
     }
 });
