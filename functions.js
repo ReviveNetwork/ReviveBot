@@ -60,6 +60,8 @@ exports.refreshUser = function(user) {
     {
         addRole("ingame moderator", user.id);
     }
+        
+    console.log('refreshed', user.username);
     var guild = bot.guilds.get("256299642180861953");
     var member  = guild.member(user);
     member.setNickname(info.username);
