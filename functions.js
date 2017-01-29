@@ -1,6 +1,6 @@
 const urlencode = require('urlencode');
 const bot = require('./bot');
-const request = require('request');
+const request = require('sync-request');
 
 module.exports = {};
 exports = module.exports;
@@ -21,12 +21,8 @@ exports.refreshUser = function(user) {
     console.log(user);
     var id = user.id;
     console.log(id);
-    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id, function(error, response, body) {
-        if (error) {
-            console.log(error + ":" + response.statusCode);
-        }
-        console.log(body);
-        var info = JSON.parse(body);
+       body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
+        var info = JSON.parse(body.getBody());
         var guild = bot.guilds.find("name", "Revive Network");
         var member = guild.member(user);
         if (info.is_donator) {
@@ -44,5 +40,4 @@ exports.refreshUser = function(user) {
             member.addRole(guild.roles.find("name", "ingame moderator"));
         }
         member.setNickname(info.username);
-    });
 };
