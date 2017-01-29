@@ -12,5 +12,5 @@ var count = function(c, message) {
         return;
     }
     message.edit(c);
-    setTimeout(count(c - 1, message), 1000);
+    setTimeout(count(c - 1, message), 3000);
 };
