@@ -5,20 +5,18 @@ const request = require('request');
 module.exports = {};
 exports = module.exports;
 
-exports.addRole = function(rolename, userid) {
-    var user = bot.users.get(userid);
+exports.addRole = function(rolename, user) {
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
     guild.member(user).addRole(role);
-    console.log(user, "Role Added: " + role.name);
+    console.log(user.username+ "Role Added: " + role.name);
 };
 
-exports.removeRole = function(rolename, userid) {
-    var user = bot.users.get(userid);
+exports.removeRole = function(rolename, user) {
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
     guild.member(user).removeRole(role);
-    console.log(user, "Role removed: " + role.name);
+    console.log(user.username+ "Role removed: " + role.name);
 };
 
 exports.integrate = function(user) {
@@ -41,21 +39,21 @@ exports.refreshUser = function(user) {
     }
         var info = JSON.parse(body);
     if (info.is_donator == true) {
-        exports.addRole("Donator", user.id);
+        exports.addRole("Donator", user);
     } else {
-        exports.removeRole("Donator", user.id);
+        exports.removeRole("Donator", user);
     }
     if(info.is_admin)
     {
-        exports.addRole("discordadmins", user.id);
+        exports.addRole("discordadmins", user);
     }
     if(info.is_mod)
     {
-        exports.addRole("moderator", user.id);
+        exports.addRole("moderator", user);
     }
     if(info.usergroup == 8)
     {
-        exports.addRole("ingame moderator", user.id);
+        exports.addRole("ingame moderator", user);
     }
     var guild = bot.guilds.get("256299642180861953");
     var member  = guild.member(user);
