@@ -9,20 +9,16 @@ exports.addRole = function(rolename, userid) {
     var user = bot.users.get(userid);
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
-    if (guild.member(user).roles.indexOf(role) < 0) {
-        guild.member(user).addRole(role);
-        bot.sendMessage(user, "Role Added: " + role.name);
-    }
+    guild.member(user).addRole(role);
+    console.log(user, "Role Added: " + role.name);
 };
 
 exports.removeRole = function(rolename, userid) {
     var user = bot.users.get(userid);
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
-    if (guild.member(user).roles.indexOf(role) >= 0) {
-        guild.member(user).rempveRole(role);
-        bot.sendMessage(user, "Role removed: " + role.name);
-    }
+    guild.member(user).removeRole(role);
+    console.log(user, "Role removed: " + role.name);
 };
 
 exports.integrate = function(user) {
