@@ -44,7 +44,7 @@ exports.refreshUser = function(user,member) {
     if (info.usergroup == 8) {
         member.addRole(guild.roles.find("name", "ingame moderator"));
     }
-    member.setNickname(info.username);
+   // member.setNickname(info.username);
 };
 exports.refreshAll = function(array) {
     setTimeout(function(){
