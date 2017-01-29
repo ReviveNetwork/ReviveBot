@@ -42,7 +42,8 @@ exports.refreshUser = function(user,member) {
 };
 exports.refreshAll = function(array) {
     setTimeout(function(){
-		exports.refreshUser(array.pop().user,array()[i])
+		var member = array.pop();
+		exports.refreshUser(member.user,member)
 		exports.refreshAll(array)
 		},1000);
 };
