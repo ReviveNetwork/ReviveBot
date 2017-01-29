@@ -7,6 +7,11 @@ const help = require('./help');
 const fun = require('./fun');
 const web = require('./web');
 
+var config = require('./config');
+
+bot.on('ready', () => {
+    bot.channels.get('id', config.log_channel).sendMessage('Started up :)');
+});
 
 bot.on('message', message => {
 var guild = bot.guilds.get("256299642180861953");
@@ -21,14 +26,14 @@ if(message.content.startsWith('add')&&message.content.includes('to')) {
 			return;
 		}
 
-var member = message.guild.member(message.mentions.users.first()); 
+var member = message.guild.member(message.mentions.users.first());
 var msg = message.content.split("to ");
 member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 		message.reply('done');
 		return;
 	}
 	if(message.content.startsWith('remove')&&message.content.includes('from')) {                                               if(! message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {                                         message.channel.sendMessage("You aren't  Worthy");
-			                       
+
 	return;
 			                }
 
