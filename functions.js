@@ -5,22 +5,6 @@ const request = require('request');
 module.exports = {};
 exports = module.exports;
 
-exports.addRole = function(rolename, user) {
-    var guild = bot.guilds.find("name", "Revive Network");
-    var role = guild.roles.find("name", rolename);
-    console.log(guild.roles.join(","));
-    guild.member(user).addRole(role).catch(console.error);
-    console.log(user.username+ "Role Added: " + role.name);
-};
-
-exports.removeRole = function(rolename, user) {
-    var guild = bot.guilds.find("name", "Revive Network");
-    var role = guild.roles.find("name", rolename);
-     console.log(guild.roles.join(","));
-    guild.member(user).removeRole(role).catch(console.error);
-    console.log(user.username+ "Role removed: " + role.name);
-};
-
 exports.integrate = function(user) {
     //user is an user onject. get it using message.author
     let id = urlencode(new Buffer(JSON.stringify({
@@ -44,25 +28,25 @@ exports.refreshUser = function(user) {
     }
         console.log(body);
         var info = JSON.parse(body);
+        var guild = bot.guilds.find("name", "Revive Network");
+    var member  = guild.member(user);
     if (info.is_donator == true) {
-        exports.addRole("Donator", user);
+        member.addRole(guild.roles.find("name", "donators"));
     } else {
-        exports.removeRole("Donator", user);
+        member.removeRole(guild.roles.find("name", "donators"));
     }
     if(info.is_admin)
     {
-        exports.addRole("discordadmins", user);
+        exports.addRole(guild.roles.find("name", "discordadmins"));
     }
     if(info.is_mod)
     {
-        exports.addRole("moderator", user);
+        exports.addRole(guild.roles.find("name", "moderator"));;
     }
     if(info.usergroup == 8)
     {
-        exports.addRole("ingame moderator", user);
+        exports.addRole(guild.roles.find("name", "ingame moderator"));
     }
-    var guild = bot.guilds.find("name", "Revive Network");
-    var member  = guild.member(user);
     member.setNickname(info.username);
     });
 };
