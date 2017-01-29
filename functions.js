@@ -33,7 +33,8 @@ exports.refreshUser = function(user) {
     //user is an user onject. get it using message.author
     //dont execute the statements untill api implemented
     console.log(user);
-    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+user.id,function (error, response, body) {
+    var id = user.id;
+    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+id,function (error, response, body) {
     if(error)
     {
         console.log(error+":"+response.statusCode);
