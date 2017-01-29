@@ -45,21 +45,21 @@ exports.refreshUser = function(user) {
     }
         var info = JSON.parse(body);
     if (info.is_donator == true) {
-        addRole("Donator", user.id);
+        exports.addRole("Donator", user.id);
     } else {
-        removeRole("Donator", user.id);
+        exports.removeRole("Donator", user.id);
     }
     if(info.is_admin)
     {
-        addRole("discordadmins", user.id);
+        exports.addRole("discordadmins", user.id);
     }
     if(info.is_mod)
     {
-        addRole("moderator", user.id);
+        exports.addRole("moderator", user.id);
     }
     if(info.usergroup == 8)
     {
-        addRole("ingame moderator", user.id);
+        exports.addRole("ingame moderator", user.id);
     }
     var guild = bot.guilds.get("256299642180861953");
     var member  = guild.member(user);
