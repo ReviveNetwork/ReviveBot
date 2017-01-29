@@ -111,6 +111,15 @@ bot.on('message', message => {
             "\n ~ping hostname - pings the hostname" +
             "\n ~bf2 PlayerName - returns bf2 player profile" +
             "\n ~bf2142 PlayerName - returns bf2142 player profile" +
+            "\n ~help - displays help" +
+            "\n ~restart - restarts the bot" +
+            "\n ~start - starts the bot"+
+            "\n ~stops - stops the bot"+
+            "\n ~link - links your discord account with your battlelo.co account" +
+            "\n ~cookie - eats a cookie"+
+            "\n add PlayerName to roleName - adds a player to a role"+
+            "\n remove PlayerName from roleName - remove a player to a role"+
+            "\n ~count int - counts from int to 0 and returns boom"
             "\n ```");
         return;
     }
