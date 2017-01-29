@@ -6,14 +6,14 @@ module.exports = {};
 exports = module.exports;
 
 exports.addRole = function(rolename, user) {
-    var guild = bot.guilds.get("256299642180861953");
+    var guild = bot.guilds.find("name", "Revive Network");
     var role = guild.roles.find("name", rolename);
     guild.member(user).addRole(role);
     console.log(user.username+ "Role Added: " + role.name);
 };
 
 exports.removeRole = function(rolename, user) {
-    var guild = bot.guilds.get("256299642180861953");
+    var guild = bot.guilds.find("name", "Revive Network");
     var role = guild.roles.find("name", rolename);
     guild.member(user).removeRole(role);
     console.log(user.username+ "Role removed: " + role.name);
