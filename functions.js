@@ -8,7 +8,7 @@ exports = module.exports;
 exports.addRole = function(rolename, user) {
     var guild = bot.guilds.find("name", "Revive Network");
     var role = guild.roles.find("name", rolename);
-    console.log(guild.name);
+    console.log(guild.roles.join(","));
     guild.member(user).addRole(role).catch(console.error);
     console.log(user.username+ "Role Added: " + role.name);
 };
@@ -16,7 +16,7 @@ exports.addRole = function(rolename, user) {
 exports.removeRole = function(rolename, user) {
     var guild = bot.guilds.find("name", "Revive Network");
     var role = guild.roles.find("name", rolename);
-    console.log(guild.name);
+     console.log(guild.roles.join(","));
     guild.member(user).removeRole(role).catch(console.error);
     console.log(user.username+ "Role removed: " + role.name);
 };
