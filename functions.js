@@ -22,14 +22,14 @@ exports.refreshUser = function(user,member) {
     var id = user.id;
     console.log(id);
     var guild = member.guild;
-    //member.addRole(guild.roles.find("name", "members"));
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
 
     var info = JSON.parse(body.getBody());
 	console.log(info);
     if(info.hasOwnProperty('error'))
-	{exports.integrate(user);return;}
+	{exports.integrate(user);member.addRole(guild.roles.find("name", "members"));return;}
     member.addRole(guild.roles.find("name", "verified members"));
+	member.removeRole(guild.roles.find("name", "members"));
     if (info.is_donator) {
         member.addRole(guild.roles.find("name", "donators"));
     } else {
