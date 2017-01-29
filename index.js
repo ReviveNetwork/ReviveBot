@@ -11,7 +11,7 @@ var config = require('./config');
 
 bot.on('ready', () => {
     console.log('Bot ready');
-    bot.servers.get('name', config.log_server).channels.get('name', config.log_channel).sendMessage('Started up :)');
+    bot.channels.get(config.log_channel).sendMessage('Revive-Bot: STARTED');
 });
 
 bot.on('message', message => {

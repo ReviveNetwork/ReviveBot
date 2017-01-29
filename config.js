@@ -7,6 +7,5 @@
 //
 
 module.exports = {
-    log_server: "Revive Network Dev"
-    log_channel: "revive-bot-logs"
+    log_channel: "275077677852000257"
 }
