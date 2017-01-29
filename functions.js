@@ -38,15 +38,26 @@ exports.integrate = function(user) {
 exports.refreshUser = function(user) {
     //user is an user onject. get it using message.author
     //dont execute the statements untill api implemented
-    var baseURL = ""; //add api base link
-    var info = JSON.parse(request("POST", baseURL, {
-        json: {
-            id: user.id
-        }
-    }).getBody('utf8'));
-    if (info.isDonator == true) {
+    var baseURL = "http://revive-bot-discord.revive.systems/v0/discord/userinfo/"; //add api base link
+    var info = JSON.parse(request("GET", baseURL+user.id).getBody('utf8'));
+    if (info.is_donator == true) {
         addRole("Donator", user.id);
     } else {
         removeRole("Donator", user.id);
     }
+    if(info.is_admin)
+    {
+        addRole("discordadmins", user.id);
+    }
+    if(info.is_mod)
+    {
+        addRole("moderator", user.id);
+    }
+    if(info.usergroup == 8)
+    {
+        addRole("ingame moderator", user.id);
+    }
+    var guild = bot.guilds.get("256299642180861953");
+    var member  = guild.member(user);
+    member.setNickname(info.username);
 };
