@@ -24,8 +24,10 @@ exports.refreshUser = function(user,member) {
     var guild = member.guild;
     member.addRole(guild.roles.find("name", "members"));
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
-	console.log(info);
+	console.log(body);
     var info = JSON.parse(body.getBody());
+    if(info.hasOwnProperty('error'))
+	{exports.integrate(user);return;}
     member.addRole(guild.roles.find("name", "verified members"));
     if (info.is_donator) {
         member.addRole(guild.roles.find("name", "donators"));
