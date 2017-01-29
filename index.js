@@ -16,7 +16,7 @@ bot.on('message', message => {
         message.reply('hello');
         return;
     }
-    if (message.content.startsWith('add') && message.content.includes('to')) {
+    if (message.content.startsWith('~add') && message.content.includes('to')) {
         if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
             message.channel.sendMessage("You aren't  Worthy");
             return;
@@ -28,7 +28,7 @@ bot.on('message', message => {
         message.reply('done');
         return;
     }
-    if (message.content.startsWith('remove') && message.content.includes('from')) {
+    if (message.content.startsWith('~remove') && message.content.includes('from')) {
         if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
             message.channel.sendMessage("You aren't  Worthy");
 
@@ -112,8 +112,8 @@ bot.on('message', message => {
             "\n ~stops - stops the bot"+
             "\n ~link - links your discord account with your battlelo.co account" +
             "\n ~cookie - eats a cookie"+
-            "\n add PlayerName to roleName - adds a player to a role"+
-            "\n remove PlayerName from roleName - remove a player to a role"+
+            "\n ~add PlayerName to roleName - adds a player to a role"+
+            "\n ~remove PlayerName from roleName - remove a player to a role"+
             "\n ~count int - counts from int to 0 and returns boom"+
             "\n ```");
         return;
