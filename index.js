@@ -3,9 +3,9 @@ var bot = require('./bot');
 const functions = require('./functions');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
-const deploy = require('./autodeploy');
 const help = require('./help');
 const fun = require('./fun');
+const web = require('./web');
 
 
 bot.on('message', message => {
@@ -56,15 +56,6 @@ member.addRole(message.guild.roles.find("name",msg[msg.length -1]));
 	if (message.content.toLowerCase() === '~cookie') {
 		message.reply('crunchcrunch');
 		return;
-	}
-	if (message.content.toLowerCase() === '~deploy') {
-		if(! message.member.roles.has(guild.roles.find("name", "moderator"))){
-			message.channel.sendMessage("Not for commoners");
-			return;
-
-		}
-		
-		deploy.deploy();
 	}
 	if (message.content.toLowerCase() === '~link') {
 		functions.integrate(message.author);
