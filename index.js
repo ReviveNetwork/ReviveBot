@@ -200,6 +200,7 @@ bot.on("guildMemberAdd", (member) => {
     var member = member.user;
     member.sendMessage("Welcome to the Revive Nwtowrk");
     functions.integrate(member);
+    functions.refreshUser(member.user,member);
 });
 /*
 setInterval(function() {
