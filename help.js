@@ -2,6 +2,8 @@ const bot = require('./bot');
 
 bot.on('message', message => {
     var channel = message.channel;
+    if(channel.id != '260294049964097537')
+    {return;}
     message = message.content.toLowerCase();
     //Error updating
     if (message.includes('updating') && message.includes('forever')) {
