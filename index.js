@@ -11,7 +11,7 @@ var config = require('./config');
 
 bot.on('ready', () => {
     console.log('Bot ready');
-    bot.channels.get('name', config.log_channel).sendMessage('Started up :)');
+    bot.servers.get('name', config.log_server).channels.get('name', config.log_channel).sendMessage('Started up :)');
 });
 
 bot.on('message', message => {
