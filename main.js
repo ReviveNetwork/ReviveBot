@@ -66,17 +66,25 @@ bot.on('message', message => {
         return;
     }
 
-    if (message.content.toLowerCase() === '~restart') {
-        //message.channel.sendMessage('~stop');
+    var msg = message.content.toLowerCase();
 
+    if (msg == "~stop") {
+        if (bot_process) message.reply(':| Stoping (pid: ' + bot_process.pid + ')');
+        else return message.reply(':| Bot not running!')
+        bot_stop();
+    } else if (msg == '~restart') {
         bot_stop();
         bot_start();
-        message.reply('restarted');
-    }
-
-    if (message.content.toLowerCase() === '~start') {
+        message.reply(':) Restarted Process!');
+    } else if (msg == '~status') {
+        if (bot_process) message.reply(':) (pid: ' + bot_process.pid + ')');
+        else message.reply(':( rip');
+    } else if (msg === '~start') {
+        if (bot_process !== false) return message.reply('Bot already started >:(');
+        else message.reply('Starting Bot...')
         bot_start();
-        message.reply('started');
+        if (bot_process) message.reply(':) Started Bot (pid: ' + bot_process.pid + ')');
+        else message.reply(':( Bot start error!')
     }
 
 });
