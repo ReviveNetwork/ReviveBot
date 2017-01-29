@@ -5,7 +5,7 @@ const request = require('request');
 module.exports = {};
 exports = module.exports;
 
-exports.addRole = function(roleName, userid) {
+exports.addRole = function(rolename, userid) {
     var user = bot.users.get(userid);
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
@@ -15,7 +15,7 @@ exports.addRole = function(roleName, userid) {
     }
 };
 
-exports.removeRole = function(roleName, userid) {
+exports.removeRole = function(rolename, userid) {
     var user = bot.users.get(userid);
     var guild = bot.guilds.get("256299642180861953");
     var role = guild.roles.find("name", rolename);
