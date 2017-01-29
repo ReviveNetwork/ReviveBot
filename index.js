@@ -9,11 +9,6 @@ const web = require('./web');
 
 var config = require('./config');
 
-bot.on('ready', () => {
-    console.log('Bot ready');
-    bot.channels.get(config.log_channel).sendMessage('Revive-Bot: STARTED');
-});
-
 bot.on('message', message => {
     var guild = bot.guilds.get("256299642180861953");
     if (message.author.bot == true) return; // prevent loop
@@ -52,7 +47,7 @@ bot.on('message', message => {
         bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.content);
     }
     if (message.content.startsWith('~')) {
-        console.log(message.author.username + " : " + message.content);
+        console.log(message.author.username + ": " + message.content);
     } else {
         return;
     }

@@ -5,6 +5,7 @@ bot.on('message', message => {
         c = parseInt(message.content.split(' ')[1]) || 10;
         message.channel.sendMessage('counting').then(msg => count(c, msg));
     }
+
 });
 var count = function(c, message) {
     if (c <= 0) {
