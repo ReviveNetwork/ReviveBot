@@ -34,6 +34,7 @@ exports.refreshUser = function(user) {
     //dont execute the statements untill api implemented
     console.log(user);
     var id = user.id;
+    console.log(id);
     request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/"+id,function (error, response, body) {
     if(error)
     {
