@@ -7,5 +7,5 @@
 //
 
 module.exports = {
-
+    log_channel: "275077677852000257"
 }
