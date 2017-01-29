@@ -21,7 +21,7 @@ exports.refreshUser = function(user) {
     console.log(user);
     var id = user.id;
     console.log(id);
-    body = request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
+    body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
     var info = JSON.parse(body.getBody());
     var guild = bot.guilds.find("name", "Revive Network");
     var member = guild.member(user);
