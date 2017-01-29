@@ -11,7 +11,7 @@ const web = require('./web');
 var config = require('./config');
 
 bot.on('message', message => {
-    var guild = bot.guilds.get("256299642180861953");
+    var guild = bot.guilds.find("name","Revive Network");
     if (message.author.bot == true) return; // prevent loop
     if (message.content.toLowerCase() === 'hi' || message.content.toLowerCase() === 'hello' || message.content.toLowerCase() === 'hey') {
         message.reply('hello');
