@@ -6,7 +6,7 @@ const bf2142 = require('./bf2142');
 const help = require('./help');
 const fun = require('./fun');
 const web = require('./web');
-const music = require('./music');
+//const music = require('./music');
 
 var config = require('./config');
 
