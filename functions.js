@@ -22,6 +22,7 @@ exports.refreshUser = function(user,member) {
     var id = user.id;
     console.log(id);
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
+	console.log(info);
     var info = JSON.parse(body.getBody());
     var guild = member.guild;
     if (info.is_donator) {
