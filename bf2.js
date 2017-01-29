@@ -40,4 +40,3 @@ exports.player = function(pid_, nick_, score_) {
             return this.nick + "\t" + this.pid + "\t" + this.score + "\t" + "<https://battlelog.co/bfhq.php?pid=" + this.pid + ">";
         }
 };
-

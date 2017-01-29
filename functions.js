@@ -11,7 +11,7 @@ exports.addRole = function(roleName, userid) {
     var role = guild.roles.find("name", rolename);
     if (guild.member(user).roles.indexOf(role) < 0) {
         guild.member(user).addRole(role);
-        bot.sendMessage(user,"Role Added: " + role.name);
+        bot.sendMessage(user, "Role Added: " + role.name);
     }
 };
 
@@ -21,16 +21,16 @@ exports.removeRole = function(roleName, userid) {
     var role = guild.roles.find("name", rolename);
     if (guild.member(user).roles.indexOf(role) >= 0) {
         guild.member(user).rempveRole(role);
-        bot.sendMessage(user,"Role removed: " + role.name);
+        bot.sendMessage(user, "Role removed: " + role.name);
     }
 };
 
 exports.integrate = function(user) {
     //user is an user onject. get it using message.author
     let id = urlencode(new Buffer(JSON.stringify({
-            id: user.id,
-            name: user.username
-        })).toString('base64'));
+        id: user.id,
+        name: user.username
+    })).toString('base64'));
     var res = "To link your discord account and forum account, please follow the below link \n https://battlelog.co/discord_link.php?id=" + id;
     user.sendMessage(res);
 };
@@ -50,4 +50,3 @@ exports.refreshUser = function(user) {
         removeRole("Donator", user.id);
     }
 };
-

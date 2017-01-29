@@ -10,6 +10,8 @@ if (!dt) {
 
 client.login(dt);
 
-client.on('error', e => { console.error(e); });
+client.on('error', e => {
+    console.error(e);
+});
 
 module.exports = client;

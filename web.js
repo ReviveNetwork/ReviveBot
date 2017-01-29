@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bot = require('./bot');
-const functions =  require('./functions');
+const functions = require('./functions');
 const deploy = require('./autodeploy.js');
 let app = express();
 
