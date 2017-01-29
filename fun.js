@@ -7,7 +7,7 @@ bot.on('message', message => {
         message.channel.sendMessage('counting').then(msg => count(c, msg));
     }
     if (message.content.toLowerCase().startsWith('~calc')) {
-       var res = message.content.match(/[ 0-9\/\+\-\*]+/);
+       var res = message.content.match(/[ 0-9\^\/\+\-\*]+/);
         res = res.join(' ')
        message.channel.sendMessage(math.eval(res));
     }
