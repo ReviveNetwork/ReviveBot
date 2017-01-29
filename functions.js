@@ -27,9 +27,9 @@ exports.refreshUser = function(user,member) {
     var info = JSON.parse(body.getBody());
 	console.log(info);
     if(info.hasOwnProperty('error'))
-	{exports.integrate(user);member.addRole(guild.roles.find("name", "members"));return;}
+	{exports.integrate(user);return;}
     member.addRole(guild.roles.find("name", "verified members"));
-	member.removeRole(guild.roles.find("name", "members"));
+	//member.removeRole(guild.roles.find("name", "members"));
     if (info.is_donator) {
         member.addRole(guild.roles.find("name", "donators"));
     } else {
