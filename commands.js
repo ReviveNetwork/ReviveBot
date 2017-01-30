@@ -1,6 +1,9 @@
-exports.commands={
+&&&{
+	
+}exports.commands={
 	'pong': {
 		description:'reply with a pong',
+		syntax: '~ping',
 		exec: function(message,text)
 		{
 			message.reply('pong');
@@ -8,6 +11,7 @@ exports.commands={
 	},
 	'yo':{
 		description:'reply with a yo bro',
+		syntax: '~yo',
 		exec: function(message,text)
 		{
 			message.reply('yo bro');
@@ -15,12 +19,14 @@ exports.commands={
 	},
 	'link':{
 		description:'link revive account to this discord account',
+		syntax: '~link',
 		exec: function(message,text){
 			functions.integrate(message.author);
 		}
 	},
 	'refresh':{
 		description:'refresh a user discord link status',
+		syntax: '~refresh',
 		exec: function(message,text){
 			if(text=='all'
 				&& message.member.roles.find('moderator')!=undefined
@@ -36,6 +42,7 @@ exports.commands={
 	},
 	'bf2':{
 		description:'finds a bf2 player',
+		syntax: '~bf2 <PlayerName>',
 		exec: function(message,text){
 			if(message.mentions.users.first!=undefined)
 			{
@@ -87,6 +94,7 @@ exports.commands={
 	},
 	'bf2142':{
 		description:'finds a bf2142 player',
+		syntax: '~bf2142 <PlayerName>',
 		exec: function(message,text){
 			if(message.mentions.users.first!=undefined)
 			{
@@ -138,12 +146,14 @@ exports.commands={
 	},
 	'cookie':{
 		description: 'eats a cookie',
+		syntax: '~cookie',
 		exec: function(message,text){
 			message.reply('crunch crunch');
 		}
 	},
 	'add':{
 		description: 'adds a person to a role',
+		syntax: '~add <UserMention> to <roleName>',
 		exec: function(message,text){
 			if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 				 message.channel.sendMessage("You aren't Worthy"); return; } 
@@ -154,6 +164,7 @@ exports.commands={
 	},
 	'remove':{
 		description: 'removes a person to a role',
+		syntax: '~remove <UserMention> from <roleName>',
 		exec: function(message,text){
 			if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 				 message.channel.sendMessage("You aren't Worthy"); return; } 
