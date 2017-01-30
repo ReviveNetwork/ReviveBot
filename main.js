@@ -87,12 +87,14 @@ bot.on('message', message => {
         else message.reply(':( Bot start error!')
     }else if (msg === '~npm') {
        const exec = require('child_process').exec;
-    exec('npm '+msg.substring(5), (error, stdout, stderr) => {
+        exec('npm '+msg.substring(5), (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
+            bot.channels.get(config.log_channel).sendMessage('**ERROR** NPM-' + ' ```' + error + '```');
             return;
         }
         console.log(`stdout: ${stdout}`);
+        bot.channels.get(config.log_channel).sendMessage('**LOG** NPM-' + ' ```' + stdout + '```');
         console.log(`stderr: ${stderr}`);
         });
     }
