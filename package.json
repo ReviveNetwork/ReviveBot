@@ -17,6 +17,7 @@
     "http": "0.0.0",
     "node-opus": "^0.2.0",
     "opusscript": "^0.0.1",
+    "ytdl-core": "^0.7.21",    
     "sync-request": "^4.0.1",
     "unzip": "^0.1.11",
     "urlencode": "^1.1.0",
