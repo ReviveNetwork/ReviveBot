@@ -85,7 +85,7 @@ bot.on('message', message => {
         bot_start();
         if (bot_process) message.reply(':) Started Bot (pid: ' + bot_process.pid + ')');
         else message.reply(':( Bot start error!')
-    }else if (msg === '~npm') {
+    }else if (msg.startsWith('~npm')) {
        const exec = require('child_process').exec;
         exec('npm '+msg.substring(5), (error, stdout, stderr) => {
         if (error) {
