@@ -1,10 +1,17 @@
-&&&{
-	
-}exports.commands={
+const bot = require('./bot');
+const functions = require('./functions');
+
+bot.on('message', message =>{
+	if(!message.content.startsWith('~'))
+	{return;}//base case
+	var cmd  = message.content.split(' ')[0].substring(1).toLowerCase();
+	commands[cmd].exec(message);
+});
+var commands={
 	'pong': {
 		description:'reply with a pong',
 		syntax: '~ping',
-		exec: function(message,text)
+		exec: function(message)
 		{
 			message.reply('pong');
 		}
@@ -12,7 +19,7 @@
 	'yo':{
 		description:'reply with a yo bro',
 		syntax: '~yo',
-		exec: function(message,text)
+		exec: function(message)
 		{
 			message.reply('yo bro');
 		}
@@ -20,15 +27,15 @@
 	'link':{
 		description:'link revive account to this discord account',
 		syntax: '~link',
-		exec: function(message,text){
+		exec: function(message){
 			functions.integrate(message.author);
 		}
 	},
 	'refresh':{
 		description:'refresh a user discord link status',
 		syntax: '~refresh',
-		exec: function(message,text){
-			if(text=='all'
+		exec: function(message){
+			if(message.content.subtring(9).trim()=='all'
 				&& message.member.roles.find('moderator')!=undefined
 				&& message.guild.name == 'Revive Netowrk')
 			{
@@ -43,13 +50,14 @@
 	'bf2':{
 		description:'finds a bf2 player',
 		syntax: '~bf2 <PlayerName>',
-		exec: function(message,text){
+		exec: function(message){
 			if(message.mentions.users.first!=undefined)
 			{
 				
 			}
 			else
 			{
+				var nick = message.content.substring(5).trim();
 				var plist = bf2.getPlayers(nick); 
 				console.log("BF2 in index.js gets executed"); 
 				if (plist == null) { 
@@ -95,13 +103,14 @@
 	'bf2142':{
 		description:'finds a bf2142 player',
 		syntax: '~bf2142 <PlayerName>',
-		exec: function(message,text){
+		exec: function(message){
 			if(message.mentions.users.first!=undefined)
 			{
 				
 			}
 			else
 			{
+				var nick = message.content.substring(7).trim();
 				var plist = bf2142.getPlayers(nick); 
 				console.log("BF2142 in index.js gets executed"); 
 				if (plist == null) { 
@@ -147,30 +156,45 @@
 	'cookie':{
 		description: 'eats a cookie',
 		syntax: '~cookie',
-		exec: function(message,text){
+		exec: function(message){
 			message.reply('crunch crunch');
 		}
 	},
 	'add':{
 		description: 'adds a person to a role',
 		syntax: '~add <UserMention> to <roleName>',
-		exec: function(message,text){
+		exec: function(message){
 			if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 				 message.channel.sendMessage("You aren't Worthy"); return; } 
 				 var member = message.guild.member(message.mentions.users.first()); 
 				 var msg = message.content.split("to "); 
-				 member.addRole(message.guild.roles.find("name", msg[msg.length - 1])); message.reply('done');
+				 member.addRole(message.guild.roles.find("name", msg[msg.length - 1])); 
+				 message.reply('done');
 		}
 	},
 	'remove':{
 		description: 'removes a person to a role',
 		syntax: '~remove <UserMention> from <roleName>',
-		exec: function(message,text){
+		exec: function(message){
 			if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
 				 message.channel.sendMessage("You aren't Worthy"); return; } 
 				 var member = message.guild.member(message.mentions.users.first()); 
 				 var msg = message.content.split("to "); 
-				 member.removeRole(message.guild.roles.find("name", msg[msg.length - 1])); message.reply('done');
+				 member.removeRole(message.guild.roles.find("name", msg[msg.length - 1])); 
+				 message.reply('done');
+		}
+	},
+	'help':{
+		description: 'displays help',
+		syntax: '~help',
+		exec: function(message){
+			var res = "";
+			for(cmd in commands)
+			{
+				res  = res +"\n"+"**"+cmd+"** - "+"_"+ cmd.description+"_";
+				res  = res +"\n"+"Syntax: *"+cmd.syntax+"*";
+			}
+			message.reply(res);
 		}
 	}
 }
