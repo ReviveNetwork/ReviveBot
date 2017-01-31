@@ -179,6 +179,7 @@ var commands = {
             for (cmd in commands) {
                 embed.addField(cmd,"Description: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
 			}
+			embed.addField('Music',"Description: Access the music bot using - as the prefix" + "\n"+ "Syntax: -help");
             message.channel.sendEmbed(embed);
         }
     }
