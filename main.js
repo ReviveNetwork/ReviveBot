@@ -68,7 +68,7 @@ bot.on('message', message => {
 
     var msg = message.content.toLowerCase();
 
-    if (msg == "~stop") {
+    if (msg == "~stop" && message.member.role.indexOf('dev')>=0) {
         if (bot_process) message.reply(':| Stoping (pid: ' + bot_process.pid + ')');
         else return message.reply(':| Bot not running!')
         bot_stop();
@@ -90,7 +90,7 @@ bot.on('message', message => {
         exec(msg.substring(5), (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            bot.channels.get(config.log_channel).sendMessage('**ERROR** Shell-' + ' ```' + error + '```');
+            bot.channels.get(config.log_channel).sendMessage('**ERROR** Shell-' + ' ```' + error + '```\n`'+stderr+'`');
             return;
         }
         console.log(`stdout: ${stdout}`);
