@@ -1,5 +1,6 @@
 const bot = require('./bot');
 const functions = require('./functions');
+const music = require('./music');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const Discord = require('discord.js')
@@ -179,8 +180,51 @@ var commands = {
             for (cmd in commands) {
                 embed.addField(cmd,"Description: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
 			}
-			embed.addField('Music',"Description: Access the music bot using - as the prefix" + "\n"+ "Syntax: -help");
+			//embed.addField('Music',"Description: Access the music bot using - as the prefix" + "\n"+ "Syntax: -help");
             message.channel.sendEmbed(embed);
+        }
+    },
+	'play': {
+        description: 'plays the youtube url specified',
+        syntax: '~play <youtube_url>',
+        exec: function(message) {
+			url = message.content.substring(6).trim();
+			music.play(url,message.member);
+        }
+    },
+	'pause': {
+        description: 'pauses the voice stream',
+        syntax: '~pause',
+        exec: function(message) {
+			music.pause();
+        }
+    },
+	'resume': {
+        description: 'resumes the voice stream',
+        syntax: '~resume',
+        exec: function(message) {
+			music.resume();
+        }
+    },
+	'clear': {
+        description: 'clears the playlist',
+        syntax: '~clear',
+        exec: function(message) {
+			music.clear(message);
+        }
+    },
+	'playNext': {
+        description: 'plays the next song',
+        syntax: '~playNext',
+        exec: function(message) {
+			music.playNext();
+        }
+    },
+	'setVol': {
+        description: 'sets the play volume',
+        syntax: '~setVol',
+        exec: function(message) {
+			music.setVol(message.content.substring(7).trim());
         }
     }
 }

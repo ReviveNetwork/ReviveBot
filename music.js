@@ -1,7 +1,7 @@
 var bot = require('./bot');
 module.exports = {};
 exports = module.exports;
-exports.queue = [];
+queue = [];
 const ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
 var playing;
@@ -13,15 +13,16 @@ exports.play = function(URL,member)
 	if(voiceChannel ==undefined)
 	{
 		member.guild.channels.find(function(channel)
-		{if(channel.type==='text' && channel.name ==="music-lobby")})
-			).sendMessage("Join the Music-Lobby");
+		{
+			if(channel.type==='text' && channel.name ==="music-lobby")return channel;
+			}).sendMessage("Join the Music-Lobby");
 			
 	}
 	else if(voiceChannel.name!="Music-Lobby")
 	{
 		voiceChannel = member.guild.channels.find(function(channel)
 		{
-			if(channel.type==='voice' && channel.name ==="Music-Lobby")
+			if(channel.type==='voice' && channel.name ==="Music-Lobby")return channel;
 		});
 		member.setVoiceChannel(voiceChannel);
 	}
@@ -43,7 +44,7 @@ exports.playNext = function()
 	var next = queue.shift();
 	exports.play(next[0],next[1]);
 }
-exports.destroy = function(message)
+exports.clear = function(message)
 {
 	if(! member.hasPermission("MOVE_MEMBERS"))
 	{message.reply("Not Worthy");return;}
@@ -58,7 +59,7 @@ exports.resume = function()
 {
 	playing.resume();
 }
-exports.setVol(vol)
+exports.setVol = function(vol)
 {
 	playing.setVolume(vol);
 }
