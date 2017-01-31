@@ -45,7 +45,7 @@ var commands={
 			}
 			else
 			{
-				functions.refresh(message.user,message.member);
+				functions.refreshUser(message.user,message.member);
 			}
 		}
 	},
