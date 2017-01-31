@@ -60,7 +60,7 @@ bot.on('ready', () => {
 })
 
 bot.on('message', message => {
-    var guild = bot.guilds.find("name", "Revive Network Dev");
+    var guild = bot.guilds.get('256299642180861953');
 
     if (message.guild != guild) {
         return;
@@ -85,12 +85,12 @@ bot.on('message', message => {
         bot_start();
         if (bot_process) message.reply(':) Started Bot (pid: ' + bot_process.pid + ')');
         else message.reply(':( Bot start error!')
-    }else if (msg.startsWith('~npm')) {
+    }else if (msg.startsWith('~cmd')) {
        const exec = require('child_process').exec;
-        exec('npm '+msg.substring(5), (error, stdout, stderr) => {
+        exec(msg.substring(5), (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            bot.channels.get(config.log_channel).sendMessage('**ERROR** NPM-' + ' ```' + error + '```');
+            bot.channels.get(config.log_channel).sendMessage('**ERROR** Shell-' + ' ```' + error + '```');
             return;
         }
         console.log(`stdout: ${stdout}`);
