@@ -177,7 +177,7 @@ var commands = {
         exec: function(message) {
 			var embed = new Discord.RichEmbed().setTitle('HELP').setColor("#FF7F50");
             for (cmd in commands) {
-                embed.addField(cmd,"Decription: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
+                embed.addField(cmd,"Description: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
 			}
             message.channel.sendEmbed(embed);
         }
