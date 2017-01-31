@@ -2,6 +2,7 @@ const bot = require('./bot');
 const functions = require('./functions');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
+const Discord = require('discord.js')
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -93,7 +94,7 @@ var commands = {
         description: 'finds a bf2142 player',
         syntax: '~bf2142 <PlayerName>',
         exec: function(message) {
-
+			
             var nick = message.content.substring(7).trim();
             var plist = bf2142.getPlayers(nick);
             console.log("BF2142 in index.js gets executed");
@@ -174,12 +175,11 @@ var commands = {
         description: 'displays help',
         syntax: '~help',
         exec: function(message) {
-            var res = "";
+			var embed = new Discord.RichEmbed().setTitle('HELP').setColor("#FF7F50");
             for (cmd in commands) {
-                res = res + "\n" + "**" + cmd + "** - " + "_" + commands[cmd].description + "_";
-                res = res + "\n" + "Syntax: *" + commands[cmd].syntax + "*";
-            }
-            message.reply(res);
+                embed.addField(cmd,"Decription: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
+			}
+            message.channel.sendEmbed(embed);
         }
     }
 }
