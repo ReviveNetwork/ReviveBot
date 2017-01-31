@@ -35,7 +35,7 @@ var commands={
 		description:'refresh a user discord link status',
 		syntax: '~refresh',
 		exec: function(message){
-			if(message.content.subtring(9).trim()=='all'
+			if(message.content.substring(9).trim()=='all'
 				&& message.member.roles.find('moderator')!=undefined
 				&& message.guild.name == 'Revive Netowrk')
 			{
