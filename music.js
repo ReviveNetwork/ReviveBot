@@ -4,10 +4,11 @@ exports = module.exports;
 queue = [];
 const ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
-var playing;
 exports.play = function(URL,member)
 {
-	if(queue.size!=0)
+	var playing;
+	console.log("QUEUE size"+queue.length);
+	if(queue.length!=0)
 	{queue.push([URL,member]);return;}
 	var voiceChannel = member.voiceChannel;
 	if(voiceChannel ==undefined)
@@ -26,20 +27,22 @@ exports.play = function(URL,member)
 		});
 		member.setVoiceChannel(voiceChannel);
 	}
+	console.log(voiceChannel);
+	console.log(URL);
 	voiceChannel.join()
 	.then(connection => {
-   const stream = ytdl(URL, {filter : 'audioonly'});
+	const stream = ytdl(URL, {filter : 'audioonly'});
     playing = connection.playStream(stream, streamOptions);
-	})
-	.catch(console.error);
-	
 	playing.on('end', (err) => {
 				exports.playNext();
 				});
+	})
+	.catch(console.error);
+
 }
 exports.playNext = function()
 {
-	if(queue.size==0)
+	if(queue.length==0)
 	{return;}
 	var next = queue.shift();
 	exports.play(next[0],next[1]);
