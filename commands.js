@@ -191,8 +191,8 @@ var commands={
 			var res = "";
 			for(cmd in commands)
 			{
-				res  = res +"\n"+"**"+cmd+"** - "+"_"+ cmd.description+"_";
-				res  = res +"\n"+"Syntax: *"+cmd.syntax+"*";
+				res  = res +"\n"+"**"+cmd+"** - "+"_"+ commands[cmd].description+"_";
+				res  = res +"\n"+"Syntax: *"+commands[cmd].syntax+"*";
 			}
 			message.reply(res);
 		}
