@@ -5,7 +5,7 @@ const web = require('./web');
 //const music = require('./music');
 var commands = require('./commands');
 var config = require('./config');
-var functions = require('/functions');
+var functions = require('/.functions');
 
 bot.on('message', message => {
     if (message.author.bot == true) return; // prevent loop
