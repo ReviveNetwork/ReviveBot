@@ -23,9 +23,9 @@ process.on('uncaughtException', function(err) {
     bot = require('./bot');
 });
 bot.on("guildMemberAdd", (member) => {
-    var member = member.user;
-    member.sendMessage("Welcome to the Revive Nwtowrk");
-    functions.refreshUser(member.user,member);
+    var user = member.user;
+    user.sendMessage("Welcome to the Revive Nwtowrk");
+    functions.refreshUser(user);
 });
 bot.on('message', message => {
     if (message.content.toLowerCase() === '~stop') {

@@ -15,13 +15,14 @@ exports.integrate = function(user) {
     user.sendMessage(res);
 };
 
-exports.refreshUser = function(user,member) {
+exports.refreshUser = function(user) {
     //user is an user onject. get it using message.author
     //dont execute the statements untill api implemented
+	var guild = bot.guilds.get('184536578654339072');
+	var member = guild.member(user);
     console.log(user);
     var id = user.id;
     console.log(id);
-    var guild = member.guild;
     body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
 
     var info = JSON.parse(body.getBody());
@@ -49,7 +50,7 @@ exports.refreshUser = function(user,member) {
 exports.refreshAll = function(array) {
     setTimeout(function(){
 		var member = array.pop();
-		exports.refreshUser(member.user,member)
+		exports.refreshUser(member.user)
 		exports.refreshAll(array)
 		},3000);
 };

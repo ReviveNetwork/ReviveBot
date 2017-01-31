@@ -38,14 +38,13 @@ var commands={
 		syntax: '~refresh',
 		exec: function(message){
 			if(message.content.substring(9).trim()=='all'
-				&& message.member.roles.find('moderator')!=undefined
-				&& message.guild.name == 'Revive Netowrk')
+				&& message.guild.name == 'Revive Netowrk Dev')
 			{
-				functions.refreshAll(message.guild.members.array())
+				functions.refreshAll(bot.guilds.get('184536578654339072').members.array())
 			}
 			else
 			{
-				functions.refreshUser(message.user,message.member);
+				functions.refreshUser(message.user);
 			}
 		}
 	},
