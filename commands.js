@@ -1,6 +1,6 @@
 const bot = require('./bot');
 const functions = require('./functions');
-//const music = require('./music');
+const music = require('./music');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const Discord = require('discord.js')
