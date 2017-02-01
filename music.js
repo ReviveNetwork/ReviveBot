@@ -4,13 +4,15 @@ exports = module.exports;
 queue = [];
 const ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
+var playing;
+var voiceChannel
 exports.play = function(URL,member)
 {
-	var playing;
+	
 	console.log("QUEUE size"+queue.length);
 	if(queue.length!=0)
 	{queue.push([URL,member]);return;}
-	var voiceChannel = member.voiceChannel;
+	voiceChannel = member.voiceChannel;
 	if(voiceChannel ==undefined)
 	{
 		member.guild.channels.find(function(channel)
@@ -49,10 +51,11 @@ exports.playNext = function()
 }
 exports.clear = function(message)
 {
-	if(! member.hasPermission("MOVE_MEMBERS"))
+	if(! message.member.hasPermission("MOVE_MEMBERS"))
 	{message.reply("Not Worthy");return;}
 	queue = [];
 	playing.end();
+	voiceChannel.disconnect();
 }
 exports.pause = function()
 {
