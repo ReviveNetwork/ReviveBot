@@ -210,7 +210,7 @@ var commands = {
         description: 'clears the playlist',
         syntax: '~clear',
         exec: function(message) {
-			music.clear(message.member);
+			music.clear(message);
         }
     },
 	'playNext': {
