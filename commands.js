@@ -217,9 +217,9 @@ var commands = {
     },
 	'playnext': {
         description: 'plays the next song',
-        syntax: '~playNext',
+        syntax: '~playnext',
         exec: function(message) {
-			music.playNext();
+			music.playNext(message);
         }
     },
 	'setvol': {
