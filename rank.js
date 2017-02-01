@@ -4,7 +4,8 @@ module.exports = {};
 exports = module.exports;
 exports.rank = function(message)
 {
-	const id = message.mentions.users.first().id;
+	var id = message.mentions.users.first() || message.author;
+	id = id.id;
 	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
 		body = JSON.parse(body);
 		for(var i=0;i<body.soldiers.length;i++)

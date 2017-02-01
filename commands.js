@@ -239,7 +239,7 @@ var commands = {
     },
 	'info': {
         description: 'Gives the Battlelog Profile of a Verified User',
-        syntax: '~info',
+        syntax: '~info @usermention',
         exec: function(message){rank.rank(message);}
     }
 }
