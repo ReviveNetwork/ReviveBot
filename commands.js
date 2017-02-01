@@ -227,4 +227,11 @@ var commands = {
 			music.setVol(message.content.substring(7).trim());
         }
     }
+	'queue': {
+        description: 'views the queue',
+        syntax: '~queue',
+        exec: function(message) {
+			message.channel.sendMessage(music.queue.join("\n"));
+        }
+    }
 }
