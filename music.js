@@ -30,7 +30,7 @@ exports.play = function(URL, message) {
         voice_channel = member.guild.channels.find(function(channel) {
             if (channel.type === 'voice' && channel.name === "Music-Lobby") return channel;
         });
-        member.setvoiceChannel(voice_channel);
+        member.setVoiceChannel(voice_channel);
     }
     if (queue.length === 0) {
         voice_channel.join().then(connection => {
