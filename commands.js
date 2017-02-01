@@ -215,14 +215,14 @@ var commands = {
 			music.clear(message);
         }
     },
-	'playNext': {
+	'playnext': {
         description: 'plays the next song',
         syntax: '~playNext',
         exec: function(message) {
 			music.playNext();
         }
     },
-	'setVol': {
+	'setvol': {
         description: 'sets the play volume',
         syntax: '~setVol',
         exec: function(message) {

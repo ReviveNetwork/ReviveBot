@@ -64,7 +64,15 @@ exports.clear = function(message)
 }
 exports.pause = function(message)
 {
-	playing.pause();
+	if(stopped) {
+				message.reply("Playback is already stopped!");
+			} else {
+				stopped = true;
+				if(voice_handler !== null) {
+					voice_handler.end();
+				}
+				message.reply("Stopping!");
+			}
 }
 exports.resume = function(message)
 {
@@ -79,7 +87,7 @@ exports.resume = function(message)
 }
 exports.setVol = function(message)
 {
-	playing.setVolume(vol);
+	voice_handler.setVolume(vol);
 }
 exports.queue =  function(message){
 	var response = "";
