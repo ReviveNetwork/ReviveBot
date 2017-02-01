@@ -96,7 +96,7 @@ exports.queue =  function(message){
 				response = "the queue is empty.";
 			} else {
 				for(var i = 0; i < queue.length; i++) {
-					response += "\"" + queue[i]["title"] + "\" (requested by " + queue[i]["user"] + ")\n";
+					response += "<" + queue[i]["url"] + "> (requested by " + queue[i]["user"] + ")\n";
 				}
 			}
 			
