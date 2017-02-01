@@ -8,7 +8,7 @@ exports.getPlayers = function(nick,callback) {
     console.log(body);
     var collection = body.split("\n");
     console.log(collection);
-    var index = 7;
+    var index = collection.indexOf('H\tpid\tnick')+1;
     if (index > collection.length) {
         return null;
     }
