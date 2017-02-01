@@ -41,5 +41,5 @@ exports.player = function(pid_, nick_, score_) {
 };
 exports.str = function(player)
 {
-		return player.nick+" "+player.score+" "+player.link;
+		return player.nick+"\t"+player.score+"\t"+player.link;
 }
