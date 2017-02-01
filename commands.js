@@ -4,6 +4,7 @@ const music = require('./music');
 const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const Discord = require('discord.js')
+const rank = require('./rank');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -235,5 +236,10 @@ var commands = {
         exec: function(message) {
 			music.queue(message);
         }
+    },
+	'info': {
+        description: 'Gives the Battlelog Profile of a Verified User',
+        syntax: '~info',
+        exec: function(message){rank.rank(message);}
     }
 }

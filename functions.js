@@ -23,7 +23,7 @@ exports.refreshUser = function(user) {
     console.log(user);
     var id = user.id;
     console.log(id);
-    body = request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
+	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
 
     var info = JSON.parse(body);
 	console.log(info);
