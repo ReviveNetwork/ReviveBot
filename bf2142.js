@@ -50,5 +50,5 @@ exports.getAuthToken = function(pid) {
 }
 exports.str = function(player)
 {
-		return player.nick+" "+player.link;
+		return player.nick+"\t\t"+player.link;
 }
