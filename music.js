@@ -36,7 +36,7 @@ exports.play = function(URL,member)
 	const stream = ytdl(URL, {filter : 'audioonly'});
     playing = connection.playStream(stream, streamOptions);
 	playing.on('end', (end) => {
-				voiceChannel.disconnect();
+				connection.disconnect();
 				exports.playNext();
 				});
 	})
@@ -56,7 +56,7 @@ exports.clear = function(message)
 	{message.reply("Not Worthy");return;}
 	queue = [];
 	playing.end();
-	voiceChannel.disconnect();
+	voiceChannel.connection.disconnect();
 }
 exports.pause = function()
 {
