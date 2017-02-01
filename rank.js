@@ -8,6 +8,8 @@ exports.rank = function(message)
 	id = id.id;
 	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
 		body = JSON.parse(body);
+		if(body.error)
+		{message.reply("The requested user hasnt linked his discord account with thier revive account");return;}
 		for(var i=0;i<body.soldiers.length;i++)
 		{
 			var soldier = body.soldiers[i];
