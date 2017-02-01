@@ -198,14 +198,14 @@ var commands = {
         description: 'pauses the voice stream',
         syntax: '~pause',
         exec: function(message) {
-			music.pause();
+			music.pause(message);
         }
     },
 	'resume': {
         description: 'resumes the voice stream',
         syntax: '~resume',
         exec: function(message) {
-			music.resume();
+			music.resume(message);
         }
     },
 	'clear': {
