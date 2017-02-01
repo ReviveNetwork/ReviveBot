@@ -226,7 +226,7 @@ var commands = {
         exec: function(message) {
 			music.setVol(message.content.substring(7).trim());
         }
-    }
+    },
 	'queue': {
         description: 'views the queue',
         syntax: '~queue',
