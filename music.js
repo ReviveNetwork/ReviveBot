@@ -85,9 +85,9 @@ exports.resume = function(message)
 				message.reply("Playback is already running");
 			}
 }
-exports.setVol = function(message)
+exports.setVol = function(vol)
 {
-	voice_handler.setVolume(vol);
+	voice_handler.setVolume();
 }
 exports.queue =  function(message){
 	var response = "";
