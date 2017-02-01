@@ -10,7 +10,7 @@ exports.play = function(URL,member)
 {
 	
 	console.log("QUEUE size"+queue.length);
-	if(queue.length!=0)
+	if(playing)
 	{queue.push([URL,member]);return;}
 	voiceChannel = member.voiceChannel;
 	if(voiceChannel ==undefined)
