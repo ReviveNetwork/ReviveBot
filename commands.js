@@ -191,7 +191,7 @@ var commands = {
         syntax: '~play <youtube_url>',
         exec: function(message) {
 			url = message.content.substring(6).trim();
-			music.play(url,message.member);
+			music.play(url,message);
         }
     },
 	'pause': {
@@ -233,7 +233,7 @@ var commands = {
         description: 'views the queue',
         syntax: '~queue',
         exec: function(message) {
-			message.channel.sendMessage(music.queue.join("\n"));
+			music.queue(message);
         }
     }
 }

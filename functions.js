@@ -1,6 +1,6 @@
 const urlencode = require('urlencode');
 const bot = require('./bot');
-const request = require('sync-request');
+const request = require('request');
 
 module.exports = {};
 exports = module.exports;
@@ -23,7 +23,7 @@ exports.refreshUser = function(user) {
     console.log(user);
     var id = user.id;
     console.log(id);
-    body = request("GET","http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
+    body = request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
 
     var info = JSON.parse(body.getBody());
 	console.log(info);
@@ -46,6 +46,7 @@ exports.refreshUser = function(user) {
         member.addRole(guild.roles.find("name", "ingame moderator"));
     }
    // member.setNickname(info.username);
+	});
 };
 exports.refreshAll = function(array) {
     setTimeout(function(){

@@ -4,16 +4,22 @@ exports = module.exports;
 queue = [];
 const ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
-var playing;
-var voiceChannel
-exports.play = function(URL,member)
+var stopped = false;
+var inform_np = true;
+
+var now_playing_data = {};
+var queue = [];
+var voice_connection = null;
+var voice_handler = null;
+var voice_channel = null;
+var text_channel = null;
+exports.play = function(URL,message)
 {
-	
+	member =  message.member
 	console.log("QUEUE size"+queue.length);
-	if(playing)
-	{queue.push([URL,member]);return;}
-	voiceChannel = member.voiceChannel;
-	if(voiceChannel ==undefined)
+	voice_channel = member.voiceChannel;
+	text_channel = message.channel;
+	if(voice_channel ==undefined)
 	{
 		member.guild.channels.find(function(channel)
 		{
@@ -21,52 +27,107 @@ exports.play = function(URL,member)
 			}).sendMessage("Join the Music-Lobby");
 			
 	}
-	else if(voiceChannel.name!="Music-Lobby")
+	else if(voice_channel.name!="Music-Lobby")
 	{
-		voiceChannel = member.guild.channels.find(function(channel)
+		voice_channel = member.guild.channels.find(function(channel)
 		{
 			if(channel.type==='voice' && channel.name ==="Music-Lobby")return channel;
 		});
-		member.setVoiceChannel(voiceChannel);
-	}
-	console.log(voiceChannel);
-	console.log(URL);
-	voiceChannel.join()
-	.then(connection => {
-	const stream = ytdl(URL, {filter : 'audioonly'});
-    playing = connection.playStream(stream, streamOptions);
-	playing.on('end', (end) => {
-				//connection.disconnect();
-				exports.playNext();
-				});
-	})
-	.catch(console.error);
-
+		member.setvoice_channel(voice_channel);
+	}if(queue.length===0)
+	{voice_channel.join().then(connection => {voice_connection = connection;	add_to_queue(url,message);}).catch(console.error);}
+	else{	add_to_queue(url,message);}
 }
-exports.playNext = function()
+exports.playNext = function(message)
 {
-	if(queue.length==0)
-	{return;}
-	var next = queue.shift();
-	exports.play(next[0],next[1]);
+	if(voice_handler !== null) {
+				message.reply("Skipping...");
+				voice_handler.end();
+			} else {
+				message.reply("There is nothing being played.");
+			}
 }
 exports.clear = function(message)
 {
 	if(! message.member.hasPermission("MOVE_MEMBERS"))
 	{message.reply("Not Worthy");return;}
-	queue = [];
-	playing.end();
-	voiceChannel.connection.disconnect();
+	if(stopped) {
+				message.reply("Playback is already stopped!");
+			} else {
+				stopped = true;
+				if(voice_handler !== null) {
+					voice_handler.end();
+					queue = [];
+				}
+				message.reply("Stopping!");
+			}
 }
-exports.pause = function()
+exports.pause = function(message)
 {
 	playing.pause();
 }
-exports.resume = function()
+exports.resume = function(message)
 {
-	playing.resume();
+	if(stopped) {
+				stopped = false;
+				if(!is_queue_empty()) {
+					play_next_song();
+				}
+			} else {
+				message.reply("Playback is already running");
+			}
 }
-exports.setVol = function(vol)
+exports.setVol = function(message)
 {
 	playing.setVolume(vol);
+}
+exports.queue =  function(message){
+	var response = "";
+	
+			if(is_queue_empty()) {
+				response = "the queue is empty.";
+			} else {
+				for(var i = 0; i < queue.length; i++) {
+					response += "\"" + queue[i]["title"] + "\" (requested by " + queue[i]["user"] + ")\n";
+				}
+			}
+			
+			message.reply(response);
+}
+function add_to_queue(url, message) {
+			queue.push({video: url, user: message.author.username});
+			message.reply('added to the queue.');
+			if(!stopped && !is_bot_playing() && queue.length === 1) {
+				play_next_song();
+			}
+}
+function play_next_song() {
+	var url = queue[0]["video"];
+	var user = queue[0]["user"];
+
+	now_playing_data["video"] = url;
+	now_playing_data["user"] = user;
+
+	if(inform_np) {
+		text_channel.sendMessage('Now playing: <' + url + '> (requested by ' + user + ')');
+	}
+
+	var audio_stream = ytdl(url);
+	voice_handler = voice_connection.playStream(audio_stream);
+
+	voice_handler.once("end", reason => {
+		voice_handler = null;
+		if(!stopped && !is_queue_empty()) {
+			play_next_song();
+		}
+	});
+
+	queue.splice(0,1);
+}
+function is_queue_empty() {
+	return queue.length === 0;
+}
+
+function is_bot_playing() {
+	return voice_handler !== null;
 }
