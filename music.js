@@ -36,7 +36,7 @@ exports.play = function(URL,member)
 	const stream = ytdl(URL, {filter : 'audioonly'});
     playing = connection.playStream(stream, streamOptions);
 	playing.on('end', (end) => {
-				voiceChannel.disconect();
+				voiceChannel.disconnect();
 				exports.playNext();
 				});
 	})
