@@ -51,7 +51,7 @@ var commands = {
         syntax: '~bf2 <PlayerName>',
         exec: function(message) {
             var nick = message.content.substring(5).trim();
-            var plist = bf2.getPlayers(nick);
+			bf2.getPlayers(nick,function(plist){
             console.log("BF2 in index.js gets executed");
             if (plist == null) {
                 message.channel.sendMessage("API Down or invalid search");
@@ -69,7 +69,7 @@ var commands = {
             var start = 0;
             var past = 0;
             if (exact != null) {
-                res = res + "\n" + (1) + "\t" + "\t" + exact.str();
+			res = res + "\n" + (1) + "\t" + "\t" +  bf2.str(exact);
                 start++;
             }
             for (var i = start; i < plist.length; i++) {
@@ -84,11 +84,12 @@ var commands = {
                     break;
                 } else {
                     res = res + " \n" + (i + 1 - past) +
-                        "\t" + "\t" + plist[i].str();
+                        "\t" + "\t" + bf2.str(plist[i]);
                 }
             }
 			message.channel.sendMessage(res);
 			console.log(res);
+			});
         }
     },
     'bf2142': {
@@ -97,7 +98,7 @@ var commands = {
         exec: function(message) {
 			
             var nick = message.content.substring(7).trim();
-            var plist = bf2142.getPlayers(nick);
+            bf2142.getPlayers(nick,function(plist){
             console.log("BF2142 in index.js gets executed");
             if (plist == null) {
                 message.channel.sendMessage("API Down or invalid search");
@@ -115,7 +116,7 @@ var commands = {
             var start = 0;
             var past = 0;
             if (exact != null) {
-                res = res + "\n" + (1) + "\t" + "\t" + exact.str();
+                res = res + "\n" + (1) + "\t" + "\t" + bf2142.str(exact);
                 start++;
             }
             for (var i = start; i < plist.length; i++) {
@@ -130,11 +131,12 @@ var commands = {
                     break;
                 } else {
                     res = res + " \n" + (i + 1 - past) +
-                        "\t" + "\t" + plist[i].str();
+                        "\t" + "\t" + bf2142.str(plist[i]);
                 }
             }
 			message.channel.sendMessage(res);
 			console.log(res);
+			});
         }
     },
     'cookie': {

@@ -1,10 +1,10 @@
-const request = require('sync-request');
+const request = require('request');
 module.exports = {};
 var exports = module.exports;
-exports.getPlayers = function(nick) {
+exports.getPlayers = function(nick,callback) {
     console.log("GET PLAYERS BF2");
     var playerlist = new Array();
-    var body = request("GET", 'http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0').getBody('utf8');
+    request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0',function (error, response, body) {
     var collection = body.split("\n");
     console.log(collection);
     var index = 4;
@@ -29,14 +29,17 @@ exports.getPlayers = function(nick) {
 
         index++;
     }
-    //console.log(playerlist);
-    return playerlist;
+    console.log(playerlist);
+    callback(playerlist);
+	});
 };
 exports.player = function(pid_, nick_, score_) {
     this.nick = nick_;
     this.pid = pid_;
     this.score = score_;
-    this.str = function() {
-            return this.nick + "\t" + this.pid + "\t" + this.score + "\t" + "<https://battlelog.co/bfhq.php?pid=" + this.pid + ">";
-        }
+    this.link =  "<https://battlelog.co/bfhq.php?pid=" + this.pid + ">";
 };
+exports.str = function(player)
+{
+		return player.nick+" "+player.score+" "+player.link;
+}
