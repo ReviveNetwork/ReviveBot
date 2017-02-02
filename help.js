@@ -5,7 +5,7 @@ var config = require('./config');
 bot.on('message', message => {
     var channel = message.channel;
 
-    if (message.author.bot) {
+    if (message.author.bot && ! channel.name.includes('help') ) {
         return;
     }
     var user = message.author;
@@ -50,6 +50,4 @@ bot.on('message', message => {
     if (message.includes('howto') && message.includes('report')) {
         channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=15931');
     }
-    if(message.includes('fuck'))
-	channel.sendMessage("WARNING **"+user.username+"**: Dont use Obsene words");
 });
