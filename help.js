@@ -5,7 +5,7 @@ var config = require('./config');
 bot.on('message', message => {
     var channel = message.channel;
 
-    if (channel && channel.id !== config.help_channel) {
+    if (message.author.bot) {
         return;
     }
     var user = message.author;
