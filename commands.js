@@ -248,7 +248,7 @@ var commands = {
 	syntax:'~request <method> <url> <body>',
 	exec: function(message){
 	 if (message.guild != bot.guilds.get('256299642180861953')) { return;  }
-	var msg = message.content.toUpperCase().substring(5).trim().split(" ");
+	var msg = message.content.toUpperCase().substring(9).trim().split(" ");
 	var call = function (error, response, body) 
 	 {
          if(error)
