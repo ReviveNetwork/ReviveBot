@@ -244,12 +244,12 @@ var commands = {
         exec: function(message){rank.rank(message);}
     },
 	'request':{
-        description: 'does a http get on the url given and sends it to log',
-	syntax:'~request <method> <url> <body>',
+        description: 'execute a request',
+	syntax:'~request <request>',
 	exec: function(message){
 	 if (message.guild != bot.guilds.get('256299642180861953')) { return;  }
-	var msg = message.content.toUpperCase().substring(9).trim().split(" ");
-	var call = function (error, response, body) 
+	var msg = message.content.substring(9).trim();
+	var call = function (error, response, body)
 	 {
          if(error)
 	 {
@@ -262,10 +262,7 @@ var commands = {
 	 message.channel.sendMessage("```Javascript\n"+body+'```');
 	 }
 	 };
-	if(msg[0] === 'GET')
-        request(msg[1],call);
-	else
-	request({uri:msg[1],method:msg[0],json:msg.slice(2)},call);
+        request(msg,call);
 	}
 	}
 }
