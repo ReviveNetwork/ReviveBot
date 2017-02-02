@@ -5,6 +5,7 @@ const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const Discord = require('discord.js')
 const rank = require('./rank');
+const request = require('request');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -241,5 +242,25 @@ var commands = {
         description: 'Gives the Battlelog Profile of a Verified User',
         syntax: '~info @usermention',
         exec: function(message){rank.rank(message);}
-    }
+    },
+	'get':{
+        description: 'does a http get on the url given and sends it to log',
+	syntax:'~get <url>',
+	exec: function(message){
+	 if (message.guild != bot.guilds.get('256299642180861953')) { return;  }
+         request(message.content.substring(5),function (error, response, body) 
+	 {
+         if(error)
+	 {
+		 message.reply(error);
+	 }
+	 else
+	 {
+	 console.log(body)
+	 if(body.length<2000)
+	 message.channel.sendMessage("```Javascript\n"+body+'```');
+	 }
+	 });
+	}
+	}
 }
