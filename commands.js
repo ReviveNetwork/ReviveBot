@@ -243,12 +243,13 @@ var commands = {
         syntax: '~info @usermention',
         exec: function(message){rank.rank(message);}
     },
-	'get':{
+	'request':{
         description: 'does a http get on the url given and sends it to log',
-	syntax:'~get <url>',
+	syntax:'~request <method> <url> <body>',
 	exec: function(message){
 	 if (message.guild != bot.guilds.get('256299642180861953')) { return;  }
-         request(message.content.substring(5),function (error, response, body) 
+	var msg = message.content.toUpperCase().substring(5).trim().split(" ");
+	var call = function (error, response, body) 
 	 {
          if(error)
 	 {
@@ -260,7 +261,11 @@ var commands = {
 	 if(body.length<2000)
 	 message.channel.sendMessage("```Javascript\n"+body+'```');
 	 }
-	 });
+	 };
+	if(msg[0] === 'GET')
+        request(msg[1],call);
+	else
+	request({uri:msg[1],method:msg[0],json:msg.slice(2)},call);
 	}
 	}
 }
