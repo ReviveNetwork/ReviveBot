@@ -262,6 +262,7 @@ var commands = {
 	 message.channel.sendMessage("```Javascript\n"+body+'```');
 	 }
 	 };
+	if(msg.startsWith('{')) msg = JSON.parse(msg);
         request(msg,call);
 	}
 	}
