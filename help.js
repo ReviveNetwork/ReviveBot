@@ -8,7 +8,7 @@ bot.on('message', message => {
     if (channel && channel.id !== config.help_channel) {
         return;
     }
-
+    var user = message.author;
     message = message.content.toLowerCase();
     //Error updating
     if (message.includes('updating') && message.includes('forever')) {
@@ -50,4 +50,6 @@ bot.on('message', message => {
     if (message.includes('howto') && message.includes('report')) {
         channel.sendMessage('Follow this article \n https://battlelog.co/post.php?id=15931');
     }
+    if(message.includes('fuck'))
+	channel.sendMessage("WARNING **"+user.username+"**: Dont use Obsene words");
 });
