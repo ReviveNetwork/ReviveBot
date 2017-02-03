@@ -25,8 +25,9 @@ exports.getPlayers = function(nick,callback) {
         var p = collection[index].split("\t");
         //console.log(p[2],p[3],p[4]);
         p = new exports.player(p[2], p[3], p[4]);
-	exports.getrank(p,function(player){
-        playerlist.push(player);});
+	exports.getrank(p.pid,function(rank){
+        p.rank=rank;});
+	playerlist.push(p);
 
         index++;
     }
@@ -45,11 +46,11 @@ exports.str = function(player)
 {
  return player.nick+"\t"+player.score+"\t"+player.link;
 }
-exports.getrank = function(player,callback)
+exports.getrank = function(pid,callback)
 {
-    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + player.pid +,function (error, response, body) {
-	    player.rank=parseInt(body.split('\n')[2].split('\t')[1]);
-	    callback(player);
+    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid +,function (error, response, body) {
+	    var rank=parseInt(body.split('\n')[2].split('\t')[1]);
+	    callback(rank);
 });
 }
 
