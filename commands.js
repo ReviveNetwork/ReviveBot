@@ -63,7 +63,7 @@ var commands = {
                 //checking for exact matches 
                 var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
                 console.log(exact);
-                var res = "**S.no.\tName \t PID \t Score**";
+                var res = "**S.no.\tName \t PID \t Score\t Rank**";
             }
 			    if (plist.length == 0) {
                 message.channel.sendMessage("Player not found"); return;
