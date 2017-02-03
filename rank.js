@@ -13,9 +13,12 @@ exports.rank = function(message)
 		for(var i=0;i<body.soldiers.length;i++)
 		{
 			var soldier = body.soldiers[i];
+			var game = soldier.game=="stella"?require('./bf2142'):require('./bf2');
+			var ranklink = soldier.game=='stella'?'http://files.2142-stats.com/2142/ranks/':'https://battlelog.co/img/ranks/rank_'
+			game.getrank(soldier.pid,function(rank){
 			var embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
-			.setThumbnail(body.gravatar)
+			.setThumbnail((soldier.game=='stella'?ranklink+rank+'.jpg':ranklink+rank+'.png'))
 			.addField("Game: ",(soldier.game== "stella" ? "Battlefield 2142" : "Battlefield 2"))
 			.addField("Online: ",(soldier.online == 1 ? "yes" : "no"))
 			.addField("Last Active: ",soldier.last_active)
@@ -23,6 +26,7 @@ exports.rank = function(message)
 			.setFooter(soldier.time_created)
 			.setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
 			message.channel.sendEmbed(embed);
+			});
 		}
 	});
 }
