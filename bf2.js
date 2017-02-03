@@ -44,7 +44,7 @@ exports.player = function(pid_, nick_, score_) {
 };
 exports.str = function(player)
 {
- return player.nick+"\t"+player.score+"\t"+player.link;
+ return player.nick+"\t"+player.score+"\t"+player.rank+"\t"+player.link;
 }
 exports.getrank = function(pid,callback)
 {

@@ -26,6 +26,8 @@ exports.getPlayers = function(nick,callback) {
         var p = collection[index].split("\t");
 
         p = new exports.player(p[1], p[2]);
+	exports.getrank(p.pid,function(rank){
+		p.rank=rank;});
         playerlist.push(p);
 
         index++;
@@ -37,6 +39,7 @@ exports.getPlayers = function(nick,callback) {
 exports.player = function(pid_, nick_) {
     this.nick = nick_;
     this.pid = pid_;
+    this.rank = 0;
     this.link =  "<https://bl2142.co/bfhq.php?pid=" + this.pid + ">";
 };
 exports.getAuthToken = function(pid) {
@@ -50,7 +53,7 @@ exports.getAuthToken = function(pid) {
 }
 exports.str = function(player)
 {
-		return player.nick+"\t\t"+player.link;
+		return player.nick+"\t"+player.rank+"\t"+player.link;
 }
 exports.getrank = function(pid,call){
 	request('http://s.bf2142.us/getplayerinfo.aspx?auth='+exports.getAuthToken(pid)+'&mode=base',function(error,response,body){
