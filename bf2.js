@@ -1,10 +1,10 @@
 const request = require('request');
 module.exports = {};
 var exports = module.exports;
-exports.getPlayers = function(nick,callback) {
+exports.getPlayers = asyncfunction(nick,callback) {
     console.log("GET PLAYERS BF2");
     var playerlist = new Array();
-    request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0',function (error, response, body) {
+    return request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0').then(body => {
     var collection = body.split("\n");
     console.log(collection);
     var index = collection.indexOf('H\tn\tpid\tnick\tscore')+1;
@@ -32,8 +32,7 @@ exports.getPlayers = function(nick,callback) {
         index++;
     }
     console.log(playerlist);
-    callback(playerlist);
-	});
+    return playerlist;});
 };
 exports.player = function(pid_, nick_, score_) {
     this.nick = nick_;
@@ -46,11 +45,11 @@ exports.str = function(player)
 {
  return player.nick+"\t"+player.score+"\t"+player.rank+"\t"+player.link;
 }
-exports.getrank = function(pid,callback)
+exports.getrank = async function(pid,callback)
 {
-    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid,function (error, response, body) {
+    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid).then(body =>{
 	    var rank=parseInt(body.split('\n')[2].split('\t')[1]);
-	    callback(rank);
+	    retun rank;
 });
 }
 

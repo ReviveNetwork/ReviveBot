@@ -53,7 +53,7 @@ var commands = {
         syntax: '~bf2 <PlayerName>',
         exec: function(message) {
             var nick = message.content.substring(5).trim();
-			bf2.getPlayers(nick,function(plist){
+	    plist = await bf2.getPlayers(nick);
             console.log("BF2 in index.js gets executed");
             if (plist == null) {
                 message.channel.sendMessage("API Down or invalid search");
@@ -91,7 +91,7 @@ var commands = {
             }
 			message.channel.sendMessage(res);
 			console.log(res);
-			});
+			
         }
     },
     'bf2142': {
@@ -100,8 +100,8 @@ var commands = {
         exec: function(message) {
 			
             var nick = message.content.substring(7).trim();
-            bf2142.getPlayers(nick,function(plist){
-            console.log("BF2142 in index.js gets executed");
+            var plist = await bf2142.getPlayers(nick);
+	    console.log("BF2142 in index.js gets executed");
             if (plist == null) {
                 message.channel.sendMessage("API Down or invalid search");
                 return;
@@ -138,7 +138,6 @@ var commands = {
             }
 			message.channel.sendMessage(res);
 			console.log(res);
-			});
         }
     },
     'cookie': {
