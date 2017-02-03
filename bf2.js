@@ -48,7 +48,7 @@ exports.str = function(player)
 }
 exports.getrank = function(pid,callback)
 {
-    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid +,function (error, response, body) {
+    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid,function (error, response, body) {
 	    var rank=parseInt(body.split('\n')[2].split('\t')[1]);
 	    callback(rank);
 });
