@@ -52,3 +52,9 @@ exports.str = function(player)
 {
 		return player.nick+"\t\t"+player.link;
 }
+exports.getrank = function(pid,call){
+	request('http://s.bf2142.us/getplayerinfo.aspx?auth='+exports.getAuthToken(pid)+'&mode=base',function(error,response,body){
+         var rank = parseInt(body.split('\n')[4].split('\t')[5]);
+	call(rank);
+	});
+}
