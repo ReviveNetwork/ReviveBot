@@ -5,9 +5,10 @@ var config = require('./config');
 bot.on('message', message => {
     var channel = message.channel;
 
-    if (message.author.bot && ! channel.name.includes('help') ) {
+    if (channel.name.indexOf('help')<0 ) {
         return;
     }
+    if(message.author.bot)return;
     var user = message.author;
     message = message.content.toLowerCase();
     //Error updating
