@@ -46,7 +46,7 @@ exports.str = function(player)
 const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base').then((body) =>{
 	console.log(body);
 	if(body.includes('E\t104'))
-	{return NaN;}
+	{return 0;}
          var rank = parseInt(body.split('\n')[4].split('\t')[5]);
 	return rank;
 	}));
