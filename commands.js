@@ -275,7 +275,8 @@ var commands = {
 	'calc': {
 	description: 'evalutes a mathematical expression',
 	syntax: '~calc <expression>',
-	exec : function(message){                           var res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
-	 res = res.join(' ')                                message.channel.sendMessage(math.eval(res));    
+	exec : function(message){                           let res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
+	 res = res.join(' ');                               message.channel.sendMessage(math.eval(res));    
+	}
 	}
 }
