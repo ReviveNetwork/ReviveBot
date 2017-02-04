@@ -42,11 +42,11 @@ exports.str = function(player)
 {
 		return player.nick+"\t"+player.rank+"\t"+player.link;
 }
-const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base')).then((body) =>{
+const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base').then((body) =>{
 	console.log(body);
          var rank = parseInt(body.split('\n')[4].split('\t')[5]);
 	return rank;
-	});
+	}));
 
 exports.getrank = getrank;
 exports.getPlayers = getPlayers;
