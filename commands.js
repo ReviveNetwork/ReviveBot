@@ -12,6 +12,7 @@ bot.on('message', message => {
         return;
     } //base case
     var cmd = message.content.split(' ')[0].substring(1).toLowerCase();
+    if(commands.hasOwnProperty(cmd))
     commands[cmd].exec(message);
 });
 var commands = {
