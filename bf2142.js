@@ -1,63 +1,49 @@
-const request = require('request');
+const request = require('request-promise');
 module.exports = {};
-var exports = module.exports;
-exports.getPlayers = function(nick,callback) {
-    console.log("GET PLAYERS BF2142");
-    var playerlist = new Array();
-    request('http://s.bf2142.us/playersearch.aspx?auth=' + exports.getAuthToken(00000000) + '&nick=' + nick,function (error, response, body) {
+exports = module.exports;
+const toArray = (body) => {
     console.log(body);
-    var collection = body.split("\n");
+    let playerlist = new Array();
+    let collection = body.split("\n");
     console.log(collection);
-    var index = collection.indexOf('H\tpid\tnick')+1;
+    let index = collection.indexOf('H\tpid\tnick')+1;
     if (index > collection.length) {
         return null;
     }
-    while (collection[index].startsWith("D")) {
-        /*
-        if(index==30)
-        {
-        playerlist.push(collection.length-27+"more players found"+"\n"
-        +"to Get a full list of players \n"
-        +"<https://battlelog.co/player_search.php?q="+nick+">");
-        break;
-    }
-    */
-        //console.log(collection[index]);
+    while (collection[index].startsWith("D")){
         var p = collection[index].split("\t");
 
-        p = new exports.player(p[1], p[2]);
-	exports.getrank(p.pid,function(rank){
-		p.rank=rank;});
+        p = new player(p[1], p[2]);
         playerlist.push(p);
 
         index++;
-    }
+    };
     console.log(playerlist);
-    callback(playerlist);
-	});
+    return playerlist;
 };
-exports.player = function(pid_, nick_) {
+const getPlayers = (nick) => getAuthToken(0).then(auth => request('http://s.bf2142.us/playersearch.aspx?auth=' +auth + '&nick=' + nick )
+    .then(toArray)
+    .then((playerList) => Promise.all(playerList.map(player => getrank(player.pid))).then((playerRanks) => {
+	            playerRanks.forEach((rank, i) => playerList[i].rank = rank);
+	            return playerList;
+	        })));
+
+const player = function(pid_, nick_) {
     this.nick = nick_;
     this.pid = pid_;
     this.rank = 0;
     this.link =  "<https://bl2142.co/bfhq.php?pid=" + this.pid + ">";
 };
-exports.getAuthToken = function(pid) {
-    var authToken = "";
-    request("GET", 'https://bf2142auth.herokuapp.com?=' + pid,function (error, response, body) {
-    //console.log(authToken);
+const getAuthToken = (pid) =>request('https://bf2142auth.herokuapp.com?=' + pid).then(body => body.trim());
 
-    console.log(authToken);
-    return authToken;
-	});
-}
 exports.str = function(player)
 {
 		return player.nick+"\t"+player.rank+"\t"+player.link;
 }
-exports.getrank = function(pid,call){
-	request('http://s.bf2142.us/getplayerinfo.aspx?auth='+exports.getAuthToken(pid)+'&mode=base',function(error,response,body){
+const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base').then((body) =>{
          var rank = parseInt(body.split('\n')[4].split('\t')[5]);
-	call(rank);
-	});
-}
+	return rank;
+	}));
+
+exports.getrabk = getrank;
+exports.getPlayers = getPlayers;

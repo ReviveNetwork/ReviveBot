@@ -1,4 +1,4 @@
-const request = require('request');
+const request = require('request-promise');
 const Discord = require('discord.js');
 module.exports = {};
 exports = module.exports;
@@ -6,7 +6,7 @@ exports.rank = function(message)
 {
 	var id = message.mentions.users.first() || message.author;
 	id = id.id;
-	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
+	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id).then(body =>{
 		body = JSON.parse(body);
 		if(body.error)
 		{message.reply("The requested user hasnt linked his discord account with thier revive account");return;}
@@ -15,7 +15,7 @@ exports.rank = function(message)
 			var soldier = body.soldiers[i];
 			var game = soldier.game=="stella"?require('./bf2142'):require('./bf2');
 			var ranklink = soldier.game=='stella'?'http://files.2142-stats.com/2142/ranks/':'https://battlelog.co/img/ranks/rank_'
-			game.getrank(soldier.pid,function(rank){
+			game.getrank(soldier.pid).then(rank => {
 			var embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
 			.setThumbnail((soldier.game=='stella'?ranklink+rank+'.jpg':ranklink+rank+'.png'))
