@@ -5,7 +5,8 @@ const bf2 = require('./bf2');
 const bf2142 = require('./bf2142');
 const Discord = require('discord.js')
 const rank = require('./rank');
-const request = require('request');
+const request = require('request-promise');
+const stats = require('./stats');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -266,5 +267,8 @@ var commands = {
 	if(msg.startsWith('{')) msg = JSON.parse(msg);
         request(msg,call);
 	}
-	}
+	},                                                 'stats': {
+	 description: 'displays the guild stats',
+	syntax: '~stats',                                  exec: function(message) {                           stats.stats(message);              
+	}                                              }
 }
