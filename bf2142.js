@@ -34,7 +34,7 @@ const player = function(pid_, nick_) {
     this.rank = 0;
     this.link =  "<https://bl2142.co/bfhq.php?pid=" + this.pid + ">";
 };
-const getAuthToken = (pid) =>request('https://bf2142auth.herokuapp.com?pid=' + pid).then(body => {body=body.trim();
+const getAuthToken = (pid) =>request('http://bf2142auth.herokuapp.com?pid=' + pid).then(body => {body=body.trim();
 	console.log(body);
         return body;});
 
