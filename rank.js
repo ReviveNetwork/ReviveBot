@@ -11,13 +11,13 @@ exports.rank = function(message)
 		console.log(body);
 		if(body.error)
 		{message.reply("The requested user hasnt linked his discord account with thier revive account");return;}
-		for(var i=0;i<body.soldiers.length;i++)
+		for(let i=0;i<body.soldiers.length;i++)
 		{
-			var soldier = body.soldiers[i];
-			var gameob = soldier.game=="stella"?require('./bf2142'):require('./bf2');
-			var ranklink = soldier.game=='stella'?'http://files.2142-stats.com/2142/ranks/':'https://battlelog.co/img/ranks/rank_'
+			let soldier = body.soldiers[i];
+			let gameob = soldier.game=="stella"?require('./bf2142'):require('./bf2');
+			let ranklink = soldier.game=='stella'?'http://files.2142-stats.com/2142/ranks/':'https://battlelog.co/img/ranks/rank_'
 			gameob.getrank(soldier.pid).then(rank => {
-			var embed = new Discord.RichEmbed()
+			let embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
 			.setThumbnail((soldier.game=='stella'?ranklink+rank+'.jpg':ranklink+rank+'.png'))
 			.addField("Game: ",(soldier.game== "stella" ? "Battlefield 2142" : "Battlefield 2"))
