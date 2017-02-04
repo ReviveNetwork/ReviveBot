@@ -18,7 +18,7 @@ bot.on('message', message => {
     commands[cmd].exec(message);
 });
 var commands = {
-    'pong': {
+    'ping': {
         description: 'reply with a pong',
         syntax: '~ping',
         exec: function(message) {
