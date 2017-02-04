@@ -24,7 +24,8 @@ exports.refreshUser = function(user) {
     var id = user.id;
     console.log(id);
 	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id,function (error, response, body) {
-
+    if(error || response.statusCode != 200)
+    {console.log('error: '+ response.statusCode+'\n'+body);return;}
     var info = JSON.parse(body);
 	console.log(info);
     if(info.hasOwnProperty('error'))
