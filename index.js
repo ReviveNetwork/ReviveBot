@@ -1,6 +1,5 @@
 var bot = require('./bot');
 const help = require('./help');
-const fun = require('./fun');
 const web = require('./web');
 //const music = require('./music');
 var commands = require('./commands');
@@ -18,11 +17,11 @@ bot.on('message', message => {
     } else if (message.channel.id == '271349742099759104') {
         bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.content);
     }
-});
+});/*
 process.on('uncaughtException', function(err) {
     console.log('Caught exception: ' + err);
     bot = require('./bot');
-});
+});*/
 bot.on("guildMemberAdd", (member) => {
     var user = member.user;
     user.sendMessage("Welcome to the Revive Nwtowrk");
