@@ -13,7 +13,7 @@ let stats = (message)=>{
 	.addField('Online: ',guild.presences.map(p =>p.status!='offline').length)
 	.addField('Region: ',guild.region);
 	guild.roles.map((role) =>{
-		embed.addField(role.name+": ",members.size);
+		embed.addField(role.name+": ",role.members.size);
 	});
 	message.channel.sendEmbed(embed);
 }
