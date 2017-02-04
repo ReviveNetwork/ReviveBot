@@ -34,16 +34,19 @@ const player = function(pid_, nick_) {
     this.rank = 0;
     this.link =  "<https://bl2142.co/bfhq.php?pid=" + this.pid + ">";
 };
-const getAuthToken = (pid) =>request('https://bf2142auth.herokuapp.com?=' + pid).then(body => body.trim());
+const getAuthToken = (pid) =>request('https://bf2142auth.herokuapp.com?pid= ' + pid).then(body => {body=body.trim();
+	console.log(body);
+        return body;});
 
 exports.str = function(player)
 {
 		return player.nick+"\t"+player.rank+"\t"+player.link;
 }
 const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base')).then((body) =>{
+	console.log(body);
          var rank = parseInt(body.split('\n')[4].split('\t')[5]);
 	return rank;
 	});
 
-exports.getrabk = getrank;
+exports.getrank = getrank;
 exports.getPlayers = getPlayers;
