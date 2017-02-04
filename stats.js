@@ -7,7 +7,7 @@ let stats = (message)=>{
 	let embed = new Discord.RichEmbed()
 	.setThumbnail(guild.iconURL)
 	.setTitle(guild.name)
-	.setAuthor(guild.owner.user.name,guild.owner.user.displayAvatarURL)
+	.setAuthor(guild.owner.user.username,guild.owner.user.displayAvatarURL)
 	.setFooter(guild.createdAt)
 	.addField('Members: ',guild.memberCount)
 	.addField('Online: ',guild.presences.map(p =>p.status!='offline').length)
