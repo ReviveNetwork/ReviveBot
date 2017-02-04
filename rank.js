@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const Discord = require('discord.js');
+const moment = require('moment');
 module.exports = {};
 exports = module.exports;
 exports.rank = function(message)
@@ -22,9 +23,9 @@ exports.rank = function(message)
 			.setThumbnail((soldier.game=='stella'?ranklink+rank+'.jpg':ranklink+rank+'.png'))
 			.addField("Game: ",(soldier.game== "stella" ? "Battlefield 2142" : "Battlefield 2"))
 			.addField("Online: ",(soldier.online == 1 ? "yes" : "no"))
-			.addField("Last Active: ",soldier.last_active)
+			.addField("Last Active: ",moment(soldier.last_active,"YYYY-MM-DD HH:mm:ss").fromNow())
 			.setURL((soldier.game == "stella" ? "http://bl2142.co/bfhq.php?pid=" : "http://battlelog.co/bfhq.php?pid=")+soldier.pid)
-			.setFooter(soldier.time_created)
+			.setFooter(moment(soldier.time_created,"YYYY-MM-DD HH:mm:ss").fromNow())
 			.setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
 			message.channel.sendEmbed(embed);
 			});
