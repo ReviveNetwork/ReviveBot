@@ -7,6 +7,7 @@ const Discord = require('discord.js')
 const rank = require('./rank');
 const request = require('request-promise');
 const stats = require('./stats');
+const math = require('mathjs');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -270,5 +271,11 @@ var commands = {
 	},                                                 'stats': {
 	 description: 'displays the guild stats',
 	syntax: '~stats',                                  exec: function(message) {                           stats.stats(message);              
-	}                                              }
+	}                                              },
+	'calc': {
+	description: 'evalutes a mathematical expression',
+	syntax: '~calc <expression>',
+	exec : function(message){                           var res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
+	 res = res.join(' ')                                message.channel.sendMessage(math.eval(res));    
+	}
 }
