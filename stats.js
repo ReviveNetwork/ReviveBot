@@ -1,5 +1,5 @@
 const bot = require('./bot');
-const discord = require('discord.js');
+const Discord = require('discord.js');
 module.exports= {};
 exports= module.exports;
 let stats = (message)=>{
