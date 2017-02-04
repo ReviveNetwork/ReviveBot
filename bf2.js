@@ -1,10 +1,6 @@
-const request = require('request');
-module.exports = {};
-var exports = module.exports;
-exports.getPlayers = asyncfunction(nick,callback) {
-    console.log("GET PLAYERS BF2");
-    var playerlist = new Array();
-    return request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0').then(body => {
+const request = require('request-promise');
+const toarray = (body) => {
+    let playerlist = new Array();
     var collection = body.split("\n");
     console.log(collection);
     var index = collection.indexOf('H\tn\tpid\tnick\tscore')+1;
@@ -12,29 +8,22 @@ exports.getPlayers = asyncfunction(nick,callback) {
         return null;
     }
     while (collection[index].startsWith("D")) {
-        /*
-        if(index==30)
-        {
-        playerlist.push(collection.length-27+"more players found"+"\n"
-        +"to Get a full list of players \n"
-        +"<https://battlelog.co/player_search.php?q="+nick+">");
-        break;
-    }
-    */
         //console.log(collection[index]);
         var p = collection[index].split("\t");
         //console.log(p[2],p[3],p[4]);
-        p = new exports.player(p[2], p[3], p[4]);
-	exports.getrank(p.pid,function(rank){
-        p.rank=rank;});
+        p = new player(p[2], p[3], p[4]);
 	playerlist.push(p);
-
         index++;
     }
     console.log(playerlist);
-    return playerlist;});
-};
-exports.player = function(pid_, nick_, score_) {
+    return playerlist;};
+const getPlayers = (nick, callback) => request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0')
+    .then(toarray)
+    .then((playerList) => Promise.all(playerList.map(player => getrank(player.pid))).then((playerRanks) => {
+	            playerRanks.forEach((rank, i) => playerList[i].rank = rank);
+	            return playerList;
+    }));
+player = function(pid_, nick_, score_) {
     this.nick = nick_;
     this.pid = pid_;
     this.score = score_;
@@ -45,11 +34,10 @@ exports.str = function(player)
 {
  return player.nick+"\t"+player.score+"\t"+player.rank+"\t"+player.link;
 }
-exports.getrank = async function(pid,callback)
-{
-    request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid).then(body =>{
+getrank = (pid,callback) => request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid).then(body => {
 	    var rank=parseInt(body.split('\n')[2].split('\t')[1]);
-	    retun rank;
-});
-}
+	    return rank;
+	});
+exports.getrank = getrank
+ exports.getPlayers = getPlayers;
 
