@@ -21,12 +21,12 @@ const toArray = (body) => {
     console.log(playerlist);
     return playerlist;
 };
-const getPlayers = (nick) => getAuthToken(0).then(auth => request('http://s.bf2142.us/playersearch.aspx?auth=' +auth + '&nick=' + nick )
+const getPlayers = (nick) => getAuthToken(0).then(auth => request('http://s.bf2142.us/playersearch.aspx?auth=' +auth + '&nick=' + nick ))
     .then(toArray)
     .then((playerList) => Promise.all(playerList.map(player => getrank(player.pid))).then((playerRanks) => {
 	            playerRanks.forEach((rank, i) => playerList[i].rank = rank);
 	            return playerList;
-	        })));
+	        }));
 
 const player = function(pid_, nick_) {
     this.nick = nick_;
@@ -40,10 +40,10 @@ exports.str = function(player)
 {
 		return player.nick+"\t"+player.rank+"\t"+player.link;
 }
-const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base').then((body) =>{
+const getrank = (pid)=>getAuthToken(pid).then(auth => request('http://s.bf2142.us/getplayerinfo.aspx?auth='+auth+'&mode=base')).then((body) =>{
          var rank = parseInt(body.split('\n')[4].split('\t')[5]);
 	return rank;
-	}));
+	});
 
 exports.getrabk = getrank;
 exports.getPlayers = getPlayers;
