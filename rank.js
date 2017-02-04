@@ -13,9 +13,9 @@ exports.rank = function(message)
 		for(var i=0;i<body.soldiers.length;i++)
 		{
 			var soldier = body.soldiers[i];
-			var game = soldier.game=="stella"?require('./bf2142'):require('./bf2');
+			var gameob = soldier.game=="stella"?require('./bf2142'):require('./bf2');
 			var ranklink = soldier.game=='stella'?'http://files.2142-stats.com/2142/ranks/':'https://battlelog.co/img/ranks/rank_'
-			game.getrank(soldier.pid).then(rank => {
+			gameob.getrank(soldier.pid).then(rank => {
 			var embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
 			.setThumbnail((soldier.game=='stella'?ranklink+rank+'.jpg':ranklink+rank+'.png'))
