@@ -8,12 +8,12 @@ let stats = (message)=>{
 	.setThumbnail(guild.iconURL)
 	.setTitle(guild.name)
 	.setAuthor(guild.owner.user.username,guild.owner.user.displayAvatarURL)
-	.setFooter(guild.createdAt)
-	.addField('Members: ',guild.memberCount)
-	.addField('Online: ',guild.presences.map(p =>p.status!='offline').length)
-	.addField('Region: ',guild.region);
+	.setFooter("formed on "+guild.createdAt)
+	.addField('Members: ',guild.memberCount,true)
+	.addField('Online: ',guild.presences.map(p =>p.status!='offline').length,true)
+	.addField('Region: ',guild.region,true);
 	guild.roles.map((role) =>{
-		embed.addField(role.name+": ",role.members.size);
+		embed.addField(role.name+": ",role.members.size,true);
 	});
 	message.channel.sendEmbed(embed);
 }
