@@ -16,7 +16,7 @@ bot.on('message', message => {
         channel.sendMessage('Follow this article \n http://battlelog.co/wiki.php?article=27');
     }
     //Error debugging
-else if (message.includes('unkwown dynamicoption')) {
+else if (message.includes('unknown dynamicoption')) {
         channel.sendMessage('Follow the second part of this article. \n http://battlelog.co/post.php?id=9744');
     }
     //Mouse stuck after launch ingame
