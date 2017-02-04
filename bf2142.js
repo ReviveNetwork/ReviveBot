@@ -13,7 +13,7 @@ const toArray = (body) => {
     while (collection[index].startsWith("D")){
         var p = collection[index].split("\t");
 
-        p = new player(p[1], p[2]);
+        p = new player(parseInt(p[1]), p[2]);
         playerlist.push(p);
 
         index++;
