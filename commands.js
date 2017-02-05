@@ -48,7 +48,7 @@ var commands = {
                 functions.refreshAll(bot.guilds.get('184536578654339072').members.array())
             } else if(message.mentions.users) {
 		for(let i=0;i<message.mentions.users.size; i++)
-		{functions.refreshUser(message.metions.users[i]);}
+		{functions.refreshUser(message.mentions.users[i]);}
 		}else{
 		
                 functions.refreshUser(message.author);
