@@ -266,7 +266,8 @@ var commands = {
                     message.reply(error);
                 } else {
                     console.log(body)
-                    if (body.length < 2000)
+                    if (body.length > 2000)
+			body = body.toString().substring(0,1980)+"...";
                         message.channel.sendMessage("```Javascript\n" + body + '```');
                 }
             };
