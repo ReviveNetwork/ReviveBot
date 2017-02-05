@@ -20,7 +20,7 @@ exports.rank = function(message)
 			gameob.getrank(soldier.pid).then(rank => {
 			let embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
-			.setThumbnail(ranklink+rank+'.png'))
+			.setThumbnail(ranklink+rank+'.png')
 			.addField("Game: ",(soldier.game== "stella" ? "Battlefield 2142" : "Battlefield 2"))
 			.addField("Online: ",(soldier.online == 1 ? "yes" : "no"))
 			.addField("Last Active: ",moment(soldier.last_active,"YYYY-MM-DD HH:mm:ss").fromNow())
