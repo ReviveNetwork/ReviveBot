@@ -17,7 +17,8 @@ var voice_handler = null;
 var voice_channel = null;
 var text_channel = null;
 exports.play = function(URL, message) {
-    member = message.member
+    member = message.member;
+    if(!url.includes("youtube.com/"))return;
     console.log("QUEUE size" + queue.length);
     voice_channel = member.voiceChannel;
     text_channel = message.channel;
