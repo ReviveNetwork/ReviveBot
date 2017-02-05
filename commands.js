@@ -283,7 +283,7 @@ var commands = {
         syntax: '~calc <expression>',
         exec: function(message) {
             let res = message.content.substring(6)//.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
-            res = res.join(' ');
+           // res = res.join(' ');
             message.channel.sendMessage(math.eval(res));
         }
     }
