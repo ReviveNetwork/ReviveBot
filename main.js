@@ -30,12 +30,12 @@ function bot_start() {
 
     bot_process.stderr.on('data', (data) => {
         console.error(data.toString());
-        bot.channels.get(config.log_channel).sendMessage('**ERROR** ReviveBot-' + bot_process.pid + ' ```' + data + '```');
+        bot.channels.get(config.log_channel).sendMessage('**ERROR** ReviveBot-' + bot_process.pid + ' ```' + data.subtring(0,1900)+ '```');
     });
 
     bot_process.stdout.on('data', (data) => {
         console.log(data.toString());
-        bot.channels.get(config.log_channel).sendMessage('**LOG** ReviveBot-' + bot_process.pid + ' ```' + data + '```');
+        bot.channels.get(config.log_channel).sendMessage('**LOG** ReviveBot-' + bot_process.pid + ' ```' + data.substring(0,1900) + '```');
     });
 
     return bot_process;

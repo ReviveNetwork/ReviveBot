@@ -287,7 +287,9 @@ var commands = {
         exec: function(message) {
             let res = message.content.substring(6)//.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
            // res = res.join(' ');
-            message.channel.sendMessage(math.eval(res));
+	    res = math.eval(res);
+	    console.log(res);
+            message.channel.sendMessage(res);
         }
     }
 }
