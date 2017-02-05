@@ -8,9 +8,6 @@ const rank = require('./rank');
 const request = require('request-promise');
 const stats = require('./stats');
 const math = require('mathjs');
-const webshot = require('webshot');
-const toArray = require('stream-to-array');
-const util = require('util');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -288,18 +285,6 @@ var commands = {
             let res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
             res = res.join(' ');
             message.channel.sendMessage(math.eval(res));
-        }
-    },
-    'webshot': {
-        description: 'Takes a screenshot of a URL',
-        syntax: '~webshot <URL>',
-        exec: function(message) {
-            message.channel.sendFile(toArray(webshot(message.content.substring(9).trim()))
-				.then(function (parts) {
-					const buffers = parts
-					.map(part => util.isBuffer(part) ? part : Buffer.from(part));
-					return Buffer.concat(buffers);
-				}));
         }
     }
 }
