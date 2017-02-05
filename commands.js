@@ -8,14 +8,16 @@ const rank = require('./rank');
 const request = require('request-promise');
 const stats = require('./stats');
 const math = require('mathjs');
+const webshot = require('webshot');
+const toArray = require('stream-to-array')
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
         return;
     } //base case
     var cmd = message.content.split(' ')[0].substring(1).toLowerCase();
-    if(commands.hasOwnProperty(cmd))
-    commands[cmd].exec(message);
+    if (commands.hasOwnProperty(cmd))
+        commands[cmd].exec(message);
 });
 var commands = {
     'ping': {
@@ -56,92 +58,94 @@ var commands = {
         syntax: '~bf2 <PlayerName>',
         exec: function(message) {
             var nick = message.content.substring(5).trim();
-	    bf2.getPlayers(nick).then(plist =>{
-            console.log("BF2 in index.js gets executed");
-            if (plist == null) {
-                message.channel.sendMessage("API Down or invalid search");
-                return;
-            }
-            if (plist.length >= 1) {
-                //checking for exact matches 
-                var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
-                console.log(exact);
-                var res = "**S.no.\tName \t PID \t Score\t Rank**";
-            }
-			    if (plist.length == 0) {
-                message.channel.sendMessage("Player not found"); return;
-            }
-            var start = 0;
-            var past = 0;
-            if (exact != null) {
-			res = res + "\n" + (1) + "\t" + "\t" +  bf2.str(exact);
-                start++;
-            }
-            for (var i = start; i < plist.length; i++) {
-                if (exact != null && i == plist.indexOf(exact)) {
-                    past++;
-                    continue;
+            bf2.getPlayers(nick).then(plist => {
+                console.log("BF2 in index.js gets executed");
+                if (plist == null) {
+                    message.channel.sendMessage("API Down or invalid search");
+                    return;
                 }
-                if (i == 26) {
-                    res = res + "\n" + (plist.length - 25) +
-                        " more players found to Get a full list of players \n" +
-                        "<https://battlelog.co/player_search.php?q=" + nick + ">";
-                    break;
-                } else {
-                    res = res + " \n" + (i + 1 - past) +
-                        "\t" + "\t" + bf2.str(plist[i]);
+                if (plist.length >= 1) {
+                    //checking for exact matches 
+                    var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
+                    console.log(exact);
+                    var res = "**S.no.\tName \t PID \t Score\t Rank**";
                 }
-            }
-			message.channel.sendMessage(res);
-			console.log(res);
-	});
+                if (plist.length == 0) {
+                    message.channel.sendMessage("Player not found");
+                    return;
+                }
+                var start = 0;
+                var past = 0;
+                if (exact != null) {
+                    res = res + "\n" + (1) + "\t" + "\t" + bf2.str(exact);
+                    start++;
+                }
+                for (var i = start; i < plist.length; i++) {
+                    if (exact != null && i == plist.indexOf(exact)) {
+                        past++;
+                        continue;
+                    }
+                    if (i == 26) {
+                        res = res + "\n" + (plist.length - 25) +
+                            " more players found to Get a full list of players \n" +
+                            "<https://battlelog.co/player_search.php?q=" + nick + ">";
+                        break;
+                    } else {
+                        res = res + " \n" + (i + 1 - past) +
+                            "\t" + "\t" + bf2.str(plist[i]);
+                    }
+                }
+                message.channel.sendMessage(res);
+                console.log(res);
+            });
         }
     },
     'bf2142': {
         description: 'finds a bf2142 player',
         syntax: '~bf2142 <PlayerName>',
         exec: function(message) {
-			
+
             let nick = message.content.substring(7).trim();
-            bf2142.getPlayers(nick).then(plist=>{
-	    console.log("BF2142 in index.js gets executed");
-            if (plist == null) {
-                message.channel.sendMessage("API Down or invalid search");
-                return;
-            }
-            if (plist.length >= 1) {
-                //checking for exact matches 
-                var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
-                console.log(exact);
-                var res = "**S.no.\tName \tRank**";
-            }
-			if (plist.length == 0) {
-                message.channel.sendMessage("Player not found");return;
-            }
-            var start = 0;
-            var past = 0;
-            if (exact != null) {
-                res = res + "\n" + (1) + "\t" + "\t" + bf2142.str(exact);
-                start++;
-            }
-            for (var i = start; i < plist.length; i++) {
-                if (exact != null && i == plist.indexOf(exact)) {
-                    past++;
-                    continue;
+            bf2142.getPlayers(nick).then(plist => {
+                console.log("BF2142 in index.js gets executed");
+                if (plist == null) {
+                    message.channel.sendMessage("API Down or invalid search");
+                    return;
                 }
-                if (i == 26) {
-                    res = res + "\n" + (plist.length - 25) +
-                        " more players found to Get a full list of players \n" +
-                        "<https://battlelog.co/player_search.php?q=" + nick + ">";
-                    break;
-                } else {
-                    res = res + " \n" + (i + 1 - past) +
-                        "\t" + "\t" + bf2142.str(plist[i]);
+                if (plist.length >= 1) {
+                    //checking for exact matches 
+                    var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
+                    console.log(exact);
+                    var res = "**S.no.\tName \tRank**";
                 }
-            }
-			message.channel.sendMessage(res);
-			console.log(res);
-	    });
+                if (plist.length == 0) {
+                    message.channel.sendMessage("Player not found");
+                    return;
+                }
+                var start = 0;
+                var past = 0;
+                if (exact != null) {
+                    res = res + "\n" + (1) + "\t" + "\t" + bf2142.str(exact);
+                    start++;
+                }
+                for (var i = start; i < plist.length; i++) {
+                    if (exact != null && i == plist.indexOf(exact)) {
+                        past++;
+                        continue;
+                    }
+                    if (i == 26) {
+                        res = res + "\n" + (plist.length - 25) +
+                            " more players found to Get a full list of players \n" +
+                            "<https://battlelog.co/player_search.php?q=" + nick + ">";
+                        break;
+                    } else {
+                        res = res + " \n" + (i + 1 - past) +
+                            "\t" + "\t" + bf2142.str(plist[i]);
+                    }
+                }
+                message.channel.sendMessage(res);
+                console.log(res);
+            });
         }
     },
     'cookie': {
@@ -183,100 +187,118 @@ var commands = {
         description: 'displays help',
         syntax: '~help',
         exec: function(message) {
-			var embed = new Discord.RichEmbed().setTitle('HELP').setColor("#FF7F50");
+            var embed = new Discord.RichEmbed().setTitle('HELP').setColor("#FF7F50");
             for (cmd in commands) {
-                embed.addField(cmd,"Description: " + commands[cmd].description + "\n"+ "Syntax: " + commands[cmd].syntax);
-			}
-			//embed.addField('Music',"Description: Access the music bot using - as the prefix" + "\n"+ "Syntax: -help");
+                embed.addField(cmd, "Description: " + commands[cmd].description + "\n" + "Syntax: " + commands[cmd].syntax);
+            }
+            //embed.addField('Music',"Description: Access the music bot using - as the prefix" + "\n"+ "Syntax: -help");
             message.channel.sendEmbed(embed);
         }
     },
-	'play': {
+    'play': {
         description: 'plays the youtube url specified',
         syntax: '~play <youtube_url>',
         exec: function(message) {
-			url = message.content.substring(6).trim();
-			music.play(url,message);
+            url = message.content.substring(6).trim();
+            music.play(url, message);
         }
     },
-	'pause': {
+    'pause': {
         description: 'pauses the voice stream',
         syntax: '~pause',
         exec: function(message) {
-			music.pause(message);
+            music.pause(message);
         }
     },
-	'resume': {
+    'resume': {
         description: 'resumes the voice stream',
         syntax: '~resume',
         exec: function(message) {
-			music.resume(message);
+            music.resume(message);
         }
     },
-	'clear': {
+    'clear': {
         description: 'clears the playlist',
         syntax: '~clear',
         exec: function(message) {
-			music.clear(message);
+            music.clear(message);
         }
     },
-	'playnext': {
+    'playnext': {
         description: 'plays the next song',
         syntax: '~playnext',
         exec: function(message) {
-			music.playNext(message);
+            music.playNext(message);
         }
     },
-	'setvol': {
+    'setvol': {
         description: 'sets the play volume',
         syntax: '~setVol',
         exec: function(message) {
-			music.setVol(message.content.substring(7).trim());
+            music.setVol(message.content.substring(7).trim());
         }
     },
-	'queue': {
+    'queue': {
         description: 'views the queue',
         syntax: '~queue',
         exec: function(message) {
-			music.queue(message);
+            music.queue(message);
         }
     },
-	'info': {
+    'info': {
         description: 'Gives the Battlelog Profile of a Verified User',
         syntax: '~info @usermention',
-        exec: function(message){rank.rank(message);}
+        exec: function(message) {
+            rank.rank(message);
+        }
     },
-	'request':{
+    'request': {
         description: 'execute a request',
-	syntax:'~request <request>',
-	exec: function(message){
-	 if (message.guild != bot.guilds.get('256299642180861953')) { return;  }
-	var msg = message.content.substring(9).trim();
-	var call = function (error, response, body)
-	 {
-         if(error)
-	 {
-		 message.reply(error);
-	 }
-	 else
-	 {
-	 console.log(body)
-	 if(body.length<2000)
-	 message.channel.sendMessage("```Javascript\n"+body+'```');
-	 }
-	 };
-	if(msg.startsWith('{')) msg = JSON.parse(msg);
-        request(msg,call);
-	}
-	},                                                 'stats': {
-	 description: 'displays the guild stats',
-	syntax: '~stats',                                  exec: function(message) {                           stats.stats(message);              
-	}                                              },
-	'calc': {
-	description: 'evalutes a mathematical expression',
-	syntax: '~calc <expression>',
-	exec : function(message){                           let res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
-	 res = res.join(' ');                               message.channel.sendMessage(math.eval(res));    
-	}
-	}
+        syntax: '~request <request>',
+        exec: function(message) {
+            if (message.guild != bot.guilds.get('256299642180861953')) {
+                return;
+            }
+            var msg = message.content.substring(9).trim();
+            var call = function(error, response, body) {
+                if (error) {
+                    message.reply(error);
+                } else {
+                    console.log(body)
+                    if (body.length < 2000)
+                        message.channel.sendMessage("```Javascript\n" + body + '```');
+                }
+            };
+            if (msg.startsWith('{')) msg = JSON.parse(msg);
+            request(msg, call);
+        }
+    },
+    'stats': {
+        description: 'displays the guild stats',
+        syntax: '~stats',
+        exec: function(message) {
+            stats.stats(message);
+        }
+    },
+    'calc': {
+        description: 'evalutes a mathematical expression',
+        syntax: '~calc <expression>',
+        exec: function(message) {
+            let res = message.content.match(/[ 0-9\%\(\)\^\/\+\-\*]+/);
+            res = res.join(' ');
+            message.channel.sendMessage(math.eval(res));
+        }
+    },
+    'webshot': {
+        description: 'Takes a screenshot of a URL',
+        syntax: '~webshot <URL>',
+        exec: function(message) {
+            message.sendFile(toArray(webshot(message.content.substring(9).trim()))
+				.then(function (parts) {
+					const buffers = parts
+					.map(part => util.isBuffer(part) ? part : Buffer.from(part));
+					return Buffer.concat(buffers);
+				}));
+        }
+    }
 }
