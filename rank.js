@@ -22,10 +22,11 @@ exports.rank = function(message)
 			.setTitle(soldier.nickname)
 			.setThumbnail(ranklink+rank+'.png')
 			.addField("Game: ",(soldier.game== "stella" ? "Battlefield 2142" : "Battlefield 2"))
+			.addField("Rank: ",(soldier.game== "stella" ? require('./bf2142rank.json') : require('./bf2rank.json'))[rank])
 			.addField("Online: ",(soldier.online == 1 ? "yes" : "no"))
 			.addField("Last Active: ",moment(soldier.last_active,"YYYY-MM-DD HH:mm:ss").fromNow())
 			.setURL((soldier.game == "stella" ? "http://bl2142.co/bfhq.php?pid=" : "http://battlelog.co/bfhq.php?pid=")+soldier.pid)
-			.setFooter(moment(soldier.time_created,"YYYY-MM-DD HH:mm:ss").fromNow())
+			.setFooter("Created "+moment(soldier.time_created,"YYYY-MM-DD HH:mm:ss").fromNow())
 			.setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
 			message.channel.sendEmbed(embed);
 			});
