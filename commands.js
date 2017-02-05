@@ -46,7 +46,11 @@ var commands = {
             if (message.content.substring(9).trim() == 'all' &&
                 message.guild.name == 'Revive Netowrk Dev') {
                 functions.refreshAll(bot.guilds.get('184536578654339072').members.array())
-            } else {
+            } else if(message.mentions.users) {
+		for(let i=0;i<message.mentions.users.size; i++)
+		{functions.refreshUser(message.metions.users[i]);}
+		}else{
+		
                 functions.refreshUser(message.author);
             }
         }
