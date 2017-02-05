@@ -9,7 +9,8 @@ const request = require('request-promise');
 const stats = require('./stats');
 const math = require('mathjs');
 const webshot = require('webshot');
-const toArray = require('stream-to-array')
+const toArray = require('stream-to-array');
+const util = require('util');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
