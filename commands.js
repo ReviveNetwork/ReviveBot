@@ -293,7 +293,7 @@ var commands = {
         description: 'Takes a screenshot of a URL',
         syntax: '~webshot <URL>',
         exec: function(message) {
-            message.sendFile(toArray(webshot(message.content.substring(9).trim()))
+            message.channel.sendFile(toArray(webshot(message.content.substring(9).trim()))
 				.then(function (parts) {
 					const buffers = parts
 					.map(part => util.isBuffer(part) ? part : Buffer.from(part));
