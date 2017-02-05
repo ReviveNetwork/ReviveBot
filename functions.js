@@ -12,7 +12,7 @@ exports.integrate = function(user) {
         name: user.username
     })).toString('base64'));
     var res = "To link your discord account and forum account, please follow the below link \n https://battlelog.co/discord_link.php?id=" + id;
-    user.sendMessage(res);
+    //user.sendMessage(res);
     setTimeout(exports.refreshUser(user),120000);
 };
 
