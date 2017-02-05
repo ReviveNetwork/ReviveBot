@@ -30,13 +30,11 @@ function bot_start() {
 
     bot_process.stderr.on('data', (data) => {
         console.error(data.toString());
-	if(data.length>1900)data=data.substring(0,1900);
         bot.channels.get(config.log_channel).sendMessage('**ERROR** ReviveBot-' + bot_process.pid + ' ```' + + '```');
     });
 
     bot_process.stdout.on('data', (data) => {
         console.log(data.toString());
-	if(data.length>1900)data=data.substring(0,1900);
         bot.channels.get(config.log_channel).sendMessage('**LOG** ReviveBot-' + bot_process.pid + ' ```' +data + '```');
     });
 
