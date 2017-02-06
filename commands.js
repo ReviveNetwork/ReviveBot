@@ -47,7 +47,7 @@ var commands = {
                 message.guild.name == 'Revive Netowrk Dev') {
                 functions.refreshAll(bot.guilds.get('184536578654339072').members.array())
             } else if(message.mentions.users) {
-		message.mentions.users.map(refreshUser);
+		message.mentions.users.map(functions.refreshUser);
 		}else{
 		
                 functions.refreshUser(message.author);
