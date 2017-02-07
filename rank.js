@@ -7,7 +7,7 @@ exports.rank = function(message)
 {
 	var id = message.mentions.users.first() || message.author;
 	id = id.id;
-	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id).catch(console.log).then(body =>{
+	request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id).catch(err => {console.log(err);message.channel.sendMessage('api down')}).then(body =>{
 		try{body = JSON.parse(body)}catch(e){console.log("error: "+body);}
 		console.log(body);
 		if(body.error)
