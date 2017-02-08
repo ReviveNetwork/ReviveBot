@@ -37,6 +37,20 @@ bot.on('messageUpdate', (oldMessage,newMessage)=>{
 		m.newMessage.edit(newMessage.content);
 	}
 });
+bot.on('messageDelete', message=>{
+	if (message.author.bot == true) return; // prevent double messages
+	console.log("executing");
+	let m = messageDB.data.find(function(messageObj)
+				{	
+					if(messageObj.oldMessage.id === message.id)
+						return messageObj;
+				});
+	if(m)
+	{
+		//console.log(m);
+		m.newMessage.delete().then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
+	}
+});
 
 process.on('uncaughtException', function(err) {
     console.log('Caught exception: ' + err);
