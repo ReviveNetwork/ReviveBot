@@ -271,7 +271,8 @@ var commands = {
                         message.channel.sendMessage("```Javascript\n" + body + '```');
                 }
             };
-            if (msg.startsWith('{')) msg = JSON.parse(msg);
+            if (msg.startsWith('{')) msg = JSON.parse(msg)
+				else msg = getOptions(msg);
             request(msg, call);
         }
     },
@@ -301,4 +302,12 @@ const str = function(soldier,game)
 	else
 	{game='http://bl2142.co/bfhq?pid='}
 	return soldier.nick+'\t'+"<"+game+soldier.pid+">";
+};
+const getOptions = function(URL) {
+    return {
+        url: URL,
+        headers: {
+            'User-Agent': 'GameSpyHTTP/1.0'
+        }
+    };
 };
