@@ -19,7 +19,7 @@
     "opusscript": "^0.0.1",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "revive-stats.js": "^1.0.2",
+    "revive-stats.js": "^1.0.3",
     "urlencode": "^1.1.0",
     "uws": "^0.12.0",
     "ytdl-core": "^0.7.21"
