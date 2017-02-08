@@ -18,6 +18,7 @@ const toarray = (body) => {
     console.log(playerlist);
     return playerlist;};
 const getPlayers = (nick, callback) => request('http://bf2web.game.bf2.us/ASP/searchforplayers.aspx?nick=' + nick + '&where=a&sort=a&debug=txs&transpose=0')
+	.catch(console.log)
     .then(toarray)
     .then((playerList) => Promise.all(playerList.map(player => getrank(player.pid))).then((playerRanks) => {
 	            playerRanks.forEach((rank, i) => playerList[i].rank = rank);
@@ -34,7 +35,7 @@ exports.str = function(player)
 {
  return player.nick+"\t"+player.score+"\t"+player.rank+"\t"+player.link;
 }
-getrank = (pid,callback) => request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid).then(body => {
+getrank = (pid,callback) => request('http://bf2web.game.bf2.us/ASP/getrankinfo.aspx?pid=' + pid).catch(console.log).then(body => {
 	    var rank=parseInt(body.split('\n')[2].split('\t')[1]);
 	    return rank;
 	});
