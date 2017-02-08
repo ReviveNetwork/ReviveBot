@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const Discord = require('discord.js');
+const revive = require('revive-stats.js')
 const moment = require('moment');
 module.exports = {};
 exports = module.exports;
@@ -15,7 +16,7 @@ exports.rank = function(message)
 		for(let i=0;i<body.soldiers.length;i++)
 		{
 			let soldier = body.soldiers[i];
-			let gameob = soldier.game=="stella"?require('./bf2142'):require('./bf2');
+			let gameob = soldier.game=="stella"?revive.bf2142:revive.bf2142;
 			let ranklink = soldier.game=='stella'?'https://github.com/ReviveNetwork/ReviveBot/raw/master/img/bf2142/rank_':'https://battlelog.co/img/ranks/rank_'
 			gameob.getrank(soldier.pid).then(rank => {
 			let embed = new Discord.RichEmbed()

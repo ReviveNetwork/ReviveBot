@@ -1,8 +1,8 @@
 const bot = require('./bot');
 const functions = require('./functions');
 const music = require('./music');
-const bf2 = require('./bf2');
-const bf2142 = require('./bf2142');
+const bf2 = require('revive-stats.js').bf2;
+const bf2142 = require('revive-stats.js').bf2142;
 const Discord = require('discord.js')
 const rank = require('./rank');
 const request = require('request-promise');
@@ -69,7 +69,7 @@ var commands = {
                     //checking for exact matches 
                     var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
                     console.log(exact);
-                    var res = "**S.no.\tName \t PID \t Score\t Rank**";
+                    var res = "**S.no.\tName \t link**";
                 }
                 if (plist.length == 0) {
                     message.channel.sendMessage("Player not found");
@@ -78,7 +78,7 @@ var commands = {
                 var start = 0;
                 var past = 0;
                 if (exact != null) {
-                    res = res + "\n" + (1) + "\t" + "\t" + bf2.str(exact);
+                    res = res + "\n" + (1) + "\t" + "\t" + str(exact);
                     start++;
                 }
                 for (var i = start; i < plist.length; i++) {
@@ -93,7 +93,7 @@ var commands = {
                         break;
                     } else {
                         res = res + " \n" + (i + 1 - past) +
-                            "\t" + "\t" + bf2.str(plist[i]);
+                            "\t" + "\t" + str(plist[i]);
                     }
                 }
                 message.channel.sendMessage(res);
@@ -117,7 +117,7 @@ var commands = {
                     //checking for exact matches 
                     var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
                     console.log(exact);
-                    var res = "**S.no.\tName \tRank**";
+                    var res = "**S.no.\tName \t link**";
                 }
                 if (plist.length == 0) {
                     message.channel.sendMessage("Player not found");
@@ -126,7 +126,7 @@ var commands = {
                 var start = 0;
                 var past = 0;
                 if (exact != null) {
-                    res = res + "\n" + (1) + "\t" + "\t" + bf2142.str(exact);
+                    res = res + "\n" + (1) + "\t" + "\t" + str(exact);
                     start++;
                 }
                 for (var i = start; i < plist.length; i++) {
@@ -141,7 +141,7 @@ var commands = {
                         break;
                     } else {
                         res = res + " \n" + (i + 1 - past) +
-                            "\t" + "\t" + bf2142.str(plist[i]);
+                            "\t" + "\t" + str(plist[i]);
                     }
                 }
                 message.channel.sendMessage(res);
@@ -294,3 +294,11 @@ var commands = {
         }
     }
 }
+const str = function(soldier,game)
+{
+	if(game=='bf2')
+	{game='http://battlelog.co/bfhq?pid='}
+	else
+	{game='http://bl2142.co/bfhq?pid='}
+	return soldier.nick+'\t'+"<"+game+soldier.pid+">";
+};
