@@ -24,11 +24,12 @@ bot.on('message', message => {
     }
 });
 bot.on('messageUpdate', (oldMessage,newMessage)=>{
+	console.log("executing");
 	if(newMessage.channel == '271350052188979201' ||newMessage.channel == '271349742099759104')
 	{
 		messageDB.find("oldMessage",oldMessage.id).newMessage.edit(newMessage.content);
 	}
-})
+});
 process.on('uncaughtException', function(err) {
     console.log('Caught exception: ' + err);
 	fs.writeFileSync('messagedb.json', JSON.stringify(messageDB));
