@@ -17,19 +17,27 @@ bot.on('message', message => {
     }
     if (message.channel.id == '271350052188979201') {
         bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.content)
-		.then(msg => messageDB.data.push({oldMessage:message.id,newMessage:msg.id}));
+		.then(msg => messageDB.data.push({oldMessage:message,newMessage:msg}));
     } else if (message.channel.id == '271349742099759104') {
         bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.content)
 		.then(msg => messageDB.data.push({oldMessage:message,newMessage:msg}));
     }
 });
 bot.on('messageUpdate', (oldMessage,newMessage)=>{
+	if (newMessage.author.bot == true) return; // prevent double messages
 	console.log("executing");
-	if(newMessage.channel == '271350052188979201' ||newMessage.channel == '271349742099759104')
+	let m = messageDB.data.find(function(messageObj)
+				{	
+					if(messageObj.oldMessage.id === oldMessage.id)
+						return messageObj;
+				});
+	if(m)
 	{
-		messageDB.find("oldMessage",oldMessage.id).newMessage.edit(newMessage.content);
+		//console.log(m);
+		m.newMessage.edit(newMessage.content);
 	}
 });
+
 process.on('uncaughtException', function(err) {
     console.log('Caught exception: ' + err);
 	fs.writeFileSync('messagedb.json', JSON.stringify(messageDB));
