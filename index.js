@@ -17,10 +17,10 @@ bot.on('message', message => {
     }
     if (message.channel.id == '271350052188979201') {
         bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.content)
-		.then(msg => messageDB.data.push({oldMessage:message,newMessage:msg}));
+		.then(msg => messageDB.data.push({oldMessage:message.id,newMessage:msg.id,channel:msg.channel.id}));
     } else if (message.channel.id == '271349742099759104') {
         bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.content)
-		.then(msg => messageDB.data.push({oldMessage:message,newMessage:msg}));
+		.then(msg => messageDB.data.push({oldMessage:message.id,newMessage:msg.id,channel:msg.channel.id}));
     }
 });
 bot.on('messageUpdate', (oldMessage,newMessage)=>{
@@ -28,13 +28,13 @@ bot.on('messageUpdate', (oldMessage,newMessage)=>{
 	console.log("executing");
 	let m = messageDB.data.find(function(messageObj)
 				{	
-					if(messageObj.oldMessage.id === oldMessage.id)
+					if(messageObj.oldMessage === oldMessage.id)
 						return messageObj;
 				});
 	if(m)
 	{
 		//console.log(m);
-		m.newMessage.edit(newMessage.content);
+		bot.channels.get(m.channel).fetchMessage(m.newMessage).edit("**" + message.author.username + ":** " +newMessage.content);
 	}
 });
 bot.on('messageDelete', message=>{
@@ -42,13 +42,13 @@ bot.on('messageDelete', message=>{
 	console.log("executing");
 	let m = messageDB.data.find(function(messageObj)
 				{	
-					if(messageObj.oldMessage.id === message.id)
+					if(messageObj.oldMessage === message.id)
 						return messageObj;
 				});
 	if(m)
 	{
 		//console.log(m);
-		m.newMessage.delete().then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
+		bots.channel.get(m.channel).fetchMessage(m.newMessage).delete().then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
 	}
 });
 
