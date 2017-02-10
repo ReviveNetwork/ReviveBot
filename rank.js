@@ -19,7 +19,7 @@ exports.rank = function(message)
 			let gameob = soldier.game=="stella"?revive.bf2142:revive.bf2;
 			let ranklink = soldier.game=='stella'?'https://github.com/ReviveNetwork/ReviveBot/raw/master/img/bf2142/rank_':'https://battlelog.co/img/ranks/rank_'
 			gameob.getPlayer(soldier.pid).then(rank => {
-				if(rank){rank=0;}
+				if(!rank){rank=0;}
 				else {rank = rank.rank};
 			let embed = new Discord.RichEmbed()
 			.setTitle(soldier.nickname)
