@@ -303,7 +303,7 @@ var commands = {
 		  console.log(res);                                  message.channel.sendMessage(res);          }
     },
      'convert': {                                           description: 'hashes a dec number to a different base.',
-	 syntax: '~convert <base>' <decnumber>,             exec: function(message) 
+	 syntax: '~convert <base> <decnumber>',             exec: function(message) 
 	     {
 		 let res = message.content.trim().substring(7);
 		 let base = res.split(' ')[0];
