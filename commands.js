@@ -293,7 +293,25 @@ var commands = {
 	    console.log(res);
             message.channel.sendMessage(res);
         }
-    }
+    },                                                   'hash': {                                              description: 'hashes a text.',                      
+	  syntax: '~hash <text>',
+	  exec: function(message) {
+		  let res = message.content.trim().substring(7);
+		  let algo = res.split(' ')[0];
+		  res = res.substring(algo.length+1).trim();
+		  res = checksum(res,algo);
+		  console.log(res);                                  message.channel.sendMessage(res);          }
+    },
+     'convert': {                                           description: 'hashes a dec number to a different base.',
+	 syntax: '~convert <base>' <decnumber>,             exec: function(message) 
+	     {
+		 let res = message.content.trim().substring(7);
+		 let base = res.split(' ')[0];
+		 res = res.substring(base.length+1).trim();
+		 base = parseInt(base);
+		 res = parseInt(res).toString(base); 
+		 console.log(res);                                  message.channel.sendMessage(res);          }
+     }
 }
 const str = function(soldier,game)
 {
@@ -311,3 +329,9 @@ const getOptions = function(URL) {
         }
     };
 };
+function checksum (str, algorithm, encoding) {
+	    return crypto
+	        .createHash(algorithm || 'md5')
+	        .update(str, 'utf8')
+	        .digest(encoding || 'hex')
+	}

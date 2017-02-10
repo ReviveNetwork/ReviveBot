@@ -12,7 +12,7 @@ if(!messageDB.data)
 bot.on('message', message => {
     if (message.author.bot == true) return; // prevent loop
     if (message.content.toLowerCase() === 'hi' || message.content.toLowerCase() === 'hello' || message.content.toLowerCase() === 'hey') {
-        message.reply('hello');
+        message.channel.sendMessage('hello');
         return;
     }
     if (message.channel.id == '271350052188979201') {
