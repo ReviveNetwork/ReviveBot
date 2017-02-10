@@ -13,7 +13,7 @@ bot.on('message', message => {
     if (message.author.bot == true) return; // prevent loop
     let attach='';
     if(message.attachments.size>0)
-	{attach= '\n<'+message.attachments.first().url+'>';}
+	{attach= '\n'+message.attachments.first().url;}
     if (message.content.toLowerCase() === 'hi' || message.content.toLowerCase() === 'hello' || message.content.toLowerCase() === 'hey') {
         message.channel.sendMessage('hello');
         return;
@@ -51,7 +51,7 @@ bot.on('messageDelete', message=>{
 	if(m)
 	{
 		//console.log(m);
-		bots.channel.get(m.channel).fetchMessage(m.newMessage).delete().then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
+		bot.channels.get(m.channel).fetchMessage(m.newMessage).delete().then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
 	}
 });
 
