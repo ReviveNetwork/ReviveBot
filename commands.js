@@ -306,7 +306,7 @@ var commands = {
      'convert': {                                           description: 'hashes a dec number to a different base.',
 	 syntax: '~convert <base> <decnumber>',             exec: function(message) 
 	     {
-		 let res = message.content.trim().substring(7);
+		 let res = message.content.trim().substring(9);
 		 let base = res.split(' ')[0];
 		 res = res.substring(base.length+1).trim();
 		 base = parseInt(base);
@@ -333,6 +333,6 @@ const getOptions = function(URL) {
 function checksum (str, algorithm, encoding) {
 	    return crypto
 	        .createHash(algorithm || 'md5')
-	        .update(str, 'utf8')
-	        .digest(encoding || 'hex')
+	        .update(str)
+	        .digest('hex')
 	}
