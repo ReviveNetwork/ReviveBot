@@ -297,7 +297,7 @@ var commands = {
     },                                                   'hash': {                                              description: 'hashes a text.',                      
 	  syntax: '~hash <algorithm> <text>',
 	  exec: function(message) {
-		  let res = message.content.trim().substring(7);
+		  let res = message.content.trim().substring(6);
 		  let algo = res.split(' ')[0];
 		  res = res.substring(algo.length+1).trim();
 		  res = checksum(res,algo);
@@ -330,7 +330,9 @@ const getOptions = function(URL) {
         }
     };
 };
-function checksum (str, algorithm, encoding) {
+function checksum (str, algorithm) {
+	console.log(str);
+	console.log(algorithm);
 	    return crypto
 	        .createHash(algorithm || 'md5')
 	        .update(str)
