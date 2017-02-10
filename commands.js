@@ -8,6 +8,7 @@ const rank = require('./rank');
 const request = require('request-promise');
 const stats = require('./stats');
 const math = require('mathjs');
+const crypto = require('crypto');
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -294,7 +295,7 @@ var commands = {
             message.channel.sendMessage(res);
         }
     },                                                   'hash': {                                              description: 'hashes a text.',                      
-	  syntax: '~hash <text>',
+	  syntax: '~hash <algorithm> <text>',
 	  exec: function(message) {
 		  let res = message.content.trim().substring(7);
 		  let algo = res.split(' ')[0];
