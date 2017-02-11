@@ -79,7 +79,7 @@ var commands = {
                 var start = 0;
                 var past = 0;
                 if (exact != null) {
-                    res = res + "\n" + (1) + "\t" + "\t" + str(exact);
+                    res = res + "\n" + (1) + "\t" + "\t" + str(exact,'bf2');
                     start++;
                 }
                 for (var i = start; i < plist.length; i++) {
@@ -94,7 +94,7 @@ var commands = {
                         break;
                     } else {
                         res = res + " \n" + (i + 1 - past) +
-                            "\t" + "\t" + str(plist[i]);
+                            "\t" + "\t" + str(plist[i],'bf2');
                     }
                 }
                 message.channel.sendMessage(res);
