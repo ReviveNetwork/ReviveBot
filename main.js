@@ -65,10 +65,10 @@ bot.on('message', message => {
     if (message.guild != guild) {
         return;
     }
-
+    if(! message.member.roles.find('name','dev'))return;
     var msg = message.content.toLowerCase();
 
-    if (msg == "~stop" && message.member.role.indexOf('dev')>=0) {
+    if (msg == "~stop") {
         if (bot_process) message.reply(':| Stoping (pid: ' + bot_process.pid + ')');
         else return message.reply(':| Bot not running!')
         bot_stop();
