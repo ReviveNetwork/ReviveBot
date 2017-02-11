@@ -2,7 +2,7 @@ var bot = require('./bot');
 const fork = require('child_process').fork;
 
 const config = require('./config');
-
+let start =true;
 var bot_process = false;
 
 /*
@@ -17,6 +17,7 @@ function bot_start() {
         console.log('Bot process already started...');
         return;
     }
+	start = false;
 
     var dt = process.env.DISCORD_TOKEN || process.argv[2];
     bot_process = fork(require('path').join(__dirname, 'index.js'), [process.argv[2]], { silent: true });
@@ -54,7 +55,7 @@ function bot_stop() {
 */
 
 bot.on('ready', () => {
-	if(!bot_process)bot_start();
+	if(start)bot_start();
     bot.channels.get(config.log_channel).sendMessage('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
 })
 
