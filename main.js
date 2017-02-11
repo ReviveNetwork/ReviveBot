@@ -54,9 +54,8 @@ function bot_stop() {
 */
 
 bot.on('ready', () => {
-    bot_start();
-    bot.channels.get(config.log_channel).sendMessage('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
-
+    bot.channels.get(config.log_channel).sendMessag
+e('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
 })
 
 bot.on('message', message => {
@@ -99,3 +98,4 @@ bot.on('message', message => {
         });
     }
 });
+bot_start();
