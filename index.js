@@ -5,7 +5,7 @@ const web = require('./web');
 var commands = require('./commands');
 var config = require('./config');
 var functions = require('./functions');
-let messageDB = require('./messagedb.json');
+let messageDB = {data:[]}; //require('./messagedb.json');
 fs = require('fs');
 if(!messageDB.data)
 {messageDB.data = new Array();}
