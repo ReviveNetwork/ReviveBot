@@ -7,7 +7,7 @@ let app = express();
 app.use(bodyParser.json())
 
 app.get('/push/user/:userId/updated', function(req, res) {
-    functions.refresh(bot.users.get(req.params.userId));
+    functions.refreshUser(bot.users.get(req.params.userId));
 
 });
 
