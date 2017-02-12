@@ -18,7 +18,7 @@ var voice_channel = null;
 var text_channel = null;
 exports.play = function(URL, message) {
     member = message.member;
-    if(!url.includes("youtube.com/"))return;
+    if(!url.includes("http"))return;
     console.log("QUEUE size" + queue.length);
     voice_channel = member.voiceChannel;
     text_channel = message.channel;
@@ -89,7 +89,7 @@ exports.resume = function(message) {
     }
 }
 exports.setVol = function(vol) {
-    voice_handler.setVolume();
+    voice_handler.setVolume(vol);
 }
 exports.queue = function(message) {
     var response = "";

@@ -1,10 +1,5 @@
 var bot = require('./bot');
-const help = require('./help');
-const web = require('./web');
-//const music = require('./music');
-var commands = require('./commands');
 var config = require('./config');
-var functions = require('./functions');
 let messageDB = {data:[]}; //require('./messagedb.json');
 fs = require('fs');
 if(!messageDB.data)

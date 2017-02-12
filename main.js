@@ -1,9 +1,8 @@
 var bot = require('./bot');
-const fork = require('child_process').fork;
-
+const spawn = require('child_process').spawn;
+const commands = require('./commands');
 const config = require('./config');
-let start =true;
-var bot_process = false;
+var pm2 = false;
 
 /*
     These functions are bootstrapping the bot process
@@ -11,43 +10,31 @@ var bot_process = false;
     cool, i guess...
 */
 
-function bot_start() {
+function startlog() {
 
-    if (bot_process !== false) {
+    if (pm2 !== false) {
         console.log('Bot process already started...');
         return;
     }
 	start = false;
 
-    var dt = process.env.DISCORD_TOKEN || process.argv[2];
-    bot_process = fork(require('path').join(__dirname, 'index.js'), [process.argv[2]], { silent: true });
-    bot_process.on('exit', (code, signal) => {
-        console.log('BOT EXIT');
-        bot.channels.get(config.log_channel).sendMessage('ReviveBot: EXIT (pid: ' + bot_process.pid + ', code: ' + code + ' signal: ' + signal + ')');
-        bot_process = false;
+    pm2 = spawn('pm2', ['logs','--raw']);
+    pm2.on('exit', (code, signal) => {
+        console.log('PM2 EXIT');
     })
 
-    bot.channels.get(config.log_channel).sendMessage('ReviveBot: RUNNING (pid: ' + bot_process.pid + ')');
-
-    bot_process.stderr.on('data', (data) => {
+    pm2.stderr.on('data', (data) => {
         console.error(data.toString());
-        bot.channels.get(config.log_channel).sendMessage('**ERROR** ReviveBot-' + bot_process.pid + ' ```' + data.toString().substring(0,1900)+ '```');
+        bot.channels.get(config.log_channel).sendMessage(' ```' + data.toString().substring(0,1900)+ '```');
     });
 
-    bot_process.stdout.on('data', (data) => {
+    pm2.stdout.on('data', (data) => {
         console.log(data.toString());
-        bot.channels.get(config.log_channel).sendMessage('**LOG** ReviveBot-' + bot_process.pid + ' ```' +data.toString().substring(0,1900) + '```');
+        bot.channels.get(config.log_channel).sendMessage( ' ```' +data.toString().substring(0,1900) + '```');
     });
 
-    return bot_process;
+    return pm2;
 };
-
-function bot_stop() {
-    if (bot_process) {
-        bot_process.kill();
-        bot_process = false;
-    }
-}
 
 /*
     Initialize our bot bootstrapper
@@ -55,11 +42,12 @@ function bot_stop() {
 */
 
 bot.on('ready', () => {
-	if(start)bot_start();
+	startlog();
     bot.channels.get(config.log_channel).sendMessage('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
 })
 
 bot.on('message', message => {
+	if(message.author.bot)return;
     var guild = bot.guilds.get('256299642180861953');
 
     if (message.guild != guild) {
@@ -68,24 +56,13 @@ bot.on('message', message => {
     if(! message.member.roles.find('name','dev'))return;
     var msg = message.content.toLowerCase();
 
-    if (msg == "~stop") {
-        if (bot_process) message.reply(':| Stoping (pid: ' + bot_process.pid + ')');
-        else return message.reply(':| Bot not running!')
-        bot_stop();
-    } else if (msg == '~restart') {
-        bot_stop();
-        bot_start();
-        message.reply(':) Restarted Process!');
-    } else if (msg == '~status') {
-        if (bot_process) message.reply(':) (pid: ' + bot_process.pid + ')');
-        else message.reply(':( rip');
-    } else if (msg === '~start') {
-        if (bot_process !== false) return message.reply('Bot already started >:(');
-        else message.reply('Starting Bot...')
-        bot_start();
-        if (bot_process) message.reply(':) Started Bot (pid: ' + bot_process.pid + ')');
-        else message.reply(':( Bot start error!')
-    }else if (msg.startsWith('~cmd')) {
+    if (msg == '~restart') {
+	bot.channels.get(config.log_channel).sendMessage('Exiting with code 0');
+        process.exit();
+        }
+	else if (msg == '~status') {
+        message.reply(':) (pid: ' + process.pid + ')');
+    } else if (msg.startsWith('~cmd')) {
        const exec = require('child_process').exec;
         exec(msg.substring(5), (error, stdout, stderr) => {
         if (error) {
@@ -94,8 +71,16 @@ bot.on('message', message => {
             return;
         }
         console.log(`stdout: ${stdout}`);
-        bot.channels.get(config.log_channel).sendMessage('**LOG** NPM-' + ' ```' + stdout + '```');
+        bot.channels.get(config.log_channel).sendMessage('**LOG** Shell-' + ' ```' + stdout + '```');
         console.log(`stderr: ${stderr}`);
         });
     }
 });
+process.on('exit', (code) => {
+	  console.log(`About to exit with code: ${code}`);
+	});
+process.on('uncaughtException', function (err) 
+	{
+	  bot.channels.get(config.log_channel).sendMessage((new Date).toUTCString() + ' uncaughtException:', err.message);
+	  bot.channels.get(config.log_channel).sendMessage(err.stack).then(msg => process.exit(1));
+	});
