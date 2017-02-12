@@ -42,7 +42,7 @@ function startlog() {
 */
 
 bot.on('ready', () => {
-	startlog();
+	//startlog();
     bot.channels.get(config.log_channel).sendMessage('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
 })
 
