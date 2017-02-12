@@ -49,25 +49,8 @@ bot.on('messageDelete', message=>{
 		bot.channels.get(m.channel).fetchMessage(m.newMessage).then(msg => msg.delete()).then(messageDB.data.splice(messageDB.data.indexOf(m),1)).catch(console.log);
 	}
 });
-
-process.on('uncaughtException', function(err) {
-    console.log('Caught exception: ' + err);
-	fs.writeFileSync('messagedb.json', JSON.stringify(messageDB));
-    bot = require('./bot');
-});
-process.on('Exit', function(code) {
-	fs.writeFileSync('messagedb.json', JSON.stringify(messageDB));
-});
 bot.on("guildMemberAdd", (member) => {
     var user = member.user;
     user.sendMessage("Welcome to the Revive Network");
     functions.refreshUser(user);
-});
-bot.on('message', message => {
-    if (message.content.toLowerCase() === '~stop') {
-        if (message.guild != bot.guilds.find("name", "Revive Network Dev")) {
-            return;
-        };
-        process.exit();
-    }
 });

@@ -9,7 +9,7 @@ const request = require('request-promise');
 const stats = require('./stats');
 const math = require('mathjs');
 const crypto = require('crypto');
-//const web = require('./web');
+const web = require('./web');
 const help = require('./help');
 const index = require('./hotline');
 

@@ -13,7 +13,7 @@ var pm2 = false;
 function startlog() {
 
     if (pm2 !== false) {
-        console.log('Bot process already started...');
+        console.log('pm2 logs process already started...');
         return;
     }
 	start = false;
@@ -24,12 +24,12 @@ function startlog() {
     })
 
     pm2.stderr.on('data', (data) => {
-        console.error(data.toString());
+       // console.error(data.toString());
         bot.channels.get(config.log_channel).sendMessage(' ```' + data.toString().substring(0,1900)+ '```');
     });
 
     pm2.stdout.on('data', (data) => {
-        console.log(data.toString());
+        //console.log(data.toString());
         bot.channels.get(config.log_channel).sendMessage( ' ```' +data.toString().substring(0,1900) + '```');
     });
 
@@ -42,8 +42,8 @@ function startlog() {
 */
 
 bot.on('ready', () => {
-	//startlog();
-    bot.channels.get(config.log_channel).sendMessage('BOOTSTRAP: Ready (pid: ' + process.pid + ')');
+	startlog();
+    bot.channels.get(config.log_channel).sendMessage('Bot Ready (pid: ' + process.pid + ')');
 })
 
 bot.on('message', message => {
@@ -79,3 +79,7 @@ bot.on('message', message => {
 process.on('exit', (code) => {
 	  console.log(`About to exit with code: ${code}`);
 	});
+process.on('uncaughtException',(err) =>{
+	console.log('Uncaught Exception:'+err);
+	console.log(err.stack);
+});
