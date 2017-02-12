@@ -47,8 +47,7 @@ var commands = {
         description: 'refresh a user discord link status',
         syntax: '~refresh',
         exec: function(message) {
-            if (message.content.toString().includes('all') &&
-                message.guild.name == 'Revive Netowrk Dev') {
+            if (message.content.toString().includes('all')) {
                 functions.refreshAll(bot.guilds.get('184536578654339072').members.array())
             } else if(message.mentions.users.size !=0 ) {
 		message.mentions.users.map(functions.refreshUser);
