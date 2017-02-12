@@ -328,9 +328,9 @@ var commands = {
 const str = function(soldier,game)
 {
 	if(game=='bf2')
-	{game='http://battlelog.co/bfhq?pid='}
+	{game='httpa://battlelog.co/bfhq.php?pid='}
 	else
-	{game='http://bl2142.co/bfhq?pid='}
+	{game='https://bl2142.co/bfhq.php?pid='}
 	return soldier.nick+'\t'+"<"+game+soldier.pid+">";
 };
 const getOptions = function(URL) {
