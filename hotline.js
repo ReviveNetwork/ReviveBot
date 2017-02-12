@@ -1,6 +1,7 @@
 var bot = require('./bot');
 var config = require('./config');
 let messageDB = {data:[]}; //require('./messagedb.json');
+const functions = require('./functions');
 fs = require('fs');
 if(!messageDB.data)
 {messageDB.data = new Array();}
