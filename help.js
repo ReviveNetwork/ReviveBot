@@ -4,11 +4,11 @@ var config = require('./config');
 
 bot.on('message', message => {
     var channel = message.channel;
-
+    if(message.author.bot)return;
+    if(!message.channel.name)return;//it is a dm
     if (channel.name.indexOf('help')<0 ) {
         return;
     }
-    if(message.author.bot)return;
     var user = message.author;
     message = message.content.toLowerCase();
     //Error updating
