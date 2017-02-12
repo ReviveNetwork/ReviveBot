@@ -79,8 +79,3 @@ bot.on('message', message => {
 process.on('exit', (code) => {
 	  console.log(`About to exit with code: ${code}`);
 	});
-process.on('uncaughtException', function (err) 
-	{
-	  bot.channels.get(config.log_channel).sendMessage((new Date).toUTCString() + ' uncaughtException:', err.message);
-	  bot.channels.get(config.log_channel).sendMessage(err.stack).then(msg => process.exit(1));
-	});
