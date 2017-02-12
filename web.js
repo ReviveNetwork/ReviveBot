@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 
 app.get('/push/user/:userId/updated', function(req, res) {
 	console.log(req.params.userId);
-   //functions.refreshUser(bot.users.get(req.params.userId));
+   functions.refreshUser(bot.users.get(req.params.userId));
  res.send('updated');
  res.end();
 });
