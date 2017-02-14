@@ -71,7 +71,7 @@ bot.on('message', message => {
             return;
         }
         console.log(`stdout: ${stdout}`);
-        bot.channels.get(config.log_channel).sendMessage('**LOG** Shell-' + ' ```' + stdout + '```');
+        message.channel.sendMessage(' ```' + stdout + '```');
         console.log(`stderr: ${stderr}`);
         });
     }
