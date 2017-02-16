@@ -11,7 +11,8 @@ bot.on('message', message => {
     if(message.attachments.size>0)
 	{attach= '\n'+message.attachments.first().url;}
     if (message.content.toLowerCase() === 'hi' || message.content.toLowerCase() === 'hello' || message.content.toLowerCase() === 'hey') {
-        message.channel.sendMessage('hello');
+        if(message.isMentioned(bot.user))
+	message.channel.sendMessage('hello');
         return;
     }
     if (message.channel.id == '271350052188979201') {
