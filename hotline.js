@@ -10,7 +10,7 @@ bot.on('message', message => {
     let attach='';
     if(message.attachments.size>0)
 	{attach= '\n'+message.attachments.first().url;}
-    if (message.content.toLowerCase() === 'hi' || message.content.toLowerCase() === 'hello' || message.content.toLowerCase() === 'hey') {
+    if (message.content.toLowerCase().includes('hi') || message.content.toLowerCase().includes('hello') || message.content.toLowerCase().includes('hey')) {
         if(message.isMentioned(bot.user))
 	message.channel.sendMessage('hello');
         return;
