@@ -18,7 +18,7 @@ function startlog() {
     }
 	start = false;
 
-    pm2 = spawn('pm2', ['logs','revivebot','--raw']);
+    pm2 = spawn('pm2', ['logs']);
     pm2.on('exit', (code, signal) => {
         console.log('PM2 EXIT');
     })
