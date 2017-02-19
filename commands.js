@@ -61,41 +61,26 @@ var commands = {
         description: 'finds a bf2 player',
         syntax: '~bf2 <PlayerName>',
         exec: function (message) {
-            var nick = message.content.substring(5).trim();
+            let nick = message.content.substring(5).trim();
             bf2.getPlayers(nick).then(plist => {
                 console.log("BF2 in index.js gets executed");
                 if (plist == null) {
                     message.channel.sendMessage("API Down or invalid search");
                     return;
                 }
-                if (plist.length >= 1) {
-                    //checking for exact matches 
-                    var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
-                    console.log(exact);
-                    var res = "**S.no.\tName \t link**";
-                }
                 if (plist.length == 0) {
                     message.channel.sendMessage("Player not found");
                     return;
                 }
-                var start = 0;
-                var past = 0;
-                if (exact != null) {
-                    res = res + "\n" + (1) + "\t" + "\t" + str(exact, 'bf2');
-                    start++;
-                }
-                for (var i = start; i < plist.length; i++) {
-                    if (exact != null && i == plist.indexOf(exact)) {
-                        past++;
-                        continue;
-                    }
+				let res = "**S.no.\tName \t link**";
+                for (let i = 0; i < plist.length; i++) {
                     if (i == 26) {
                         res = res + "\n" + (plist.length - 25) +
                             " more players found to Get a full list of players \n" +
                             "<https://battlelog.co/player_search.php?q=" + nick + ">";
                         break;
                     } else {
-                        res = res + " \n" + (i + 1 - past) +
+                        res = res + " \n" + (i + 1) +
                             "\t" + "\t" + str(plist[i], 'bf2');
                     }
                 }
@@ -116,34 +101,19 @@ var commands = {
                     message.channel.sendMessage("API Down or invalid search");
                     return;
                 }
-                if (plist.length >= 1) {
-                    //checking for exact matches 
-                    var exact = plist.find(o => o.nick.toUpperCase().trim() === nick.toUpperCase());
-                    console.log(exact);
-                    var res = "**S.no.\tName \t link**";
-                }
                 if (plist.length == 0) {
                     message.channel.sendMessage("Player not found");
                     return;
                 }
-                var start = 0;
-                var past = 0;
-                if (exact != null) {
-                    res = res + "\n" + (1) + "\t" + "\t" + str(exact);
-                    start++;
-                }
-                for (var i = start; i < plist.length; i++) {
-                    if (exact != null && i == plist.indexOf(exact)) {
-                        past++;
-                        continue;
-                    }
+				let res = "**S.no.\tName \t link**";
+                for (let i = start; i < plist.length; i++) {
                     if (i == 26) {
                         res = res + "\n" + (plist.length - 25) +
                             " more players found to Get a full list of players \n" +
                             "<https://battlelog.co/player_search.php?q=" + nick + ">";
                         break;
                     } else {
-                        res = res + " \n" + (i + 1 - past) +
+                        res = res + " \n" + (i + 1) +
                             "\t" + "\t" + str(plist[i]);
                     }
                 }
