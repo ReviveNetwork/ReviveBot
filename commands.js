@@ -56,7 +56,7 @@ var commands = {
             if (message.mentions.users.size != 0) {
                 message.mentions.users.map(functions.refreshUser);
             } else {
-                return functions.refreshUser(message.author).then(() => message.channel.sendMessage("Linked"));
+                return refreshUser(message.author).then(() => message.channel.sendMessage("Linked"));
             }
         }
     },
