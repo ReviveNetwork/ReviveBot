@@ -54,7 +54,7 @@ var commands = {
         syntax: '~refresh',
         exec: function (message) {
             if (message.mentions.users.size != 0) {
-                message.mentions.users.map(functions.refreshUser);
+                message.mentions.users.map(refreshUser);
             } else {
                 return refreshUser(message.author).then(() => message.channel.sendMessage("Linked"));
             }
