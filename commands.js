@@ -15,6 +15,7 @@ const addRole = require('./lib/modules/addrole');
 const removeRole = require('./lib/modules/removerole');
 const convert = require('./lib/modules/convert');
 const hash = require('./lib/modules/hash');
+const cleverbot = require('./lib/modules/cleverbot')
 
 bot.on('message', message => {
     if (!message.content.startsWith('~')) {
@@ -54,7 +55,7 @@ var commands = {
         syntax: '~refresh',
         exec: function (message) {
             if (message.mentions.users.size != 0) {
-               return message.mentions.users.map(refresh);
+                return message.mentions.users.map(refresh);
             } else {
                 return refresh(message.author).then(() => message.channel.sendMessage("Linked"));
             }
