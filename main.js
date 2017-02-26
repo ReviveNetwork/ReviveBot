@@ -25,12 +25,12 @@ function startlog() {
 
     pm2.stderr.on('data', (data) => {
         // console.error(data.toString());
-        bot.channels.get(config.log_channel).sendMessage(' ```' + data.toString().substring(0, 1900) + '```');
+        bot.channels.get(config.log_channel).sendCode("shell", 'Log-' + error + '\n' + stderr, { split: true });
     });
 
     pm2.stdout.on('data', (data) => {
         //console.log(data.toString());
-        bot.channels.get(config.log_channel).sendMessage(' ```' + data.toString().substring(0, 1900) + '```');
+        bot.channels.get(config.log_channel).sendCode("shell", 'ERROR -' + error + '\n' + stderr, { split: true });
     });
 
     return pm2;
@@ -67,11 +67,11 @@ bot.on('message', message => {
         exec(msg.substring(5), (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
-                bot.channels.get(config.log_channel).sendMessage('**ERROR** Shell-' + ' ```' + error + '```\n`' + stderr + '`');
+                message.channel.sendCode("shell", '**ERROR** Shell-' + error + '\n' + stderr, { split: true });
                 return;
             }
             console.log(`stdout: ${stdout}`);
-            message.channel.sendMessage(' ```' + stdout + '```');
+            message.channel.sendCode("shell", stdout + { split: true });
             console.log(`stderr: ${stderr}`);
         });
     }
