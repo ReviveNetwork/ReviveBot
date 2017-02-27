@@ -25,12 +25,12 @@ function startlog() {
 
     pm2.stderr.on('data', (data) => {
         // console.error(data.toString());
-        bot.channels.get(config.log_channel).sendCode("shell", 'Log- ' + data, { split: true });
+        bot.channels.get(config.log_channel).sendCode("shell", 'ERROR- ' + data, { split: true });
     });
 
     pm2.stdout.on('data', (data) => {
         //console.log(data.toString());
-        bot.channels.get(config.log_channel).sendCode("shell", 'ERROR - ' + data, { split: true });
+        bot.channels.get(config.log_channel).sendCode("shell", 'Log - ' + data, { split: true });
     });
 
     return pm2;
