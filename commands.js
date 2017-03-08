@@ -15,7 +15,7 @@ const addRole = require('./lib/modules/addrole');
 const removeRole = require('./lib/modules/removerole');
 const convert = require('./lib/modules/convert');
 const hash = require('./lib/modules/hash');
-const cleverbot = require('./lib/modules/cleverbot');
+//const cleverbot = require('./lib/modules/cleverbot');
 const reactionNav = require('./lib/modules/reactionNav')
 
 bot.on('message', message => {
