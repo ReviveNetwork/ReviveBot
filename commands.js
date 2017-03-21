@@ -13,6 +13,7 @@ const integrate = require('./lib/modules/link/integrate');
 const refresh = require('./lib/modules/link/refreshuser');
 const addRole = require('./lib/modules/addrole');
 const removeRole = require('./lib/modules/removerole');
+const moveRole = require('./lib/modules/moveRole');
 const convert = require('./lib/modules/convert');
 const hash = require('./lib/modules/hash');
 //const cleverbot = require('./lib/modules/cleverbot');
@@ -89,6 +90,11 @@ var commands = {
         syntax: '~remove <UserMention> from <roleName>',
         exec: removeRole
     },
+    'move': {
+        description: 'moves a role to specified position',
+        syntax: '~move <rolename> to <number>',
+        exec: moveRole
+    }, 
     'help': {
         description: 'displays help',
         syntax: '~help',
