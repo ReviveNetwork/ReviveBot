@@ -20,10 +20,12 @@ exports.play = function (URL, message) {
         });
         guilds[message.guild.id].p.on('close', () => {
             console.log("child exitted");
+            guilds[message.guild.id].spawnComplete = false;
             delete guilds[message.guild.id].p;
         });
         guilds[message.guild.id].p.on('exit', () => {
             console.log("child exitted");
+            guilds[message.guild.id].spawnComplete =false;
             delete guilds[message.guild.id].p;
         });
     }
