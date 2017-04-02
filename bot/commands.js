@@ -19,9 +19,6 @@ module.exports = {
         }
         else if (cmd === 'help')
             help(message);
-        else {
-            message.reply("Command not found. Do `" + settings.identifier + 'help` to get list of commands');
-        }
     }
 }
 function help(message) {
