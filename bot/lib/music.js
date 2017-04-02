@@ -4,7 +4,7 @@ exports = module.exports;
 var guilds = {};
 const GuildSpawn = require('./../classes/GuildSpawn');
 exports.play = function (URL, message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         guilds[message.guild.id] = new GuildSpawn(message.guild);
 
         guilds[message.guild.id].p.on('message', m => {
@@ -35,7 +35,7 @@ exports.play = function (URL, message) {
 }
 
 exports.playNext = function (message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Queue is empty!");
     }
     let ms = { cmd: 'playnext', message: message.content, user: message.author.id, channel: message.channel.id };
@@ -45,7 +45,7 @@ exports.playNext = function (message) {
         return guilds[message.guild.id].queue.push(ms);
 }
 exports.clear = function (message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Already Stopped!");
     }
     let ms = { cmd: 'clear', message: message.content, user: message.author.id, channel: message.channel.id };
@@ -55,7 +55,7 @@ exports.clear = function (message) {
         return guilds[message.guild.id].queue.push(ms);
 };
 exports.resume = function (message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Nothing is running!");
     }
     let ms = { cmd: 'resume', message: message.content, user: message.author.id, channel: message.channel.id };
@@ -65,7 +65,7 @@ exports.resume = function (message) {
         return guilds[message.guild.id].queue.push(ms);
 }
 exports.setVol = function (vol, message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Nothing is running!");
     }
     let ms = { cmd: 'setvol', message: vol, user: message.author.id, channel: message.channel.id };
@@ -75,7 +75,7 @@ exports.setVol = function (vol, message) {
         return guilds[message.guild.id].queue.push(ms);
 }
 exports.queue = function (message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Nothing is running!");
     }
     let ms = { cmd: 'queue', message: message.content, user: message.author.id, channel: message.channel.id };
@@ -85,7 +85,7 @@ exports.queue = function (message) {
         return guilds[message.guild.id].queue.push(ms);
 }
 exports.pause = function (message) {
-    if (!guilds[message.guild.id]) {
+    if (!guilds[message.guild.id] || guilds[message.guild.id] == undefined) {
         return message.reply("Nothing is running!");
     }
     let ms = { cmd: 'pause', message: message.content, user: message.author.id, channel: message.channel.id };
