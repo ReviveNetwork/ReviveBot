@@ -13,6 +13,7 @@ let guild = process.argv[2];
 let voice_channel = process.argv[3];
 let text_channel = process.argv[4];
 let queue = [];
+let voice_handler = null;
 let voice_connection = null;
 let stopped = false;
 let inform_np = true;
