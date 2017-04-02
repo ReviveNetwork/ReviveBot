@@ -35,7 +35,7 @@ bot.on('ready', () => {
         }
     });
 })
-exports.play = function (URL, message) {
+exports.play = function (url, message) {
     let member = message.member;
     if (!url.includes("http")) return;
     console.log("QUEUE size" + guilds[message.guild.id].queue.length);
