@@ -12,6 +12,7 @@ module.exports = {
     "play": "music/play",
     "pause": "music/pause",
     "queue": "music/queue",
+    "clear": "music/clear",
     "resume": "music/resume",
     "setvol": "music/setvol",
     "info": "info",
