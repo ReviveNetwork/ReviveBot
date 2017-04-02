@@ -21,5 +21,6 @@ module.exports = {
     "link": "link",
     "refresh": "refresh",
     "yo": "yo",
-    "cookie": "cookie"
+    "cookie": "cookie",
+    "request": "request"
 }

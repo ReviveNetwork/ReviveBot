@@ -31,5 +31,5 @@ function help(message) {
             res = res + "**" + key + "** : " + value.description + "\n";
         }
     )
-    message.channel.sendCode('list', res);
+    message.channel.sendMessage(res);
 }
