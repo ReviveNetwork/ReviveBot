@@ -29,9 +29,11 @@ module.exports = class GuildSpawn {
             if (cn.includes("voice") || cn.includes("music"))
                 return c;
         });
+        if( this.text_channel)
+             this.text_channel =  this.text_channel.id;
         this.queue = [];
         this.spawnComplete = false;
-        this.p = cp.fork('./bot/lib/musicFork.js', [guild.id, this.voice_channel.id, this.text_channel.id]);
+        this.p = cp.fork('./bot/lib/musicFork.js', [guild.id, this.voice_channel.id,this.text_channel);
     };
 
 }
