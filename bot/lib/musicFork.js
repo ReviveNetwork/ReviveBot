@@ -45,9 +45,9 @@ const cmd = {
             add_to_queue(url, user, channel);
         }
     },
-    playnext: function () {
+    playnext: function (message, user, channel) {
         if (voice_handler !== null) {
-            message.reply("Skippin..");
+           bot.channels.get(channel).sendMessage("Skipping..");
             voice_handler.end();
         } else {
             play_next_song();
