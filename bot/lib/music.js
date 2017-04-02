@@ -20,11 +20,11 @@ exports.play = function (URL, message) {
         });
         guilds[message.guild.id].p.on('close', () => {
             console.log("child exitted");
-            message.guild.id].p = undefined;
+            guilds[message.guild.id].p = undefined;
         });
         guilds[message.guild.id].p.on('exit', () => {
             console.log("child exitted");
-            message.guild.id].p = undefined;
+            guilds[message.guild.id].p = undefined;
         });
     }
     let ms = { cmd: 'play', message: URL, user: message.author.id, channel: message.channel.id };
