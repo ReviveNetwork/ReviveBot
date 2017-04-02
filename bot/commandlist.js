@@ -10,6 +10,7 @@ module.exports = {
     "remove": "remove",
     "unlock": "unlock",
     "play": "music/play",
+    "playnext": "music/playnext",
     "pause": "music/pause",
     "queue": "music/queue",
     "clear": "music/clear",
