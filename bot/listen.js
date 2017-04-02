@@ -15,7 +15,7 @@ bot.on('message', (message) => {
      * if locked, reject everything except dm
      */
     if (lock) {
-        if (!settings.owners.includes(message.author))
+        if (!settings.owners.includes(message.author.id))
             if (message.channel.guild)
                 return;//not DM
     }
