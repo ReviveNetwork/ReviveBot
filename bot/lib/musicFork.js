@@ -187,5 +187,6 @@ function is_bot_playing() {
     return voice_handler !== null;
 }
 process.on('error', process.send);
+var cleanExit = function() { process.exit() };
 process.on('SIGINT', cleanExit); // catch ctrl-c
 process.on('SIGTERM', cleanExit); // catch kill
