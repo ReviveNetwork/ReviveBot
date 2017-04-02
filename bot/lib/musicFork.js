@@ -17,6 +17,7 @@ let voice_handler = null;
 let voice_connection = null;
 let stopped = false;
 let inform_np = true;
+let now_playing_data = {};
 /**
  * List of commands
  */
