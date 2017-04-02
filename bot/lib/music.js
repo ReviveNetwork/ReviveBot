@@ -79,3 +79,13 @@ exports.queue = function (message) {
     else
         return guilds[message.guild.id].queue.push(ms);
 }
+exports.pause = function (message) {
+    if (!guilds[message.guild.id]) {
+        return message.reply("Nothing is running!");
+    }
+    let ms = { cmd: 'pause', message: message.content, user: message.author.id, channel: message.channel.id };
+    if (guilds[message.guild.id].spawnComplete)
+        return guilds[message.guild.id].p.send(ms);
+    else
+        return guilds[message.guild.id].queue.push(ms);
+}
