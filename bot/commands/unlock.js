@@ -5,7 +5,7 @@ const settings = require('./../../settings.json');
  * @param {*message} message
  */
 async function command(params, message) {
-    if (!settings.owners.includes(message.author.id)) {
+    if (settings.owners.includes(message.author.id)) {
         message.client.emit('unlock');
         message.reply('Unlocked the bot');
     }
