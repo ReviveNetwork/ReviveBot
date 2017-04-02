@@ -6,3 +6,4 @@ require('./modules/reactionNav');
 require('./modules/help');
 require('./modules/hotline');
 require('./modules/logs');
+require('./modules/api');
