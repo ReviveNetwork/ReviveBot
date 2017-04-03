@@ -10,6 +10,8 @@ async function command(params, message) {
         return;
     }
     let r = message.guild.roles.find("name", params[params.length - 1].trim());
+    if(message.member.highestRole.comparePositionTo(r)<0)
+        return message.reply("You can not add this role as it is higher than your highest role");
     return message.guild.member(message.mentions.users.first()).removeRole(r);
 }
 /**
