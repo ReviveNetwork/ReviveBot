@@ -15,10 +15,10 @@ async function command(params, message) {
         return;
     }
     res = checksum(res, algo);
-    console.log(res); message.channel.sendMessage('hash of message:' + res);
+    console.log(res); message.channel.sendMessage('hash of message: ' + res);
     if (message.attachments.size > 0) {
         res = message.attachments.first().url;
-        request(res).then(body => message.channel.sendMessage('Hash of file:\n' + checksum(body, algo)));
+        request(res).then(body => message.channel.sendMessage('Hash of file: ' + checksum(body, algo)));
     }
 }
 /**
