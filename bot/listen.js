@@ -49,3 +49,7 @@ bot.on("guildMemberAdd", (member) => {
         refresh(user);
     }
 });
+bot.on('disconnect', function(event) {
+    if (event.code === 0) return console.error(event);
+    bot.destroy().then(() => bot.login());
+});
