@@ -26,7 +26,7 @@ async function command(params, message) {
         if (body.error) {
             if (all)
                 return message.reply("Please link your discord account first using `~link`");
-            return message.reply("The requested user hasnt linked his discord account with their revive account");
+            return message.reply("The requested user has not yet linked his discord account with their revive account");
         }
         for (let i = 0; i < body.soldiers.length; i++) {
             let soldier = body.soldiers[i];
