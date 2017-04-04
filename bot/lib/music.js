@@ -6,9 +6,9 @@ const streamOptions = {
     seek: 0,
     volume: 0.5
 };
-var guilds = {};
-bot.on('ready', () => {
-    bot.guilds.map((guild) => {
+let guilds = {};
+const Guild = (guild)=>
+    {
         let v = guild.channels.filter((guildch) => {
             if (guildch.type === 'voice')
                 return guildch;
@@ -23,8 +23,9 @@ bot.on('ready', () => {
             if (ch.name.toLowerCase().includes("music"))
                 return ch;
         });
-        guilds[guild.id] = {
+        return {
             voice_channel: v,
+            guild: guild.id,
             text_channel: t,
             voice_handler: null,
             voice_connection: null,
@@ -32,12 +33,13 @@ bot.on('ready', () => {
             queue: [],
             stopped: false,
             inform_np: true
-        }
-    });
-})
+            };
+    };
 exports.play = function (url, message) {
     let member = message.member;
     if (!url.includes("http")) return;
+    if(!guilds[message.guild.id])
+        guilds[message.guild.id] = Guild(message.guild);
     console.log("QUEUE size" + guilds[message.guild.id].queue.length);
     /*
     voice_channel = member.voiceChannel;
@@ -70,9 +72,9 @@ exports.play = function (url, message) {
 exports.playNext = function (message) {
     if (guilds[message.guild.id].voice_handler !== null) {
         message.reply("Skipping...");
-        guilds[message.guild.id].voice_handler.end();
+        return guilds[message.guild.id].voice_handler.end();
     } else {
-        play_next_song(guilds[message.guild.id]);
+        return play_next_song(guilds[message.guild.id]);
     }
 }
 exports.clear = function (message) {
@@ -92,7 +94,7 @@ exports.clear = function (message) {
         guilds[message.guild.id].stopped = true;
         message.reply("Stopping!");
     }
-    guilds[message.guild.id].voice_connection.disconnect();
+    return delete guilds[message.guild.id];
 }
 exports.pause = function (message) {
     if (guilds[message.guild.id].stopped) {
@@ -109,7 +111,7 @@ exports.resume = function (message) {
     if (guilds[message.guild.id].stopped) {
         guilds[message.guild.id].stopped = false;
         if (!is_queue_empty(guilds[message.guild.id])) {
-            play_next_song(guilds[message.guild.id]);
+            return play_next_song(guilds[message.guild.id]);
         }
     } else {
         message.reply("Playback is already running");
@@ -117,9 +119,9 @@ exports.resume = function (message) {
 }
 exports.setVol = function (vol, message) {
     if (vol > 1 || vol < 0)
-        return "Invalid Volume. Volume Range(0-1)";
+        return message.reply("Invalid Volume. Volume Range(0-1)");
     guilds[message.guild.id].voice_handler.setVolume(vol);
-    return "Volume Has been set"
+    return message.reply("Volume Has been set");
 }
 exports.queue = function (message) {
     var response = "";
@@ -132,7 +134,7 @@ exports.queue = function (message) {
                 + guilds[message.guild.id].queue[i]["user"] + ")\n";
         }
     }
-    message.reply(response);
+    return message.reply(response);
 }
 
 function add_to_queue(url, message) {
@@ -144,7 +146,7 @@ function add_to_queue(url, message) {
     if (!guilds[message.guild.id].stopped
         && !is_bot_playing(guilds[message.guild.id])
         && guilds[message.guild.id].queue.length === 1) {
-        play_next_song(guilds[message.guild.id]);
+        return play_next_song(guilds[message.guild.id]);
     }
 }
 
@@ -172,6 +174,7 @@ function play_next_song(g) {
             play_next_song(g);
         } else if (is_queue_empty(g)) {
             g.voice_connection.disconnect();
+            delete guilds[g.text_channel.guild.id];
         }
     });
 
@@ -185,29 +188,3 @@ function is_queue_empty(g) {
 function is_bot_playing(g) {
     return g.voice_handler !== null;
 }
-bot.on('guildCreate', (guild) => {
-    let v = guild.channels.filter((guildch) => {
-        if (guildch.type === 'voice')
-            return guildch;
-    }).find((ch) => {
-        if (ch.name.toLowerCase().includes("music"))
-            return ch;
-    });
-    let t = guild.channels.filter((guildch) => {
-        if (guildch.type === 'text')
-            return guildch;
-    }).find((ch) => {
-        if (ch.name.toLowerCase().includes("music"))
-            return ch;
-    });
-    guilds[guild.id] = {
-        voice_channel: v,
-        text_channel: t,
-        voice_handler: null,
-        voice_connection: null,
-        now_playing_data: {},
-        queue: [],
-        stopped: false,
-        inform_np: true
-    };
-});
