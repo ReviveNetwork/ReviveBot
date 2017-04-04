@@ -41,26 +41,14 @@ exports.play = function (url, message) {
     if(!guilds[message.guild.id])
         guilds[message.guild.id] = Guild(message.guild);
     console.log("QUEUE size" + guilds[message.guild.id].queue.length);
-    /*
-    voice_channel = member.voiceChannel;
-    text_channel = message.channel;
-    if (voice_channel == undefined) {
-        member.guild.channels.find(function (channel) {
-            if (channel.type === 'text' && channel.name === "music-lobby") return channel;
-        }).sendMessage("Join the Music-Lobby");
-
-    } else if (voice_channel.name != "Music-Lobby") {
-        voice_channel = member.guild.channels.find(function (channel) {
-            if (channel.type === 'voice' && channel.name === "Music-Lobby") return channel;
-        });
-        member.setVoiceChannel(voice_channel);
-    }*/
+    if(!guilds[message.guild.id].voice_channel)
+        return messsage.reply("This guild doesnt have a music channel");
     member.setVoiceChannel(guilds[message.guild.id].voice_channel).catch(() => {
         message.reply("JOIN A VOICE CHANNEL");
     });
     if (guilds[message.guild.id].text_channel == null)
         guilds[message.guild.id].text_channel = message.channel;
-    if (guilds[message.guild.id].queue.length === 0) {
+    if (!guilds[message.guild.id].voice_connection) {
         guilds[message.guild.id].voice_channel.join().then(connection => {
             guilds[message.guild.id].voice_connection = connection;
             add_to_queue(url, message);
@@ -143,8 +131,7 @@ function add_to_queue(url, message) {
         user: message.author.username
     });
     message.reply('added to the queue.');
-    if (!guilds[message.guild.id].stopped
-        && !is_bot_playing(guilds[message.guild.id])
+    if (!is_bot_playing(guilds[message.guild.id])
         && guilds[message.guild.id].queue.length === 1) {
         return play_next_song(guilds[message.guild.id]);
     }
