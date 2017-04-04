@@ -10,6 +10,8 @@ bot.on('error', (err) => {
     console.log(new Date.now() + " - Error: " + err);
     console.log("Stack Trace: " + err.stack);
 })
+process.on('unhandledRejection',(err)=>console.log("UNHANDLED REJECTION AT "+err.stack));
+process.on('uncaughtException',(err)=>console.log("UNHANDLED EXCEPTION AT "+err.stack));
 bot.on('message', (message) => {
     /**
      * if locked, reject everything except dm
