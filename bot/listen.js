@@ -7,7 +7,6 @@ bot.on('error', (err) => {
     /**
      * Catch errors here
      */
-    console.log(new Date.now() + " - Error: " + err);
     console.log("Stack Trace: " + err.stack);
 })
 process.on('unhandledRejection',(err)=>console.log("UNHANDLED REJECTION AT "+err.stack));
