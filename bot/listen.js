@@ -9,7 +9,11 @@ bot.on('error', (err) => {
      */
     console.log("Stack Trace: " + err.stack);
 })
-process.on('unhandledRejection',(err)=>console.log("UNHANDLED REJECTION AT "+err.stack));
+process.on('unhandledRejection',(err)=>{
+    console.log("UNHANDLED REJECTION AT "+err.stack);
+    if(err.toString().includes('Request to use token, but token was unavailable to the client'))
+        process.exit();//restart
+});
 process.on('uncaughtException',(err)=>console.log("UNHANDLED EXCEPTION AT "+err.stack));
 bot.on('message', (message) => {
     /**
@@ -52,5 +56,5 @@ bot.on("guildMemberAdd", (member) => {
 });
 bot.on('disconnect', function(event) {
     if (event.code === 0) return console.error(event);
-    bot.destroy().then(() => bot.login());
+    process.exit();//force restart
 });
