@@ -53,8 +53,8 @@ bot.on("guildMemberAdd", (member) => {
         user.sendMessage("Welcome to the Revive Network");
         refresh(user);
     }
-});
+});/**
 bot.on('disconnect', function(event) {
     if (event.code === 0) return console.error(event);
     process.exit();//force restart
-});
+});*/
