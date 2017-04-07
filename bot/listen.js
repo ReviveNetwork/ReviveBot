@@ -21,7 +21,7 @@ bot.on('message', (message) => {
      */
     if (lock) {
         if (!settings.owners.includes(message.author.id))
-            if (message.channel.guild)
+          //  if (message.channel.guild)
                 return;//not DM
     }
     /**
