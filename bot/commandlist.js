@@ -9,6 +9,7 @@ module.exports = {
     "add": "add",
     "remove": "remove",
     "unlock": "unlock",
+    /*
     "play": "music/play",
     "playnext": "music/playnext",
     "pause": "music/pause",
@@ -16,6 +17,7 @@ module.exports = {
     "clear": "music/clear",
     "resume": "music/resume",
     "setvol": "music/setvol",
+    */
     "info": "info",
     "hash": "hash",
     "bf2": "bf2",
