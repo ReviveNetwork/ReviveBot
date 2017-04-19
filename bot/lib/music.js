@@ -114,7 +114,7 @@ exports.setVol = function (vol, message) {
 exports.queue = function (message) {
     var response = "";
 
-    if (is_queue_empty(guilds[message.guild.id])) {
+    if (!guilds[message.guild.id] || is_queue_empty(guilds[message.guild.id])) {
         response = "the queue is empty.";
     } else {
         for (var i = 0; i < guilds[message.guild.id].queue.length; i++) {
