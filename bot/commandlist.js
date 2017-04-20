@@ -26,5 +26,6 @@ module.exports = {
     "refresh": "refresh",
     "yo": "yo",
     "cookie": "cookie",
-    "request": "request"
+    "request": "request",
+    "status":"status"
 }
