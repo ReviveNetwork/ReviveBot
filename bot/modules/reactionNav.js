@@ -7,6 +7,7 @@ bot.on('addNav', ob => {
     setTimeout(() => {
         //ob.message.edit(ob.message.content + "\nReactions Navigator Expired");
         ob.message.reactions.map(r => r.remove(bot.user).catch(console.log));
+        database[ob.message.id] = null;
         delete database[ob.message.id];
     }, 300000
     )
