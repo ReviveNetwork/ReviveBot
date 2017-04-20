@@ -1,4 +1,19 @@
-var bot = require('./../bot');
+const Discord = require('discord.js');
+const bot = new Discord.bot();
+
+var dt = process.env.DISCORD_TOKEN || process.argv[2];
+
+if (!dt) {
+    console.log('required DISCORD_TOKEN env variable or argument');
+}
+
+bot.login(dt);
+
+bot.on('error', e => {
+    console.error(e);
+});
+
+module.exports = bot;
 const spawn = require('child_process').spawn;
 var pm2 = false;
 
