@@ -22,7 +22,6 @@
     "request-promise-native": "^1.0.3",
     "revive-stats.js": "^1.4.7",
     "urlencode": "^1.1.0",
-    "uws": "^0.12.0",
     "ytdl-core": "^0.7.21"
   },
   "devDependencies": {},
