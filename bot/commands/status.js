@@ -6,7 +6,7 @@
  */
 async function command(params, message) {
     const exec = require('child_process').exec; 
-    exec("pm2 status", (error, stdout, stderr) => { 
+    exec("pod list", (error, stdout, stderr) => { 
     	if (error) { 
     		console.error(`exec error: ${error}`); 
     		message.channel.sendCode("shell", '**ERROR** ' + error + '\n' + stderr, { split: true }); return; 
