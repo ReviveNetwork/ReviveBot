@@ -4,7 +4,7 @@
   "description": "Bot for the Revive Network",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "node test.js",
     "start": "node index.js"
   },
   "author": "Melroy",
