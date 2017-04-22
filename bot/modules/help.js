@@ -4,7 +4,7 @@ bot.on('message', message => {
     var channel = message.channel;
     if (message.author.bot) return;
     if (!message.channel.name) return;//it is a dm
-    if (!channel.name.toLowerCase().contains('help')) {
+    if (!channel.name.contains('help')) {
         return;
     }
     var user = message.author;
