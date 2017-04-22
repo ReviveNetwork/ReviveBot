@@ -17,7 +17,7 @@ async function command(params, message) {
 /**
  * description of the command
  */
-const description = "removes a role to a user. \nSyntax: add <mention> from role";
+const description = "removes a role to a user. \nSyntax: remove <mention> from role";
 /**
  * Define Exports
  */
