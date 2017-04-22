@@ -3,7 +3,7 @@
  * Require them here to be included in the bot
  */
 require('./modules/reactionNav');
-require('./modules/help');
+//require('./modules/help');
 require('./modules/hotline');
 //require('./modules/logs');
 require('./modules/api');
