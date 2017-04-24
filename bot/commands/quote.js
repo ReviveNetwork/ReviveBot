@@ -8,10 +8,9 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     if (params.length < 1)
-        return message.reply("incorrect usage\nSyntax: ~qoute <messageID>");
+        return message.reply("incorrect usage\nSyntax: ~quote <messageID>");
     let m = await Message.where('messageID', params[0]).fetch();
-    if(m)
-    {
+    if (m) {
         console.log(m);
         const ch = bot.channels.get(m.channel);
         m = ch.fetch(m.messageID);
@@ -21,7 +20,7 @@ async function command(params, message) {
 /**
  * description of the command
  */
-const description = "qoutes a message via id";
+const description = "quotes a message via id";
 /**
  * Define Exports
  */

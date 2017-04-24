@@ -27,6 +27,6 @@ module.exports = {
     "yo": "yo",
     "cookie": "cookie",
     "request": "request",
-    "status":"status",
-    "qoute":"qoute"
+    "status": "status",
+    "quote": "quote"
 }
