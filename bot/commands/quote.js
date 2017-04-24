@@ -15,7 +15,9 @@ async function command(params, message) {
         const ch = bot.channels.get(m.attributes.channel);
         m = await ch.fetchMessage(m.attributes.messageID);
         console.log("fetching : "+m.id);
-        ch.sendEmbed(m2e(m));
+        m =m2e(m);
+        console.log(m);
+        ch.sendEmbed(m);
     }
 }
 /**
