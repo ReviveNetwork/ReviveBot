@@ -17,7 +17,7 @@ async function command(params, message) {
         console.log("fetching : "+m.id);
         m =m2e(m);
         console.log(m);
-        ch.sendEmbed(m);
+        ch.sendEmbed(m).catch(console.error);
     }
 }
 /**
