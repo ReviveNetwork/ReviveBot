@@ -9,7 +9,7 @@ const bot = require('./../bot');
 async function command(params, message) {
     if (params.length < 1)
         return message.reply("incorrect usage\nSyntax: ~qoute <messageID>");
-    let m = Message.where('messageID', params[0]).fetch();
+    let m = await Message.where('messageID', params[0]).fetch();
     if(m)
     {
         console.log(m);
