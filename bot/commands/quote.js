@@ -20,7 +20,7 @@ async function command(params, message) {
         let attach = m.attachments;
         if(attach)
             attach = attach.first();
-        ch.sendEmbed(m,{file:attach}).catch(console.error);
+        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
     }
     else
         message.reply("message not available");
