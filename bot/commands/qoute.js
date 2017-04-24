@@ -1,5 +1,6 @@
 const Message = require('./../../orm/Message');
 const m2e = require('./../lib/message2embed');
+const bot = require('./../bot');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
