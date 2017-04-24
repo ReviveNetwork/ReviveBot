@@ -15,12 +15,12 @@ async function command(params, message) {
         const ch = bot.channels.get(m.attributes.channel);
         m = await ch.fetchMessage(m.attributes.messageID);
         console.log("fetching : "+m.id);
+        let attach = m.attachments;
         m =m2e(m);
         console.log(m);
-        let attach = m.attachments;
         if(attach)
-            attach = attach.first();
-        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
+            attach = attach.array();
+        message.channel.sendEmbed(m,{files:attach}).catch(console.error);
     }
     else
         message.reply("message not available");
