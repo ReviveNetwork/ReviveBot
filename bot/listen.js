@@ -2,6 +2,7 @@ const refresh = require('./lib/refresh');
 const bot = require('./bot.js');
 const settings = require('./../settings.json');
 const modules = require('./modules.js');
+const Message = require('./../orm/Message')
 const commands = require('./commands');
 let lock = false;
 bot.on('error', (err) => {
@@ -10,20 +11,24 @@ bot.on('error', (err) => {
      */
     console.log("Stack Trace: " + err.stack);
 })
-process.on('unhandledRejection',(err)=>{
-    console.log("UNHANDLED REJECTION AT "+err.stack);
-    if(err.toString().includes('Request to use token, but token was unavailable to the client'))
+process.on('unhandledRejection', (err) => {
+    console.log("UNHANDLED REJECTION AT " + err.stack);
+    if (err.toString().includes('Request to use token, but token was unavailable to the client'))
         process.exit();//restart
 });
-process.on('uncaughtException',(err)=>console.log("UNHANDLED EXCEPTION AT "+err.stack));
+process.on('uncaughtException', (err) => console.log("UNHANDLED EXCEPTION AT " + err.stack));
 bot.on('message', (message) => {
     /**
      * if locked, reject everything except dm
      */
+    new Message({
+        messageID: message.id,
+        channel: message.channel.id
+    }).save();
     if (lock) {
         if (!settings.owners.includes(message.author.id))
-          //  if (message.channel.guild)
-                return;//not DM
+            //  if (message.channel.guild)
+            return;//not DM
     }
     /**
      * Listen to messages and convert into params
@@ -59,3 +64,7 @@ bot.on('disconnect', function(event) {
     if (event.code === 0) return console.error(event);
     process.exit();//force restart
 });*/
+
+bot.on('ready', () => {
+    console.log("ReviveBot Ready");
+})
