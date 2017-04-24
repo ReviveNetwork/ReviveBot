@@ -19,8 +19,8 @@ async function command(params, message) {
         console.log(m);
         let attach = m.attachments;
         if(attach)
-            attach = attach.array();
-        ch.sendEmbed(m,{files:attach}).catch(console.error);
+            attach = attach.first();
+        ch.sendEmbed(m,{file:attach}).catch(console.error);
     }
     else
         message.reply("message not available");
