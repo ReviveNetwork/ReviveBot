@@ -4,5 +4,6 @@ module.exports = (message) => {
     embed.setAuthor(message.author.username,message.author.avatarURL)
     embed.setDescription(message.content);
     embed.setTimestamp(message.createdTimestamp)
+    embed.setTitle("Qoute");
     return embed;
 }
