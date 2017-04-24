@@ -4,6 +4,6 @@ module.exports = (message) => {
     embed.setAuthor(message.author.username,message.author.avatarURL)
     embed.setDescription(message.content);
     embed.setFooter(message.createdAt)
-    embed.setTitle("Quote");
+    //embed.setTitle("Quote");
     return embed;
 }
