@@ -17,7 +17,10 @@ async function command(params, message) {
         console.log("fetching : "+m.id);
         m =m2e(m);
         console.log(m);
-        ch.sendEmbed(m,{files:m.attachments.array()}).catch(console.error);
+        let attach = m.attachments;
+        if(attach)
+            attach = attach.array();
+        ch.sendEmbed(m,{files:attach}).catch(console.error);
     }
     else
         message.reply("message not available");
