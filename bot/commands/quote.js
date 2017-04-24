@@ -19,6 +19,8 @@ async function command(params, message) {
         console.log(m);
         ch.sendEmbed(m).catch(console.error);
     }
+    else
+        message.reply("message not available");
 }
 /**
  * description of the command
