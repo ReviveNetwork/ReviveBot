@@ -19,8 +19,8 @@ async function command(params, message) {
         m =m2e(m);
         console.log(m);
         if(attach)
-            attach = attach.array();
-        message.channel.sendEmbed(m,{files:attach}).catch(console.error);
+            attach = attach.first();
+        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
     }
     else
         message.reply("message not available");
