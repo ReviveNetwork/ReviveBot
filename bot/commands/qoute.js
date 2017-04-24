@@ -9,8 +9,13 @@ async function command(params, message) {
     if (params.length < 1)
         return message.reply("incorrect usage\nSyntax: ~qoute <messageID>");
     let m = Message.where('messageID', params[0]).fetch();
-    if(m.message)
-    message.channel.sendEmbed(m2e(m.message));
+    if(m)
+    {
+        
+        const ch = bot.channels.get(m.channel);
+        m = ch.fetch(m.messageID);
+        ch.sendEmbed(m2e(m));
+    }
 }
 /**
  * description of the command
