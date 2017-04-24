@@ -13,7 +13,7 @@ async function command(params, message) {
     if (m) {
         console.log(m);
         const ch = bot.channels.get(m.channel);
-        m = ch.fetch(m.messageID);
+        m = ch.fetchMessage(m.messageID);
         ch.sendEmbed(m2e(m));
     }
 }
