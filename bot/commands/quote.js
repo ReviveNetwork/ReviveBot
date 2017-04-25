@@ -9,11 +9,14 @@ const bot = require('./../bot');
 async function command(params, message) {
     if (params.length < 1)
         return message.reply("incorrect usage\nSyntax: ~quote <messageID>");
-    let m = await Message.where('messageID', params[0]).fetch();
+    let m = message.channel.fetchMessage(params[0]) || (await Message.where('messageID', params[0]).fetch());
     if (m) {
         console.log(m);
-        const ch = bot.channels.get(m.attributes.channel);
-        m = await ch.fetchMessage(m.attributes.messageID);
+        let ch = null;
+        if(!m.guild){
+            ch = bot.channels.get(m.attributes.channel);
+            m = await ch.fetchMessage(m.attributes.messageID);
+        }
         console.log("fetching : "+m.id);
         let attach = m.attachments.first();
         m =m2e(m);
