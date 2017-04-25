@@ -9,7 +9,7 @@ const bot = require('./../bot');
 async function command(params, message) {
     if (params.length < 1)
         return message.reply("incorrect usage\nSyntax: ~quote <messageID>");
-    let m = message.channel.fetchMessage(params[0]) || (await Message.where('messageID', params[0]).fetch());
+    let m =await Message.where('messageID', params[0]).fetch();
     if (m) {
         console.log(m);
         let ch = null;
@@ -26,7 +26,18 @@ async function command(params, message) {
         message.channel.sendEmbed(m,{file:attach}).catch(console.error);
     }
     else
-        message.reply("message not available");
+    {
+        m =  message.channel.fetchMessage(params[0]);
+        if(!m)
+            return message.reply("message not available");
+        console.log("fetching : "+m.id);
+        let attach = m.attachments.first();
+        m =m2e(m);
+        console.log(m);
+        if(attach)
+            attach = attach.url;
+        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
+    }
 }
 /**
  * description of the command
