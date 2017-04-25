@@ -27,7 +27,7 @@ async function command(params, message) {
     }
     else
     {
-        m =  message.channel.fetchMessage(params[0]);
+        m = await message.channel.fetchMessage(params[0]);
         if(!m)
             return message.reply("message not available");
         console.log("fetching : "+m.id);
