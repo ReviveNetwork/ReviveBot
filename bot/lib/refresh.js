@@ -36,7 +36,7 @@ module.exports = function (user) {
         }
         if (info.usergroup == 8) {
             if(!member.roles.get(guild.roles.find("name", "ingame moderator").id))
-            member.addRole(guild.roles.find("name", "ingame moderator")).then(user.sendMessage('Role added: ingame moderator'));
+            member.addRole(guild.roles.find("name", "moderator")).then(user.sendMessage('Role added: moderator'));
         }
         // member.setNickname(info.username);
     });
