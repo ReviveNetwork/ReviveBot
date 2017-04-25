@@ -7,37 +7,27 @@ const bot = require('./../bot');
  * @param {*message} message
  */
 async function command(params, message) {
-    if (params.length < 1)
-        return message.reply("incorrect usage\nSyntax: ~quote <messageID>");
-    let m =await Message.where('messageID', params[0]).fetch();
-    if (m) {
-        console.log(m);
-        let ch = null;
-        if(!m.guild){
-            ch = bot.channels.get(m.attributes.channel);
-            m = await ch.fetchMessage(m.attributes.messageID);
-        }
-        console.log("fetching : "+m.id);
-        let attach = m.attachments.first();
-        m =m2e(m);
-        console.log(m);
-        if(attach)
-            attach = attach.url;
-        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
+        if (params.length < 1)
+            return message.reply("incorrect usage\nSyntax: ~quote <messageID>");
+        let m =await Message.where('messageID', params[0]).fetch();
+        if (m) {
+            console.log(m);
+        let ch = bot.channels.get(m.attributes.channel);
+        m = await ch.fetchMessage(m.attributes.messageID);
     }
     else
     {
         m = await message.channel.fetchMessage(params[0]);
         if(!m)
             return message.reply("message not available");
-        console.log("fetching : "+m.id);
-        let attach = m.attachments.first();
-        m =m2e(m);
-        console.log(m);
-        if(attach)
-            attach = attach.url;
-        message.channel.sendEmbed(m,{file:attach}).catch(console.error);
     }
+    console.log("fetching : "+m.id);
+    let attach = m.attachments.first();
+    m =m2e(m);
+    console.log(m);
+    if(attach)
+        attach = attach.url;
+    message.channel.sendEmbed(m,{file:attach}).catch(console.error);
 }
 /**
  * description of the command
