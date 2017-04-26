@@ -31,7 +31,7 @@ async function command(params, message) {
        if(r1.position<r2.position)
           return 1;
     }).shift().color;
-    em.setColor(color);
+    em.setColor(m.member.displayColor);
     console.log(em);
     if(attach)
         attach = attach.url;
