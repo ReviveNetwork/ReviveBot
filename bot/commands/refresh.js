@@ -6,9 +6,14 @@ const refresh = require('./../lib/refresh');
  */
 async function command(params, message) {
     if (params.length >= 1)
-        return message.mentions.users.map((u) => refresh(u));
-    else
-        return refresh(message.author);
+        return message.mentions.users.map((u) => {
+            await refresh(u)
+            message.channel.sendMessage(u.toString() + " sucessfully linked");
+        });
+    else {
+        await refresh(message.author);
+        return message.channel.sendMessage(message.author.toString() + " sucessfully linked");
+    }
 }
 /**
  * description of the command
