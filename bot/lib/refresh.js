@@ -4,7 +4,7 @@ module.exports = async function (user) {
     var guild = bot.guilds.get('184536578654339072');
     var member = guild.member(user);
     if(!member)
-        return;
+        return false;
     //console.log(user);
     var id = user.id;
     console.log(id);
@@ -17,7 +17,8 @@ module.exports = async function (user) {
         if (info.hasOwnProperty('error')) {
             user.sendMessage("To link your discord account with your battlelog account follow the link given below\n"
                 + "https://battlelog.co/discord_link.php");
-            return "User " + user.username + " Not Linked. DMing user to link now";
+            console.log( "User " + user.username + " Not Linked. DMing user to link now");
+            return false;
         }
         member.addRole(guild.roles.find("name", "verified members"));
         //member.removeRole(guild.roles.find("name", "members"));
@@ -36,6 +37,7 @@ module.exports = async function (user) {
             if(!member.roles.get(guild.roles.find("name", "moderator").id))
             member.addRole(guild.roles.find("name", "moderator")).then(user.sendMessage('Role added: moderator'));
         }
+        return true;
         // member.setNickname(info.username);
     });
 };
