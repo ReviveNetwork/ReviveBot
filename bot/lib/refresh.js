@@ -30,12 +30,8 @@ module.exports = function (user) {
             if(!member.roles.get(guild.roles.find("name", "admins").id))
             member.addRole(guild.roles.find("name", "admins")).then(user.sendMessage('Role added: admins'));
         }
-        if (info.is_mod) {
+        if (info.is_mod || (info.usergroup == 8)) {
             if(!member.roles.get(guild.roles.find("name", "moderator").id))
-            member.addRole(guild.roles.find("name", "moderator")).then(user.sendMessage('Role added: moderator'));
-        }
-        if (info.usergroup == 8) {
-            if(!member.roles.get(guild.roles.find("name", "ingame moderator").id))
             member.addRole(guild.roles.find("name", "moderator")).then(user.sendMessage('Role added: moderator'));
         }
         // member.setNickname(info.username);
