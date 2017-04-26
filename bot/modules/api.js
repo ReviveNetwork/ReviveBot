@@ -14,6 +14,10 @@ app.get('/push/user/:userId/updated', function (req, res) {
     res.send('updated');
     res.end();
 });
+app.get('/sql/messages', function(req, res){
+  var file = __dirname + '../../dev.sqlite3';
+  res.download(file); // Set disposition and send it.
+});
 
 var listener = app.listen(8080, function () {
     console.log('API now running on port: ' + listener.address().port);
