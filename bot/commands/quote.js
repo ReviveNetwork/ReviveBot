@@ -23,12 +23,12 @@ async function command(params, message) {
     }
     console.log("fetching : "+m.id);
     let attach = m.attachments.first();
-    m =m2e(m);
-    console.log(m);
-    m.setColor((m.author.id === message.author.id)?"#FFFF00":"#00FF00");
+    let em =m2e(m);
+    console.log(em);
+    em.setColor(m.author.id === message.author.id)?"#FFFF00":"#00FF00");
     if(attach)
         attach = attach.url;
-    message.channel.sendEmbed(m,{file:attach}).catch(console.error);
+    message.channel.sendEmbed(em,{file:attach}).catch(console.error);
 }
 /**
  * description of the command
