@@ -7,7 +7,7 @@ module.exports = (message) => {
     if(!message.content =="")
         embed.setDescription(message.content);
     else
-        embed.setDescription("```           "+me.author.name+" : "+me.title+"\n           "+(me.description||"")+((me.footer)?("\n           At "+me.footer.text+"```"):"```"));
+        embed.setDescription("```           "+me.author.name+" : "+me.title+"\n           "+(me.description.replace(/```/g,"")||"")+((me.footer)?("\n           At "+me.footer.text+"```"):"```"));
     embed.setFooter(message.createdAt)
     //embed.setTitle("Quote");
     return embed;
