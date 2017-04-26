@@ -7,12 +7,16 @@ const refresh = require('./../lib/refresh');
 async function command(params, message) {
     if (params.length >= 1)
         return message.mentions.users.map(async function(u){
-            await refresh(u)
-            message.channel.sendMessage(u.toString() + " sucessfully linked");
+            if( await refresh(u) )
+                message.channel.sendMessage(u.toString() + " sucessfully linked");
+            else
+                message.channel.sendMessage(u.toString() + " unable to be linked");
         });
     else {
-        await refresh(message.author);
-        return message.channel.sendMessage(message.author.toString() + " sucessfully linked");
+        if(await refresh(message.author))
+            return message.channel.sendMessage(message.author.toString() + " sucessfully linked")
+        else
+            return message.channel.sendMessage(message.author.toString() + " unable to be linked");
     }
 }
 /**
