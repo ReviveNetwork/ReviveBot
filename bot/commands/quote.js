@@ -25,7 +25,7 @@ async function command(params, message) {
     let attach = m.attachments.first();
     let em =m2e(m);
     console.log(em);
-    em.setColor((m.author.id === message.author.id)?"#FFFF00":"#00FF00");
+    em.setColor(m.member.highestRole.color);
     if(attach)
         attach = attach.url;
     message.channel.sendEmbed(em,{file:attach}).catch(console.error);
