@@ -1,6 +1,6 @@
 const request = require('request-promise-native');
 const bot = require('./../bot');
-module.exports = function (user) {
+module.exports = async function (user) {
     var guild = bot.guilds.get('184536578654339072');
     var member = guild.member(user);
     if(!member)
