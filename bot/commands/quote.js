@@ -24,9 +24,15 @@ async function command(params, message) {
     console.log("fetching : "+m.id);
     let attach = m.attachments.first();
     let em =m2e(m);
+    const color = m.member.roles.filter((r)=>{
+       if(r.color !== 0)
+         return r;
+    }).array().sort((r1,r2)=>{
+       if(r1.position<r2.position)
+          return 1;
+    }).shift().color;
+    em.setColor(color);
     console.log(em);
-    em.setColor(m.member.highestRole.color);
-    console.log(m.member.highestRole.color);
     if(attach)
         attach = attach.url;
     message.channel.sendEmbed(em,{file:attach}).catch(console.error);
