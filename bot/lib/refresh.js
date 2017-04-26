@@ -3,6 +3,8 @@ const bot = require('./../bot');
 module.exports = function (user) {
     var guild = bot.guilds.get('184536578654339072');
     var member = guild.member(user);
+    if(!member)
+        return;
     //console.log(user);
     var id = user.id;
     console.log(id);
@@ -20,11 +22,11 @@ module.exports = function (user) {
         member.addRole(guild.roles.find("name", "verified members"));
         //member.removeRole(guild.roles.find("name", "members"));
         if (info.is_donator) {
-            if(!member.roles.get(guild.roles.find("name", "donators").id))
-            member.addRole(guild.roles.find("name", "donators")).then(user.sendMessage('Role added: donators'));
+            if(!member.roles.get("273105185566359562"))
+            member.addRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role added: donators'));
         } else {
-            if(member.roles.get(guild.roles.find("name", "donators").id))
-            member.removeRole(guild.roles.find("name", "donators")).then(user.sendMessage('Role removed: donators'));
+            if(member.roles.get("273105185566359562"))
+            member.removeRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role removed: donators'));
         }
         if (info.is_admin) {
             if(!member.roles.get(guild.roles.find("name", "admins").id))
