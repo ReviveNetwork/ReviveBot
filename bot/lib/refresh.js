@@ -20,7 +20,7 @@ module.exports = async function (user) {
             console.log( "User " + user.username + " Not Linked. DMing user to link now");
             return false;
         }
-        member.addRole(guild.roles.find("name", "verified members"));
+        member.addRole(guild.roles.get('275317218911322112'));
         //member.removeRole(guild.roles.find("name", "members"));
         if (info.is_donator) {
             if(!member.roles.get("273105185566359562"))
@@ -30,12 +30,12 @@ module.exports = async function (user) {
             member.removeRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role removed: donators'));
         }
         if (info.is_admin) {
-            if(!member.roles.get(guild.roles.find("name", "admins").id))
-            member.addRole(guild.roles.find("name", "admins")).then(user.sendMessage('Role added: admins'));
+            if(!member.roles.get('200849956796497920'))
+            member.addRole(guild.roles.get('200849956796497920')).then(user.sendMessage('Role added: admins'));
         }
         if (info.is_mod || (info.usergroup == 8)) {
-            if(!member.roles.get(guild.roles.find("name", "moderator").id))
-            member.addRole(guild.roles.find("name", "moderator")).then(user.sendMessage('Role added: moderator'));
+            if(!member.roles.get('184676864630063104'))
+            member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
         }
         return true;
         // member.setNickname(info.username);
