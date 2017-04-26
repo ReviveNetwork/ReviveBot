@@ -37,7 +37,7 @@ module.exports = async function (user) {
             if(!member.roles.get('184676864630063104'))
             member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
         }
+        member.setNickname(info.username);
         return true;
-        // member.setNickname(info.username);
     });
 };
