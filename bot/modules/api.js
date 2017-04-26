@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bot = require('../bot');
 const refreshUser = require('./../lib/refresh');
 let app = express();
+const path = require('path');
 
 app.use(bodyParser.json())
 
@@ -15,7 +16,7 @@ app.get('/push/user/:userId/updated', function (req, res) {
     res.end();
 });
 app.get('/sql/messages', function(req, res){
-  var file = __dirname + '../../dev.sqlite3';
+  var file = path.resolve(__dirname, '..', '..','dev.sqlite3') ;
   res.download(file); // Set disposition and send it.
 });
 
