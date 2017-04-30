@@ -13,6 +13,7 @@ async function command(params, message) {
             else
                 message.channel.sendMessage(u.toString() + " unable to be linked");
         });
+        if (!settings.owners.includes(message.author.id)) return;
         message.mentions.roles.map(function(r){
             r.members.map(async function(m){
                 let u = m.user;
