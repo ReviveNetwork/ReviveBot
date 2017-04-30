@@ -19,7 +19,7 @@ async function command(params, message) {
             console.log("Linking everyone in "+r.name);
             r.members.map(async function(m){
                 let u = m.user;
-                console.log("refreshing "+user.username);
+                console.log("refreshing "+u.username);
                 if( await refresh(u,true) )
                     await message.channel.sendMessage(u.toString() + " sucessfully linked");
                 else
