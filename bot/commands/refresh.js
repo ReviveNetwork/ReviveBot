@@ -10,27 +10,29 @@ async function command(params, message) {
     {
         message.mentions.users.map(async function(u){
             if( await refresh(u) )
-                message.channel.sendMessage(u.toString() + " sucessfully linked");
+                await message.channel.sendMessage(u.toString() + " sucessfully linked");
             else
-                message.channel.sendMessage(u.toString() + " unable to be linked");
+                await message.channel.sendMessage(u.toString() + " unable to be linked");
         });
         if (!settings.owners.includes(message.author.id)) return;
         message.mentions.roles.map(function(r){
+            console.log("Linking everyone in "+r.name);
             r.members.map(async function(m){
                 let u = m.user;
+                console.log("refreshing "+user.username);
                 if( await refresh(u,true) )
-                    message.channel.sendMessage(u.toString() + " sucessfully linked");
+                    await message.channel.sendMessage(u.toString() + " sucessfully linked");
                 else
-                    message.channel.sendMessage(u.toString() + " unable to be linked");
+                    await message.channel.sendMessage(u.toString() + " unable to be linked");
             })
         });
         return true;
     }
     else {
         if(await refresh(message.author))
-            return message.channel.sendMessage(message.author.toString() + " sucessfully linked")
+            return await message.channel.sendMessage(message.author.toString() + " sucessfully linked")
         else
-            return message.channel.sendMessage(message.author.toString() + " unable to be linked");
+            return await message.channel.sendMessage(message.author.toString() + " unable to be linked");
     }
 }
 /**
