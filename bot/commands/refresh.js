@@ -16,7 +16,7 @@ async function command(params, message) {
         message.mentions.roles.map(function(r){
             r.members.map(async function(m){
                 let u = m.user;
-                if( await refresh(u) )
+                if( await refresh(u,true) )
                     message.channel.sendMessage(u.toString() + " sucessfully linked");
                 else
                     message.channel.sendMessage(u.toString() + " unable to be linked");
