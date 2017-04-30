@@ -1,6 +1,6 @@
 const request = require('request-promise-native');
 const bot = require('./../bot');
-module.exports = async function (user) {
+module.exports = async function (user,noDM) {
     var guild = bot.guilds.get('184536578654339072');
     var member = guild.member(user);
     if(!member)
@@ -14,7 +14,7 @@ module.exports = async function (user) {
         catch (e) {
             throw e;
         }
-        if (info.hasOwnProperty('error')) {
+        if (info.hasOwnProperty('error') && !noDM) {
             user.sendMessage("To link your discord account with your battlelog account follow the link given below\n"
                 + "https://battlelog.co/discord_link.php");
             console.log( "User " + user.username + " Not Linked. DMing user to link now");
