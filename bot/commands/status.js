@@ -12,7 +12,7 @@ async function command(params, message) {
     		message.channel.sendCode("shell", '**ERROR** ' + error + '\n' +` $(stderr)`, { split: true }); return; 
     		} 
     	console.log(`stdout: ${stdout}`); 
-    	message.channel.sendCode("shell", ` $(stdout)` , { split: true });
+    	message.channel.sendCode("shell", `$(stdout)` , { split: true });
     	console.log(`stderr: ${stderr}`); 
     });
 }
