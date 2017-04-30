@@ -1,4 +1,5 @@
 const refresh = require('./../lib/refresh');
+const settings = require('./../../settings.json');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
