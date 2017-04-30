@@ -9,10 +9,10 @@ async function command(params, message) {
     exec("pod list", (error, stdout, stderr) => { 
     	if (error) { 
     		console.error(`exec error: ${error}`); 
-    		message.channel.sendCode("shell", '**ERROR** ' + error + '\n' + stderr, { split: true }); return; 
+    		message.channel.sendCode("shell", '**ERROR** ' + error + '\n' + stderr.toString(), { split: true }); return; 
     		} 
     	console.log(`stdout: ${stdout}`); 
-    	message.channel.sendCode("shell", stdout + { split: true });
+    	message.channel.sendCode("shell", stdout.toString() + { split: true });
     	console.log(`stderr: ${stderr}`); 
     });
 }
