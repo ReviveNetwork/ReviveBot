@@ -24,10 +24,10 @@ async function command(params, message) {
     console.log("fetching : "+m.id);
     let attach = m.attachments.first();
     let em =m2e(m);
-    let color = m.member.roles;
+    let color = m.member;
     if(color)
     {
-       color = color.filter((r)=>{
+       color = color.roles.filter((r)=>{
          if(r.color !== 0)
             return r;
          }).array().sort((r1,r2)=>{
