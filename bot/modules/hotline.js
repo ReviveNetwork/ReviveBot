@@ -1,4 +1,5 @@
 var bot = require('../bot');
+const m2e = require('./../lib/message2embed');
 let messageDB = { data: [] };
 bot.on('message', message => {
     if (message.author.bot == true) return; // prevent loop
@@ -6,10 +7,10 @@ bot.on('message', message => {
     if (message.attachments.size > 0)
     { attach = '\n' + message.attachments.first().url; }
     if (message.channel.id == '271350052188979201') {
-        bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.cleanContent + attach)
+        bot.channels.get('271349742099759104').sendEmbed(m2e(message), { file: attach })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     } else if (message.channel.id == '271349742099759104') {
-        bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.cleanContent + attach)
+        bot.channels.get('271350052188979201').sendEmbed(m2e(message), { file: attach })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     }
 });
@@ -25,7 +26,7 @@ bot.on('messageUpdate', (oldMessage, newMessage) => {
     });
     if (m) {
         //console.log(m);
-        bot.channels.get(m.channel).fetchMessage(m.newMessage).edit("**" + oldMessage.author.username + ":** " + newMessage.cleanContent + attach);
+        bot.channels.get(m.channel).fetchMessage(m.newMessage).edit('', { file: attach, embed: m2e(newMessage) });;
     }
 });
 bot.on('messageDelete', message => {
