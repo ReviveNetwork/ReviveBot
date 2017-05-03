@@ -6,7 +6,7 @@ module.exports = (message, hotline) => {
     if (!hotline)
         embed.setTitle(message.channel.name + " in " + message.guild.name)
     if (!message.content == "")
-        embed.setDescription(message.content);
+        embed.setDescription(message.cleanContent);
     else
         embed.setDescription("**" + me.author.name + " : " + me.title + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
     if (!hotline)
