@@ -7,10 +7,10 @@ bot.on('message', message => {
     if (message.attachments.size > 0)
     { attach = message.attachments.first().url; }
     if (message.channel.id == '271350052188979201') {
-        bot.channels.get('271349742099759104').sendEmbed(m2e(message), { files: [attach] })
+        bot.channels.get('271349742099759104').sendEmbed(m2e(message, true), { files: [attach] })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     } else if (message.channel.id == '271349742099759104') {
-        bot.channels.get('271350052188979201').sendEmbed(m2e(message), { files: [attach] })
+        bot.channels.get('271350052188979201').sendEmbed(m2e(message, true), { files: [attach] })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     }
 });
@@ -26,7 +26,7 @@ bot.on('messageUpdate', (oldMessage, newMessage) => {
     });
     if (m) {
         //console.log(m);
-        bot.channels.get(m.channel).fetchMessage(m.newMessage).edit('', { files: [attach], embed: m2e(newMessage) });;
+        bot.channels.get(m.channel).fetchMessage(m.newMessage).edit('', { files: [attach], embed: m2e(newMessage, true) });;
     }
 });
 bot.on('messageDelete', message => {
