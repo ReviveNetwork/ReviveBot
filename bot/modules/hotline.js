@@ -7,10 +7,10 @@ bot.on('message', message => {
     if (message.attachments.size > 0)
     { attach = message.attachments.first().url; }
     if (message.channel.id == '271350052188979201') {
-        bot.channels.get('271349742099759104').sendEmbed(m2e(message, true), { files: [attach] })
+        bot.channels.get('271349742099759104').send('', { files: [attach], embed: m2e(message, true) })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     } else if (message.channel.id == '271349742099759104') {
-        bot.channels.get('271350052188979201').sendEmbed(m2e(message, true), { files: [attach] })
+        bot.channels.get('271350052188979201').send('', { files: [attach], embed: m2e(message, true) })
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     }
 });
