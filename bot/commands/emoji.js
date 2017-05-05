@@ -22,7 +22,7 @@ async function command(params, message) {
             em = JSON.parse(em);
             let url = em[params[0]];
             if (url)
-                message.channel.send('', { file: url });
+                message.channel.send('', { file: { attachment: url, name: params[0] + ".png" } });
             else
                 message.channel.sendMessage('Invalid emoji');
         }
