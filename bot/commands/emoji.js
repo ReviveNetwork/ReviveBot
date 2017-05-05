@@ -27,7 +27,7 @@ async function command(params, message) {
                     files.push({ attachment: url, name: params[i] + ".png" });
             }
         }
-        if (file.length === 0)
+        if (files.length === 0)
             return await message.channel.sendMessage("Invalid Emoji");
         else
             return await message.channel.send('Emojis', { files: files });
