@@ -9,6 +9,7 @@ async function command(params, message) {
     let res = "";
     for (let i = 0; i < params.length; i++) {
         let emoji = bot.emojis.find('name', params[i]);
+        console.log(emoji);
         if (emoji)
             res = res + " " + emoji.toString();
         else

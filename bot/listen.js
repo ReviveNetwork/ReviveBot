@@ -21,6 +21,7 @@ bot.on('message', (message) => {
     /**
      * if locked, reject everything except dm
      */
+    if (message.author.bot) return;
     new Message({
         messageID: message.id,
         channel: message.channel.id
