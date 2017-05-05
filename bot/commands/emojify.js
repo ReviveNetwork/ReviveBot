@@ -12,7 +12,7 @@ async function command(params, message) {
         if (emoji)
             res = res + " " + emoji.toString();
         else
-            res = params[i];
+            res = res + " " + params[i];
     }
     message.channel.sendMessage(res);
 }
