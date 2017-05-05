@@ -8,26 +8,31 @@ const request = require('request-promise-native')
  * @param {*message} message
  */
 async function command(params, message) {
-    if (params[0]) {
-        if (/\<\:.+\:\d+\>/.test(params[0])) {
-            let url = `https://cdn.discordapp.com/emojis/${params[0].match(/(\d+)/)[1]}.png`;
-            message.channel.send('', { file: url });
-        } else {
-            let em = await request({
-                uri: 'https://api.github.com/emojis',
-                headers: {
-                    'User-Agent': 'Revive-Bot'
-                }
-            });
-            em = JSON.parse(em);
-            let url = em[params[0]];
-            if (url)
-                message.channel.send('', { file: { attachment: url, name: params[0] + ".png" } });
-            else
-                message.channel.sendMessage('Invalid emoji');
+    if (params.length > 0) {
+        let em = await request({
+            uri: 'https://api.github.com/emojis',
+            headers: {
+                'User-Agent': 'Revive-Bot'
+            }
+        });
+        em = JSON.parse(em);
+        const files = [];
+        for (let i = 0; i < params.length; i++) {
+            if (/\<\:.+\:\d+\>/.test(params[i])) {
+                files.push({ attachment: `https://cdn.discordapp.com/emojis/${params[i].match(/(\d+)/)[1]}.png`, name: "emoji.png" });
+
+            } else {
+                let url = em[params[i]];
+                if (url)
+                    files.push({ attachment: url, name: params[i] + ".png" });
+            }
         }
+        if (file.length === 0)
+            return await message.channel.sendMessage("Invalid Emoji");
+        else
+            return await message.channel.send('Emojis', { files: files });
     } else
-        message.channel.sendMessage('Not enough arguments!');
+        return await message.channel.sendMessage('Not enough arguments!');
 
 }
 /**
