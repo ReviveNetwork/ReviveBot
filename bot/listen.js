@@ -21,11 +21,12 @@ bot.on('message', (message) => {
     /**
      * if locked, reject everything except dm
      */
-    if (message.author.bot) return;
+
     new Message({
         messageID: message.id,
         channel: message.channel.id
     }).save();
+    if (message.author.bot) return;
     if (lock) {
         if (!settings.owners.includes(message.author.id))
             //  if (message.channel.guild)
