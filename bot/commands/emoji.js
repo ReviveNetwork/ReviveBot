@@ -9,8 +9,8 @@ const request = require('request-promise-native')
  */
 async function command(params, message) {
     if (params[0]) {
-        if (/\<\:.+\:\d+\>/.test(params[1])) {
-            let url = `https://cdn.discordapp.com/emojis/${params[1].match(/(\d+)/)[1]}.png`;
+        if (/\<\:.+\:\d+\>/.test(params[0])) {
+            let url = `https://cdn.discordapp.com/emojis/${params[0].match(/(\d+)/)[1]}.png`;
             message.channel.send('', { file: url });
         } else {
             let em = await request('https://api.github.com/emojis');
