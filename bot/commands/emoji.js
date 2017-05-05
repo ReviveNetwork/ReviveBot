@@ -1,7 +1,7 @@
 
 const bot = require('./../bot');
 const nemoji = require('node-emoji');
-const rp = require('request-promise-native')
+const request = require('request-promise-native')
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
