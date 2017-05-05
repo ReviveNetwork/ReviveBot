@@ -33,10 +33,14 @@ module.exports = async function (user,noDM) {
             if(!member.roles.get('200849956796497920'))
             await member.addRole(guild.roles.get('200849956796497920')).then(user.sendMessage('Role added: admins'));
         }
+        else if(member.roles.get('200849956796497920'))
+            await member.removeRole(guild.roles.get('200849956796497920')).then(user.sendMessage('Role removed: admins'));
         if (info.is_mod || (info.usergroup == 8)) {
             if(!member.roles.get('184676864630063104'))
-            await member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
+                await member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
         }
+        else if(member.roles.get('184676864630063104'))
+            await member.removeRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role removed: moderator'));
         await member.setNickname(info.username);
         return true;
     });
