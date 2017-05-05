@@ -1,11 +1,12 @@
 
+const bot = require('./../bot');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
  * @param {*message} message
  */
 async function command(params, message) {
-    let playing = message.guild.members.filterArray(function (m) {
+    let playing = bot.users.filterArray(function (m) {
         if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes(params.join(" ").toLowerCase()))
                 return m;
@@ -15,7 +16,7 @@ async function command(params, message) {
     else {
         let res = "List of players playing";
         for (let i = 0; i < playing.length; i++) {
-            res = res + "\n" + playing[i].user.username + "#" + playing[i].user.discriminator + " is playing " + playing[i].presence.game.name;
+            res = res + "\n" + playing[i].username + "#" + playing[i].discriminator + " is playing " + playing[i].presence.game.name;
         }
         message.channel.send(res, { split: true })
     }
