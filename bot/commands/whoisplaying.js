@@ -16,7 +16,7 @@ async function command(params, message) {
     else {
         let res = "List of players playing";
         for (let i = 0; i < playing.length; i++) {
-            res = res + "\n" + playing[i].username + "#" + playing[i].discriminator + " is playing " + playing[i].presence.game.name;
+            res = res + "\n**" + playing[i].username + "#" + playing[i].discriminator + "** is playing **" + playing[i].presence.game.name + "**";
         }
         message.channel.send(res, { split: true })
     }
