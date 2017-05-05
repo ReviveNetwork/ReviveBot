@@ -13,7 +13,12 @@ async function command(params, message) {
             let url = `https://cdn.discordapp.com/emojis/${params[0].match(/(\d+)/)[1]}.png`;
             message.channel.send('', { file: url });
         } else {
-            let em = await request('https://api.github.com/emojis');
+            let em = await request({
+                uri: 'https://api.github.com/emojis',
+                headers: {
+                    'User-Agent': 'Revive-Bot'
+                }
+            });
             em = JSON.parse(em);
             let url = em[params[0]];
             if (url)
