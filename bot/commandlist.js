@@ -28,5 +28,6 @@ module.exports = {
     "cookie": "cookie",
     "request": "request",
     "status": "status",
-    "quote": "quote"
+    "quote": "quote",
+    "emojify": "emojify"
 }
