@@ -9,7 +9,7 @@ const nemoji = require('node-emoji');
 async function command(params, message) {
     let res = "";
     for (let i = 0; i < params.length; i++) {
-        let emoji = nemoji.search(params[i]).shift();
+        let emoji = nemoji.search(params[i]).shift().emoji;
         console.log(emoji);
         if (!emoji)
             emoji = bot.emojis.find('name', ':' + params[i] + ":");
