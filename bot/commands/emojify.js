@@ -12,10 +12,10 @@ async function command(params, message) {
         let emoji = nemoji.search(params[i]).shift();
         console.log(emoji);
         if (!emoji)
-            emoji = bot.emojis.find('name', ":" + params[i]) + ":";
+            emoji = bot.emojis.find('name', ":" + params[i] + ":");
         else
             emoji = emoji.emoji;
-        if (emoji)
+        if (emoji && emoji!=null)
             res = res + " " + emoji.toString();
         else
             res = res + " " + params[i];
