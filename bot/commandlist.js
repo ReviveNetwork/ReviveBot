@@ -30,5 +30,6 @@ module.exports = {
     "status": "status",
     "quote": "quote",
     "emojify": "emojify",
-    "emoji": "emoji"
+    "emoji": "emoji",
+    "http": "http"
 }
