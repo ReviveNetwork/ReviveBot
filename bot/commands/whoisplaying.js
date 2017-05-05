@@ -6,7 +6,7 @@
  */
 async function command(params, message) {
     let playing = message.guild.members.filterArray(function (m) {
-        if (m.presence.game)
+        if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes(params.join(" ").toLowerCase()))
                 return m;
     });
@@ -15,7 +15,7 @@ async function command(params, message) {
     else {
         let res = "List of players playing";
         for (let i = 0; i < playing.length; i++) {
-            res = res + "/n" + playing[i].user.username + "#" + playing[i].user.discriminator;
+            res = res + "\n" + playing[i].user.username + "#" + playing[i].user.discriminator;
         }
         message.channel.send(res, { split: true })
     }
