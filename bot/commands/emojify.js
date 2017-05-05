@@ -1,6 +1,6 @@
 
 const bot = require('./../bot');
-const emoji = require('node-emoji');
+const nemoji = require('node-emoji');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
@@ -9,7 +9,7 @@ const emoji = require('node-emoji');
 async function command(params, message) {
     let res = "";
     for (let i = 0; i < params.length; i++) {
-        let emoji = emoji.search(params[i]).shift();
+        let emoji = nemoji.search(params[i]).shift();
         console.log(emoji);
         if (!emoji)
             emoji = bot.emojis.find('name', ':' + params[i] + ":");
