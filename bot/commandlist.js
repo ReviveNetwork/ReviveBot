@@ -31,5 +31,6 @@ module.exports = {
     "quote": "quote",
     "emojify": "emojify",
     "emoji": "emoji",
-    "http": "http"
+    "http": "http",
+    "8ball": "8ball"
 }
