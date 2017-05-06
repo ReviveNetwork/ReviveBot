@@ -33,7 +33,7 @@ module.exports = async function (user, noDM) {
             if (!member.roles.get('184676864630063104'))
                 await member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
         }
-        if(guild.me.highestRole.comparePositionTo(member.highestRole))
+        if(guild.me.highestRole.comparePositionTo(member.highestRole)>1)
             await member.setNickname(info.username);
         return info;
     });
