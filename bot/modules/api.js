@@ -32,6 +32,7 @@ app.get('/reverse/:id', async function (req, res) {
     result.is_mod = roles.includes("184676864630063104");
     result.is_admin = roles.includes("200849956796497920");
     res.json(result);
+    res.end();
 });
 var listener = app.listen(8080, function () {
     console.log('API now running on port: ' + listener.address().port);
