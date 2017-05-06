@@ -4,6 +4,7 @@ const settings = require('./../settings.json');
 const modules = require('./modules.js');
 const Message = require('./../orm/Message')
 const commands = require('./commands');
+const request = require('request-promise-native');
 let lock = false;
 bot.on('error', (err) => {
     /**
@@ -69,4 +70,10 @@ bot.on('disconnect', function(event) {
 
 bot.on('ready', () => {
     console.log("ReviveBot Ready");
-})
+});
+bot.on("guildMemberUpdate", (member) => {
+    var user = member.user;
+    if (member.guild.name.toLowerCase().includes('revive')) {
+        await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
+    }
+});
