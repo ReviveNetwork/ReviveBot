@@ -29,10 +29,6 @@ module.exports = async function (user, noDM) {
             if (member.roles.get("273105185566359562"))
                 await member.removeRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role removed: donators'));
         }
-        if (info.is_mod || (info.usergroup == 8)) {
-            if (!member.roles.get('184676864630063104'))
-                await member.addRole(guild.roles.get('184676864630063104')).then(user.sendMessage('Role added: moderator'));
-        }
         if(guild.me.highestRole.comparePositionTo(member.highestRole)>1)
             await member.setNickname(info.username);
         return info;
