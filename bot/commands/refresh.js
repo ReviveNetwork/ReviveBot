@@ -31,7 +31,7 @@ async function command(params, message) {
         return true;
     }
     else {
-        const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + u.id)
+        const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + message.author.id)
         if (r == "ok")
             await message.channel.sendMessage(u.toString() + " sucessfully linked");
         else
