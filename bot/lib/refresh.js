@@ -8,7 +8,7 @@ module.exports = async function (user, noDM) {
     //console.log(user);
     var id = user.id;
     console.log(id);
-    return request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id).then(async function (body) {
+    return request("http://localhost/v0/discord/userinfo/" + id).then(async function (body) {
         console.log(body);
         try { var info = JSON.parse(body); }
         catch (e) {
