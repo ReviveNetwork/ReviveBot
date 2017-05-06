@@ -28,6 +28,10 @@ app.get('/reverse/:id', async function (req, res) {
     })
     let result = {};
     let r = await refreshUser(user);
+    if (!r) {
+        res.json({ "error": "cant link" });
+        return res.end();
+    }
     result.name = r.username;
     result.is_mod = roles.includes("184676864630063104");
     result.is_admin = roles.includes("200849956796497920");
