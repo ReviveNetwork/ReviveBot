@@ -26,7 +26,7 @@ async function command(params, message) {
     console.log(em);
     if (attach)
         attach = attach.url;
-    message.channel.sendEmbed(em, { file: attach }).catch(console.error);
+    message.channel.send((params[1])?(message.author.toString()+": "+params.slice(1).join(" ")):(""), { embed:em , file: attach }).catch(console.error);
 }
 /**
  * description of the command
