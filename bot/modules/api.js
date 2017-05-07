@@ -34,7 +34,7 @@ app.get('/reverse/:id', async function (req, res) {
     }
     result.name = r.username;
     result.is_mod = roles.includes("184676864630063104");
-    result.is_admin = roles.includes("200849956796497920");
+    result.is_admin = roles.includes("200849956796497920") || roles.includes("184684916833779712");
     res.json(result);
     res.end();
 });
