@@ -17,7 +17,7 @@ async function command(params, message) {
     }
     else if (params[0].startsWith('-'))
     {
-        params[0] = parseInt(params[0]);
+        params[0] = parseInt(params[0].substring(1));
         m = await message.channel.fetchMessages({limit: params[0]});
         m = m.first();
     }
