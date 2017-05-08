@@ -15,11 +15,17 @@ async function command(params, message) {
         let ch = bot.channels.get(m.attributes.channel);
         m = await ch.fetchMessage(m.attributes.messageID);
     }
+    else if (params[0].startsWith('-'))
+    {
+        params[0] = parseInt(params[0]);
+        m = await message.channel.fetchMessages({limit: params[0]});
+        m = m.first();
+    }
     else {
         m = await message.channel.fetchMessage(params[0]);
-        if (!m)
-            return message.reply("message not available");
     }
+    if (!m)
+        return message.reply("message not available");
     console.log("fetching : " + m.id);
     let attach = m.attachments.first();
     let em = m2e(m);
