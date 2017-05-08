@@ -19,7 +19,7 @@ async function command(params, message) {
     {
         params[0] = parseInt(params[0].substring(1));
         m = await message.channel.fetchMessages({limit: params[0]});
-        m = m.first();
+        m = m.last();
     }
     else {
         m = await message.channel.fetchMessage(params[0]);
