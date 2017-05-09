@@ -9,7 +9,7 @@ async function command(params, message) {
     var msg = params.join(" ");
     if (msg.startsWith('{'))
         msg = JSON.parse(msg)
-    message.channel.sendCode('javascript', await request(msg));
+    message.channel.send(await request(msg), { code: 'javascript' });
 }
 /**
  * description of the command

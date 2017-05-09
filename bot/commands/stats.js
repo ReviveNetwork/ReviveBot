@@ -19,7 +19,7 @@ async function command(params, message) {
         if (role.name != '@everyone')
             embed.addField(role.name + ": ", role.members.size, true);
     });
-    return message.channel.sendEmbed(embed).catch(message.channel.sendMessage);
+    return message.channel.send('', { embed: embed }).catch(message.channel.send);
 }
 /**
  * description of the command
