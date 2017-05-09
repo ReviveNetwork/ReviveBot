@@ -28,11 +28,11 @@ async function command(params, message) {
             }
         }
         if (files.length === 0)
-            return await message.channel.sendMessage("Invalid Emoji");
+            return await message.channel.send("Invalid Emoji");
         else
-            return await message.channel.send((files.length>1)?('Emojis'):(""), { files: files });
+            return await message.channel.send((files.length > 1) ? ('Emojis') : (""), { files: files });
     } else
-        return await message.channel.sendMessage('Not enough arguments!');
+        return await message.channel.send('Not enough arguments!');
 
 }
 /**

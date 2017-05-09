@@ -7,41 +7,40 @@ const streamOptions = {
     volume: 0.5
 };
 let guilds = {};
-const Guild = (guild)=>
-    {
-        let v = guild.channels.filter((guildch) => {
-            if (guildch.type === 'voice')
-                return guildch;
-        }).find((ch) => {
-            if (ch.name.toLowerCase().includes("music"))
-                return ch;
-        });
-        let t = guild.channels.filter((guildch) => {
-            if (guildch.type === 'text')
-                return guildch;
-        }).find((ch) => {
-            if (ch.name.toLowerCase().includes("music"))
-                return ch;
-        });
-        return {
-            voice_channel: v,
-            guild: guild.id,
-            text_channel: t,
-            voice_handler: null,
-            voice_connection: null,
-            now_playing_data: {},
-            queue: [],
-            stopped: false,
-            inform_np: true
-            };
+const Guild = (guild) => {
+    let v = guild.channels.filter((guildch) => {
+        if (guildch.type === 'voice')
+            return guildch;
+    }).find((ch) => {
+        if (ch.name.toLowerCase().includes("music"))
+            return ch;
+    });
+    let t = guild.channels.filter((guildch) => {
+        if (guildch.type === 'text')
+            return guildch;
+    }).find((ch) => {
+        if (ch.name.toLowerCase().includes("music"))
+            return ch;
+    });
+    return {
+        voice_channel: v,
+        guild: guild.id,
+        text_channel: t,
+        voice_handler: null,
+        voice_connection: null,
+        now_playing_data: {},
+        queue: [],
+        stopped: false,
+        inform_np: true
     };
+};
 exports.play = function (url, message) {
     let member = message.member;
     if (!url.includes("http")) return;
-    if(!guilds[message.guild.id])
+    if (!guilds[message.guild.id])
         guilds[message.guild.id] = Guild(message.guild);
     console.log("QUEUE size" + guilds[message.guild.id].queue.length);
-    if(!guilds[message.guild.id].voice_channel)
+    if (!guilds[message.guild.id].voice_channel)
         return messsage.reply("This guild doesnt have a music channel");
     member.setVoiceChannel(guilds[message.guild.id].voice_channel).catch(() => {
         message.reply("JOIN A VOICE CHANNEL");
@@ -139,7 +138,7 @@ function add_to_queue(url, message) {
 
 function play_next_song(g) {
     if (g.queue.length == 0) {
-        g.text_channel.sendMessage("Queue Empty");
+        g.text_channel.send("Queue Empty");
         return "Queue Empty";
     }
     var url = g.queue[0]["video"];
@@ -149,7 +148,7 @@ function play_next_song(g) {
     g.now_playing_data["user"] = user;
 
     if (g.inform_np) {
-        g.text_channel.sendMessage('Now playing: <' + url + '> (requested by ' + user + ')');
+        g.text_channel.send('Now playing: <' + url + '> (requested by ' + user + ')');
     }
 
     var audio_stream = ytdl(url);

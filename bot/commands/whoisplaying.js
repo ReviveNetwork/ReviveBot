@@ -12,7 +12,7 @@ async function command(params, message) {
                 return m;
     });
     if (params.length < 1)
-        return await message.channel.sendMessage(playing.length + " are playing right now");
+        return await message.channel.send(playing.length + " are playing right now");
     else {
         let res = "List of players playing";
         for (let i = 0; i < playing.length; i++) {

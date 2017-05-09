@@ -15,12 +15,12 @@ async function command(params, message) {
             emoji = bot.emojis.find('name', ":" + params[i] + ":");
         else
             emoji = emoji.emoji;
-        if (emoji && emoji!=null)
+        if (emoji && emoji != null)
             res = res + " " + emoji.toString();
         else
             res = res + " " + params[i];
     }
-    message.channel.sendMessage(res);
+    message.channel.send(res);
 }
 /**
  * description of the command

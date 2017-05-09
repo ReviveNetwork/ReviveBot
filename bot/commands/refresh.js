@@ -11,9 +11,9 @@ async function command(params, message) {
         message.mentions.users.map(async function (u) {
             const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + u.id)
             if (r == "ok")
-                await message.channel.sendMessage(u.toString() + " sucessfully linked");
+                await message.channel.send(u.toString() + " sucessfully linked");
             else
-                await message.channel.sendMessage(u.toString() + " unable to be linked");
+                await message.channel.send(u.toString() + " unable to be linked");
         });
         if (!settings.owners.includes(message.author.id)) return;
         message.mentions.roles.map(function (r) {
@@ -23,9 +23,9 @@ async function command(params, message) {
                 console.log("refreshing " + u.username);
                 const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + u.id)
                 if (r == "ok")
-                    await message.channel.sendMessage(u.toString() + " sucessfully linked");
+                    await message.channel.send(u.toString() + " sucessfully linked");
                 else
-                    await message.channel.sendMessage(u.toString() + " unable to be linked");
+                    await message.channel.send(u.toString() + " unable to be linked");
             })
         });
         return true;
@@ -33,9 +33,9 @@ async function command(params, message) {
     else {
         const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + message.author.id)
         if (r == "ok")
-            await message.channel.sendMessage(message.author.toString() + " sucessfully linked");
+            await message.channel.send(message.author.toString() + " sucessfully linked");
         else
-            await message.channel.sendMessage(message.author.toString() + " unable to be linked");
+            await message.channel.send(message.author.toString() + " unable to be linked");
     }
 }
 /**

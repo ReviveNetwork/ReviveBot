@@ -47,7 +47,7 @@ const cmd = {
     },
     playnext: function (message, user, channel) {
         if (voice_handler !== null) {
-           bot.channels.get(channel).sendMessage("Skipping..");
+            bot.channels.get(channel).send("Skipping..");
             voice_handler.end();
         } else {
             play_next_song();
@@ -55,32 +55,32 @@ const cmd = {
     },
     clear: function (message, user, channel) {
         if (!guild.member(bot.users.get(user)).hasPermission("MOVE_MEMBERS")) {
-            bot.channels.get(channel).sendMessage("Not Worthy");
+            bot.channels.get(channel).send("Not Worthy");
             return;
         }
         queue = [];
 
         if (stopped) {
-            bot.channels.get(channel).sendMessage("Playback is already stopped!");
+            bot.channels.get(channel).send("Playback is already stopped!");
         } else {
             if (voice_handler !== null) {
                 voice_handler.end();
             }
             stopped = true;
-            bot.channels.get(channel).sendMessage("Stopping!");
+            bot.channels.get(channel).send("Stopping!");
         }
         voice_connection.disconnect();
         setTimeout(() => process.exit(), 1000);
     },
     pause: function (message, user, channel) {
         if (stopped) {
-            bot.channels.get(channel).sendMessage("Playback is already paused!");
+            bot.channels.get(channel).send("Playback is already paused!");
         } else {
             stopped = true;
             if (voice_handler !== null) {
                 voice_handler.end();
             }
-            bot.channels.get(channel).sendMessage("pausing!");
+            bot.channels.get(channel).send("pausing!");
         }
     },
     resume: function (message) {
@@ -90,15 +90,15 @@ const cmd = {
                 play_next_song();
             }
         } else {
-            bot.channels.get(channel).sendMessage("Playback is already running");
+            bot.channels.get(channel).send("Playback is already running");
         }
     },
     setvol: function (vol, user, channel) {
         vol = parseInt(vol);
         if (vol > 1 || vol < 0)
-            bot.channels.get(channel).sendMessage("Invalid Volume. Volume Range(0-1)");
+            bot.channels.get(channel).send("Invalid Volume. Volume Range(0-1)");
         voice_handler.setVolume(vol);
-        bot.channels.get(channel).sendMessage("Volume Has been set");
+        bot.channels.get(channel).send("Volume Has been set");
     },
     queue: function (message, user, channel) {
         var response = "";
@@ -111,7 +111,7 @@ const cmd = {
                     + queue[i]["user"] + ")\n";
             }
         }
-        bot.channels.get(channel).sendMessage(response);
+        bot.channels.get(channel).send(response);
     }
 }
 /**
@@ -140,7 +140,7 @@ function add_to_queue(url, user, channel) {
         video: url,
         user: bot.users.get(user).username
     });
-    bot.channels.get(channel).sendMessage('added to the queue.');
+    bot.channels.get(channel).send('added to the queue.');
     if (!stopped
         && !is_bot_playing()
         && queue.length === 1) {
@@ -150,7 +150,7 @@ function add_to_queue(url, user, channel) {
 
 function play_next_song() {
     if (queue.length == 0) {
-        text_channel.sendMessage("Queue Empty");
+        text_channel.send("Queue Empty");
         return "Queue Empty";
     }
     var url = queue[0]["video"];
@@ -160,7 +160,7 @@ function play_next_song() {
     now_playing_data["user"] = user;
 
     if (inform_np) {
-        text_channel.sendMessage('Now playing: <' + url + '> (requested by ' + user + ')');
+        text_channel.send('Now playing: <' + url + '> (requested by ' + user + ')');
     }
 
     var audio_stream = ytdl(url);
@@ -187,6 +187,6 @@ function is_bot_playing() {
     return voice_handler !== null;
 }
 process.on('error', process.send);
-var cleanExit = function() { process.exit() };
+var cleanExit = function () { process.exit() };
 process.on('SIGINT', cleanExit); // catch ctrl-c
 process.on('SIGTERM', cleanExit); // catch kill

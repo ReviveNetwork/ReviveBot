@@ -10,10 +10,10 @@ async function command(params, message) {
     let nick = params[0];
     bf2142.getPlayers(nick).then(plist => {
         if (plist.length == 0) {
-            message.channel.sendMessage("Player not found");
+            message.channel.send("Player not found");
             return;
         }
-        p2str(plist[0], "bf2142").then(pl => message.channel.sendMessage(pl).then(msg => {
+        p2str(plist[0], "bf2142").then(pl => message.channel.send(pl).then(msg => {
             if (plist.length === 1) return;
             msg.react('▶').then(
                 msg.react('◀')).then(
@@ -21,7 +21,7 @@ async function command(params, message) {
                 msg.react('⏪'))
             bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2142"), arr: plist, index: 0 });
         }));
-    }).catch(message.channel.sendMessage);
+    }).catch(message.channel.send);
 }
 /**
  * description of the command

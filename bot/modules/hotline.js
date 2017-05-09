@@ -6,10 +6,10 @@ bot.on('message', message => {
     if (message.attachments.size > 0)
     { attach = '\n' + message.attachments.first().url; }
     if (message.channel.id == '271350052188979201') {
-        bot.channels.get('271349742099759104').sendMessage("**" + message.author.username + ":** " + message.cleanContent + attach)
+        bot.channels.get('271349742099759104').send("**" + message.author.username + ":** " + message.cleanContent + attach)
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     } else if (message.channel.id == '271349742099759104') {
-        bot.channels.get('271350052188979201').sendMessage("**" + message.author.username + ":** " + message.cleanContent + attach)
+        bot.channels.get('271350052188979201').send("**" + message.author.username + ":** " + message.cleanContent + attach)
             .then(msg => messageDB.data.push({ oldMessage: message.id, newMessage: msg.id, channel: msg.channel.id }));
     }
 });

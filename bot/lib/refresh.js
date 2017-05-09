@@ -15,7 +15,7 @@ module.exports = async function (user, noDM) {
             throw e;
         }
         if (info.hasOwnProperty('error') && !noDM) {
-            user.sendMessage("To link your discord account with your battlelog account follow the link given below\n"
+            user.send("To link your discord account with your battlelog account follow the link given below\n"
                 + "https://battlelog.co/discord_link.php");
             console.log("User " + user.username + " Not Linked. DMing user to link now");
             return false;
@@ -24,12 +24,12 @@ module.exports = async function (user, noDM) {
         //member.removeRole(guild.roles.find("name", "members"));
         if (info.is_donator) {
             if (!member.roles.get("273105185566359562"))
-                await member.addRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role added: donators'));
+                await member.addRole(guild.roles.get("273105185566359562")).then(user.send('Role added: donators'));
         } else {
             if (member.roles.get("273105185566359562"))
-                await member.removeRole(guild.roles.get("273105185566359562")).then(user.sendMessage('Role removed: donators'));
+                await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
         }
-        if(guild.me.highestRole.comparePositionTo(member.highestRole)>1)
+        if (guild.me.highestRole.comparePositionTo(member.highestRole) > 1)
             await member.setNickname(info.username);
         return info;
     });

@@ -59,7 +59,7 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", (member) => {
     var user = member.user;
     if (member.guild.name.toLowerCase().includes('revive')) {
-        user.sendMessage("Welcome to the Revive Network");
+        user.send("Welcome to the Revive Network");
         refresh(user);
     }
 });/**
@@ -71,7 +71,7 @@ bot.on('disconnect', function(event) {
 bot.on('ready', () => {
     console.log("ReviveBot Ready");
 });
-bot.on("guildMemberUpdate", async function (member){
+bot.on("guildMemberUpdate", async function (member) {
     var user = member.user;
     if (member.guild.name.toLowerCase().includes('revive')) {
         await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
