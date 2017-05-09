@@ -19,7 +19,7 @@ async function command(params, message) {
         const files = [];
         for (let i = 0; i < params.length; i++) {
             if (/\<\:.+\:\d+\>/.test(params[i])) {
-                files.push({ attachment: `https://cdn.discordapp.com/emojis/${params[i].match(/(\d+)/)[1]}.png`, name: "emoji.png" });
+                files.push({ attachment: `https://cdn.discordapp.com/emojis/${params[i].match(/(\d+)(?!.*\d)/)[1]}.png`, name: "emoji.png" });
 
             } else {
                 let url = em[params[i]];
