@@ -20,7 +20,7 @@ async function command(params, message) {
     let all = false;
     if (id === message.author.id) all = true;
     let arr = [];
-    request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id).catch(err => { console.log(err); message.channel.send('api down') }).then(body => {
+    let body = await request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
         try { body = JSON.parse(body) } catch (e) { console.log("error: " + body); }
         console.log(body);
         if (body.error) {
@@ -61,7 +61,6 @@ async function command(params, message) {
                 .setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
             await message.channel.send('', { embed: embed });
         }
-    });
 }
 /**
  * description of the command
