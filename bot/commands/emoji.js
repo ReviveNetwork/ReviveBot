@@ -1,6 +1,5 @@
 
 const bot = require('./../bot');
-const nemoji = require('node-emoji');
 const request = require('request-promise-native');
 const e = require('./../../data/emoji.json');
 /**
@@ -23,11 +22,13 @@ async function command(params, message) {
                 files.push({ attachment: `https://cdn.discordapp.com/emojis/${params[i].match(/(\d+)(?!.*\d)/)[1]}.png`, name: "emoji.png" });
 
             } else {
-                let url = em[params[i]]
+                let url = em[params[i]];
+                console.log(url);
                 if (!url) {
                     url = e[params[i]];
                     if (url)
                         url = em[url];
+                    console.log(url);
                 }
                 if (url)
                     files.push({ attachment: url, name: params[i] + ".png" });
