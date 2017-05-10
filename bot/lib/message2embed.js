@@ -4,7 +4,7 @@ module.exports = (message, hotline) => {
     const embed = new Discord.RichEmbed();
     embed.setAuthor(message.author.username, message.author.avatarURL)
     if (!hotline)
-        embed.setTitle(message.channel.name + " in " + message.guild.name)
+        embed.setTitle((message.guild)?(message.channel.name + " in " + message.guild.name):(" in a DM with " + message.channel.recipient.tag));
     if (!message.content == "")
         embed.setDescription(message.cleanContent);
     else
