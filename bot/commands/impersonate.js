@@ -6,12 +6,12 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     let user = bot.users.random();
-    let ava = bot.user.displayAvatarURL;
-    await bot.user.setAvatar(user.displayAvatarURL);
+    //let ava = bot.user.displayAvatarURL;
+    //await bot.user.setAvatar(user.displayAvatarURL);
     await message.guild.me.setNickname(user.username);
     await message.channel.send(params.join(" "));
     await message.guild.me.setNickname(bot.user.username);
-    await bot.user.setAvatar(ava);
+    //await bot.user.setAvatar(ava);
 }
 /**
  * description of the command
