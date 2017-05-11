@@ -46,4 +46,10 @@ bot.on('message', message => {
     else if (message.includes('how') && message.includes('report')) {
         channel.send('Follow this article \n https://battlelog.co/post.php?id=15931');
     }
+    else if (message.includes('patch') && message.includes('help')) {
+        channel.send('Follow this post \n https://battlelog.co/post.php?id=19446#p68847');
+    }
+    else if (message.includes('connect') && message.includes('blue')) {
+        channel.send('It seems your using the old launcher. Download the new launcher using this link \n http://download.bf2.us/launcher-release/Setup.exe',{files: ['https://battlelog.co/img/revive-launcher.png']});
+    }
 });
