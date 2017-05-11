@@ -33,5 +33,6 @@ module.exports = {
     "emoji": "emoji",
     "http": "http",
     "8ball": "8ball",
-    "whoisplaying": "whoisplaying"
+    "whoisplaying": "whoisplaying",
+    "impersonate":"impersonate"
 }
