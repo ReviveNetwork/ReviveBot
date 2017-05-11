@@ -15,10 +15,10 @@ async function command(params, message) {
         .addField('Members: ', guild.memberCount, true)
         .addField('Online: ', guild.presences.map(p => p.status != 'offline').length, true)
         .addField('Region: ', guild.region, true);
-    let r ='**Roles**:\n'
+    let r ='__**Roles**__:\n'
     guild.roles.map((role) =>{
 		if(role.name !='@everyone')
-		r = r + role.name+": "+role.members.size+'\n';
+		r = r + "**"+role.name+"**: "+role.members.size+'\n';
 	});
 	embed.setDescription (r);
     return message.channel.send('', { embed: embed }).catch(message.channel.send);
