@@ -23,6 +23,11 @@ app.get('/reverse/:id', async function (req, res) {
     const user = bot.users.get(req.params.id);
     const guild = bot.guilds.get("184536578654339072");
     const member = guild.member(user);
+    if(!member)
+    {
+        res.json({ "error": "cant link" });
+        return res.end();
+    }
     const roles = member.roles.map((r) => {
         return r.id;
     })
