@@ -9,7 +9,10 @@ async function command(params, message) {
     //let ava = bot.user.displayAvatarURL;
     //await bot.user.setAvatar(user.displayAvatarURL);
     await message.guild.me.setNickname(user.username);
-    await message.channel.send(params.join(" "));
+    if(params.length<1)
+        await message.channel.send("No argument provided",{code:'error'});
+    else
+        await message.channel.send(params.join(" "));
     await message.guild.me.setNickname(bot.user.username);
     //await bot.user.setAvatar(ava);
 }
