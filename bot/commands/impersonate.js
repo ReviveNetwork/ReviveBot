@@ -9,8 +9,10 @@ async function command(params, message) {
     if(message.mentions.users.first())
     {
         user = message.mentions.users.first();
-        let index = params.indexOf(message.mentions.users.first().toString());
-        params.splice(index,1);
+        params = params.filter(function(p){
+            if(!p.includes(user.id))
+                return p;
+        })
     }
     //let ava = bot.user.displayAvatarURL;
     //await bot.user.setAvatar(user.displayAvatarURL);
