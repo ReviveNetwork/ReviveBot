@@ -6,6 +6,12 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     let user = bot.users.random();
+    if(message.mentions.users.first())
+    {
+        user = message.mentions.users.first();
+        let index = params.indexOf(message.mentions.users.first().toString());
+        params.splice(index,1);
+    }
     //let ava = bot.user.displayAvatarURL;
     //await bot.user.setAvatar(user.displayAvatarURL);
     await message.guild.me.setNickname(user.username);
