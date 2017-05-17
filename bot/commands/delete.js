@@ -38,7 +38,7 @@ async function command(params, message) {
     if(user ===null)
     {
         await channel.bulkDelete(limit);
-        return await message.channel.send("Deleted "+messages.size +" messages");
+        return await message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
     }
     else
     {
@@ -49,8 +49,9 @@ async function command(params, message) {
         if(messages.size < 2)
             return message.channel.send("Deleted 0 messages");
         await channel.bulkDelete();
-        return await message.channel.send("Deleted "+messages.size +" messages");
+        return message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
     }
+    await message.delete(10000);
 }
 /**
  * description of the command
