@@ -34,5 +34,6 @@ module.exports = {
     "http": "http",
     "8ball": "8ball",
     "whoisplaying": "whoisplaying",
-    "impersonate":"impersonate"
+    "impersonate":"impersonate",
+    "delete":"delete"
 }
