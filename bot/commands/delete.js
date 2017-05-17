@@ -48,7 +48,7 @@ async function command(params, message) {
         });
         if(messages.size < 2)
             return message.channel.send("Deleted 0 messages");
-        await channel.bulkDelete();
+        await channel.bulkDelete(messages);
         return message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
     }
     await message.delete(10000);
