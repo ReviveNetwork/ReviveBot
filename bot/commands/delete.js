@@ -30,9 +30,9 @@ async function command(params, message) {
     }
     if(params[0] && !isNaN(parseInt(params[0])) )
       limit = parseInt(params[0]);
-    let messages = channel.fetchMessages({limit:limit});
+    let messages = await channel.fetchMessages({limit:limit});
     if(user ===null)
-      return await channel.bulkDelete(messages);
+      return await channel.bulkDelete(limit);
     else
     {
       return await channel.bulkDelete(await messages.filter(function(m){
