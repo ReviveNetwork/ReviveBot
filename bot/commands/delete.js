@@ -30,15 +30,26 @@ async function command(params, message) {
     }
     if(params[0] && !isNaN(parseInt(params[0])) )
       limit = parseInt(params[0]);
+    if(limit>100)
+        return await message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100");
     let messages = await channel.fetchMessages({limit:limit});
+    if(messages.size < 2)
+            return message.channel.send("Deleted 0 messages");
     if(user ===null)
-      return await channel.bulkDelete(limit);
+    {
+        await channel.bulkDelete(limit);
+        return await message.channel.send("Deleted "+messages.size +" messages");
+    }
     else
     {
-      return await channel.bulkDelete(await messages.filter(function(m){
-        if(m.author.id === user.id)
-          return m;
-      }));
+        messages = await messages.filter(function(m){
+            if(m.author.id === user.id)
+                return m;
+        });
+        if(messages.size < 2)
+            return message.channel.send("Deleted 0 messages");
+        await channel.bulkDelete();
+        return await message.channel.send("Deleted "+messages.size +" messages");
     }
 }
 /**
