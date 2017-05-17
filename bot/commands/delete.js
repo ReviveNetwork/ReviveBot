@@ -6,9 +6,10 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-        message.channel.send("You aren't Worthy");
+        message.channel.send("You aren't Worthy").then(m =>m.delete(10000));
         return;
     }
+    await message.delete(10000);
     let user = null;
     let channel = message.channel;
     let limit = 10;
@@ -31,14 +32,14 @@ async function command(params, message) {
     if(params[0] && !isNaN(parseInt(params[0])) )
       limit = parseInt(params[0]);
     if(limit>100)
-        return await message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100");
+        return message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100").then(m =>m.delete(10000));
     let messages = await channel.fetchMessages({limit:limit});
     if(messages.size < 2)
-            return message.channel.send("Deleted 0 messages");
+            return message.channel.send("Deleted 0 messages").then(m =>m.delete(10000));
     if(user ===null)
     {
         await channel.bulkDelete(limit);
-        return await message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
+        return message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
     }
     else
     {
@@ -47,11 +48,10 @@ async function command(params, message) {
                 return m;
         });
         if(messages.size < 2)
-            return message.channel.send("Deleted 0 messages");
+            return message.channel.send("Deleted 0 messages").then(m =>m.delete(10000));
         await channel.bulkDelete(messages);
         return message.channel.send("Deleted "+messages.size +" messages").then(m =>m.delete(10000));
     }
-    await message.delete(10000);
 }
 /**
  * description of the command
