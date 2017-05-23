@@ -35,7 +35,7 @@ async function command(params, message) {
                     let ecache = await request("https://blob-cache.herokuapp.com/");
                     ecache =  JSON.parse(ecache);
                     if(ecache[params[i]])
-                       url = "https://cdn.discordapp.com/emojis/"+ecache[params[i]];
+                       url = "https://cdn.discordapp.com/emojis/"+ecache[params[i]]+".png";
                 }
                 if (url)
                     files.push({ attachment: url, name: params[i] + ".png" });
