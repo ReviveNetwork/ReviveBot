@@ -30,6 +30,13 @@ async function command(params, message) {
                         url = em[url];
                     console.log(url);
                 }
+                if (!url)
+                {
+                    let ecache = await request("https://blob-cache.herokuapp.com/");
+                    ecache =  JSON.parse(ecache);
+                    if(ecache[params[i]])
+                       url = "https://cdn.discordapp.com/emojis/"+ecache[params[i]];
+                }
                 if (url)
                     files.push({ attachment: url, name: params[i] + ".png" });
             }
