@@ -71,9 +71,14 @@ bot.on('disconnect', function(event) {
 bot.on('ready', () => {
     console.log("ReviveBot Ready");
 });
-bot.on("guildMemberUpdate", async function (member) {
+bot.on("guildMemberUpdate", async function (member, nmember) {
     var user = member.user;
-    if (member.guild.name.toLowerCase().includes('revive')) {
-        await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
+    if (member.guild && (member.guild.id === "184536578654339072")) {
+        if(!oldMem.roles.has("273105185566359562") && newMem.roles.has("273105185566359562")) return;
+        if(!oldMem.roles.has("275317218911322112") && newMem.roles.has("275317218911322112")) return;
+        if((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920"))|| (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104"))|| (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523")))
+        {
+            await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
+        }
     }
 });
