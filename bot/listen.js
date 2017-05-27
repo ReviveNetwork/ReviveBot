@@ -56,7 +56,7 @@ bot.on('message', (message) => {
 });
 bot.on('lock', () => { lock = true; });
 bot.on('unlock', () => { lock = false; });
-bot.on("guildMemberAdd", (member) => {
+bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.name.toLowerCase().includes('revive')) {
         user.send("Welcome to the Revive Network");
