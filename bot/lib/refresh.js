@@ -21,7 +21,7 @@ module.exports = async function (user, noDM) {
             return false;
         }
         if(bot.guilds.get("184536578654339072").roles.get("317854639431221248"))
-            await message.member.removeRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+            await member.removeRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
         await member.addRole('275317218911322112');
         //member.removeRole(guild.roles.find("name", "members"));
         if (info.is_donator) {
