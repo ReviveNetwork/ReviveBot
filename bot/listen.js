@@ -62,6 +62,7 @@ bot.on("guildMemberAdd", async function (member) {
         user.send("Welcome to the Revive Network");
         if(! await refresh(user))
         {
+            bot.channels.get("317859245309689856").send(user.toString()+"Type `accept` to continue").delete(3000);
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
         }
     }
