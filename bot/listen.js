@@ -60,7 +60,10 @@ bot.on("guildMemberAdd", (member) => {
     var user = member.user;
     if (member.guild.name.toLowerCase().includes('revive')) {
         user.send("Welcome to the Revive Network");
-        refresh(user);
+        if(! await refresh(user))
+        {
+            await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+        }
     }
 });/**
 bot.on('disconnect', function(event) {
