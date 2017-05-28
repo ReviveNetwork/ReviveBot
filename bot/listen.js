@@ -58,12 +58,28 @@ bot.on('lock', () => { lock = true; });
 bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
-    if (member.guild.name.toLowerCase().includes('revive')) {
+    if (member.guild.id === "184536578654339072") {
         user.send("Welcome to the Revive Network");
-        if(! await refresh(user))
-        {
-            bot.channels.get("317859245309689856").send(user.toString()+"Type `accept` to continue").delete(3000);
+        if (! await refresh(user)) {
+            bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute").delete(60000);
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+            // Await !vote messages
+            const filter = (message) => {
+                if (message.author.id === member.user.id)
+                    if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
+                        await message.member.removeRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+                        return message;
+                    }
+            }
+            // Errors: ['time'] treats ending because of the time limit as an error
+            bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                .then(collected => {
+                    if (collected.size < 1) {
+                        member.kick();
+                    }
+                    return collected;
+                })
+                .then(collected => collected.map((m) => m.delete()));
         }
     }
 });/**
@@ -79,10 +95,9 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
-        if(!oldMem.roles.has("273105185566359562") && newMem.roles.has("273105185566359562")) return;
-        if(!oldMem.roles.has("275317218911322112") && newMem.roles.has("275317218911322112")) return;
-        if((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920"))|| (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104"))|| (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523")))
-        {
+        if (!oldMem.roles.has("273105185566359562") && newMem.roles.has("273105185566359562")) return;
+        if (!oldMem.roles.has("275317218911322112") && newMem.roles.has("275317218911322112")) return;
+        if ((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920")) || (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104")) || (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523"))) {
             await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
         }
     }

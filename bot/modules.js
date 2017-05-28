@@ -7,4 +7,4 @@ require('./modules/help');
 require('./modules/hotline');
 //require('./modules/logs');
 require('./modules/api');
-require('./modules/accept');
+//require('./modules/accept');
