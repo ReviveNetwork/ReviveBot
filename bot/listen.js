@@ -67,7 +67,7 @@ bot.on("guildMemberAdd", async function (member) {
             const filter = (message) => {
                 if (message.author.id === member.user.id)
                     if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
-                        await message.member.removeRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+                        await message.member.removeRole("317854639431221248");
                         return message;
                     }
             }
