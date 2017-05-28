@@ -62,26 +62,28 @@ bot.on("guildMemberAdd", async function (member) {
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
-            const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute");
-            await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
-            // Await !vote messages
-            const filter = (message) => {
-                if (message.author.id === member.user.id)
-                    if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
-                        message.member.removeRole("317854639431221248");
-                        return message;
-                    }
-            }
-            // Errors: ['time'] treats ending because of the time limit as an error
-            bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
-                .then(collected => {
-                    ma.delete();
-                    if (collected.size < 1) {
-                        member.kick();
-                    }
-                    return collected;
-                })
-                .then(collected => collected.map((m) => m.delete()));
+            setTimeout(async function () {
+                const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute");
+                await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
+                // Await !vote messages
+                const filter = (message) => {
+                    if (message.author.id === member.user.id)
+                        if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
+                            message.member.removeRole("317854639431221248");
+                            return message;
+                        }
+                }
+                // Errors: ['time'] treats ending because of the time limit as an error
+                bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                    .then(collected => {
+                        ma.delete();
+                        if (collected.size < 1) {
+                            member.kick();
+                        }
+                        return collected;
+                    })
+                    .then(collected => collected.map((m) => m.delete()));
+            }, 1000);
         }
     }
 });/**
