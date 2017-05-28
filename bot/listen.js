@@ -61,7 +61,7 @@ bot.on("guildMemberAdd", async function (member) {
     if (member.guild.id === "184536578654339072") {
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
-            bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute").delete(60000);
+            (await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute")).delete(60000);
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
             // Await !vote messages
             const filter = (message) => {
