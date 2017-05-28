@@ -59,6 +59,7 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.id === "184536578654339072") {
+        if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
             const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute");
