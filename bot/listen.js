@@ -61,7 +61,7 @@ bot.on("guildMemberAdd", async function (member) {
     if (member.guild.id === "184536578654339072") {
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
-            (await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute")).delete(60000);
+            const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 1 minute");
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
             // Await !vote messages
             const filter = (message) => {
@@ -74,6 +74,7 @@ bot.on("guildMemberAdd", async function (member) {
             // Errors: ['time'] treats ending because of the time limit as an error
             bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
                 .then(collected => {
+                    ma.delete();
                     if (collected.size < 1) {
                         member.kick();
                     }
