@@ -68,10 +68,13 @@ bot.on("guildMemberAdd", async function (member) {
             // Await !vote messages
             const filter = (message) => {
                 if (message.author.id === member.user.id)
+                {
+                    message.delete();
                     if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
                         message.member.removeRole("317854639431221248");
                         return message;
                     }
+                }
             }
             // Errors: ['time'] treats ending because of the time limit as an error
             bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 600000, errors: ['time'] })
@@ -81,7 +84,6 @@ bot.on("guildMemberAdd", async function (member) {
                     }
                     return collected;
                 })
-                .then(collected => collected.map((m) => m.delete()))
 
         }
     }
