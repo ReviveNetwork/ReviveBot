@@ -63,7 +63,8 @@ bot.on("guildMemberAdd", async function (member) {
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
-            const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't accept within 10 minutes");
+            const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't type `accept` within 10 minutes");
+            ma.delete();
             // Await !vote messages
             const filter = (message) => {
                 if (message.author.id === member.user.id)
@@ -75,13 +76,12 @@ bot.on("guildMemberAdd", async function (member) {
             // Errors: ['time'] treats ending because of the time limit as an error
             bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
-                    ma.delete();
                     if (collected.size < 1) {
                         member.kick();
                     }
                     return collected;
                 })
-                .then(collected => collected.map((m) => m.delete()));
+                .then(collected => collected.map((m) => m.delete()))
 
         }
     }
