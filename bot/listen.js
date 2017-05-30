@@ -79,7 +79,7 @@ bot.on("guildMemberAdd", async function (member) {
             // Errors: ['time'] treats ending because of the time limit as an error
             bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
-                    if (collected.size < 1  && !message.member.roles.get("317854639431221248")) {
+                    if (collected.size < 1  && member.guild.member(member.user).roles.get("317854639431221248")) {
                         member.kick();
                     }
                     return collected;
