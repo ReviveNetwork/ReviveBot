@@ -31,6 +31,24 @@ module.exports = async function (user, noDM) {
             if (member.roles.get("273105185566359562"))
                 await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
         }
+        if(info.banned == 1)
+        {
+            info.username = "[BANNED] "+info.username;
+            if (!member.roles.get("318990525539680257"))
+                await member.addRole(guild.roles.get("318990525539680257")).then(user.send('Role added: BANNED'));
+        }
+        else
+        {
+            if (member.roles.get("318990525539680257"))
+                await member.removeRole(guild.roles.get("318990525539680257")).then(user.send('Role removed: BANNED'));   
+        }
+        if (info.is_donator) {
+            if (!member.roles.get("273105185566359562"))
+                await member.addRole(guild.roles.get("273105185566359562")).then(user.send('Role added: donators'));
+        } else {
+            if (member.roles.get("273105185566359562"))
+                await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
+        }
         if (guild.me.highestRole.comparePositionTo(member.highestRole) > 1)
             await member.setNickname(info.username);
         return info;
