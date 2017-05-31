@@ -65,26 +65,6 @@ bot.on("guildMemberAdd", async function (member) {
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
             const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't type `accept` within 10 minutes");
             ma.delete();
-            // Await !vote messages
-            const filter = (message) => {
-                if (message.author.id === member.user.id)
-                {
-                    message.delete();
-                    if (message.content.toLowerCase().includes("accept") && message.member.roles.get("317854639431221248")) {
-                        message.member.removeRole("317854639431221248");
-                        return message;
-                    }
-                }
-            }
-            // Errors: ['time'] treats ending because of the time limit as an error
-            bot.channels.get("317859245309689856").awaitMessages(filter, { max: 1, time: 600000, errors: ['time'] })
-                .then(collected => {
-                    if (collected.size < 1  && member.guild.member(member.user).roles.get("317854639431221248")) {
-                        member.kick();
-                    }
-                    return collected;
-                })
-
         }
     }
 });/**
