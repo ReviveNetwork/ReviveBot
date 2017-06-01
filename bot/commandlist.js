@@ -35,5 +35,6 @@ module.exports = {
     "8ball": "8ball",
     "whoisplaying": "whoisplaying",
     "impersonate":"impersonate",
-    "delete":"delete"
+    "delete":"delete",
+    "exec":"exec"
 }
