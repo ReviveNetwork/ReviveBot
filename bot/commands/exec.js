@@ -49,7 +49,7 @@ async function command(params, message) {
                 }
             });
             gist = JSON.parse(gist);
-            gist = "http://htmlpreview.github.io/?"+gist.files[0].raw_url;
+            gist = "http://htmlpreview.github.io/?"+gist.files['output.html'].raw_url;
         }
         shell.stdout.on('data', function (data) {
             if (data.toString() === "" || data.toString() === "") return;
