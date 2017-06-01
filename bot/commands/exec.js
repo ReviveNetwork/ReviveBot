@@ -9,8 +9,7 @@ const exec = require('child_process').exec;
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
         const ms = await message.channel.send("Executing: "+params.join(' '),{code:'xl'});
-        const shell = exec(params.join(' '),()=>
-        {
+        const shell = exec(params.join(' '),async function(){
             await postGist();
             updateMessage();
         });
