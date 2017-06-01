@@ -13,7 +13,7 @@ async function command(params, message) {
         let outputlines =[];
         let errorlines =[];
         let gist;
-        const updateMessage(){
+        const updateMessage = function(){
             let out = outputlines.slice(-5);
             let err = errorlines.slice(-5);
             ms.edit(
