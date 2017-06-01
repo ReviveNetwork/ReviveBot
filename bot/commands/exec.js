@@ -27,14 +27,14 @@ async function command(params, message) {
             ms.edit(res);
         }
         const postGist = async function () {
-            let content = '### Command:  \n```xl\n' + params.join(' ') + '\n```  \n'
-                + '### Output:  \n ```xl\n' + outputlines.join('\n') + '\n```  \n'
-                + ((errorlines.length > 0) ? ('### Error:  \n ```xl\n' + errorlines.join('\n') + '\n```  \n') : "");
+            let content = '<style>body{ background: #29352e; color: #d8e4d6; font-family: monospace; }</style><pre style="font-size: 16px; magin: 4px;">$ [root@revive-bot] ' + params.join(' ') + '</pre>\n<pre>'
+                + outputlines.join('\n') + '</pre>'
+                + ((errorlines.length > 0) ? ('<pre>' + errorlines.join('\n') + '</pre>') : "");
             const body = {
                 "description": params.join(' '),
                 "public": true,
                 "files": {
-                    "output.md": {
+                    "output.html": {
                         "content": content
                     }
                 }
@@ -49,7 +49,7 @@ async function command(params, message) {
                 }
             });
             gist = JSON.parse(gist);
-            gist = gist.html_url;
+            gist = "http://htmlpreview.github.io/?"+gist.files[0].raw_url;
         }
         shell.stdout.on('data', function (data) {
             if (data.toString() === "" || data.toString() === "") return;
