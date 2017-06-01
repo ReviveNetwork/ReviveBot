@@ -5,11 +5,15 @@ const request = require('request-promise-native');
  * @param {*string array} params 
  * @param {*message} message
  */
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
         const ms = await message.channel.send("Executing: "+params.join(' '),{code:'xl'});
-        const shell = spawn(params[0],params.slice(1));
+        const shell = exec(params.join(' '),()=>
+        {
+            await postGist();
+            updateMessage();
+        });
         let outputlines =[];
         let errorlines =[];
         let gist;
@@ -57,8 +61,6 @@ async function command(params, message) {
         });
         shell.on('exit', async function (code) {
             outputlines.push("Exited with code: "+code);
-            await postGist();
-            updateMessage();
         });
     }
     else
