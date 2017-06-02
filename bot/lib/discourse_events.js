@@ -3,8 +3,9 @@ const bot = require('./../bot');
 const md = require('to-markdown');
 const RichEmbed = require('discord.js').RichEmbed;
 const did_from_uname = async function (uname) {
-    let res = await request('http://localhost/v0/discord/did_from_uname/' + encodeURIComponent(uname))
-    console.log(res)
+    let res = await request('http://localhost/v0/discord/did_from_uname/' + encodeURIComponent(uname));
+    console.log(res);
+    res = JSON.parse(res);
     return res.id;
 }
 module.exports = {
