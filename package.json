@@ -20,7 +20,8 @@
     "request-promise-native": "^1.0.3",
     "revive-stats.js": "^1.4.7",
     "sqlite3": "^3.1.8",
-    "node-emoji": "^1.5.1"
+    "node-emoji": "^1.5.1",
+    "html-md": "^3.0.2"
   },
   "devDependencies": {},
   "repository": {

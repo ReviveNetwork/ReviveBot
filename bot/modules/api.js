@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bot = require('../bot');
 const refreshUser = require('./../lib/refresh');
+const discourse_events = require('./../lib/discourse_events')
 let app = express();
 const path = require('path');
 
@@ -20,6 +21,10 @@ app.get('/sql/messages', function (req, res) {
     res.download(file); // Set disposition and send it.
 });
 app.post('/notify', function (req, res) {
+    let event_handler = discourse_events(req.headers['X-Discourse-Event-Type']);
+    let body = req.body;
+    body.base_url = req.headers['X-Discourse-Instance'];
+    event_handler(req.body);
     res.sendStatus(202);
     res.end();
 });
