@@ -23,7 +23,11 @@ app.get('/sql/messages', function (req, res) {
 app.post('/notify', function (req, res) {
     let event = req.headers['X-Discourse-Event-Type'];
     let event_handler;
-    if(event.toLowerCase() == post)
+    if(!event)
+    {
+        return res.end(JSON.stringify(req.headers));
+    }
+    else if(event.toLowerCase() == post)
         event_handler = discourse_events.post;
     else if(event.toLowerCase() == user)
         event_handler = discourse_events.user;
