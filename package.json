@@ -21,7 +21,7 @@
     "revive-stats.js": "^1.4.7",
     "sqlite3": "^3.1.8",
     "node-emoji": "^1.5.1",
-    "html-md": "^3.0.2"
+    "to-markdown": "^3.0.4"
   },
   "devDependencies": {},
   "repository": {
