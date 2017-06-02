@@ -27,11 +27,11 @@ app.post('/notify', function (req, res) {
     {
         return res.end(JSON.stringify(req.headers));
     }
-    else if(event.toLowerCase() == post)
+    else if(event.toLowerCase() == 'post')
         event_handler = discourse_events.post;
-    else if(event.toLowerCase() == user)
+    else if(event.toLowerCase() == 'user')
         event_handler = discourse_events.user;
-    else if(event.toLowerCase() == ping)
+    else if(event.toLowerCase() == 'ping')
         event_handler = discourse_events.ping;
     let body = req.body;
     if(body instanceof string)
