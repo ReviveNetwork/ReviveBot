@@ -21,7 +21,7 @@ app.get('/sql/messages', function (req, res) {
     res.download(file); // Set disposition and send it.
 });
 app.post('/notify', function (req, res) {
-    let event_handler = discourse_events(req.headers['X-Discourse-Event-Type']);
+    let event_handler = discourse_events[req.headers['X-Discourse-Event-Type']];
     let body = req.body;
     body.base_url = req.headers['X-Discourse-Instance'];
     event_handler(req.body);
