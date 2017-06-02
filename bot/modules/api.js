@@ -19,7 +19,7 @@ app.get('/sql/messages', function (req, res) {
     var file = path.resolve(__dirname, '..', '..', 'dev.sqlite3');
     res.download(file); // Set disposition and send it.
 });
-app.get('/notify', function (req, res) {
+app.post('/notify', function (req, res) {
     res.sendStatus(202);
     res.end();
 });
