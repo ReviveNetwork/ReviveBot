@@ -21,10 +21,17 @@ app.get('/sql/messages', function (req, res) {
     res.download(file); // Set disposition and send it.
 });
 app.post('/notify', function (req, res) {
-    let event_handler = discourse_events[req.headers['X-Discourse-Event-Type']];
+    let event = req.headers['X-Discourse-Event-Type'];
+    if(event.toLowerCase() == post)
+        let event_handler = discourse_events.post;
+    else if(event.toLowerCase() == user)
+        let event_handler = discourse_events.user;
+    else if(event.toLowerCase() == ping)
+        let event_handler = discourse_events.ping;
     let body = req.body;
     body.base_url = req.headers['X-Discourse-Instance'];
-    event_handler(req.body);
+    if(event_handler)
+        event_handler(req.body);
     res.sendStatus(202);
     res.end();
 });
