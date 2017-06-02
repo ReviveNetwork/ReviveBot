@@ -15,7 +15,7 @@ module.exports = {
         let embed = new RichEmbed();
         embed.setAuthor(body.post.username, body.post.avatar_template.replace('{size}', "100")).setDescription(md(body.post.cooked))
         if (body.post.reply_to_user && body.post.reply_to_user.username) {
-            bot.users.get(await did_from_uname(body.post.reply_to_user.username)).send('You recieved a reply from ' + body.post.username + ' for post ' + body.base_url + '/t/' + body.post.topic_slug + '/' + body.post.topic_id + '/' + body.post.post_number)
+            bot.users.get(await did_from_uname(body.post.reply_to_user.username)).send('You recieved a reply from ' + body.post.username + ' for post ' + body.base_url + '/t/' + body.post.topic_slug + '/' + body.post.topic_id + '/' + body.post.post_number,{embed: embed})
         }
     },
     'user': async function (body) {
