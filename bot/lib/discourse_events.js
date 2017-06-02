@@ -1,6 +1,6 @@
 const request = require('request-promise-native');
 const bot = require('./../bot');
-const md = require('html-md');
+//const md = require('html-md');
 const RichEmbed = require('discord.js').RichEmbed;
 const did_from_uname = async function (uname) {
     let res = await request('http://localhost/v0/discord/did_from_uname/' + encodeURIComponent(uname))
@@ -13,7 +13,7 @@ module.exports = {
     'post': async function (body) {
         console.log("Recieved a post event for post no: " + body.post.post_number);
         let embed = new RichEmbed();
-        embed.setAuthor(body.post.username, body.post.avatar_template.replace('{size}', "100")).setDescription(md(body.post.cooked))
+        embed.setAuthor(body.post.username, body.post.avatar_template.replace('{size}', "100")).setDescription(body.post.cooked)
         if (body.post.reply_to_user && body.post.reply_to_user.username) {
             let id = await did_from_uname(body.post.reply_to_user.username);
             if(id)
