@@ -34,6 +34,8 @@ app.post('/notify', function (req, res) {
     else if(event.toLowerCase() == ping)
         event_handler = discourse_events.ping;
     let body = req.body;
+    if(body instanceof string)
+        body = JSON.parse(body);
     body.base_url = req.headers['x-discourse-instance'];
     if(event_handler)
         event_handler(req.body);
