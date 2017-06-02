@@ -22,12 +22,13 @@ app.get('/sql/messages', function (req, res) {
 });
 app.post('/notify', function (req, res) {
     let event = req.headers['X-Discourse-Event-Type'];
+    let event_handler;
     if(event.toLowerCase() == post)
-        let event_handler = discourse_events.post;
+        event_handler = discourse_events.post;
     else if(event.toLowerCase() == user)
-        let event_handler = discourse_events.user;
+        event_handler = discourse_events.user;
     else if(event.toLowerCase() == ping)
-        let event_handler = discourse_events.ping;
+        event_handler = discourse_events.ping;
     let body = req.body;
     body.base_url = req.headers['X-Discourse-Instance'];
     if(event_handler)
