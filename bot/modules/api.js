@@ -19,12 +19,15 @@ app.get('/sql/messages', function (req, res) {
     var file = path.resolve(__dirname, '..', '..', 'dev.sqlite3');
     res.download(file); // Set disposition and send it.
 });
+app.get('/notify', function (req, res) {
+    res.sendStatus(202);
+    res.end();
+});
 app.get('/reverse/:id', async function (req, res) {
     const user = bot.users.get(req.params.id);
     const guild = bot.guilds.get("184536578654339072");
     const member = guild.member(user);
-    if(!member)
-    {
+    if (!member) {
         res.json({ "error": "cant link" });
         return res.end();
     }
