@@ -2,7 +2,6 @@ const request = require('request-promise-native');
 const bot = require('./../bot');
 const md = require('to-markdown');
 const RichEmbed = require('discord.js').RichEmbed;
-const request = require('request-promise-native');
 const mentionReg = /\[@[a-z]*\]\(\/u\/[a-z]*\)/igm;
 const did_from_uname = async function (uname) {
     let res = await request('http://localhost/v0/discord/did_from_uname/' + encodeURIComponent(uname));
