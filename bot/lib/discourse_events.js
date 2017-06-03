@@ -17,7 +17,8 @@ module.exports = {
         console.log("Recieved a post event for post no: " + body.post.post_number);
         let toMention =[];
         let embed = new RichEmbed();
-        embed.setAuthor(body.post.username, body.base_url + body.post.avatar_template.replace('{size}', "100")).setDescription(md(body.post.cooked))
+        body.post.cooked = md(body.post.cooked)
+        embed.setAuthor(body.post.username, body.base_url + body.post.avatar_template.replace('{size}', "100")).setDescription(body.post.cooked)
         if (body.post.reply_to_user && body.post.reply_to_user.username) {
             toMention.push(body.post.reply_to_user.username);
         }
