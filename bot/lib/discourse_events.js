@@ -23,7 +23,7 @@ module.exports = {
             toMention.push(body.post.reply_to_user.username);
         }
         body.post.cooked.match(mentionReg).map(function(m){
-            let u = m.match('/@[a-z]*/i')[0].substring(1);
+            let u = m.match(/@[a-z]*/i)[0].substring(1);
             return toMention.push(u)
         })
         for(let i=0;i<toMention.length;i++)
