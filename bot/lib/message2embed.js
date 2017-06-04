@@ -16,7 +16,7 @@ module.exports = async function (message, hotline){
     if (!message.content.trim() == "")
         embed.setDescription(message.cleanContent);
     else
-        embed.setDescription("**" + (( me.author && me.author!=null)?(me.author.name+ " : "):"")  + *(me.title && me.title!=null)?me.title:"") + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
+        embed.setDescription("**" + (( me.author && me.author!=null)?(me.author.name+ " : "):"")  + (me.title && me.title!=null)?me.title:"") + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
     if (!hotline)
         embed.setTimestamp(message.createdAt)
     let color = message.member;
