@@ -3,6 +3,14 @@ module.exports = async function (message, hotline){
     let me = message.embeds.shift();
     if(me && me!=null)
     {
+        delete me.client;
+        delete me.createdAt;
+        delete me.createdTimestamp;
+        delete me.hexColor;
+        delete me.message;
+        delete me.provider;
+        delete me.type;
+        delete me.video;
         return me;
     }
     const embed = new Discord.RichEmbed();
