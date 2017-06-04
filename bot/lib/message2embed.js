@@ -1,8 +1,14 @@
 const Discord = require('discord.js');
-module.exports = (message, hotline) => {
+module.exports = async function (message, hotline){
     let me = message.embeds.shift();
     const embed = new Discord.RichEmbed();
-    embed.setAuthor(message.author.username, message.author.avatarURL)
+    if(! message.webhookID)
+        embed.setAuthor(message.author.username, message.author.avatarURL)
+    else
+    {
+        const webhook = await message.fetchWebhook();
+        embed.setAuthor(webhook.name, webhook.avatar)
+    }
     if (!hotline)
         embed.setTitle((message.guild)?(message.channel.name + " in " + message.guild.name):(" in a DM with " + message.channel.recipient.tag));
     if (!message.content == "")
