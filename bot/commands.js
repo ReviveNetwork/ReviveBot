@@ -4,6 +4,7 @@
 const commands = {};
 const settings = require('./../settings.json');
 const list = require('./commandlist');
+let debug = true;
 const getcommands = () => {
     Object.entries(list).forEach(
         ([key, value]) => {
@@ -12,10 +13,16 @@ const getcommands = () => {
     );
 }
 getcommands();
+const getError = function(err) {
+    if(debug)
+        return err.stack
+    else
+        return err
+}
 module.exports = {
     execute: function (cmd, params, message) {
         if (commands[cmd]) {
-            commands[cmd].execute(params, message).catch(err => message.channel.send(err, { code: 'error' }))//.then(message.delete(3000));
+            commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error' }))//.then(message.delete(3000));
         }
         else if (cmd === 'help')
             help(message);
