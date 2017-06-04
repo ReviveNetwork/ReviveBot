@@ -28,7 +28,7 @@ async function command(params, message) {
         return message.reply("message not available");
     console.log("fetching : " + m.id);
     let attach = m.attachments.first();
-    let em = m2e(m);
+    let em = await m2e(m);
     console.log(em);
     if (attach)
         attach = attach.url;
