@@ -13,7 +13,7 @@ module.exports = async function (message, hotline){
             embed.description = me.description
         if(me.fields && me.fields.length >0)
         {
-            me.fields.map(function(f)=>{
+            me.fields.map(function(f){
                 embed.fields.push({
                           name: f.name,
                           value: f.value,
