@@ -5,7 +5,8 @@ module.exports = async function (message, hotline){
     if(message.webhookID || message.webhookID !=null)
     {
         const webhook = await message.fetchWebhook();
-        embed.setAuthor(webhook.name, webhook.avatar)
+        if(webhook.name && webhook.name!=null)
+            embed.setAuthor(webhook.name, webhook.avatar||false)
     }
     else
     {
