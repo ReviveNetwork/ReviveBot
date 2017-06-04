@@ -38,7 +38,7 @@ module.exports = async function (message, hotline){
                 icon_url: me.footer.icon_url,
                 text: me.footer.text
               };
-        return me;
+        return embed;
         //return message.reply("Embeds not supported yet")
     }
     embed.setAuthor(message.author.username, message.author.avatarURL)
