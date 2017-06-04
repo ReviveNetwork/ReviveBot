@@ -2,19 +2,21 @@ const Discord = require('discord.js');
 module.exports = async function (message, hotline){
     let me = message.embeds.shift();
     const embed = new Discord.RichEmbed();
-    if(! message.webhookID)
-        embed.setAuthor(message.author.username, message.author.avatarURL)
-    else
+    if(message.webhookID || message.webhookID !=null)
     {
         const webhook = await message.fetchWebhook();
         embed.setAuthor(webhook.name, webhook.avatar)
     }
+    else
+    {
+        embed.setAuthor(message.author.username, message.author.avatarURL)
+    }
     if (!hotline)
         embed.setTitle((message.guild)?(message.channel.name + " in " + message.guild.name):(" in a DM with " + message.channel.recipient.tag));
-    if (!message.content == "")
+    if (!message.content.trim() == "")
         embed.setDescription(message.cleanContent);
     else
-        embed.setDescription("**" + me.author.name + " : " + me.title + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
+        embed.setDescription("**" + (( me.author)?me.author.name:"") + " : " + me.title + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
     if (!hotline)
         embed.setTimestamp(message.createdAt)
     let color = message.member;
