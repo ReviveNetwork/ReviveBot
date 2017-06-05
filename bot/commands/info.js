@@ -29,6 +29,11 @@ async function command(params, message) {
 		if (all) return message.reply("Please link your discord account first using `~link`");
 		return message.reply("The requested user has not yet linked his discord account with their revive account");
 	}
+	if (body.banned ==1){
+		if (all) return message.reply("You are global banned");
+		return message.reply("The requested user has been global banned.");
+	}
+		
 	for (let i = 0; i < body.soldiers.length; i++) {
 		let soldier = body.soldiers[i];
 		if (!all) {
