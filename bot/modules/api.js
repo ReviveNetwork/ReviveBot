@@ -5,12 +5,14 @@ const refreshUser = require('./../lib/refresh');
 const discourse_events = require('./../lib/discourse_events')
 let app = express();
 const path = require('path');
+let ready =false;
 
 app.use(bodyParser.json())
-bot.on('ready',()=>{
+bot.on('ready',()=>{ready=true;});
     app.get('/push/user/:userId/updated', function (req, res) {
         //console.log(req);
         //console.log(req.params);
+        if(!ready)return;
         console.log(req.params.userId);
         refreshUser(bot.users.get(req.params.userId));
         res.send('updated');
@@ -21,6 +23,7 @@ bot.on('ready',()=>{
         res.download(file); // Set disposition and send it.
     });
     app.post('/notify', function (req, res) {
+        if(!ready)return;
         let event = req.headers['x-discourse-event-type'];
         let event_handler;
         if(!event)
@@ -43,6 +46,7 @@ bot.on('ready',()=>{
         res.end();
     });
     app.get('/reverse/:id', async function (req, res) {
+        if(!ready)return;
         const user = bot.users.get(req.params.id);
         const guild = bot.guilds.get("184536578654339072");
         const member = guild.member(user);
@@ -65,7 +69,6 @@ bot.on('ready',()=>{
         res.json(result);
         res.end();
     });
-});
 var listener = app.listen(8080, function () {
     console.log('API now running on port: ' + listener.address().port);
 });
