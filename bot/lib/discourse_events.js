@@ -1,5 +1,6 @@
 const request = require('request-promise-native');
 const bot = require('./../bot');
+const settings = require('./../settings');
 const md = require('to-markdown');
 const RichEmbed = require('discord.js').RichEmbed;
 const mentionReg = /\[@[a-z]*\]\(\/u\/[a-z]*\)/igm;
@@ -37,7 +38,7 @@ module.exports = {
             });
         }
         // check for private_message
-        let topic = await request(body.base_url+ '/t/'+body.post.topic_id+'.json');
+        let topic = await request(body.base_url+ '/t/'+body.post.topic_id+'.json?api_key='+settings.discourse_api+'&api_username=revivebot');
         topic = JSON.parse(topic);
         if(topic.archetype && topic.archetype ==='private_message' && topic.details.participants)
         {
