@@ -1,6 +1,6 @@
 const request = require('request-promise-native');
 const bot = require('./../bot');
-const settings = require('./../settings');
+const settings = require('./../../settings');
 const md = require('to-markdown');
 const RichEmbed = require('discord.js').RichEmbed;
 const mentionReg = /\[@[a-z]*\]\(\/u\/[a-z]*\)/igm;
