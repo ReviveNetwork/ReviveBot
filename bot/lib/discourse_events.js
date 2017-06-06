@@ -37,7 +37,7 @@ module.exports = {
             });
         }
         // check for private_message
-        let topic = await request(body.base_url+ '/t/'+body.post.topic_id+'.json?api_key='+ process.env.DISCOURSE_API +'&api_username=discourse1');
+        let topic = await request(body.base_url+ '/t/'+body.post.topic_id+'.json?api_key='+ process.env.DISCOURSE_API +'&api_username=revive');
         topic = JSON.parse(topic);
         if(topic.archetype && topic.archetype ==='private_message' && topic.details.participants)
         {
