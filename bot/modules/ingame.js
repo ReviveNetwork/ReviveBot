@@ -21,12 +21,14 @@ bot.on('refreshOnline',async function(){
    });
   let online = await request('http://localhost/v0/discord/online');
   online = JSON.parse(online);
-  online.map(async function(u){
-    let user = bot.users.get(u);
-    let member = guild.member(user);
-    if(member)
-       await member.addRole(ingame);
-  })
+  console.log(online)
+  if(online)
+    online.map(async function(u){
+      let user = bot.users.get(u);
+      let member = guild.member(user);
+      if(member)
+         await member.addRole(ingame);
+    })
 });
 bot.on('ready',()=>{
   if(!re)
