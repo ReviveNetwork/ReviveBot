@@ -12,12 +12,12 @@ bot.on('ready',async function(){
       if(!playing.includes(m.id))
         return m;
     });
-    toRemove.map(async function(m){
+   await Promise.all(toRemove.map(async function(m){
       await m.removeRole(ingame);
-   });
-   playing.map(async function(m){
+   }));
+   await Promise.all(playing.map(async function(m){
       await m.addRole(ingame);
-   });
+   }));
   /**
   let online = await request('http://localhost/v0/discord/online');
   online = JSON.parse(online);
