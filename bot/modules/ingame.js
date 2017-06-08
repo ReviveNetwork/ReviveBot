@@ -1,4 +1,4 @@
-*const bot = require('./../bot');
+const bot = require('./../bot');
 const request = require('request-promise-native');
 bot.on('ready',async function(){
   const guild =  bot.guilds.get("184536578654339072");
