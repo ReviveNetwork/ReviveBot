@@ -37,7 +37,7 @@ bot.on('ready',()=>{
   if(!re)
     re = setInterval(function(){
         bot.emit('refreshOnline')
-      },15000)
+      },60000)
 })
 /**
 bot.on('presenceUpdate',async function(om,m){
