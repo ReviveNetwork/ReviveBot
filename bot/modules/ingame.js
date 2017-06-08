@@ -23,12 +23,15 @@ bot.on('refreshOnline',async function(){
   online = JSON.parse(online);
   console.log(online)
   if(online)
-    online.map(async function(u){
-      let user = bot.users.get(u);
+  {
+    for(let i=0;i<online.length;i++)
+    {
+      let user = bot.users.get(online[i]);
       let member = guild.member(user);
       if(member)
          await member.addRole(ingame);
-    })
+    }
+  }
 });
 bot.on('ready',()=>{
   if(!re)
