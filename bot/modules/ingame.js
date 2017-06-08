@@ -17,7 +17,7 @@ bot.on('ready',async function(){
    playing.map(async function(m){
       await m.addRole(ingame);
    });
-}
+});
 bot.on('presenceUpdate',async function(om,m){
     if (om.presence.game && om.presence.game.name)
             if (om.presence.game.name.toLowerCase().includes("battlefield 2"))
