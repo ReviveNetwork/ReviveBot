@@ -8,7 +8,7 @@ const influx = new Influx.InfluxDB({
       fields: {
         tag: Influx.FieldType.STRING,
         type: Influx.FieldType.STRING
-      }
+      },
       tags: [
         'discord'
       ]
