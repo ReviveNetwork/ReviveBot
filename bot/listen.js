@@ -34,36 +34,6 @@ bot.on('message', async function(message) {
             return;//not DM
     }
     /**
-    *   Check for @everyone pings
-    */
-    if(!message.member.hasPermission("MANAGE_MESSAGES") && message.mentions.roles.find('name','everyone'))
-    {
-        let mute = false;
-        await Promise.all(message.guild.roles.map(async function(r){
-            if(r.name.toLowerCase().includes('mute'))
-            {
-                setTimeout(()=>{
-                    message.member.removeRole(r);
-                },60000)
-                await message.member.addRole(r);
-                mute = true;
-            }
-            else if(r.name.toLowerCase().includes('not') && r.name.toLowerCase().includes('veri'))
-            {
-                await message.member.addRole(r);
-                mute = true;
-            }
-            else if(r.name.toLowerCase().includes('member'))
-            {
-                await message.member.removeRole(r);
-                mute = true;
-            }
-        }));
-        if(mute)
-            message.reply("Tsk.. Tsk, You pinged everyone. Now suffer the consequences");
-        
-    }
-    /**
      * Listen to messages and convert into params
      */
     if (message.content.startsWith(settings.identifier)) {
