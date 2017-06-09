@@ -20,7 +20,21 @@ async function command(params, message) {
 		if(role.name !='@everyone')
 		r = r + "**"+role.name+"**: "+role.members.size+'\n';
 	});
-	embed.setDescription (r);
+    embed.setDescription (r);
+    let members = await message.guild.fetchMembers();
+    let data = [];
+    members.map(function(m){
+	    let date = m.joinedAt;
+	    date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+	    let key = data.findIndex(d =>{
+		    if(d[0] ==date)
+			    return d;
+	    });
+	    if(key && key >=0)
+		    data[key][1]++;
+	    else
+		    data.push([date,1]);
+    });
     return message.channel.send('', { embed: embed }).catch(message.channel.send);
 }
 /**
