@@ -100,7 +100,7 @@ bot.on('disconnect', function(event) {
 bot.on('ready', async function() {
     console.log("ReviveBot Ready");
     let dbs = influx.getDatabaseNames();
-    if(!dbs.includes('discord')) {
+    if(!dbs.includes('discord'))
       await influx.createDatabase('discord');
     influx.writePoints([
       {
