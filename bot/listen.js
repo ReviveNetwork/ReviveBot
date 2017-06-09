@@ -26,7 +26,7 @@ bot.on('message', async function(message) {
     influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: member.user.tag, type:'message' },
+            fields: { tag: message.member.user.tag, type:'message' },
           }
         ]);
     new Message({
