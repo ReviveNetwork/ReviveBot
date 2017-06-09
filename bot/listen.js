@@ -51,13 +51,6 @@ bot.on('message', async function(message) {
         let cmd = params.shift().trim();
         commands.execute(cmd.toLowerCase(), params, message)
     }
-    else if (message.isMentioned(bot.user)) {
-        /**remove mentions and then get params */
-        let params = message.cleancontent.trim().replace(bot.user.toString(), "").trim();
-        params = params.split(settings.delimiter || ' ');
-        let cmd = params.shift.trim();
-        commands.execute(cmd.toLowerCase(), params, message)
-    }
     else {
         //ignore because normal message
     }
