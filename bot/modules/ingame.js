@@ -1,8 +1,10 @@
 const bot = require('./../bot');
 const request = require('request-promise-native');
+let ingame;
+let guild;
 bot.on('ready',async function(){
-  const guild =  bot.guilds.get("184536578654339072");
-  const ingame = guild.roles.get("322233107489226764");
+  guild =  bot.guilds.get("184536578654339072");
+  ingame = guild.roles.get("322233107489226764");
   let playing = guild.members.filterArray(function (m) {
         if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
@@ -36,11 +38,12 @@ bot.on('ready',async function(){
 });
 
 bot.on('presenceUpdate',async function(om,m){
+    if(m.guild.id != guild.id) return;
     if (om.presence.game && om.presence.game.name)
             if (om.presence.game.name.toLowerCase().includes("battlefield 2"))
-                await m.removeRole("322233107489226764");
+                await m.removeRole(ingame);
     if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
-                await m.addRole("322233107489226764");
+                await m.addRole(ingame);
 })
 
