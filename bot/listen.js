@@ -5,6 +5,7 @@ const modules = require('./modules.js');
 const Message = require('./../orm/Message')
 const commands = require('./commands');
 const request = require('request-promise-native');
+const influx = require('./../influx');
 let lock = false;
 bot.on('error', (err) => {
     /**
@@ -22,7 +23,12 @@ bot.on('message', async function(message) {
     /**
      * if locked, reject everything except dm
      */
-
+    influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { tag: member.user.tag, type:'message' },
+          }
+        ]);
     new Message({
         messageID: message.id,
         channel: message.channel.id
@@ -59,6 +65,12 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.id === "184536578654339072") {
+        influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { tag: member.user.tag, type:'join' },
+          }
+        ]);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
@@ -67,16 +79,43 @@ bot.on("guildMemberAdd", async function (member) {
             ma.delete();
         }
     }
-});/**
+});
+bot.on("guildMemberRemove", async function (member) {
+    var user = member.user;
+    if (member.guild.id === "184536578654339072") {
+        influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { tag: member.user.tag, type:'leave' },
+          }
+        ]);
+    }
+});
+/**
 bot.on('disconnect', function(event) {
     if (event.code === 0) return console.error(event);
     process.exit();//force restart
 });*/
 
-bot.on('ready', () => {
+bot.on('ready', async function() {
     console.log("ReviveBot Ready");
+    let dbs = influx.getDatabaseNames();
+    if(!dbs.includes('discord')) {
+      await influx.createDatabase('discord');
+    influx.writePoints([
+      {
+        measurement: 'statistics',
+        fields: { tag: bot.user.tag, type:'ready' },
+      }
+    ]);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
+    influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { tag: member.user.tag, type:'update' },
+          }
+        ]);
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
