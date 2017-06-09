@@ -6,6 +6,7 @@ const Message = require('./../orm/Message')
 const commands = require('./commands');
 const request = require('request-promise-native');
 const influx = require('./../influx');
+let ready = false;
 let lock = false;
 bot.on('error', (err) => {
     /**
@@ -23,6 +24,7 @@ bot.on('message', async function(message) {
     /**
      * if locked, reject everything except dm
      */
+    if(ready)
     influx.writePoints([
           {
             measurement: 'statistics',
@@ -65,6 +67,7 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.id === "184536578654339072") {
+        if(ready)
         influx.writePoints([
           {
             measurement: 'statistics',
@@ -101,7 +104,13 @@ bot.on('ready', async function() {
     console.log("ReviveBot Ready");
     let dbs = influx.getDatabaseNames();
     if(!dbs.includes('discord'))
+    {
       await influx.createDatabase('discord');
+        ready = true;
+    }
+    else
+        ready=true;
+    if(ready)
     influx.writePoints([
       {
         measurement: 'statistics',
@@ -110,6 +119,7 @@ bot.on('ready', async function() {
     ]);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
+    if(ready)
     influx.writePoints([
           {
             measurement: 'statistics',
