@@ -39,7 +39,7 @@ bot.on('message', (message) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES") && message.mentions.roles.find('name','everyone'))
     {
         let mute = false;
-        message.guild.roles.map(async function(r){
+        await Promise.all(message.guild.roles.map(async function(r){
             if(r.name.toLowerCase().includes('mute'))
             {
                 setTimeout(()=>{
@@ -58,7 +58,7 @@ bot.on('message', (message) => {
                 await message.member.removeRole(r);
                 mute = true;
             }
-        });
+        }));
         if(mute)
             message.reply("Tsk.. Tsk, You pinged everyone. Now suffer the consequences");
         
@@ -112,7 +112,7 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
         let oldMem = member;
         if (!oldMem.roles.has("273105185566359562") && newMem.roles.has("273105185566359562")) return;
         if (!oldMem.roles.has("275317218911322112") && newMem.roles.has("275317218911322112")) return;
-        if (!oldMem.roles.has("317854639431221248") && newMem.roles.has("317854639431221248")) 
+        if (oldMem.roles.has("317854639431221248") && !newMem.roles.has("317854639431221248")) 
             await refresh(user);
         if ((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920")) || (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104")) || (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523"))) {
             await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
