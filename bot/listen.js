@@ -18,7 +18,7 @@ process.on('unhandledRejection', (err) => {
         process.exit();//restart
 });
 process.on('uncaughtException', (err) => console.log("UNHANDLED EXCEPTION AT " + err.stack));
-bot.on('message', (message) => {
+bot.on('message', async (message) {
     /**
      * if locked, reject everything except dm
      */
