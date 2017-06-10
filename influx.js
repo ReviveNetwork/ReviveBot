@@ -6,11 +6,10 @@ const influx = new Influx.InfluxDB({
     {
       measurement: 'statistics',
       fields: {
-        tag: Influx.FieldType.STRING,
-        type: Influx.FieldType.STRING
+        tag: Influx.FieldType.STRING
       },
       tags: [
-        'discord'
+        'type'
       ]
     }
   ]
