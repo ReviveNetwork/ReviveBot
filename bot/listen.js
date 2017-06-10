@@ -95,7 +95,9 @@ bot.on('disconnect', function(event) {
 
 bot.on('ready', async function() {
     console.log("ReviveBot Ready");
-    let dbs = influx.getDatabaseNames();
+    let dbs = await influx.getDatabaseNames();
+    if(!dbs || dbs ===null)
+        console.log("Cant connect to influx")
     if(!dbs.includes('discord'))
     {
       await influx.createDatabase('discord');
