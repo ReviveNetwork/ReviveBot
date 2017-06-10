@@ -28,7 +28,7 @@ bot.on('message', async function(message) {
     influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: message.member.user.tag, type:'message' },
+            fields: { tag: message.author.tag, type:'message' },
           }
         ]);
     new Message({
@@ -96,11 +96,13 @@ bot.on('disconnect', function(event) {
 bot.on('ready', async function() {
     console.log("ReviveBot Ready");
     let dbs = await influx.getDatabaseNames();
+    console.log(dbs);
     if(!dbs || dbs ===null)
         console.log("Cant connect to influx")
     if(!dbs.includes('discord'))
     {
-      await influx.createDatabase('discord');
+        await influx.createDatabase('discord');
+        console.log("Creating Dicord DB");
         ready = true;
     }
     else
