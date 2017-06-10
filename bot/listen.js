@@ -29,7 +29,7 @@ bot.on('message', async function(message) {
             fields: { tag: message.author.tag},
             tags: {type:'message'}
           }
-        ]).then(console.log).catch(console.log);
+        ]).catch(console.log);
     new Message({
         messageID: message.id,
         channel: message.channel.id
@@ -65,7 +65,7 @@ bot.on("guildMemberAdd", async function (member) {
             fields: { tag: member.user.tag},
             tags: {type:'join'}
           }
-        ]).then(console.log).catch(console.log);
+        ]).catch(console.log);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
@@ -84,7 +84,7 @@ bot.on("guildMemberRemove", async function (member) {
             fields: { tag: member.user.tag},
             tags: {type:'leave'}
           }
-        ]).then(console.log).catch(console.log);
+        ]).catch(console.log);
     }
 });
 /**
@@ -110,7 +110,7 @@ bot.on('ready', async function() {
         fields: { tag: bot.user.tag},
         tags: {type:'ready'}
       }
-    ]).then(console.log).catch(console.log);
+    ]).catch(console.log);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
     influx.writePoints([
@@ -119,7 +119,7 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
             fields: { tag: member.user.tag},
             tags: {type:'update'}
           }
-        ]).then(console.log).catch(console.log);
+        ]).catch(console.log);
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
