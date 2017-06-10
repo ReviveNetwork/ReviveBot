@@ -12,7 +12,7 @@ async function command(params, message) {
         if(type === 'influx')
         {
           let res = await influx.query(params.join(' '));
-          return await message.channel.send(res,{code:'js'});
+          return await message.channel.send(JSON.stringify(res),{code:'js'});
         }
         else if(type === 'sql')
         {
