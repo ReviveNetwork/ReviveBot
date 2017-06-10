@@ -16,7 +16,7 @@ async function command(params, message) {
         }
         else if(type === 'sql')
         {
-          let res = await knex.query(params.join(' '));
+          let res = await knex.raw(params.join(' '));
           return await message.channel.send(res,{code:'js'});
         }
         else
