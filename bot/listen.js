@@ -27,7 +27,7 @@ bot.on('message', async function(message) {
           {
             measurement: 'statistics',
             fields: { tag: message.author.tag},
-            tags: {type:'ready'}
+            tags: {type:'message'}
           }
         ]).then(console.log).catch(console.log);
     new Message({
