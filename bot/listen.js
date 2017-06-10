@@ -6,7 +6,6 @@ const Message = require('./../orm/Message')
 const commands = require('./commands');
 const request = require('request-promise-native');
 const influx = require('./../influx');
-let ready = false;
 let lock = false;
 bot.on('error', (err) => {
     /**
@@ -24,13 +23,12 @@ bot.on('message', async function(message) {
     /**
      * if locked, reject everything except dm
      */
-    if(ready)
     influx.writePoints([
           {
             measurement: 'statistics',
             fields: { tag: message.author.tag, type:'message' },
           }
-        ]);
+        ]).catch(console.log);
     new Message({
         messageID: message.id,
         channel: message.channel.id
@@ -60,13 +58,12 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.id === "184536578654339072") {
-        if(ready)
         influx.writePoints([
           {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'join' },
           }
-        ]);
+        ]).catch(console.log);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
@@ -84,7 +81,7 @@ bot.on("guildMemberRemove", async function (member) {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'leave' },
           }
-        ]);
+        ]).catch(console.log);
     }
 });
 /**
@@ -103,26 +100,21 @@ bot.on('ready', async function() {
     {
         await influx.createDatabase('discord');
         console.log("Creating Dicord DB");
-        ready = true;
     }
-    else
-        ready=true;
-    if(ready)
     influx.writePoints([
       {
         measurement: 'statistics',
         fields: { tag: bot.user.tag, type:'ready' },
       }
-    ]);
+    ]).catch(console.log);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
-    if(ready)
     influx.writePoints([
           {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'update' },
           }
-        ]);
+        ]).catch(console.log);
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
