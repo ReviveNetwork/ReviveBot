@@ -27,8 +27,9 @@ bot.on('message', async function(message) {
           {
             measurement: 'statistics',
             fields: { tag: message.author.tag, type:'message' },
+            tags: {discord:"Revive Network"}
           }
-        ]).catch(console.log);
+        ]).then(console.log).catch(console.log);
     new Message({
         messageID: message.id,
         channel: message.channel.id
@@ -62,8 +63,9 @@ bot.on("guildMemberAdd", async function (member) {
           {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'join' },
+            tags: {discord:"Revive Network"}
           }
-        ]).catch(console.log);
+        ]).then(console.log).catch(console.log);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
@@ -80,8 +82,9 @@ bot.on("guildMemberRemove", async function (member) {
           {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'leave' },
+            tags: {discord:"Revive Network"}
           }
-        ]).catch(console.log);
+        ]).then(console.log).catch(console.log);
     }
 });
 /**
@@ -105,16 +108,18 @@ bot.on('ready', async function() {
       {
         measurement: 'statistics',
         fields: { tag: bot.user.tag, type:'ready' },
+        tags: {discord:"Revive Network"}
       }
-    ]).catch(console.log);
+    ]).then(console.log).catch(console.log);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
     influx.writePoints([
           {
             measurement: 'statistics',
             fields: { tag: member.user.tag, type:'update' },
+            tags: {discord:"Revive Network"}
           }
-        ]).catch(console.log);
+        ]).then(console.log).catch(console.log);
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
