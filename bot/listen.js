@@ -99,9 +99,8 @@ bot.on('ready', async function() {
     console.log(dbs);
     if(!dbs || dbs ===null)
         console.log("Cant connect to influx")
-    if(dbs.includes('discord'))
+    if(!dbs.includes('discord'))
     {
-        await influx.dropDatabase('discord');
         await influx.createDatabase('discord');
         console.log("Creating Dicord DB");
     }
