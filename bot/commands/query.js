@@ -17,7 +17,7 @@ async function command(params, message) {
         else if(type === 'sql')
         {
           let res = await knex.raw(params.join(' '));
-          return await message.channel.send(res,{code:'js'});
+          return await message.channel.send(JSON.stringify(res),{code:'js'});
         }
         else
           return await message.reply("INVALID TYPE OF QUERY");
