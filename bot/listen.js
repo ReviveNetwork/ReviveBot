@@ -26,8 +26,8 @@ bot.on('message', async function(message) {
     influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: message.author.tag, type:'message' },
-            tags: {discord:"Revive Network"}
+            fields: { tag: message.author.tag},
+            tags: {type:'ready'}
           }
         ]).then(console.log).catch(console.log);
     new Message({
@@ -62,8 +62,8 @@ bot.on("guildMemberAdd", async function (member) {
         influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: member.user.tag, type:'join' },
-            tags: {discord:"Revive Network"}
+            fields: { tag: member.user.tag},
+            tags: {type:'join'}
           }
         ]).then(console.log).catch(console.log);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
@@ -81,8 +81,8 @@ bot.on("guildMemberRemove", async function (member) {
         influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: member.user.tag, type:'leave' },
-            tags: {discord:"Revive Network"}
+            fields: { tag: member.user.tag},
+            tags: {type:'leave'}
           }
         ]).then(console.log).catch(console.log);
     }
@@ -99,16 +99,17 @@ bot.on('ready', async function() {
     console.log(dbs);
     if(!dbs || dbs ===null)
         console.log("Cant connect to influx")
-    if(!dbs.includes('discord'))
+    if(dbs.includes('discord'))
     {
+        await influx.dropDatabase('discord');
         await influx.createDatabase('discord');
         console.log("Creating Dicord DB");
     }
     influx.writePoints([
       {
         measurement: 'statistics',
-        fields: { tag: bot.user.tag, type:'ready' },
-        tags: {discord:"Revive Network"}
+        fields: { tag: bot.user.tag},
+        tags: {type:'ready'}
       }
     ]).then(console.log).catch(console.log);
 });
@@ -116,8 +117,8 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
     influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { tag: member.user.tag, type:'update' },
-            tags: {discord:"Revive Network"}
+            fields: { tag: member.user.tag},
+            tags: {type:'update'}
           }
         ]).then(console.log).catch(console.log);
     let user = member.user;
