@@ -36,5 +36,6 @@ module.exports = {
     "whoisplaying": "whoisplaying",
     "impersonate":"impersonate",
     "delete":"delete",
-    "exec":"exec"
+    "exec":"exec",
+    "query" : "query"
 }
