@@ -112,7 +112,7 @@ setInterval(async function(){
             tags: {type:'messages'}
           }
         ]).catch(console.log);
-    guild.roles.map(function(r)=>{
+    guild.roles.map(r=>{
         influx.writePoints([
           {
             measurement: 'statistics',
