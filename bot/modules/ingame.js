@@ -15,7 +15,7 @@ const updateIngame = async function(){
                 return m;
     });
   playing = playing.map(m => m.user.id);
-  console.log(playing);
+  //console.log(playing);
   let toRemove = ingame.members.filter(function (m){
       if(!playing.includes(m.user.id))
       {
