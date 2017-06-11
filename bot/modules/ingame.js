@@ -33,7 +33,7 @@ const updateIngame = async function(){
       if(!user)return;
       const member = await guild.fetchMember(user);
       if(!member)return;
-      if(membber && !member.roles.get(ingame.id))
+      if(!member.roles.get(ingame.id))
         await member.addRole(ingame);
    }));
   influx.writePoints([
