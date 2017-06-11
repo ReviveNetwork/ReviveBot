@@ -112,4 +112,20 @@ setInterval(async function(){
             tags: {type:'messages'}
           }
         ]).catch(console.log);
+    guild.roles.map(function(r)=>{
+        influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { count: r.members.size},
+            tags: {type: role.id }
+          }
+        ]).catch(console.log);
+    });
+    influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { count: guild.presences.map(p => p.status != 'offline').length},
+            tags: {type: "online"}
+          }
+        ]).catch(console.log);
 },1000)
