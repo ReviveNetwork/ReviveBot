@@ -4,7 +4,7 @@ const request = require('request-promise-native');
 let ingame;
 let guild;
 const updateIngame = async function(){
-  if(!guild)return;
+  if(!guild && !ingame)return;
   /*
   let playing = await request('http://localhost/v0/discord/online');
   playing = JSON.parse(playing);
@@ -18,12 +18,12 @@ const updateIngame = async function(){
       if(!playing.includes(m.user.id))
         return m;
     });
-   await Promise.all(toRemove.map(async function(m){
+  await Promise.all(toRemove.map(async function(m){
       await m.removeRole(ingame);
    }));
    await Promise.all(playing.map(async function(m){
       const user = bot.users.get(m);
-      const member = guild.member(user);
+      const member = await guild.fetchMember(user);
       if(!member.roles.get(ingame.id))
         await m.addRole(ingame);
    }));
@@ -49,6 +49,5 @@ bot.on('presenceUpdate',async function(om,m){
     if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
                 await m.addRole(ingame);
-})
-
+});
 */
