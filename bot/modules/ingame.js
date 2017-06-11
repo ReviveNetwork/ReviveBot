@@ -22,8 +22,9 @@ const updateIngame = async function(){
       await m.removeRole(ingame);
    }));
    await Promise.all(playing.map(async function(m){
-      m = guild.member(bot.users.get(m));
-      if(m && !m.roles.get(ingame.id))
+      const user = bot.users.get(m);
+      const member = guild.member(user);
+      if(!member.roles.get(ingame.id))
         await m.addRole(ingame);
    }));
   influx.writePoints([
