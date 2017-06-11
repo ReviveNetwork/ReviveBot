@@ -31,7 +31,7 @@ bot.on('ready',()=>{
     guild =  bot.guilds.get("184536578654339072");
     ingame = guild.roles.get("322233107489226764");
 });
-setInterval(updateIngame,1000)
+setInterval(updateIngame,5000)
 /**
 bot.on('presenceUpdate',async function(om,m){
     if(m.guild.id != guild.id) return;
