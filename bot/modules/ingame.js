@@ -2,14 +2,10 @@ const bot = require('./../bot');
 const request = require('request-promise-native');
 let ingame;
 let guild;
-bot.on('ready',async function(){
-  guild =  bot.guilds.get("184536578654339072");
-  ingame = guild.roles.get("322233107489226764");
-  let playing = guild.members.filterArray(function (m) {
-        if (m.presence.game && m.presence.game.name)
-            if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
-                return m.user.id;
-    });
+const updateIngame = async function(){
+  if(!guild)return;
+  let playing = await request('http://localhost/v0/discord/online');
+  playing = JSON.parse(playing);
   let toRemove = ingame.members.filter(function (m){
       if(!playing.includes(m.id))
         return m;
@@ -18,25 +14,17 @@ bot.on('ready',async function(){
       await m.removeRole(ingame);
    }));
    await Promise.all(playing.map(async function(m){
-      await m.addRole(ingame);
+      m = guild.members.get(m);
+      if(m)
+        await m.addRole(ingame);
    }));
-  /**
-  let online = await request('http://localhost/v0/discord/online');
-  online = JSON.parse(online);
-  console.log(online)
-  if(online)
-  {
-    for(let i=0;i<online.length;i++)
-    {
-      let user = bot.users.get(online[i]);
-      let member = guild.member(user);
-      if(member)
-         await member.addRole(ingame);
-    }
-  }
-  **/
+};
+bot.on('ready',()=>{
+    guild =  bot.guilds.get("184536578654339072");
+    ingame = guild.roles.get("322233107489226764");
 });
-
+setInterval(updateIngame,5000)
+/**
 bot.on('presenceUpdate',async function(om,m){
     if(m.guild.id != guild.id) return;
     if (om.presence.game && om.presence.game.name)
@@ -47,3 +35,4 @@ bot.on('presenceUpdate',async function(om,m){
                 await m.addRole(ingame);
 })
 
+*/
