@@ -6,7 +6,7 @@ const influx = new Influx.InfluxDB({
     {
       measurement: 'statistics',
       fields: {
-        count: Influx.FieldType.Integer
+        count: Influx.FieldType.INTEGER
       },
       tags: [
         'type'
