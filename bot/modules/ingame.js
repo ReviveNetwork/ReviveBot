@@ -37,7 +37,7 @@ const updateIngame = async function(){
       if(!member.roles.get(ingame.id))
         await member.addRole(ingame);
      }
-     catch((e)=>{
+     catch(e){
        console.log(user.tag+" is not a member of the guild")
      })
    }));
