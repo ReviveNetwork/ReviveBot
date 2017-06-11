@@ -15,15 +15,15 @@ const updateIngame = async function(){
                 return m.user.id;
     });
   let toRemove = ingame.members.filter(function (m){
-      if(!playing.includes(m.id))
+      if(!playing.includes(m.user.id))
         return m;
     });
    await Promise.all(toRemove.map(async function(m){
       await m.removeRole(ingame);
    }));
    await Promise.all(playing.map(async function(m){
-      m = guild.members.get(m);
-      if(! m.roles.get(ingame.id))
+      m = guild.member(bot.users.get(m));
+      if(m && !m.roles.get(ingame.id))
         await m.addRole(ingame);
    }));
   influx.writePoints([
