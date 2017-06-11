@@ -9,7 +9,8 @@ const updateIngame = async function(){
   let playing = await request('http://localhost/v0/discord/online');
   playing = JSON.parse(playing);
   */
-  let playing = guild.members.filterArray(function (m) {
+  let members = await guild.fetchMembers();
+  let playing = members.filterArray(function (m) {
         if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
                 return m.user.id;
