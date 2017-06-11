@@ -28,7 +28,11 @@ const updateIngame = async function(){
       await m.removeRole(ingame);
    }));
    await Promise.all(playing.map(async function(m){
-      const member = await guild.fetchMember(m);
+      if(m === "")return;
+      const user = await bot.fetchUser(m);
+      if(!user)return;
+      const member = await guild.fetchMember(user);
+      if(!member)return;
       if(membber && !member.roles.get(ingame.id))
         await member.addRole(ingame);
    }));
