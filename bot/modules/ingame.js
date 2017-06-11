@@ -14,9 +14,13 @@ const updateIngame = async function(){
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
                 return m.user.id;
     });
+  console.log(playing);
   let toRemove = ingame.members.filter(function (m){
       if(!playing.includes(m.user.id))
+      {
+        console.log("Not playing : "+ m.user.id)
         return m;
+      }
     });
   await Promise.all(toRemove.map(async function(m){
       await m.removeRole(ingame);
