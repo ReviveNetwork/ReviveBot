@@ -104,10 +104,12 @@ setInterval(async function(){
             tags: {type:'members'}
           }
         ]).catch(console.log);
-    influx.writePoints([
+    let count = await Message.count();
+    if(count)
+        influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { count: await Message.count()},
+            fields: { count: },
             tags: {type:'messages'}
           }
         ]).catch(console.log);
