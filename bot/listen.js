@@ -120,7 +120,7 @@ setInterval(async function(){
           {
             measurement: 'statistics',
             fields: { count: r.members.size},
-            tags: {type: role.id }
+            tags: {type: r.id }
           }
         ]).catch(console.log);
     });
