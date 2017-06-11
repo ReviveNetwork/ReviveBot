@@ -12,12 +12,12 @@ async function command(params, message) {
         if(type === 'influx')
         {
           let res = await influx.query(params.join(' '));
-          return await message.channel.send(JSON.stringify(res),{code:'js'});
+          return await message.channel.send(JSON.stringify(res),{code:'js',split:true});
         }
         else if(type === 'sql')
         {
           let res = await knex.raw(params.join(' '));
-          return await message.channel.send(JSON.stringify(res),{code:'js'});
+          return await message.channel.send(JSON.stringify(res),{code:'js',split:true});
         }
         else
           return await message.reply("INVALID TYPE OF QUERY");
