@@ -7,6 +7,7 @@ const commands = require('./commands');
 const request = require('request-promise-native');
 const influx = require('./../influx');
 let lock = false;
+let ready = false;
 bot.on('error', (err) => {
     /**
      * Catch errors here
@@ -80,6 +81,7 @@ bot.on('ready', async function() {
     {
         console.log("Creating Dicord DB");
     }
+    ready = true;
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
     let user = member.user;
@@ -95,6 +97,7 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
     }
 });
 setInterval(async function(){
+    if(!ready)return;
     const guild = bot.guilds.get("184536578654339072");
     influx.writePoints([
           {
