@@ -109,7 +109,7 @@ setInterval(async function(){
         influx.writePoints([
           {
             measurement: 'statistics',
-            fields: { count: },
+            fields: { count: count},
             tags: {type:'messages'}
           }
         ]).catch(console.log);
