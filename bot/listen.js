@@ -95,7 +95,7 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
         }
     }
 });
-setInterval(()=>{
+setInterval(async function(){
     const guild = bot.guilds.get("184536578654339072");
     influx.writePoints([
           {
