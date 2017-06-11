@@ -10,10 +10,11 @@ const updateIngame = async function(){
   playing = JSON.parse(playing);
   */
   let members = await guild.fetchMembers();
+  members = members.guild;
   let playing = members.filterArray(function (m) {
         if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
-                return m.user.id;
+                return m;
     });
   playing = playing.map(m => m.user.id);
   console.log(playing);
