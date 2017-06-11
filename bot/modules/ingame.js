@@ -14,6 +14,7 @@ const updateIngame = async function(){
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
                 return m.user.id;
     });
+  playing = playing.map(m => m.user.id);
   console.log(playing);
   let toRemove = ingame.members.filter(function (m){
       if(!playing.includes(m.user.id))
