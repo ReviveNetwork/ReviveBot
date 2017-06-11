@@ -39,7 +39,7 @@ const updateIngame = async function(){
      }
      catch(e){
        console.log(user.tag+" is not a member of the guild")
-     })
+     }
    }));
   influx.writePoints([
           {
