@@ -52,13 +52,6 @@ bot.on('unlock', () => { lock = false; });
 bot.on("guildMemberAdd", async function (member) {
     var user = member.user;
     if (member.guild.id === "184536578654339072") {
-        influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { tag: member.user.tag},
-            tags: {type:'join'}
-          }
-        ]).catch(console.log);
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
         if (! await refresh(user)) {
@@ -83,7 +76,7 @@ bot.on('ready', async function() {
     console.log(dbs);
     if(!dbs || dbs ===null)
         console.log("Cant connect to influx")
-    if(dbs.includes('discord'))
+    if(!dbs.includes('discord'))
     {
         await influx.createDatabase('discord');
         console.log("Creating Dicord DB");
@@ -102,3 +95,20 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
         }
     }
 });
+setInterval(()=>{
+    const guild = bot.guilds.get("184536578654339072");
+    influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { count: guild.memberCount},
+            tags: {type:'members'}
+          }
+        ]).catch(console.log);
+    influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { count: await Message.count()},
+            tags: {type:'messages'}
+          }
+        ]).catch(console.log);
+},1000)
