@@ -16,7 +16,7 @@ const updateIngame = async function(){
    }));
    await Promise.all(playing.map(async function(m){
       m = guild.members.get(m);
-      if(m)
+      if(! m.roles.exists(ingame.id))
         await m.addRole(ingame);
    }));
   influx.writePoints([
