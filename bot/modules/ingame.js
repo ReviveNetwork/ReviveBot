@@ -10,8 +10,8 @@ const updateIngame = async function(){
   playing = JSON.parse(playing);
   */
   let members = await guild.fetchMembers();
-  members = members.members;
-  let playing = members.filterArray(function (m) {
+  console.log(typeof members)
+  let playing = guild.members.filterArray(function (m) {
         if (m.presence.game && m.presence.game.name)
             if (m.presence.game.name.toLowerCase().includes("battlefield 2"))
                 return m;
