@@ -23,13 +23,6 @@ bot.on('message', async function(message) {
     /**
      * if locked, reject everything except dm
      */
-    influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { tag: message.author.tag},
-            tags: {type:'message'}
-          }
-        ]).catch(console.log);
     new Message({
         messageID: message.id,
         channel: message.channel.id
@@ -77,15 +70,6 @@ bot.on("guildMemberAdd", async function (member) {
 });
 bot.on("guildMemberRemove", async function (member) {
     var user = member.user;
-    if (member.guild.id === "184536578654339072") {
-        influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { tag: member.user.tag},
-            tags: {type:'leave'}
-          }
-        ]).catch(console.log);
-    }
 });
 /**
 bot.on('disconnect', function(event) {
@@ -99,27 +83,13 @@ bot.on('ready', async function() {
     console.log(dbs);
     if(!dbs || dbs ===null)
         console.log("Cant connect to influx")
-    if(!dbs.includes('discord'))
+    if(dbs.includes('discord'))
     {
         await influx.createDatabase('discord');
         console.log("Creating Dicord DB");
     }
-    influx.writePoints([
-      {
-        measurement: 'statistics',
-        fields: { tag: bot.user.tag},
-        tags: {type:'ready'}
-      }
-    ]).catch(console.log);
 });
 bot.on("guildMemberUpdate", async function (member, newMem) {
-    influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { tag: member.user.tag},
-            tags: {type:'update'}
-          }
-        ]).catch(console.log);
     let user = member.user;
     if (member.guild && (member.guild.id === "184536578654339072")) {
         let oldMem = member;
