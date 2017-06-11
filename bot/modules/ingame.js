@@ -1,4 +1,5 @@
 const bot = require('./../bot');
+const influx = require('./../../influx');
 const request = require('request-promise-native');
 let ingame;
 let guild;
@@ -18,12 +19,19 @@ const updateIngame = async function(){
       if(m)
         await m.addRole(ingame);
    }));
+  influx.writePoints([
+          {
+            measurement: 'statistics',
+            fields: { count: playing.length},
+            tags: {type:'ingame'}
+          }
+        ]).catch(console.log);
 };
 bot.on('ready',()=>{
     guild =  bot.guilds.get("184536578654339072");
     ingame = guild.roles.get("322233107489226764");
 });
-setInterval(updateIngame,5000)
+setInterval(updateIngame,1000)
 /**
 bot.on('presenceUpdate',async function(om,m){
     if(m.guild.id != guild.id) return;
