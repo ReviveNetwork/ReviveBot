@@ -15,7 +15,7 @@ bot.on('message', message => {
 });
 bot.on('messageUpdate', (oldMessage, newMessage) => {
     if (newMessage.author.bot == true) return; // prevent double messages
-    console.log("executing");
+    //console.log("executing");
     let attach = '';
     if (newMessage.attachments.size > 0)
     { attach = '\n' + newMessage.attachments.first().url; }
@@ -30,7 +30,7 @@ bot.on('messageUpdate', (oldMessage, newMessage) => {
 });
 bot.on('messageDelete', message => {
     if (message.author.bot == true) return; // prevent double messages
-    console.log("executing");
+    //console.log("executing");
     let m = messageDB.data.find(function (messageObj) {
         if (messageObj.oldMessage === message.id)
             return messageObj;
