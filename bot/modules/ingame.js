@@ -33,12 +33,10 @@ const updateIngame = async function(){
       if(!user)return;
      try{
       const member = await guild.fetchMember(user);
-      if(!member)return;
       if(!member.roles.get(ingame.id))
         await member.addRole(ingame);
      }
      catch(e){
-       console.log(user.tag+" is not a member of the guild")
      }
    }));
   influx.writePoints([
