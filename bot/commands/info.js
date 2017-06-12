@@ -41,7 +41,7 @@ async function command(params, message) {
 		}
 		let gameob = soldier.game == "stella" ? revive.bf2142 : revive.bf2;
 		let g = soldier.game == "stella" ? 'bf2142' : 'bf2';
-		let ranklink = soldier.game == 'stella' ? 'https://github.com/ReviveNetwork/ReviveBot/raw/master/img/bf2142/rank_' : 'https://battlelog.co/img/ranks/rank_'
+		let ranklink = soldier.game == 'stella' ? 'https://raw.githubusercontent.com/ReviveNetwork/ReviveBot/master/img/bf2142/rank_' : 'https://battlelog.co/img/ranks/rank_'
 		let rank = null;
         try {
             rank = await gameob.getPlayer(soldier.pid);
