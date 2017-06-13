@@ -69,7 +69,7 @@ async function command(params, message) {
 		    .addField("Favourite Vehicle: ", revive.constants[g].vehicles[rank.favVehicle], true)
 		    .addField("Heals: ", rank.heals, true)
 		    .addField("Revives: ", rank.revives, true);
-			if(soldier.game != 'stella')
+			if( rank.topOpponentName && rank.topVictimName)
 			{
 				embed.addField("Top Opponent: ", rank.topOpponentName, true);
 				embed.addField("Top Victim: ", rank.topVictimName, true);
