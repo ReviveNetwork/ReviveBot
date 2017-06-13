@@ -69,9 +69,9 @@ async function command(params, message) {
 		    .addField("Favourite Vehicle: ", revive.constants[g].vehicles[rank.favVehicle], true)
 		    .addField("Heals: ", rank.heals, true)
 		    .addField("Revives: ", rank.revives, true);
-			if( rank.topOpponentName && rank.topVictimName)
+			if( rank.topOpponentName && rank.topVictimName && rank.topOpponentName !=null && rank.topVictimName !=null )
 			{
-				embed.addField("Top Opponent: ", rank.topOpponentName, true);
+				embed.addField("Top Opponent: ", rank.topOpponentName , true);
 				embed.addField("Top Victim: ", rank.topVictimName, true);
 			}
 		    embed.setURL((soldier.game == "stella" ? "http://bl2142.co/bfhq.php?pid=" : "http://battlelog.co/bfhq.php?pid=") + soldier.pid)
@@ -82,6 +82,7 @@ async function command(params, message) {
 		}
 		catch(e){
 			console.log(e.stack);
+			console.log(rank.topOpponentName +" "+ rank.topVictimName)
 			console.log(embed);
 		}
 	}
