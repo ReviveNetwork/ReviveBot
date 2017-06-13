@@ -7,21 +7,25 @@ const p2str = require('./../lib/p2str');
  * @param {*message} message
  */
 async function command(params, message) {
-    let nick = params[0];
-    bf2.getPlayers(nick).then(plist => {
+     let nick = params[0];
+    try{
+        const plist = await bf2.getPlayers(nick);
         if (plist.length == 0) {
             message.channel.send("Player not found");
             return;
         }
-        p2str(plist[0], "bf2").then(pl => message.channel.send(pl).then(msg => {
-            if (plist.length === 1) return;
-            msg.react('▶').then(
-                msg.react('◀')).then(
-                msg.react('⏩')).then(
-                msg.react('⏪'))
-            bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2"), arr: plist, index: 0 });
-        }));
-    }).catch(message.channel.send);
+        const pl = await p2str(plist[0], "bf2")
+        const msg = await message.channel.send(pl);
+        if (plist.length === 1) return;
+        await msg.react('⏪')
+        await msg.react('◀')
+        await msg.react('▶')
+        await msg.react('⏩')
+        bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2"), arr: plist, index: 0 });
+    }
+    catch(e){
+        message.reply("No such user found");
+    }
 }
 /**
  * description of the command
