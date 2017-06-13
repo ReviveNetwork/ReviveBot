@@ -22,7 +22,6 @@ async function command(params, message) {
         await msg.react('▶')
         await msg.react('⏩')
         bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2142"), arr: plist, index: 0 });
-        }));
     }
     catch(e){
         message.reply("No such user found");
