@@ -20,7 +20,7 @@ const updateIngame = async function(){
   let toRemove = ingame.members.filter(function (m){
       if(!playing.includes(m.user.id))
       {
-        console.log("Not playing : "+ m.user.id)
+        //console.log("Not playing : "+ m.user.id)
         return m;
       }
     });
