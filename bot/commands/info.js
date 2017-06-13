@@ -53,28 +53,37 @@ async function command(params, message) {
 			continue;
 		}
 		let embed = new Discord.RichEmbed()
-            .setTitle(soldier.nickname).setThumbnail(ranklink + rank.rank + '.png')
-            .addField("Game: ", (soldier.game == "stella" ? "Battlefield 2142" : "Battlefield 2"), true)
-            .addField("Rank: ", (soldier.game == "stella" ? require('../../data/bf2142rank.json') : require('../../data/bf2rank.json'))[rank.rank], true)
-            .addField("Online: ", (soldier.online == 1 ? "yes" : "no"), true)
-            .addField("Last Active: ", moment(soldier.last_active, "YYYY-MM-DD HH:mm:ss").fromNow(), true)
-            .addField("KDR: ", rank.kdr, true)
-            .addField("Kills per Minute: ", rank.killsPM, true)
-            .addField("Deaths per Minute: ", rank.deathsPM, true)
-            .addField("Kill Streak: ", rank.bestKillStreak, true)
-            .addField("Death Streak: ", rank.worstDeathStreak, true)
-            .addField("Favourite Kit: ", revive.constants[g].kits[rank.favKit], true)
-            .addField("Favourite Vehicle: ", revive.constants[g].vehicles[rank.favVehicle], true)
-            .addField("Heals: ", rank.heals, true).addField("Revives: ", rank.revives, true);
-		    (rank.topOpponentName) ? (
-                embed.addField("Top Opponent: ", rank.topOpponentName, true)
-                .addField("Top Victim: ", rank.topVictimName, true)
-            ) : "";
-	    embed.setURL((soldier.game == "stella" ? "http://bl2142.co/bfhq.php?pid=" : "http://battlelog.co/bfhq.php?pid=") + soldier.pid)
-            .setFooter("Created " + moment(soldier.time_created, "YYYY-MM-DD HH:mm:ss").fromNow())
-            .setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
-        atleastOne = true;
-	    await message.channel.send('', { embed: embed});
+		try
+		{
+		    embed.setTitle(soldier.nickname).setThumbnail(ranklink + rank.rank + '.png')
+		    .addField("Game: ", (soldier.game == "stella" ? "Battlefield 2142" : "Battlefield 2"), true)
+		    .addField("Rank: ", (soldier.game == "stella" ? require('../../data/bf2142rank.json') : require('../../data/bf2rank.json'))[rank.rank], true)
+		    .addField("Online: ", (soldier.online == 1 ? "yes" : "no"), true)
+		    .addField("Last Active: ", moment(soldier.last_active, "YYYY-MM-DD HH:mm:ss").fromNow(), true)
+		    .addField("KDR: ", rank.kdr, true)
+		    .addField("Kills per Minute: ", rank.killsPM, true)
+		    .addField("Deaths per Minute: ", rank.deathsPM, true)
+		    .addField("Kill Streak: ", rank.bestKillStreak, true)
+		    .addField("Death Streak: ", rank.worstDeathStreak, true)
+		    .addField("Favourite Kit: ", revive.constants[g].kits[rank.favKit], true)
+		    .addField("Favourite Vehicle: ", revive.constants[g].vehicles[rank.favVehicle], true)
+		    .addField("Heals: ", rank.heals, true)
+		    .addField("Revives: ", rank.revives, true);
+			if(soldier.game != 'stella')
+			{
+				embed.addField("Top Opponent: ", rank.topOpponentName, true);
+				embed.addField("Top Victim: ", rank.topVictimName, true);
+			}
+		    embed.setURL((soldier.game == "stella" ? "http://bl2142.co/bfhq.php?pid=" : "http://battlelog.co/bfhq.php?pid=") + soldier.pid)
+		    .setFooter("Created " + moment(soldier.time_created, "YYYY-MM-DD HH:mm:ss").fromNow())
+		    .setColor(soldier.game == "stella" ? "#0000FF" : "#ff0000");
+		    await message.channel.send('', { embed: embed});
+			atleastOne = true;
+		}
+		catch(e){
+			console.log(e.stack);
+			console.log(embed);
+		}
 	}
     if(!atleastOne)
         message.channel.send(user.toString()+" has no soldiers");
