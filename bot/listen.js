@@ -6,6 +6,7 @@ const Message = require('./../orm/Message')
 const commands = require('./commands');
 const request = require('request-promise-native');
 const influx = require('./../influx');
+
 let lock = false;
 let ready = false;
 bot.on('error', (err) => {
