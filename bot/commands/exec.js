@@ -64,6 +64,11 @@ async function command(params, message) {
         shell.on('exit', async function (code) {
             outputlines.push("Exited with code: " + code);
         });
+        setTimeout(()=>{
+            errorlines.push("Process timed out");
+            shell.stdin.pause();
+            shell.kill();
+        },60000)
     }
     else
         message.reply('Not worthy')
