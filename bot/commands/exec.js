@@ -49,7 +49,7 @@ async function command(params, message) {
                 }
             });
             gist = JSON.parse(gist);
-            gist = "http://htmlpreview.github.io/?"+gist.files['output.html'].raw_url;
+            gist = "http://htmlpreview.github.io/?" + gist.files['output.html'].raw_url;
         }
         shell.stdout.on('data', function (data) {
             if (data.toString() === "" || data.toString() === "") return;
@@ -64,14 +64,14 @@ async function command(params, message) {
         shell.on('exit', async function (code) {
             outputlines.push("Exited with code: " + code);
         });
-        setTimeout(()=>{
+        setTimeout(() => {
             errorlines.push("Process timed out");
             shell.stdin.pause();
             shell.kill();
-        },60000)
+        }, 60000)
     }
     else
-        message.reply('Not worthy')
+        message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif')
 }
 /**
  * description of the command

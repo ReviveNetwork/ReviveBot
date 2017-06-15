@@ -10,7 +10,7 @@ async function command(params, message) {
         message.reply('Unlocked the bot');
     }
     else
-        message.reply('Not worthy')
+        message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif')
 }
 /**
  * description of the command

@@ -23,7 +23,7 @@ async function command(params, message) {
           return await message.reply("INVALID TYPE OF QUERY");
     }
     else
-        return await message.reply('Not worthy');
+        return await message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif');
 }
 /**
  * description of the command
