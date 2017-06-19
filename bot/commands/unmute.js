@@ -11,7 +11,7 @@ async function command(params, message) {
         return;
     }
     let mutei = settings.muted.findIndex(function (m) {
-        if (m.id === message.mentions.first() && m.guild === message.guild.id)
+        if (m.id === message.mentions.users.first() && m.guild === message.guild.id)
             return true;
     });
     if (mutei && mutei >= 0) {
