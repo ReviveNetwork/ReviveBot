@@ -38,7 +38,7 @@ bot.on('message', async function(message) {
     /**
      * Listen to messages and convert into params
      */
-    if(settings.muted)
+    if(!settings.owners.includes(message.author.id) && settings.muted)
     {
         let mute = settings.muted.find(function(u){
             if(u.id === message.author.id && u.guild === message.guild.id)
