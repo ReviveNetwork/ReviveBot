@@ -4,7 +4,6 @@
 const commands = {};
 const settings = require('./../settings.json');
 const list = require('./commandlist');
-let debug = true;
 const getcommands = () => {
     Object.entries(list).forEach(
         ([key, value]) => {
@@ -14,7 +13,7 @@ const getcommands = () => {
 }
 getcommands();
 const getError = function(err) {
-    if(debug)
+    if(settings.debug)
         return err.stack
     else
         return err
