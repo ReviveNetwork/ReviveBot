@@ -37,5 +37,7 @@ module.exports = {
     "impersonate":"impersonate",
     "delete":"delete",
     "exec":"exec",
-    "query" : "query"
+    "query" : "query",
+    "mute":"mute",
+    "unmute":"unmute"
 }
