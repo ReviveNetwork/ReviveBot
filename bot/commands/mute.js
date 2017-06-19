@@ -10,16 +10,21 @@ async function command(params, message) {
         message.channel.send("You aren't Worthy");
         return;
     }
-    let mutei = settings.muted.find(function (m) {
-        if (m.id === message.mentions.users.first() && m.guild === message.guild.id)
-            return true;
-    });
-    if (mutei) {
-        return await message.reply("already muted");
-    }
-    else
-        settings.muted.push({ id: message.author.id, guild: message.guild.id });
-    await message.reply("muted");
+    let muted = message.guild.roles.find(function (r) {
+        if (r.toLowerCase().includes('mute')) return r
+    })
+    if (!muted)
+        muted = await message.guild.createRole({
+            data: {
+                name: 'muted',
+                color: 'GREY',
+                permissions: []
+            },
+            reason: 'to mute people'
+        })
+    let user = message.mentions.users.first();
+    let member = message.guild.member(user).addRole(muted);
+    message.reply("muted")
 }
 /**
  * description of the command

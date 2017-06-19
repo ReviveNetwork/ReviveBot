@@ -21,7 +21,7 @@ process.on('unhandledRejection', (err) => {
         process.exit();//restart
 });
 process.on('uncaughtException', (err) => console.log("UNHANDLED EXCEPTION AT " + err.stack));
-bot.on('message', async function(message) {
+bot.on('message', async function (message) {
     /**
      * if locked, reject everything except dm
      */
@@ -38,15 +38,6 @@ bot.on('message', async function(message) {
     /**
      * Listen to messages and convert into params
      */
-    if(!settings.owners.includes(message.author.id) && settings.muted)
-    {
-        let mute = settings.muted.find(function(u){
-            if(u.id === message.author.id && u.guild === message.guild.id)
-                return u;
-        })
-        if(mute)
-            message.delete();
-    }
     if (message.content.startsWith(settings.identifier)) {
         /**Extracting params */
         let params = message.content.substring(settings.identifier.length).trim();
@@ -81,14 +72,13 @@ bot.on('disconnect', function(event) {
     process.exit();//force restart
 });*/
 
-bot.on('ready', async function() {
+bot.on('ready', async function () {
     console.log("ReviveBot Ready");
     let dbs = await influx.getDatabaseNames();
     console.log(dbs);
-    if(!dbs || dbs ===null)
+    if (!dbs || dbs === null)
         console.log("Cant connect to influx")
-    if(!dbs.includes('discord'))
-    {
+    if (!dbs.includes('discord')) {
         console.log("Creating Dicord DB");
     }
     ready = true;
@@ -99,46 +89,46 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
         let oldMem = member;
         if (!oldMem.roles.has("273105185566359562") && newMem.roles.has("273105185566359562")) return;
         if (!oldMem.roles.has("275317218911322112") && newMem.roles.has("275317218911322112")) return;
-        if (oldMem.roles.has("317854639431221248") && !newMem.roles.has("317854639431221248")) 
+        if (oldMem.roles.has("317854639431221248") && !newMem.roles.has("317854639431221248"))
             await refresh(user);
         if ((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920")) || (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104")) || (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523"))) {
             await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
         }
     }
 });
-setInterval(async function(){
-    if(!ready)return;
+setInterval(async function () {
+    if (!ready) return;
     const guild = bot.guilds.get("184536578654339072");
     influx.writePoints([
-          {
+        {
             measurement: 'statistics',
-            fields: { count: guild.memberCount},
-            tags: {type:'members'}
-          }
-        ]).catch(console.log);
+            fields: { count: guild.memberCount },
+            tags: { type: 'members' }
+        }
+    ]).catch(console.log);
     let count = await Message.count();
-    if(count)
+    if (count)
         influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { count: count},
-            tags: {type:'messages'}
-          }
+            {
+                measurement: 'statistics',
+                fields: { count: count },
+                tags: { type: 'messages' }
+            }
         ]).catch(console.log);
-    guild.roles.map(r=>{
+    guild.roles.map(r => {
         influx.writePoints([
-          {
-            measurement: 'statistics',
-            fields: { count: r.members.size},
-            tags: {type: r.id }
-          }
+            {
+                measurement: 'statistics',
+                fields: { count: r.members.size },
+                tags: { type: r.id }
+            }
         ]).catch(console.log);
     });
     influx.writePoints([
-          {
+        {
             measurement: 'statistics',
-            fields: { count: guild.presences.map(p => p.status != 'offline').length},
-            tags: {type: "online"}
-          }
-        ]).catch(console.log);
-},1000)
+            fields: { count: guild.presences.map(p => p.status != 'offline').length },
+            tags: { type: "online" }
+        }
+    ]).catch(console.log);
+}, 1000)
