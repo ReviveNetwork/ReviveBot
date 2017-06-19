@@ -10,7 +10,17 @@ async function command(params, message) {
         message.channel.send("You aren't Worthy");
         return;
     }
-    settings.muted.push({id: message.author.id, guild: message.guild.id});
+    let mutei = settings.muted.find(function(m){
+      if(m.id === message.mentions.first() && m.guild === message.guild.id)
+        return true;
+    });
+    if(mutei)
+    {
+      return await message.reply("already muted");
+    }
+    else
+        settings.muted.push({id: message.author.id, guild: message.guild.id});
+    await message.reply("muted");
 }
 /**
  * description of the command
