@@ -6,7 +6,7 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-        message.channel.send('You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif').then(m =>m.delete(10000));
+        message.channel.send("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif").then(m => m.delete(10000));
         return;
     }
     await message.delete(10000);

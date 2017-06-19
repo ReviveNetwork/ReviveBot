@@ -7,7 +7,7 @@
 const settings = require('./../../settings.json');
 async function command(params, message) {
     if (!message.member.hasPermission("MANAGE_ROLES")) {
-        message.channel.send('You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif');
+        message.channel.send("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif");
         return;
     }
     let muted = message.guild.roles.find(function (r) {
