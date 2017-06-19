@@ -38,12 +38,15 @@ bot.on('message', async function(message) {
     /**
      * Listen to messages and convert into params
      */
-    let mute = settings.muted.find(function(u){
-        if(u.id === message.author.id && u.guild === message.guild.id)
-            return u;
-    })
-    if(mute)
-        message.delete();
+    if(settings.muted)
+    {
+        let mute = settings.muted.find(function(u){
+            if(u.id === message.author.id && u.guild === message.guild.id)
+                return u;
+        })
+        if(mute)
+            message.delete();
+    }
     if (message.content.startsWith(settings.identifier)) {
         /**Extracting params */
         let params = message.content.substring(settings.identifier.length).trim();
