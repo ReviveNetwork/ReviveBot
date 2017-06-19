@@ -11,7 +11,7 @@ async function command(params, message) {
         return;
     }
     let muted = message.guild.roles.find(function (r) {
-        if (r.toLowerCase().includes('mute')) return r
+        if (r.name.toLowerCase().includes('mute')) return r
     })
     if (!muted)
         muted = await message.guild.createRole({
