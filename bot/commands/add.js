@@ -5,7 +5,7 @@
  * @param {*message} message
  */
 async function command(params, message) {
-    if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
+    if (!message.member.hasPermission("MANAGE_ROLES")) {
         message.channel.send("You aren't Worthy");
         return;
     }

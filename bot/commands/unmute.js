@@ -6,21 +6,20 @@
  */
 const settings = require('./../../settings.json');
 async function command(params, message) {
-    if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) {
+    if (!message.member.hasPermission("MANAGE_ROLES")) {
         message.channel.send("You aren't Worthy");
         return;
     }
-    let mutei = settings.muted.findIndex(function(m){
-      if(m.id === message.mentions.first() && m.guild === message.guild.id)
-        return true;
+    let mutei = settings.muted.findIndex(function (m) {
+        if (m.id === message.mentions.first() && m.guild === message.guild.id)
+            return true;
     });
-    if(mutei && mutei>=0)
-    {
-      settings.muted.splice(mutei, 1);
-      message.reply("unmuted");
+    if (mutei && mutei >= 0) {
+        settings.muted.splice(mutei, 1);
+        message.reply("unmuted");
     }
-    else 
-      message.reply("user was not muted");
+    else
+        message.reply("user was not muted");
 }
 /**
  * description of the command
