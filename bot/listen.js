@@ -64,7 +64,7 @@ bot.on("guildMemberAdd", async function (member) {
         if (! await refresh(user)) {
             await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
             const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't type `accept` within 10 minutes");
-            ma.delete(3000);
+            ma.delete({timeout:3000});
         }
     }
 });
