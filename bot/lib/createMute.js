@@ -4,7 +4,7 @@ module.exports = async function (guild) {
             name: 'muted',
             color: 'GREY',
             permissions: [],
-            position: guild.me.highestRole.position + 1
+            position: guild.me.highestRole.position - 1
         },
         reason: 'to mute people'
     });

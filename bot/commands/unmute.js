@@ -14,7 +14,7 @@ async function command(params, message) {
     if (!muted)
         return muted = await createMute(guild);
 
-    if (!(message.member.highestRole.position < muted.position)) {
+    if (!(message.member.highestRole.position > muted.position)) {
         message.channel.send("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif");
         return;
     }
