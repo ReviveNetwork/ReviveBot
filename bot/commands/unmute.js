@@ -20,7 +20,7 @@ async function command(params, message) {
     }
 
     let user = message.mentions.users.first();
-    let member = message.guild.member(user).removeRole(muted);
+    await message.guild.member(user).removeRole(muted);
     message.reply("unmuted");
 }
 /**

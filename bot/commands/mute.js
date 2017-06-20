@@ -21,7 +21,7 @@ async function command(params, message) {
     }
 
     let user = message.mentions.users.first();
-    let member = message.guild.member(user).addRole(muted);
+    await message.guild.member(user).addRole(muted);
     message.reply("muted")
 }
 /**
