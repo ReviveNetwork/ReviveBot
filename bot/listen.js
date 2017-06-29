@@ -97,7 +97,7 @@ bot.on("guildMemberUpdate", async function (member, newMem) {
         if (oldMem.roles.has("317854639431221248") && !newMem.roles.has("317854639431221248"))
             await refresh(user);
         if ((!oldMem.roles.has("184684916833779712") && newMem.roles.has("184684916833779712")) || (!oldMem.roles.has("200849956796497920") && newMem.roles.has("200849956796497920")) || (!oldMem.roles.has("184676864630063104") && newMem.roles.has("184676864630063104")) || (!oldMem.roles.has("286646245198528523") && newMem.roles.has("286646245198528523"))) {
-            await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + user.id);
+            await request({uri:'http://localhost/v0/discord/reverse_link/' + user.id, method:"POST"});
         }
     }
 });
