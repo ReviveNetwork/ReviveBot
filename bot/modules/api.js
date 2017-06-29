@@ -9,7 +9,7 @@ let ready =false;
 
 app.use(bodyParser.json())
 bot.on('ready',()=>{ready=true;});
-    app.get('/push/user/:userId/updated', function (req, res) {
+    app.post('/push/user/:userId/updated', function (req, res) {
         //console.log(req);
         //console.log(req.params);
         if(!ready)return;
