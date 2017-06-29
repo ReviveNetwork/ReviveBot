@@ -9,7 +9,7 @@ const request = require('request-promise-native');
 async function command(params, message) {
     if (params.length >= 1) {
         message.mentions.users.map(async function (u) {
-            const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + u.id)
+            const r = await request({uri:'http://localhost/v0/discord/reverse_link/' + u.id, method:"POST"});
             if (r == "ok")
                 await message.channel.send(u.toString() + " sucessfully linked");
             else
@@ -21,7 +21,7 @@ async function command(params, message) {
             r.members.map(async function (m) {
                 let u = m.user;
                 console.log("refreshing " + u.username);
-                const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + u.id)
+                const r = await  request({uri:'http://localhost/v0/discord/reverse_link/' + u.id, method:"POST"});
                 if (r == "ok")
                     await message.channel.send(u.toString() + " sucessfully linked");
                 else
@@ -31,7 +31,7 @@ async function command(params, message) {
         return true;
     }
     else {
-        const r = await request('http://revive-bot-discord.revive.systems/v0/discord/reverse_link/' + message.author.id)
+        const r = await  request({uri:'http://localhost/v0/discord/reverse_link/' + message.author.id, method:"POST"});
         if (r == "ok")
             await message.channel.send(message.author.toString() + " sucessfully linked");
         else
