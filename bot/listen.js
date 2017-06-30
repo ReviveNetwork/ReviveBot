@@ -61,11 +61,6 @@ bot.on("guildMemberAdd", async function (member) {
     if (member.guild.id === "184536578654339072") {
         if (member.user.bot) return console.log(member.user.tag + " is a bot who joined " + member.guild.name)
         user.send("Welcome to the Revive Network");
-        if (! await refresh(user)) {
-            await member.addRole(bot.guilds.get("184536578654339072").roles.get("317854639431221248"));
-            const ma = await bot.channels.get("317859245309689856").send(user.toString() + "Type `accept` to continue. You will be kicked if you don't type `accept` within 10 minutes");
-            ma.delete({timeout:3000});
-        }
     }
 });
 bot.on("guildMemberRemove", async function (member) {
