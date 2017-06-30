@@ -8,4 +8,4 @@ require('./modules/hotline');
 //require('./modules/logs');
 require('./modules/api');
 require('./modules/ingame');
-require('./modules/accept');
+//require('./modules/accept');
