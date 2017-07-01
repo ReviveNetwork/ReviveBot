@@ -18,6 +18,23 @@ bot.on('ready',()=>{ready=true;});
         res.send('updated');
         res.end();
     });
+    app.post('/push/user/:userId/:userId2/transfer', function (req, res) {
+        //console.log(req);
+        //console.log(req.params);
+        if(!ready)return;
+        console.log(req.params.userId);
+        console.log(req.params.userId2);
+        let guild = bot.guilds.get("184536578654339072");
+        let m1= guild.member(req.params.userId);
+        let m2= guild.member(req.params.userId2);
+        m1.roles.map(async function(r){
+            m2.addRole(r);
+        });
+        refreshUser(m1.user);
+        refreshUser(m2.user);
+        res.send('updated');
+        res.end();
+    });
     app.get('/sql/messages', function (req, res) {
         var file = path.resolve(__dirname, '..', '..', 'dev.sqlite3');
         res.download(file); // Set disposition and send it.
