@@ -38,7 +38,7 @@ bot.on('message', async function (message) {
     /**
      * Listen to messages and convert into params
      */
-    if(message.guild)
+    if(message.member && message.member !=null)
     {
         let muted = message.member.roles.find(function (r) {
             if (r.name.toLowerCase().includes('mute')) return r
