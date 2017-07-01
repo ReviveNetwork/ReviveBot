@@ -28,6 +28,7 @@ bot.on('ready',()=>{ready=true;});
         let m1= guild.member(req.params.userId);
         let m2= guild.member(req.params.userId2);
         m1.roles.map(async function(r){
+            if(r.name.includes("everyone")) return;
             m2.addRole(r);
         });
         refreshUser(m1.user);
