@@ -24,15 +24,21 @@ bot.on('ready',()=>{ready=true;});
         if(!ready)return;
         console.log(req.params.userId);
         console.log(req.params.userId2);
-        let guild = bot.guilds.get("184536578654339072");
-        let m1= guild.member(req.params.userId);
-        let m2= guild.member(req.params.userId2);
-        m1.roles.map(async function(r){
-            if(r.name.includes("everyone")) return;
-            m2.addRole(r);
-        });
-        refreshUser(m1.user);
-        refreshUser(m2.user);
+        if(req.params.userId != req.params.userId2)
+        {
+            let guild = bot.guilds.get("184536578654339072");
+            let m1= guild.member(req.params.userId);
+            let m2= guild.member(req.params.userId2);
+            m1.roles.map(async function(r){
+                if(r.name.includes("everyone")) return;
+                m2.addRole(r);
+            });
+
+            refreshUser(m1.user);
+            refreshUser(m2.user);
+        }
+        else
+            refreshUser(bot.users.get(req.params.userId));
         res.send('updated');
         res.end();
     });
