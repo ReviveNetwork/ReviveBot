@@ -41,7 +41,7 @@ module.exports = async function (message, hotline){
         return embed;
         //return message.reply("Embeds not supported yet")
     }
-    embed.setAuthor(message.author.username, message.author.displayAvatarURL())
+    embed.setAuthor(message.author.username, message.author.avatarURL())
     if (!hotline)
         embed.setTitle((message.guild)?(message.channel.name + " in " + message.guild.name):(" in a DM with " + message.channel.recipient.tag));
     if (!message.content.trim() == "")
