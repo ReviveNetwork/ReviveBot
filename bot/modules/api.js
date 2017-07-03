@@ -13,7 +13,7 @@ bot.on('ready',()=>{ready=true;});
         //console.log(req);
         //console.log(req.params);
         if(!ready)return;
-        console.log(req.params.userId);
+        console.log("Recieved Refresh request for <@"+req.params.userId+">");
         refreshUser(bot.users.get(req.params.userId));
         res.send('updated');
         res.end();
@@ -22,8 +22,7 @@ bot.on('ready',()=>{ready=true;});
         //console.log(req);
         //console.log(req.params);
         if(!ready)return;
-        console.log(req.params.userId);
-        console.log(req.params.userId2);
+        console.log("Recieved link transfer request from <@"+req.params.userId+"> to <@"+req.params.userId+">")
         if(req.params.userId != req.params.userId2)
         {
             let guild = bot.guilds.get("184536578654339072");
@@ -71,6 +70,7 @@ bot.on('ready',()=>{ready=true;});
     });
     app.get('/reverse/:id', async function (req, res) {
         if(!ready)return;
+        console.log("Recieved reverse link request for <@"+req.params.id+">")
         const user = bot.users.get(req.params.id);
         const guild = bot.guilds.get("184536578654339072");
         const member = guild.member(user);
