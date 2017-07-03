@@ -93,6 +93,9 @@ bot.on('ready',()=>{ready=true;});
         res.json(result);
         res.end();
     });
+app.all('*', function(req, res){
+  console.log("Recieved request on an invalid route \n"+req.method+" "+req.originalUrl);
+});
 var listener = app.listen(8080, function () {
     console.log('API now running on port: ' + listener.address().port);
 });
