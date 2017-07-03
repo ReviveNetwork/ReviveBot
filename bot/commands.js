@@ -12,8 +12,8 @@ const getcommands = () => {
     );
 }
 getcommands();
-const getError = function(err) {
-    if(settings.debug)
+const getError = function (err) {
+    if (settings.debug)
         return err.stack
     else
         return err
@@ -21,7 +21,7 @@ const getError = function(err) {
 module.exports = {
     execute: function (cmd, params, message) {
         if (commands[cmd]) {
-            commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error' }))//.then(message.delete(3000));
+            commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error', split: true }))//.then(message.delete(3000));
         }
         else if (cmd === 'help')
             help(message);

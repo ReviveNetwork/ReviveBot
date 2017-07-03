@@ -9,15 +9,6 @@ module.exports = {
     "add": "add",
     "remove": "remove",
     "unlock": "unlock",
-    /*
-    "play": "music/play",
-    "playnext": "music/playnext",
-    "pause": "music/pause",
-    "queue": "music/queue",
-    "clear": "music/clear",
-    "resume": "music/resume",
-    "setvol": "music/setvol",
-    */
     "info": "info",
     "hash": "hash",
     "bf2": "bf2",
@@ -34,10 +25,10 @@ module.exports = {
     "http": "http",
     "8ball": "8ball",
     "whoisplaying": "whoisplaying",
-    "impersonate":"impersonate",
-    "delete":"delete",
-    "exec":"exec",
-    "query" : "query",
-    "mute":"mute",
-    "unmute":"unmute"
+    "impersonate": "impersonate",
+    "delete": "delete",
+    "exec": "exec",
+    "query": "query",
+    "mute": "mute",
+    "unmute": "unmute"
 }
