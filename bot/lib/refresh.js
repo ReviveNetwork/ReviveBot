@@ -50,7 +50,7 @@ module.exports = async function (user, noDM) {
             if (member.roles.get("273105185566359562"))
                 await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
         }
-        if (guild.me.highestRole.comparePositionTo(member.highestRole) > 1)
+        if (member.kickable)
             await member.setNickname(info.username);
         return info;
     });
