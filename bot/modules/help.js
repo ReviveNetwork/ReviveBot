@@ -3,7 +3,7 @@ const bot = require('../bot');
 bot.on('message', message => {
     var channel = message.channel;
     if (message.author.bot) return;
-    if (message.channel.id != "260294049964097537") return;//it is not the help channel
+    if (message.channel.id != "260294049964097537" && message.channel.id != "329922321009868810" && message.channel.id != "274920877315850241" ) return;//it is not the help channel
     var user = message.author;
     message = message.content.toLowerCase();
     //Error updating
@@ -53,6 +53,6 @@ bot.on('message', message => {
         channel.send('It seems your using the old launcher. Download the new launcher using this link \n http://download.bf2.us/launcher-release/Setup.exe',{files: ['https://battlelog.co/img/revive-launcher.png']});
     }
     else if (message.includes('leg') && message.includes('is') && (message.includes('project')|| message.includes('revive') || message.includes('battlelog'))) {
-        channel.send('As Gamespy shutdown, all the games hosted by Gamespy became \"abandonware\" as EA no longer wished to support them.\nAbandonware is computer software that is no longer distributed or supported by the developer or copyright holder.\nAs long as we do not modify the software no more than we need to get it working and do not profit from it, EA will not profibit the game revival.\n\nRevive has made itself transparent to EA. At the moment, EA neither endorse nor prohibit Revive mostly due to the following reasons: \n\n1) EA has decided not to earn profit out ofnthe games anymore and  hence have ended thier support for the games after gamespy shutdown. There were also some cases where players contacted EA to purchase the games and in the end were given to them for free.\n\n2) They know that Revive, unlike them, is an non-profit organization working to provide support for abondaned games.\n\nIf EA decides to finally shut Revive down, Revive will respect thier wish to do so.',{split:true});
+        channel.send('As Gamespy shutdown, all the games hosted by Gamespy became \"abandonware\" as EA no longer wished to support them.\nAbandonware is computer software that is no longer distributed or supported by the developer or copyright holder.\nAs long as we do not modify the software no more than we need to get it working and do not profit from it, EA will not profibit the game revivals.\n\nRevive has made itself transparent to EA. At the moment, EA neither endorse nor prohibit Revive mostly due to the following reasons: \n\n1) EA has decided not to earn profit out of the games anymore and  hence have ended thier support for the games after gamespy shutdown. There were also some cases where players contacted EA to purchase the games and in the end were given to them for free.\n\n2) They know that Revive, unlike them, is an non-profit organization working to provide support for abondaned games.\n\nIf EA decides to finally shut Revive down, Revive will respect thier wish to do so.',{split:true});
     }
 });
