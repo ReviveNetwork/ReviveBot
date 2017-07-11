@@ -20,7 +20,7 @@ async function command(params, message) {
 	if(p.monit)
 	{
 		embed.addField("Memory", p.monit.memory/1000000 +" MB");
-		embed.addField("CPU", p.monit.cpu);
+		embed.addField("CPU", p.monit.cpu +" %");
 	}
 	embed.addField("Uptime", moment.utc(process.uptime() * 1000).format('HH:mm:ss'));
 	embed.addField("Node Version", process.version);
