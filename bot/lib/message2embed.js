@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports = async function (message, hotline) {
     let embed = message.embeds.shift();
-    if (me && me != null) {
+    if (embed && embed != null) {
         return embed
     }
     embed = new Discord.MessageEmbed();
