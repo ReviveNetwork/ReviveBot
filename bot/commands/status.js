@@ -15,7 +15,7 @@ async function command(params, message) {
 	embed.setAuthor("Melroy", "https://cdn.discordapp.com/avatars/184547913509109761/ef49e8f45dcb53cbe016393e842e7ee0.webp?size=256");
 	embed.setTitle("ReviveBot");
 	p = await getPm2List();
-	console.log(p);
+	//console.log(p);
 	embed.setTitle(p.name);
 	embed.addField("Process ID", p.pid);
 	if(p.monit)
@@ -33,6 +33,7 @@ getPm2List = function () {
 			pm2.describe("revivebot",
 				function (err, list) {
 					if (err) reject(err);
+					list = list.shift();
 					resolve(list);
 				}
 			)
