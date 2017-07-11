@@ -6,6 +6,8 @@
  */
 const pm2 = require('pm2');
 const moment = require('moment');
+const settings = require('./../../settings.json');
+
 async function command(params, message) {
 	if (!settings.owners.includes(message.author.id)) return await message.reply("You are not allowed to use this command");
 	const embed = new Discord.RichEmbed();
