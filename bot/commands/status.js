@@ -11,7 +11,7 @@ const Discord = require('discord.js');
 
 async function command(params, message) {
 	if (!settings.owners.includes(message.author.id)) return await message.reply("You are not allowed to use this command");
-	const embed = new Discord.RichEmbed();
+	const embed = new Discord.MessageEmbed();
 	embed.setAuthor("Melroy", "https://cdn.discordapp.com/avatars/184547913509109761/ef49e8f45dcb53cbe016393e842e7ee0.webp?size=256");
 	embed.setTitle("ReviveBot");
 	p = await getPm2List();
