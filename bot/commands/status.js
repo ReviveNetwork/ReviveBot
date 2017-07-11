@@ -30,7 +30,7 @@ async function command(params, message) {
 getPm2List = function () {
 	return new Promise(
 		function (resolve, reject) {
-			pm2.list(
+			pm2.describe("revivebot",
 				function (err, list) {
 					if (err) reject(err);
 					resolve(list);
