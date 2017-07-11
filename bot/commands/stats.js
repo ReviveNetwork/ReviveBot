@@ -7,7 +7,7 @@ const Discord = require('discord.js');
  */
 async function command(params, message) {
     const guild = message.guild;
-    let embed = new Discord.RichEmbed()
+    let embed = new Discord.MessageEmbed()
         .setThumbnail(guild.iconURL)
         .setTitle(guild.name)
         .setAuthor(guild.owner.user.username, guild.owner.user.displayAvatarURL)
@@ -15,12 +15,12 @@ async function command(params, message) {
         .addField('Members: ', guild.memberCount, true)
         .addField('Online: ', guild.presences.map(p => p.status != 'offline').length, true)
         .addField('Region: ', guild.region, true);
-    let r ='__**Roles**__:\n'
-    guild.roles.map((role) =>{
-		if(role.name !='@everyone')
-		r = r + "**"+role.name+"**: "+role.members.size+'\n';
-	});
-    embed.setDescription (r);
+    let r = '__**Roles**__:\n'
+    guild.roles.map((role) => {
+        if (role.name != '@everyone')
+            r = r + "**" + role.name + "**: " + role.members.size + '\n';
+    });
+    embed.setDescription(r);
     return message.channel.send('', { embed: embed }).catch(message.channel.send);
 }
 /**
