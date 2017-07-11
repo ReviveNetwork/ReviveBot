@@ -16,11 +16,10 @@ async function command(params, message) {
 	embed.setTitle("ReviveBot");
 	p = await getPm2List();
 	//console.log(p);
-	embed.setTitle(p.name);
 	embed.addField("Process ID", p.pid);
 	if(p.monit)
 	{
-		embed.addField("Memory", p.monit.memory);
+		embed.addField("Memory", p.monit.memory/1000000 +" MB");
 		embed.addField("CPU", p.monit.cpu);
 	}
 	embed.addField("Uptime", moment.utc(process.uptime() * 1000).format('HH:mm:ss'));
