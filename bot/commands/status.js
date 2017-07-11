@@ -15,10 +15,14 @@ async function command(params, message) {
 	embed.setAuthor("Melroy", "https://cdn.discordapp.com/avatars/184547913509109761/ef49e8f45dcb53cbe016393e842e7ee0.webp?size=256");
 	embed.setTitle("ReviveBot");
 	p = await getPm2List();
+	console.log(p);
 	embed.setTitle(p.name);
 	embed.addField("Process ID", p.pid);
-	embed.addField("Memory", p.monit.memory);
-	embed.addField("CPU", p.monit.cpu);
+	if(p.monit)
+	{
+		embed.addField("Memory", p.monit.memory);
+		embed.addField("CPU", p.monit.cpu);
+	}
 	embed.addField("Uptime", moment.utc(process.uptime() * 1000).format('HH:mm:ss'));
 	embed.addField("Node Version", process.version);
 	message.channel.send({ embed: embed });
