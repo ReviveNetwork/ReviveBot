@@ -29,7 +29,6 @@ bot.on('message', async function (message) {
         messageID: message.id,
         channel: message.channel.id
     }).save();
-    if (message.author.bot) return;
     if (lock) {
         if (!settings.owners.includes(message.author.id))
             //  if (message.channel.guild)
@@ -45,6 +44,9 @@ bot.on('message', async function (message) {
         if (muted)
             message.delete();
     }
+    
+    if (message.author.bot) return;
+    
     if (message.content.startsWith(settings.identifier)) {
         /**Extracting params */
         let params = message.content.substring(settings.identifier.length).trim();
