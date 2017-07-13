@@ -8,7 +8,7 @@ async function command(params, message) {
     let url = "https://yesno.wtf/api/";
     const r = JSON.parse(await rp(url));
 
-    return await message.channel.send(r.answer, { file: r.image });
+    return await message.channel.send(r.answer, { files: [r.image] });
 }
 /**
  * description of the command
