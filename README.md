@@ -29,7 +29,5 @@
  
  **remove** *PlayerName* **from** *roleName* - remove a player to a role
  
- **~count** *int* - counts from *int* to 0 and returns boom
- 
 [LICENSE](../blob/master/LICENSE)
 
