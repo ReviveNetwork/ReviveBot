@@ -30,4 +30,3 @@
  **remove** *PlayerName* **from** *roleName* - remove a player to a role
  
 [LICENSE](../blob/master/LICENSE)
-
