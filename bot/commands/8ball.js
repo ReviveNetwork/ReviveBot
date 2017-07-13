@@ -6,9 +6,9 @@ const rp = require('request-promise-native');
  */
 async function command(params, message) {
     let url = "https://yesno.wtf/api/";
-    if(message.content.toLowerCase().contains("what") || message.content.toLowerCase().contains("why"))
+    if(message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why"))
         url = url +"?force=maybe";
-    if(message.content.toLowerCase().contains("did") || message.content.toLowerCase().contains("you"))
+    if(message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
         url = url +"?force=maybe";
     const r = JSON.parse(await rp(url));
 
