@@ -17,13 +17,13 @@ async function command(params, message) {
 	p = await getPm2List();
 	//console.log(p);
 	embed.addField("Process ID", p.pid);
-	if(p.monit)
-	{
-		embed.addField("Memory", p.monit.memory/1000000 +" MB");
-		embed.addField("CPU", p.monit.cpu +" %");
+	if (p.monit) {
+		embed.addField("Memory", p.monit.memory / 1000000 + " MB");
+		embed.addField("CPU", p.monit.cpu + " %");
 	}
 	embed.addField("Uptime", moment.utc(process.uptime() * 1000).format('HH:mm:ss'));
 	embed.addField("Node Version", process.version);
+	embed.addField("Discord.js Version", process.versions["discord.js"]);
 	message.channel.send({ embed: embed });
 }
 getPm2List = function () {

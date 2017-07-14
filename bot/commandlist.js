@@ -30,5 +30,6 @@ module.exports = {
     "exec": "exec",
     "query": "query",
     "mute": "mute",
-    "unmute": "unmute"
+    "unmute": "unmute",
+    "dj": "dj"
 }
