@@ -80,6 +80,7 @@ bot.on('disconnect', function(event) {
 
 bot.on('ready', async function () {
     console.log("ReviveBot Ready");
+    console.log(process.versions);
     let dbs = await influx.getDatabaseNames();
     console.log(dbs);
     if (!dbs || dbs === null)
