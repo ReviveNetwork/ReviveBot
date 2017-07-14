@@ -41,7 +41,7 @@ bot.on('message', async function (message) {
         let muted = message.member.roles.find(function (r) {
             if (r.name.toLowerCase().includes('mute') && !r.name.toLowerCase().includes('non') && !r.name.toLowerCase().includes('test')) return r
         })
-        if (muted)
+        if (muted && message.deletable )
             message.delete();
     }
     
