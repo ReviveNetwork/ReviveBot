@@ -7,7 +7,7 @@
 async function command(params, message) {
     if (!message.guild.roles.find("name", "DJ"))
         return message.reply("Sorry, this command is not applicable in this guild");
-    if ((Date.now() - message.author.joinedAt.getTime()) < 2.628e+9)
+    if ((Date.now() - message.author.joinedTimestamp) < 2.628e+9)
         message.reply("You have to be a part of this guild for more than 1 month to earn this role");
     let m = await message.channel.send(message.author.toString() + " has applied to be a DJ. Please vote by clicking the below reactions");
     await m.react("✅");
