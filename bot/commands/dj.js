@@ -14,11 +14,13 @@ async function command(params, message) {
     await m.react("⛔");
     let r = await m.awaitReactions(function (r) {
         return r.name == "✅" || r.name == "⛔";
-    }, { maxUsers: 5, time: 3.6e+6 });
+    }, { maxUsers:6 ,max: 6, time: 3.6e+6 });
+    if(!r.find("name", "✅") || !r.find("name", "⛔")) 
+        return await message.reply("Error, votes could not be found");
     let yes = r.find("name", "✅").users.size;
     let no = r.find("name", "⛔").users.size;
     await m.clearReactions();
-    if (yes > no && (yes + no > 3)) {
+    if (yes > no && (yes + no > 4)) {
         await m.edit(message.author.toString() + " is now a DJ");
         await message.member.addRole(message.guild.roles.find("name", "DJ"));
     }
