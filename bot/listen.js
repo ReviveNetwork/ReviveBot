@@ -132,7 +132,7 @@ setInterval(async function () {
     influx.writePoints([
         {
             measurement: 'statistics',
-            fields: { count: guild.presences.filter(p => p.status != 'offline').length },
+            fields: { count: guild.presences.filter(p => p.status != 'offline').size },
             tags: { type: "online" }
         }
     ]).catch(console.log);
