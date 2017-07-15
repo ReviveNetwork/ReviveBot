@@ -21,9 +21,10 @@ async function command(params, message) {
 		embed.addField("Memory", p.monit.memory / 1000000 + " MB");
 		embed.addField("CPU", p.monit.cpu + " %");
 	}
+	let djs = require('./../../node_modules/discord.js/package.json');
 	embed.addField("Uptime", moment.utc(process.uptime() * 1000).format('HH:mm:ss'));
 	embed.addField("Node Version", process.version);
-	embed.addField("Discord.js Version", process.versions["discord.js"]);
+	embed.addField("Discord.js Version", djs.version);
 	message.channel.send({ embed: embed });
 }
 getPm2List = function () {
