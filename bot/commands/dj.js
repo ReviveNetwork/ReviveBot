@@ -12,9 +12,7 @@ async function command(params, message) {
     let m = await message.channel.send(message.author.toString() + " has applied to be a DJ. Please vote by clicking the below reactions");
     await m.react("✅");
     await m.react("⛔");
-    let r = await m.awaitReactions(function (r) {
-        return r.name == "✅" || r.name == "⛔";
-    }, { maxUsers:6 ,max: 6, time: 3.6e+6 });
+    let r = await m.awaitReactions(r => true, { maxUsers:6 ,max: 6, time: 3.6e+6 });
     console.log(r);
     if(!r.get("✅") || !r.get("⛔")) 
         return await message.reply("Error, votes could not be found");
