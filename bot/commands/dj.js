@@ -15,10 +15,11 @@ async function command(params, message) {
     let r = await m.awaitReactions(function (r) {
         return r.name == "✅" || r.name == "⛔";
     }, { maxUsers:6 ,max: 6, time: 3.6e+6 });
-    if(!r.find("name", "✅") || !r.find("name", "⛔")) 
+    console.log(r);
+    if(!r.get("✅") || !r.get("⛔")) 
         return await message.reply("Error, votes could not be found");
-    let yes = r.find("name", "✅").users.size;
-    let no = r.find("name", "⛔").users.size;
+    let yes = r.get( "✅").users.size;
+    let no = r.get("⛔").users.size;
     await m.clearReactions();
     if (yes > no && (yes + no > 4)) {
         await m.edit(message.author.toString() + " is now a DJ");
