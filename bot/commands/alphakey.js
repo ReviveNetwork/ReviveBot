@@ -21,6 +21,7 @@ async function command(params, message) {
         return message.reply("You should link your account first");
     }
     else if (key.key) {
+        await message.channel.send("Key has been DMed to you")
         return message.author.send("Your beta key(session id) is " + key.key);
     }
     else
