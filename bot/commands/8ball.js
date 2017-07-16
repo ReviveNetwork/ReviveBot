@@ -6,10 +6,10 @@ const rp = require('request-promise-native');
  */
 async function command(params, message) {
     let url = "https://yesno.wtf/api/";
-    if(message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why"))
-        url = url +"?force=maybe";
-    if(message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
-        url = url +"?force=maybe";
+    if (message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why"))
+        url = url + "?force=maybe";
+    if (message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
+        url = url + "?force=maybe";
     const r = JSON.parse(await rp(url));
 
     return await message.channel.send(r.answer, { files: [r.image] });
