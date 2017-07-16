@@ -21,8 +21,9 @@ async function command(params, message) {
         return message.reply("You should link your account first");
     }
     else if (key.key) {
-        await message.channel.send("Key has been DMed to you")
-        return message.author.send("Your new Revive Heroes Alpha token is ```xl\n" + key.key+"\n```");
+        message.author.send("Your new Revive Heroes Alpha token is ```xl\n" + key.key+"\n```")
+            .then(()=>message.channel.send("Key has been DMed to you")).catch(()=> message.reply("You have disabled DMs"));
+        
     }
     else
         return message.reply("There was some problem generating a key");
