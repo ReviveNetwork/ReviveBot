@@ -26,7 +26,7 @@ async function command(params, message) {
 /**
  * description of the command
  */
-const description = "Adds a role to a user. \nSyntax: add <mention> to role";
+const description = "unmutes a user";
 /**
  * Define Exports
  */
