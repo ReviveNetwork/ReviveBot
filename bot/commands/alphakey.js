@@ -22,7 +22,7 @@ async function command(params, message) {
     }
     else if (key.key) {
         await message.channel.send("Key has been DMed to you")
-        return message.author.send("Your beta key(session id) is " + key.key);
+        return message.author.send("Your new Revive Heroes Alpha token is ```xl\n" + key.key+"\n```");
     }
     else
         return message.reply("There was some problem generating a key");
