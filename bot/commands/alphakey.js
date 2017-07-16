@@ -10,7 +10,7 @@ async function command(params, message) {
     let member = guild.member(message.author.id);
     if (!member)
         return message.reply("This command is only for Revive Network users");
-    if (!member.roles.get(""))
+    if (!member.roles.get("335972667322662923"))
         return message.reply("you are not a beta member");
     let key = await request({
         method: "POST",

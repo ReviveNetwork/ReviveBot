@@ -12,7 +12,7 @@ module.exports = {
     "info": "info",
     "hash": "hash",
     "bf2": "bf2",
-    "beta": "beta",
+    "alphakey": "alphakey",
     "bf2142": "bf2142",
     "link": "link",
     "refresh": "refresh",
