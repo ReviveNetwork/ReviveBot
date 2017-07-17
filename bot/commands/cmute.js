@@ -7,12 +7,15 @@
 async function command(params, message) {
     let permissions = message.channel.permissionsFor(message.member);
     if (permissions.has("MANAGE_MESSAGES")) {
-        let m = await Promise.all(message.mentions.users
-            .map(u => {
-                message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Muted");
-            }));
-
-        message.reply("Muted " + m.size + " users");
+        if (message.mentions.users && message.mentions.users.first()) {
+            let m = await Promise.all(message.mentions.users
+                .map(u => {
+                    message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Unmuted");
+                }))
+            message.reply("Muted " + m.size + " users");
+        }
+        else
+            message.reply("No one to mute");
     }
     else
         message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
