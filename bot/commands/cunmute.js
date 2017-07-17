@@ -10,7 +10,7 @@ async function command(params, message) {
     if (permissions.has("MANAGE_MESSAGES")) {
         message.mentions.users
             .map(u => {
-                channel.overwritePermissions(u, { 'SEND_MESSAGES': true }, "Muted");
+                message.channel.overwritePermissions(u, { 'SEND_MESSAGES': true }, "Muted");
             })
     }
     else
