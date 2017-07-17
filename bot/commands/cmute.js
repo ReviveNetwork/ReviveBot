@@ -8,11 +8,11 @@ async function command(params, message) {
     let permissions = message.channel.permissionsFor(message.member);
     if (permissions.has("MANAGE_MESSAGES")) {
         if (message.mentions.users && message.mentions.users.first()) {
-            let m = await Promise.all(message.mentions.users
+            await Promise.all(message.mentions.users
                 .map(u => {
                     message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Unmuted");
                 }))
-            message.reply("Muted " + m.size + " users");
+            message.reply("Muted " + message.mentions.users.size + " users");
         }
         else
             message.reply("No one to mute");
