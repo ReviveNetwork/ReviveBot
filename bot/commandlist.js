@@ -30,6 +30,10 @@ module.exports = {
     "delete": "delete",
     "exec": "exec",
     "query": "query",
+    "cmute": "cmute",
+    "cunmute": "cunmute",
+    "mute": "mute",
+    "unmute": "unmute",
     "mute": "mute",
     "unmute": "unmute",
     "dj": "dj"
