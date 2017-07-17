@@ -15,7 +15,7 @@ async function command(params, message) {
                     if(p)
                         p.delete();
                 }))
-            message.reply("Unmuted " + m.size + " users");
+            message.reply("Unmuted " + message.mentions.users.size + " users");
         }
         else
             message.reply("No one to unmute");
