@@ -8,11 +8,11 @@
 async function command(params, message) {
     let permissions = message.channel.permissionsFor(message.member);
     if (permissions.has("MANAGE_MESSAGES")) {
-        await Promise.all(message.mentions.users
+        let m = await Promise.all(message.mentions.users
             .map(u => {
                 message.channel.overwritePermissions(u, { 'SEND_MESSAGES': true }, "Unmuted");
             }))
-        message.reply("unmuted");
+        message.reply("Muted " + m.size + " users");
     }
     else
         message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
