@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 module.exports = async function (message, hotline) {
-    let embed = message.embeds.shift();
+    let embed = message.embeds.filter(function(e){
+        if(e.type== "rich")
+            return e;
+    }).shift();
     if (embed && embed != null) {
         return embed
     }
