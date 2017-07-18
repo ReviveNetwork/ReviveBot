@@ -27,12 +27,10 @@ async function command(params, message) {
     if (!m)
         return message.reply("message not available");
     console.log("fetching : " + m.id);
-    let attach = m.attachments.first();
+    let attach = m.attachments.map(a => a.url);
     let em = await m2e(m);
     console.log(em);
-    if (attach)
-        attach = attach.url;
-    message.channel.send((params[1])?(message.author.toString()+": "+params.slice(1).join(" ")):(""), { embed:em , file: attach }).catch(console.error);
+    message.channel.send((params[1])?(message.author.toString()+": "+params.slice(1).join(" ")):(""), { embed:em , files: attach }).catch(console.error);
 }
 /**
  * description of the command
