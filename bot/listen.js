@@ -45,7 +45,7 @@ bot.on('message', async function (message) {
     }
     if (message.author.bot) return;
     if (settings.slowmov && message.channel.deletable && message.member.bannable)
-        setTimeout(() => {
+        setTimeout(async function() {
             if (message.member.lastMessage && message.member.lastMessage.id != message.id) {
                 message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
                 let mm = await message.reply("You have been muted for 5 seconds by slowmov for sending messages too fast. Please calm down")
