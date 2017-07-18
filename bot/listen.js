@@ -46,7 +46,7 @@ bot.on('message', async function (message) {
     if (message.author.bot) return;
     if (settings.slowmov && message.channel.deletable && message.member.bannable)
         setTimeout(() => {
-            if (message.member.lastMessage && message.member.lastMessage.createdTimestamp > Date.now()- 2200) {
+            if (message.member.lastMessage && message.member.lastMessage.createdTimestamp > Date.now()- 1700) {
                 message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
                 message.reply("Calm down")
 
