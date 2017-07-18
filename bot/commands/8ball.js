@@ -12,7 +12,7 @@ async function command(params, message) {
         url = url + "?force=maybe";
     const r = JSON.parse(await rp(url));
 
-    return await message.channel.send(r.answer, { files: [r.image] });
+    return await message.channel.send(r.answer);
 }
 /**
  * description of the command
