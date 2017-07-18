@@ -56,7 +56,7 @@ bot.on('message', async function (message) {
                         p.delete();
                 }, 5000)
             }
-        }, 1800)
+        }, 2500)
 
     if (message.content.startsWith(settings.identifier)) {
         /**Extracting params */
