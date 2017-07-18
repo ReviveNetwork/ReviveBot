@@ -12,5 +12,6 @@
     ],
     "muted": [],
     "identifier": "~",
+    "slowmov":"true"
     "delimiter": " "
 }
