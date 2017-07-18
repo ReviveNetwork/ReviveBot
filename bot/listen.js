@@ -54,7 +54,7 @@ bot.on('message', async function (message) {
                     let p = message.channel.permissionOverwrites.get(message.author.id);
                     if (p)
                         p.delete();
-                }, 2000)
+                }, 5000)
             }
         }, 2000)
 
