@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-module.exports = async function (message, hotline) {
+module.exports = async function (message) {
     let embed = message.embeds.filter(function(e){
         if(e.type== "rich")
             return e;
@@ -9,29 +9,8 @@ module.exports = async function (message, hotline) {
     }
     embed = new Discord.MessageEmbed();
     embed.setAuthor(message.author.username, message.author.avatarURL())
-    if (!hotline)
-        embed.setTitle((message.guild) ? (message.channel.name + " in " + message.guild.name) : (" in a DM with " + message.channel.recipient.tag));
-    if (!message.content.trim() == "")
-        embed.setDescription(message.cleanContent);
-    else
-        embed.setDescription("**" + ((me.author && me.author != null) ? (me.author.name + " : ") : "") + ((me.title && me.title != null) ? me.title : "") + "**\n	" + (me.description || "") + ((me.footer) ? ("\n*At " + me.footer.text + "*") : ""));
-    if (!hotline)
-        embed.setTimestamp(message.createdAt)
-    let color = message.member;
-    if (color) {
-        color = color.roles.filter((r) => {
-            if (r.color !== 0)
-                return r;
-        }).array().sort((r1, r2) => {
-            if (r1.position < r2.position)
-                return 1;
-        }).shift();
-        if (color)
-            color = color.color;
-    }
-    else
-        color = 0;
-    embed.setColor(color);
-    //embed.setTitle("Quote");
+    embed.setTitle((message.guild) ? (message.channel.name + " in " + message.guild.name) : (" in a DM with " + message.channel.recipient.tag));
+    embed.setDescription(message.cleanContent);
+    embed.setColor(message.member.displayColor);
     return embed;
 }
