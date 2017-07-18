@@ -11,7 +11,7 @@ async function command(params, message) {
     })
     if (message.member.permissions.has("MANAGE_MESSAGES")) {
         message.mentions.users
-            .map(u => msg.guild.member(u))
+            .map(u => message.guild.member(u))
             .map(m => m.removeRole(muted))
     }
     else
