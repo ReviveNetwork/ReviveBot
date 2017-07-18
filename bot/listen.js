@@ -45,13 +45,16 @@ bot.on('message', async function (message) {
     }
     if (message.author.bot) return;
     if (settings.slowmov && message.channel.deletable && message.member.bannable)
-        if (message.member.lastMessage && message.member.lastMessage.createdTimestamp > Date.now()- 2000) {
-            message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
-            message.reply("Calm down")
-            setTimeout(() => {
-                let p = message.channel.permissionOverwrites.get(message.author.id);
-                if (p)
-                    p.delete();
+        setTimeout(() => {
+            if (message.member.lastMessage && message.member.lastMessage.createdTimestamp > Date.now()- 2000) {
+                message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
+                message.reply("Calm down")
+
+                setTimeout(() => {
+                    let p = message.channel.permissionOverwrites.get(message.author.id);
+                    if (p)
+                        p.delete();
+                }, 2000)
             }, 2000)
         }
 
