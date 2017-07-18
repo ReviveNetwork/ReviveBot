@@ -6,7 +6,6 @@ const Message = require('./../orm/Message')
 const commands = require('./commands');
 const request = require('request-promise-native');
 const influx = require('./../influx');
-
 let lock = false;
 let ready = false;
 bot.on('error', (err) => {
@@ -41,12 +40,21 @@ bot.on('message', async function (message) {
         let muted = message.member.roles.find(function (r) {
             if (r.name.toLowerCase().includes('mute') && !r.name.toLowerCase().includes('non') && !r.name.toLowerCase().includes('test')) return r
         })
-        if (muted && message.deletable )
+        if (muted && message.deletable)
             message.delete();
     }
-    
     if (message.author.bot) return;
-    
+    if (settings.slowmow && message.channel.deletable)
+        if (message.member.lastMessage && message.member.lastMessage.createdTimestamp > Date.now() - 1000) {
+            message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
+            message.reply("Calm down")
+            setTimeout(() => {
+                let p = message.channel.permissionOverwrites.get(message.author.id);
+                if (p)
+                    p.delete();
+            }, 2000)
+        }
+
     if (message.content.startsWith(settings.identifier)) {
         /**Extracting params */
         let params = message.content.substring(settings.identifier.length).trim();

@@ -25,6 +25,7 @@ module.exports = {
     "emoji": "emoji",
     "http": "http",
     "8ball": "8ball",
+    "slowmov": "slowmov",
     "whoisplaying": "whoisplaying",
     "impersonate": "impersonate",
     "delete": "delete",

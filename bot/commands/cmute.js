@@ -10,7 +10,7 @@ async function command(params, message) {
         if (message.mentions.users && message.mentions.users.first()) {
             await Promise.all(message.mentions.users
                 .map(u => {
-                    message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Unmuted");
+                    message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Muted");
                 }))
             message.reply("Muted " + message.mentions.users.size + " users");
         }
