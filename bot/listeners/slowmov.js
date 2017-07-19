@@ -15,7 +15,7 @@ module.exports = async function (message) {
     if (message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")) return;
 
     if (settings.slowmov && message.channel.deletable && !message.member.permissions.has("MANAGE_MESSAGES") && message.channel.messages) {
-        let messages = message.channel.messages.filter(m => m.author.id == message.author.id).filter(m => m.createdTimestamp > Date.now() - 10000);
+        let messages = message.channel.messages.filter(m => m.author.id == message.author.id).filter(m => m.createdTimestamp > Date.now() - 12000);
         if (messages.size > 3) {
             let duration = 10000;
             if (settings.muted) {
