@@ -31,5 +31,6 @@ const description = "Converts text to emoji";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

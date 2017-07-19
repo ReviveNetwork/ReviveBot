@@ -32,5 +32,6 @@ const description = "Shows server stats";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

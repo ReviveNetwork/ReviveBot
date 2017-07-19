@@ -29,5 +29,6 @@ const description = "Mutes a user";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

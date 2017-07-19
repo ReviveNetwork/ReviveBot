@@ -28,8 +28,33 @@ module.exports = {
     }
 }
 function help(message) {
-    let res = "List of commands are as follows: \n";
-    Object.entries(commands).forEach(
+    let res = "";
+    let ownerc = commands.filter(c => c.owner);
+    let modc = commands.filter(c => c.mod);
+    let func = commands.filter(c => c.fun);
+    let revivec = commands.filter(c => c.custom);
+    if (settings.owners.includes(message.author.id)) {
+        res = res + "**Owner Only Commands:** \n";
+        Object.entries(ownerc).forEach(
+            ([key, value]) => {
+                res = res + "**" + key + "** : " + value.description + "\n";
+            }
+        )
+    }
+    res = res + "**Moderator/Admin Only Commands:** \n";
+    Object.entries(modc).forEach(
+        ([key, value]) => {
+            res = res + "**" + key + "** : " + value.description + "\n";
+        }
+    )
+    res = res + "**Fun/Utility Commands:** \n";
+    Object.entries(func).forEach(
+        ([key, value]) => {
+            res = res + "**" + key + "** : " + value.description + "\n";
+        }
+    )
+    res = res + "**ReviveNetwork Commands:** \n";
+    Object.entries(revivec).forEach(
         ([key, value]) => {
             res = res + "**" + key + "** : " + value.description + "\n";
         }

@@ -6,19 +6,18 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     let user = bot.users.random();
-    if(message.mentions.users.first())
-    {
+    if (message.mentions.users.first()) {
         user = message.mentions.users.first();
-        params = params.filter(function(p){
-            if(!p.includes(user.id))
+        params = params.filter(function (p) {
+            if (!p.includes(user.id))
                 return p;
         })
     }
     //let ava = bot.user.displayAvatarURL;
     //await bot.user.setAvatar(user.displayAvatarURL);
     await message.guild.me.setNickname(user.username);
-    if(params.length<1)
-        await message.channel.send("No argument provided",{code:'error'});
+    if (params.length < 1)
+        await message.channel.send("No argument provided", { code: 'error' });
     else
         await message.channel.send(params.join(" "));
     await message.guild.me.setNickname(bot.user.username);
@@ -33,5 +32,6 @@ const description = "impersonate's some random person";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

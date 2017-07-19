@@ -16,5 +16,6 @@ const description = "plays ping pong";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

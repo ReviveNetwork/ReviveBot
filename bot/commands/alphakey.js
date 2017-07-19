@@ -21,9 +21,9 @@ async function command(params, message) {
         return message.reply("You should link your account first");
     }
     else if (key.key) {
-        message.author.send("Your new Revive Heroes Alpha token is ```xl\n" + key.key+"\n``` If you're using the test launcher, you don't need to do anything with it.")
-            .then(()=>message.reply("Check your DMs for your Alpha token")).catch(()=> message.reply("You have disabled DMs"));
-        
+        message.author.send("Your new Revive Heroes Alpha token is ```xl\n" + key.key + "\n``` If you're using the test launcher, you don't need to do anything with it.")
+            .then(() => message.reply("Check your DMs for your Alpha token")).catch(() => message.reply("You have disabled DMs"));
+
     }
     else
         return message.reply("There was some problem generating a key");
@@ -37,5 +37,6 @@ const description = "gives a beta key";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    custom: true
 };

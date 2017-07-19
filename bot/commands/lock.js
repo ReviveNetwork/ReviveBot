@@ -23,5 +23,6 @@ const description = "locks the bot";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    owner: true
 };

@@ -18,5 +18,6 @@ const description = "Displays http status code";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

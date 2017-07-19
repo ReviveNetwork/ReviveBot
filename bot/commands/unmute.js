@@ -26,5 +26,6 @@ const description = "Unmutes a user";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

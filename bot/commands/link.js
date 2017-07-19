@@ -17,5 +17,6 @@ const description = "Links a discord account with battlelog.co";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    custom: true
 };

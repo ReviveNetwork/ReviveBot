@@ -41,5 +41,6 @@ const description = "quotes a message via id";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

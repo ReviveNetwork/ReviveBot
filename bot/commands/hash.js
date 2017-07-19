@@ -30,5 +30,6 @@ const description = "calculates checksum of given hash";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

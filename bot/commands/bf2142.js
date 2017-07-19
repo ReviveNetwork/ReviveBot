@@ -8,7 +8,7 @@ const bot = require('./../bot');
  */
 async function command(params, message) {
     let nick = params[0];
-    try{
+    try {
         const plist = await bf2142.getPlayers(nick);
         if (plist.length == 0) {
             message.channel.send("Player not found");
@@ -23,7 +23,7 @@ async function command(params, message) {
         await msg.react('⏩')
         bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2142"), arr: plist, index: 0 });
     }
-    catch(e){
+    catch (e) {
         message.reply("No such user found");
     }
 }
@@ -36,5 +36,6 @@ const description = "shows bf2142 stats of the username provided";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

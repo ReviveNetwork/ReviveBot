@@ -30,5 +30,6 @@ const description = "displays a list of users playing a specified game";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

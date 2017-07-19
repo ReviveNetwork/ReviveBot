@@ -16,5 +16,6 @@ const description = "says yo bro";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

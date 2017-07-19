@@ -30,12 +30,11 @@ async function command(params, message) {
                         url = em[url];
                     console.log(url);
                 }
-                if (!url)
-                {
+                if (!url) {
                     let ecache = await request("https://blob-cache.herokuapp.com/");
-                    ecache =  JSON.parse(ecache);
-                    if(ecache[params[i]])
-                       url = ecache[params[i]];
+                    ecache = JSON.parse(ecache);
+                    if (ecache[params[i]])
+                        url = ecache[params[i]];
                 }
                 if (url)
                     files.push({ attachment: url, name: params[i] + ".png" });
@@ -58,5 +57,6 @@ const description = "Gets url of the emoji";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

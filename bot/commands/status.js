@@ -49,5 +49,6 @@ const description = "shows bot stats";
  */
 module.exports = {
 	execute: command,
-	description: description
+	description: description,
+	owner: true
 };

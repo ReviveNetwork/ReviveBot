@@ -29,5 +29,6 @@ const description = "disables/enables slowmov (owners only)";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    owner: true
 };

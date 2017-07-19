@@ -21,5 +21,6 @@ const description = "Replies to a yes/no question";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

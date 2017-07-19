@@ -23,5 +23,6 @@ const description = "removes a role to a user. \nSyntax: remove <mention> from r
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

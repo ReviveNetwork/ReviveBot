@@ -23,5 +23,6 @@ const description = "Adds a role to a user. \nSyntax: add <mention> to role";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

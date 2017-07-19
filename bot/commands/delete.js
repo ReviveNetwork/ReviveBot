@@ -58,5 +58,6 @@ const description = "delete mutltiple messages from a channel.";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

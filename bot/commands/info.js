@@ -96,5 +96,6 @@ const description = "Shows battlelog.co stats";
  */
 module.exports = {
 	execute: command,
-	description: description
+	description: description,
+	custom: true
 };

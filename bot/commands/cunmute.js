@@ -12,7 +12,7 @@ async function command(params, message) {
             await Promise.all(message.mentions.users
                 .map(u => {
                     let p = message.channel.permissionOverwrites.get(u.id);
-                    if(p)
+                    if (p)
                         p.delete();
                 }))
             message.reply("Unmuted " + message.mentions.users.size + " users");
@@ -32,5 +32,6 @@ const description = "unmutes a user";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    mod: true
 };

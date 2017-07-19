@@ -82,5 +82,6 @@ const description = "executes a command (owners only)";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    owner: true
 };

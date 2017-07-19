@@ -16,5 +16,6 @@ const description = "eats a cookie";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    fun: true
 };

@@ -47,5 +47,6 @@ const description = "Refreshes your linked account status";
  */
 module.exports = {
     execute: command,
-    description: description
+    description: description,
+    custom: true
 };
