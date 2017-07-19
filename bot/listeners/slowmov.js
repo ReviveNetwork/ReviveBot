@@ -32,7 +32,7 @@ module.exports = message => {
                             return t;
                     });
                     if(is_muted.length > 0)
-                        duration = is_muted.size * duration;
+                        duration = (is_muted.length+1) * duration;
                 }
                 message.channel.overwritePermissions(message.author, { 'SEND_MESSAGES': false }, "Muted");
                 let mm = await message.reply("You have been muted for "+(duration/1000)+" seconds by slowmov for sending messages too fast. Please calm down");
@@ -44,6 +44,6 @@ module.exports = message => {
                         p.delete();
                 }, duration)
             }
-        }, 2000)
+        }, 2300)
 
 }
