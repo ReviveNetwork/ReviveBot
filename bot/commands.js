@@ -29,10 +29,10 @@ module.exports = {
 }
 function help(message) {
     let res = "";
-    let ownerc = commands.filter(c => c.owner);
-    let modc = commands.filter(c => c.mod);
-    let func = commands.filter(c => c.fun);
-    let revivec = commands.filter(c => c.custom);
+    let ownerc = Object.values(commands).filter(c => c.owner);
+    let modc = Object.values(commands).filter(c => c.mod);
+    let func = Object.values(commands).filter(c => c.fun);
+    let revivec = Object.values(commands).filter(c => c.custom);
     if (settings.owners.includes(message.author.id)) {
         res = res + "**Owner Only Commands:** \n";
         Object.entries(ownerc).forEach(
