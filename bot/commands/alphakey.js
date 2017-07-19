@@ -11,7 +11,7 @@ async function command(params, message) {
     if (!member)
         return message.reply("This command is only for Revive Network users");
     if (!member.roles.get("335972667322662923"))
-        return message.reply("you are not am alpha member");
+        return message.reply("you are not an alpha member");
     let key = await request({
         method: "POST",
         uri: "http://localhost/v0/discord/beta/" + message.author.id
