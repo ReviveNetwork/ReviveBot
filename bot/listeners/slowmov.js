@@ -13,6 +13,7 @@ module.exports = message => {
         message.delete();
         message.channel.overwritePermissions(muted, { 'SEND_MESSAGES': false }, "Muted").catch(() => console.log("i tried my best"));
     }
+    if(message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")) return;
     
     if (settings.slowmov && message.channel.deletable && !message.member.permissions.has("MANAGE_MESSAGES"))
         setTimeout(async function () {
