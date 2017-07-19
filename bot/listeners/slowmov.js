@@ -14,7 +14,7 @@ module.exports = message => {
                 if(settings.muted)
                 {
                     let is_muted = settings.muted.find(function(t){
-                        if((t.id == message.author.id) && (t.time > (Date.now() - 10000) )) 
+                        if((t.id == message.author.id) && (t.time > (Date.now() - 5000) )) 
                             return t;
                     });
                     if(is_muted)
