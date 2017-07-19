@@ -29,35 +29,41 @@ module.exports = {
 }
 function help(message) {
     let res = "";
-    let ownerc = Object.values(commands).filter(c => c.owner);
-    let modc = Object.values(commands).filter(c => c.mod);
-    let func = Object.values(commands).filter(c => c.fun);
-    let revivec = Object.values(commands).filter(c => c.custom);
+    let carray = [];
+    Object.entries(commands).forEach(
+        ([key, value]) => {
+            carray.push({ key, value });
+        }
+    )
+    let ownerc = Object.values(carray).filter(c => c.owner);
+    let modc = Object.values(carray).filter(c => c.mod);
+    let func = Object.values(carray).filter(c => c.fun);
+    let revivec = Object.values(carray).filter(c => c.custom);
     if (settings.owners.includes(message.author.id)) {
         res = res + "**Owner Only Commands:** \n";
-        Object.entries(ownerc).forEach(
-            ([key, value]) => {
-                res = res + "**" + key + "** : " + value.description + "\n";
+        ownerc.map(
+            (t) => {
+                res = res + "**" + t.key + "** : " + t.value.description + "\n";
             }
         )
     }
     res = res + "**Moderator/Admin Only Commands:** \n";
-    Object.entries(modc).forEach(
-        ([key, value]) => {
-            res = res + "**" + key + "** : " + value.description + "\n";
+    modc.map(
+        (t) => {
+            res = res + "**" + t.key + "** : " + t.value.description + "\n";
         }
     )
     res = res + "**Fun/Utility Commands:** \n";
-    Object.entries(func).forEach(
-        ([key, value]) => {
-            res = res + "**" + key + "** : " + value.description + "\n";
+    func.map(
+        (t) => {
+            res = res + "**" + t.key + "** : " + t.value.description + "\n";
         }
     )
     res = res + "**ReviveNetwork Commands:** \n";
-    Object.entries(revivec).forEach(
-        ([key, value]) => {
-            res = res + "**" + key + "** : " + value.description + "\n";
-        }
-    )
+    revivec.map(
+            (t) => {
+                res = res + "**" + t.key + "** : " + t.value.description + "\n";
+            }
+        )
     message.author.send(res);
 }
