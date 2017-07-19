@@ -20,7 +20,7 @@ module.exports = message => {
                     if(is_muted)
                         return;
                     is_muted = settings.muted.filter(function(t){
-                        if((t.id == message.author.id) && (t.time > (Date.now() - 120000) )) 
+                        if((t.id == message.author.id) && (t.time > (Date.now() - 900000) )) 
                             return t;
                     });
                     if(is_muted.length > 0)
