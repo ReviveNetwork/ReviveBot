@@ -10,7 +10,7 @@ async function command(params, message) {
         res = "Maybe";
     else
         res = res[Math.floor(Math.random() * res.length)];
-    return await message.channel.send(r.answer);
+    return await message.channel.send(res);
 }
 /**
  * description of the command
