@@ -7,7 +7,7 @@ module.exports = message => {
         if (muted && message.deletable)
             message.delete();
     }
-    if (!message.author.bot && settings.slowmov && message.channel.deletable && message.member.bannable)
+    if (!message.author.bot && settings.slowmov && message.channel.deletable && message.member.permissions.has("MANAGE_MESSAGES"))
         setTimeout(async function () {
             if (message.member.lastMessage && message.member.lastMessage.id != message.id) {
                 let duration = 10000;
