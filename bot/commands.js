@@ -21,8 +21,8 @@ const getError = function (err) {
 module.exports = {
     execute: function (cmd, params, message) {
         if (commands[cmd]) {
-            let bm = message.channel.messages.filter(m => (m.author.id == message.client.id) && (m.createdTimestamp > Date.now() - 5000)).size
-            console.log(bm);
+            let bm = message.channel.messages.filter(m => (m.author.id == message.client.user.id) && (m.createdTimestamp > Date.now() - 5000)).size
+            //console.log(bm);
             if (bm > 2 && !(message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")))
                 return message.reply("Dont abuse me");
             commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error', split: true }))//.then(message.delete(3000));
