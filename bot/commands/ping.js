@@ -5,7 +5,8 @@
  * @param {*message} message
  */
 async function command(params, message) {
-    message.reply('pong');
+    let m = await message.reply('Pong. The heartbeat ping to discord is '+message.client.ping+" ms");
+    m.edit(m.content+"\nThe time taken for me to respond to your message is "+ (m.createdTimestamp - message.createdTimestamp)+" ms");
 }
 /**
  * description of the command

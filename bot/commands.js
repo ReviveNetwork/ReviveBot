@@ -40,30 +40,30 @@ function help(message) {
     let func = Object.values(carray).filter(c => c.value.fun);
     let revivec = Object.values(carray).filter(c => c.value.custom);
     if (settings.owners.includes(message.author.id)) {
-        res = res + "**Owner Only Commands:** \n";
+        res = res + "**Owner Only Commands:** \n\n";
         ownerc.map(
             (t) => {
                 res = res + "**" + t.key + "** : " + t.value.description + "\n";
             }
         )
     }
-    res = res + "**Moderator/Admin Only Commands:** \n";
+    res = res + "\n**Moderator/Admin Only Commands:** \n\n";
     modc.map(
         (t) => {
             res = res + "**" + t.key + "** : " + t.value.description + "\n";
         }
     )
-    res = res + "**Fun/Utility Commands:** \n";
+    res = res + "\n**Fun/Utility Commands:** \n\n";
     func.map(
         (t) => {
             res = res + "**" + t.key + "** : " + t.value.description + "\n";
         }
     )
-    res = res + "**ReviveNetwork Commands:** \n";
+    res = res + "\n**ReviveNetwork Commands:** \n\n";
     revivec.map(
             (t) => {
                 res = res + "**" + t.key + "** : " + t.value.description + "\n";
             }
         )
-    message.author.send(res);
+    message.author.send(res,{split:true});
 }
