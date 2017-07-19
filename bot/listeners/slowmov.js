@@ -1,5 +1,5 @@
 const settings = require('./../../settings.json');
-module.exports = message => {
+module.exports = async function (message) {
     if (message.author.bot) return;//ignore if its a verified bot account
 
     if (!message.guild) return;//ignore if DM
@@ -15,7 +15,7 @@ module.exports = message => {
     if (message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")) return;
 
     if (settings.slowmov && message.channel.deletable && !message.member.permissions.has("MANAGE_MESSAGES") && message.channel.messages) {
-        let messages = message.channel.messages.filter(m => m.author.id == message.author.id).filter(m => m.createdTimestamp > Date.now() - 6000);
+        let messages = message.channel.messages.filter(m => m.author.id == message.author.id).filter(m => m.createdTimestamp > Date.now() - 1000);
         if (messages.size > 3) {
             let duration = 10000;
             if (settings.muted) {
