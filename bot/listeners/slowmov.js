@@ -2,7 +2,7 @@ const settings = require('./../../settings.json');
 module.exports = async function (message) {
     if (message.author.bot) return;//ignore if its a verified bot account
 
-    if (!message.guild) return;//ignore if DM
+    if (!message.guild || message.member == null) return;//ignore if DM
 
     let muted = message.member.roles.find(function (r) {
         if (r.name.toLowerCase().includes('mute') && !r.name.toLowerCase().includes('non') && !r.name.toLowerCase().includes('test'))
