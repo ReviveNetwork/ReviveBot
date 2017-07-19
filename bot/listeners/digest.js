@@ -14,7 +14,7 @@ module.exports = message => {
         params = params.split(settings.delimiter || ' ');
         cmd = params.shift().trim();
     }
-    else if (message.isMentioned(client.user)) {
+    else if (message.isMentioned(message.client.user)) {
         /**Remove mention and extract params */
         params = message.content.split(settings.delimiter || ' ');
         params = params.filter(p => !p.includes(message.client.user.id))
