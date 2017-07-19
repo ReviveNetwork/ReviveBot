@@ -35,10 +35,10 @@ function help(message) {
             carray.push({ key, value });
         }
     )
-    let ownerc = Object.values(carray).filter(c => c.owner);
-    let modc = Object.values(carray).filter(c => c.mod);
-    let func = Object.values(carray).filter(c => c.fun);
-    let revivec = Object.values(carray).filter(c => c.custom);
+    let ownerc = Object.values(carray).filter(c => c.value.owner);
+    let modc = Object.values(carray).filter(c => c.value.mod);
+    let func = Object.values(carray).filter(c => c.value.fun);
+    let revivec = Object.values(carray).filter(c => c.value.custom);
     if (settings.owners.includes(message.author.id)) {
         res = res + "**Owner Only Commands:** \n";
         ownerc.map(
