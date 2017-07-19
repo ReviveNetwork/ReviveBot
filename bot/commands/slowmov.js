@@ -23,7 +23,7 @@ async function command(params, message) {
 /**
  * description of the command
  */
-const description = "executes a command (owners only)";
+const description = "disables/enables slowmov (owners only)";
 /**
  * Define Exports
  */

@@ -5,13 +5,11 @@ const rp = require('request-promise-native');
  * @param {*message} message
  */
 async function command(params, message) {
-    let url = "https://yesno.wtf/api/";
-    if (message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why"))
-        url = url + "?force=maybe";
-    if (message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
-        url = url + "?force=maybe";
-    const r = JSON.parse(await rp(url));
-
+    let res = ["Yes", "Maybe", "No"];
+    if (message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why") || message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
+        res = "Maybe";
+    else
+        res = res[Math.floor(Math.random() * res.length)];
     return await message.channel.send(r.answer);
 }
 /**
