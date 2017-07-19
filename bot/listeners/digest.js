@@ -21,5 +21,6 @@ module.exports = message => {
         cmd = params.shift().trim();
     }
     //execute command
-    commands.execute(cmd.toLowerCase(), params, message)
+    if(cmd)
+        commands.execute(cmd.toLowerCase(), params, message)
 }
