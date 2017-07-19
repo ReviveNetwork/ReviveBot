@@ -1,13 +1,10 @@
-const bot = require('../bot');
-
-bot.on('message', message => {
-    var channel = message.channel;
+module.exports = message => {
+    let channel = message.channel;
     if (message.author.bot) return;
-    if (message.channel.id != "260294049964097537" && message.channel.id != "329922321009868810" && message.channel.id != "274920877315850241" ) return;//it is not the help channel
-    var user = message.author;
+    if (message.channel.id != "260294049964097537" && message.channel.id != "329922321009868810" && message.channel.id != "274920877315850241") return;//it is not the help channel
     message = message.content.toLowerCase();
     //Error updating
-    if (message.includes('updat') && ( message.includes('forever') || message.includes('keeps') || message.includes('progress') )) {
+    if (message.includes('updat') && (message.includes('forever') || message.includes('keeps') || message.includes('progress'))) {
         channel.send('Follow this article \n http://battlelog.co/wiki.php?article=27');
     }
     //Error debugging
@@ -50,9 +47,9 @@ bot.on('message', message => {
         channel.send('Follow this post \n https://battlelog.co/post.php?id=19446#p68847');
     }
     else if (message.includes('connect') && message.includes('blue')) {
-        channel.send('It seems your using the old launcher. Download the new launcher using this link \n http://download.bf2.us/launcher-release/Setup.exe',{files: ['https://battlelog.co/img/revive-launcher.png']});
+        channel.send('It seems your using the old launcher. Download the new launcher using this link \n http://download.bf2.us/launcher-release/Setup.exe', { files: ['https://battlelog.co/img/revive-launcher.png'] });
     }
-    else if (message.includes('leg') && message.includes('is') && (message.includes('project')|| message.includes('revive') || message.includes('battlelog'))) {
-        channel.send('As Gamespy shutdown, all the games hosted by Gamespy became \"abandonware\" as EA no longer wished to support them.\nAbandonware is computer software that is no longer distributed or supported by the developer or copyright holder.\nAs long as we do not modify the software no more than we need to get it working and do not profit from it, EA will not prohibit the game revivals.\n\nRevive has made itself transparent to EA. At the moment, EA neither endorse nor prohibit Revive mostly due to the following reasons: \n\n1) EA has decided not to earn profit out of the games anymore and  hence have ended thier support for the games after gamespy shutdown. There were also some cases where players contacted EA to purchase the games and in the end were given to them for free.\n\n2) They know that Revive, unlike them, is an non-profit organization working to provide support for abondaned games.\n\nIf EA decides to finally shut Revive down, Revive will respect thier wish to do so.',{split:true});
+    else if (message.includes('leg') && message.includes('is') && (message.includes('project') || message.includes('revive') || message.includes('battlelog'))) {
+        channel.send('As Gamespy shutdown, all the games hosted by Gamespy became \"abandonware\" as EA no longer wished to support them.\nAbandonware is computer software that is no longer distributed or supported by the developer or copyright holder.\nAs long as we do not modify the software no more than we need to get it working and do not profit from it, EA will not prohibit the game revivals.\n\nRevive has made itself transparent to EA. At the moment, EA neither endorse nor prohibit Revive mostly due to the following reasons: \n\n1) EA has decided not to earn profit out of the games anymore and  hence have ended thier support for the games after gamespy shutdown. There were also some cases where players contacted EA to purchase the games and in the end were given to them for free.\n\n2) They know that Revive, unlike them, is an non-profit organization working to provide support for abondaned games.\n\nIf EA decides to finally shut Revive down, Revive will respect thier wish to do so.', { split: true });
     }
-});
+};

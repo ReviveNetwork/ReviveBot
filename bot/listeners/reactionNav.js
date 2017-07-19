@@ -1,18 +1,15 @@
 let database = {};
-
-const bot = require('../bot');
-bot.on('addNav', ob => {
+module.exports.addNav = ob => {
     database[ob.message.id] = { arr: ob.arr, index: 0, exec: ob.exec };
     ob.message.edit(ob.message.content + "\n 1 of " + ob.arr.length);
     setTimeout(() => {
-        //ob.message.edit(ob.message.content + "\nReactions Navigator Expired");
-        ob.message.reactions.map(r => r.remove(bot.user).catch(console.log));
+        ob.message.clearReactions();
         database[ob.message.id] = null;
         delete database[ob.message.id];
     }, 300000
     )
-});
-bot.on('messageReactionAdd', (reaction, user) => {
+};
+module.exports.reactionAdd =  (reaction, user) => {
     if (user.bot) return;
     let ob = database[reaction.message.id];
     if (!ob) return;
@@ -33,4 +30,4 @@ bot.on('messageReactionAdd', (reaction, user) => {
     ob.index = index;
     ob.exec(ob.arr[index]).then(res => reaction.message.edit(res + "\n" + (index + 1) + " of " + ob.arr.length)).catch(reaction.message.edit);
     reaction.remove(user);
-})
+}

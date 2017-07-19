@@ -6,8 +6,10 @@ const settings = require('./../../settings.json');
  */
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
-        message.client.emit('unlock');
-        message.reply('Unlocked the bot');
+        if (!settings.lock)
+            return await message.reply('Bot already unlocked');
+        settings.lock = false;
+        return await message.reply('Bot unlocked');
     }
     else
         message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif')
