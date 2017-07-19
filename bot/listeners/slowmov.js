@@ -10,11 +10,11 @@ module.exports = message => {
     if (!message.author.bot && settings.slowmov && message.channel.deletable && message.member.bannable)
         setTimeout(async function () {
             if (message.member.lastMessage && message.member.lastMessage.id != message.id) {
-                let duration = 5000;
+                let duration = 10000;
                 if(settings.muted)
                 {
                     let is_muted = settings.muted.find(function(t){
-                        if((t.id == message.author.id) && (t.time > (Date.now() - 5000) )) 
+                        if((t.id == message.author.id) && (t.time > (Date.now() - 10000) )) 
                             return t;
                     });
                     if(is_muted)
