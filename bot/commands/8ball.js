@@ -5,7 +5,7 @@ const rp = require('request-promise-native');
  * @param {*message} message
  */
 async function command(params, message) {
-    let res = ["Yes", "Maybe", "No"];
+    let res = ["Yes", "No", "Maybe"];
     if (message.content.toLowerCase().includes("what") || message.content.toLowerCase().includes("why") || message.content.toLowerCase().includes("did") || message.content.toLowerCase().includes("you"))
         res = "Maybe";
     else
