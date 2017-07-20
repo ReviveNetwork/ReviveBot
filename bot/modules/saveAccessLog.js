@@ -7,5 +7,5 @@ setInterval(() => {
         path.resolve(__dirname, '..', '..', 'access_log.json'),
          JSON.stringify(access_log), 
          'utf8'
-         , err=>consolde.log);
+         , err=>console.log);
 }, 60000)
