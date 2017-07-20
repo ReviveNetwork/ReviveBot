@@ -5,7 +5,7 @@ const moment = require('moment');
  * @param {*string array} params 
  * @param {*message} message
  */
-const access_log = require('../commands').access_log;
+const access_log = require('./../commands').access_log;
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
         let user = message.mentions.users.first();
