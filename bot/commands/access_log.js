@@ -13,6 +13,11 @@ async function command(params, message) {
             await message.reply('Invalid Arguments')
             return false;
         }
+        if(!access_log)
+        {
+            await message.reply('access_Log is undefined')
+            return false;
+        }
         let logs_for_user = access_log.filter(ac => ac.author == user.id);
         if (logs_for_user.length < 1) {
             await message.reply("He hasn't used any bot commands since " + moment(access_log[0].time).fromNow());
