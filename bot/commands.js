@@ -57,6 +57,7 @@ module.exports = {
                     success: mr,
                     denied: false,
                     fun: commands[cmd].fun,
+                    channel: message.channel.id,
                     normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
                 })
             ).catch(err => {
@@ -68,6 +69,7 @@ module.exports = {
                     denied: false,
                     error: err.stack,
                     fun: commands[cmd].fun,
+                    channel: message.channel.id,
                     normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
                 })
                 message.channel.send(getError(err), { code: 'error', split: true }).catch(console.log)

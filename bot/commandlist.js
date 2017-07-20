@@ -37,5 +37,6 @@ module.exports = {
     "unmute": "unmute",
     "mute": "mute",
     "unmute": "unmute",
-    "dj": "dj"
+    "dj": "dj",
+    "hi": "hello"
 }
