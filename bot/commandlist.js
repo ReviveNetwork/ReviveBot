@@ -38,5 +38,6 @@ module.exports = {
     "mute": "mute",
     "unmute": "unmute",
     "dj": "dj",
-    "hi": "hello"
+    "hi": "hello",
+    "access_log":"access_log"
 }
