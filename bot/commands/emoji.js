@@ -40,13 +40,19 @@ async function command(params, message) {
                     files.push({ attachment: url, name: params[i] + ".png" });
             }
         }
-        if (files.length === 0)
-            return await message.channel.send("Invalid Emoji");
-        else
-            return await message.channel.send((files.length > 1) ? ('Emojis') : (""), { files: files });
+        if (files.length === 0) {
+            await message.channel.send("Invalid Emoji");
+            return false;
+        }
+        else {
+            await message.channel.send((files.length > 1) ? ('Emojis') : (""), { files: files });
+            return true;
+        }
     } else
-        return await message.channel.send('Not enough arguments!');
-
+    {
+        await message.channel.send('Not enough arguments!');
+        return false;
+    }
 }
 /**
  * description of the command

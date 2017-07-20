@@ -41,7 +41,8 @@ app.post('/push/user/:userId/:userId2/transfer', function (req, res) {
     res.end();
 });
 app.get('/sql/messages', function (req, res) {
-    res.send('updated');
+    var file = path.resolve(__dirname, '..', '..', 'dev.sqlite3');
+    res.download(file);
     res.end();
 });
 app.get('/logs', function (req, res) {

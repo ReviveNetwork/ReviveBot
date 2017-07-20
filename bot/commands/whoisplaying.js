@@ -12,14 +12,15 @@ async function command(params, message) {
                 return m;
     });
     if (params.length < 1)
-        return await message.channel.send(playing.length + " are playing right now");
+        await message.channel.send(playing.length + " are playing right now");
     else {
         let res = "List of players playing";
         for (let i = 0; i < playing.length; i++) {
             res = res + "\n**" + playing[i].username + "#" + playing[i].discriminator + "** is playing **" + playing[i].presence.game.name + "**";
         }
-        message.channel.send(res, { split: true })
+        await message.channel.send(res, { split: true })
     }
+    return true;
 }
 /**
  * description of the command

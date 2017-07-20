@@ -21,6 +21,7 @@ async function command(params, message) {
     else
         await message.channel.send(params.join(" "),{disableEveryone:true});
     await message.guild.me.setNickname(bot.user.username);
+    return true;
     //await bot.user.setAvatar(ava);
 }
 /**

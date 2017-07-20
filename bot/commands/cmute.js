@@ -6,7 +6,8 @@
  */
 async function command(params, message) {
     if (message.content.includes(message.client.user.id)) {
-        return message.reply("Trying to make me Mute myself?", { files: ["https://raw.githubusercontent.com/ReviveNetwork/ReviveBot/master/img/thuglife.jpg"] })
+        await message.reply("Trying to make me Mute myself?", { files: ["https://raw.githubusercontent.com/ReviveNetwork/ReviveBot/master/img/thuglife.jpg"] })
+        return false;
     }
     let permissions = message.channel.permissionsFor(message.member);
     if (permissions.has("MANAGE_MESSAGES")) {
@@ -15,13 +16,18 @@ async function command(params, message) {
                 .map(u => {
                     message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Muted");
                 }))
-            message.reply("Muted " + message.mentions.users.size + " users");
+            await message.reply("Muted " + message.mentions.users.size + " users");
+
         }
-        else
-            message.reply("No one to mute");
+        else {
+            await message.reply("No one to mute");
+        }
+        return true;
     }
-    else
-        message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
+    else {
+        await message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
+        return false;
+    }
 }
 /**
  * description of the command

@@ -12,7 +12,7 @@ async function command(params, message) {
         const plist = await bf2142.getPlayers(nick);
         if (plist.length == 0) {
             message.channel.send("Player not found");
-            return;
+            return false;
         }
         const pl = await p2str(plist[0], "bf2142")
         const msg = await message.channel.send(pl);
@@ -22,9 +22,11 @@ async function command(params, message) {
         await msg.react('▶')
         await msg.react('⏩')
         bot.emit('addNav', { message: msg, exec: (p) => p2str(p, "bf2142"), arr: plist, index: 0 });
+        return true;
     }
     catch (e) {
-        message.reply("No such user found");
+        await message.reply("API error");
+        return false;
     }
 }
 /**

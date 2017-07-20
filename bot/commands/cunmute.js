@@ -15,10 +15,12 @@ async function command(params, message) {
                     if (p)
                         p.delete();
                 }))
-            message.reply("Unmuted " + message.mentions.users.size + " users");
+            await message.reply("Unmuted " + message.mentions.users.size + " users");
         }
         else
+
             message.reply("No one to unmute");
+        return true;
     }
     else
         message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")

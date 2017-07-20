@@ -10,7 +10,10 @@ const settings = require('./../../settings.json');
 const Discord = require('discord.js');
 
 async function command(params, message) {
-	if (!settings.owners.includes(message.author.id)) return await message.reply("You are not allowed to use this command");
+	if (!settings.owners.includes(message.author.id)) {
+		await message.reply("You are not allowed to use this command");
+		return false;
+	}
 	const embed = new Discord.MessageEmbed();
 	embed.setAuthor("Melroy", "https://cdn.discordapp.com/avatars/184547913509109761/ef49e8f45dcb53cbe016393e842e7ee0.webp?size=256");
 	embed.setTitle("ReviveBot");

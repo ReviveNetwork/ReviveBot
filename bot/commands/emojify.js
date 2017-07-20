@@ -20,7 +20,8 @@ async function command(params, message) {
         else
             res = res + " " + params[i];
     }
-    message.channel.send(res,{disableEveryone:true});
+    await message.channel.send(res,{disableEveryone:true});
+    return true;
 }
 /**
  * description of the command

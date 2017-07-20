@@ -21,7 +21,8 @@ async function command(params, message) {
             r = r + "**" + role.name + "**: " + role.members.size + '\n';
     });
     embed.setDescription(r);
-    return message.channel.send('', { embed: embed }).catch(message.channel.send);
+    message.channel.send('', { embed: embed }).catch(message.channel.send);
+    return true;
 }
 /**
  * description of the command

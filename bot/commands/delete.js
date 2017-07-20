@@ -7,7 +7,7 @@ const bot = require('./../bot');
 async function command(params, message) {
     if (!message.member.hasPermission("MANAGE_MESSAGES")) {
         message.channel.send("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif").then(m => m.delete(10000));
-        return;
+        return false;
     }
     await message.delete(10000);
     let user = null;
@@ -29,24 +29,32 @@ async function command(params, message) {
     }
     if (params[0] && !isNaN(parseInt(params[0])))
         limit = parseInt(params[0]);
-    if (limit > 100)
-        return message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100").then(m => m.delete(10000));
+    if (limit > 100) {
+        await message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100").then(m => m.delete(10000));
+        return false;
+    }
     let messages = await channel.fetchMessages({ limit: limit });
-    if (messages.size < 2)
-        return message.channel.send("Deleted 0 messages").then(m => m.delete(10000));
+    if (messages.size < 2) {
+        await message.channel.send("Deleted 0 messages").then(m => m.delete(10000));
+        return true;
+    }
     if (user === null) {
         await channel.bulkDelete(limit);
-        return message.channel.send("Deleted " + messages.size + " messages").then(m => m.delete(10000));
+        await message.channel.send("Deleted " + messages.size + " messages").then(m => m.delete(10000));
+        return true
     }
     else {
         messages = await messages.filter(function (m) {
             if (m.author.id === user.id)
                 return m;
         });
-        if (messages.size < 2)
-            return message.channel.send("Deleted 0 messages").then(m => m.delete(10000));
+        if (messages.size < 2) {
+            await message.channel.send("Deleted 0 messages").then(m => m.delete(10000));
+            return true;
+        }
         await channel.bulkDelete(messages);
-        return message.channel.send("Deleted " + messages.size + " messages").then(m => m.delete(10000));
+        await message.channel.send("Deleted " + messages.size + " messages").then(m => m.delete(10000));
+        return true;
     }
 }
 /**

@@ -6,13 +6,18 @@ const settings = require('./../../settings.json');
  */
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
-        if (!settings.lock)
-            return await message.reply('Bot already unlocked');
+        if (settings.lock) {
+            await message.reply('Bot already unlocked');
+            return true;
+        }
         settings.lock = false;
-        return await message.reply('Bot unlocked');
+        await message.reply('Bot unlocked');
+        return true;
     }
-    else
-        message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif')
+    else {
+        await message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif')
+        return false;
+    }
 }
 /**
  * description of the command

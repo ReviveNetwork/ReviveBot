@@ -9,8 +9,8 @@ const moment = require('moment');
  */
 async function command(params, message) {
 	if (message.mentions.users.size === 0 && params.length > 0) {
-		message.reply("Usage:\n~info - shows your stats" + "\n~info <usermention> - shows stats of the user mentioned\n" + "(the user should have linked his forum account with his discord account)");
-		return;
+		await message.reply("Usage:\n~info - shows your stats" + "\n~info <usermention> - shows stats of the user mentioned\n" + "(the user should have linked his forum account with his discord account)");
+		return false;
 	}
 	let user = message.mentions.users.first() || message.author;
 	let id = user.id;
@@ -26,12 +26,20 @@ async function command(params, message) {
 	}
 	console.log(body);
 	if (body.error) {
-		if (all) return message.reply("Please link your discord account first using `~link`");
-		return message.reply("The requested user has not yet linked his discord account with their revive account");
+		if (all) {
+			await message.reply("Please link your discord account first using `~link`");
+			return false;
+		}
+		await message.reply("The requested user has not yet linked his discord account with their revive account");
+		return false;
 	}
 	if (body.banned == 1) {
-		if (all) return message.reply("You are global banned");
-		return message.reply("The requested user has been global banned.");
+		if (all) {
+			await message.reply("You are Global Banned");
+			return false;
+		}
+		await message.reply("The requested user has been global banned.");
+		return false;
 	}
 
 	for (let i = 0; i < body.soldiers.length; i++) {
@@ -85,7 +93,8 @@ async function command(params, message) {
 		}
 	}
 	if (!atleastOne)
-		message.channel.send(user.toString() + " has no soldiers");
+		await message.channel.send(user.toString() + " has no soldiers");
+	return true
 }
 /**
  * description of the command

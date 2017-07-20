@@ -8,6 +8,7 @@ async function command(params, message) {
     let url = "https://http.cat/" + params.join(' ').trim();
 
     await message.channel.send('', { file: { attachment: url, name: params[0] + ".png" } });
+    return true;
 }
 /**
  * description of the command

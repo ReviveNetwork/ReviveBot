@@ -5,12 +5,18 @@
  * @param {*message} message
  */
 async function command(params, message) {
-    if (!message.guild.roles.find("name", "DJ"))
-        return message.reply("Sorry, this command is not applicable in this guild");
-    if (!message.member.roles.find((r) => r.name.toLowerCase().includes("member")))
-        return message.reply("Sorry, you should be a verified member of this guild");
-    if ((Date.now() - message.author.joinedTimestamp) < 2.628e+9)
-        message.reply("You have to be a part of this guild for more than 1 month to earn this role");
+    if (!message.guild.roles.find("name", "DJ")) {
+        await message.reply("Sorry, this command is not applicable in this guild");
+        return false;
+    }
+    if (!message.member.roles.find((r) => r.name.toLowerCase().includes("member"))) {
+        await message.reply("Sorry, you should be a verified member of this guild");
+        return false;
+    }
+    if ((Date.now() - message.author.joinedTimestamp) < 2.628e+9) {
+        await message.reply("You have to be a part of this guild for more than 1 month to earn this role");
+        return false;
+    }
     let m = await message.channel.send(message.author.toString() + " has applied to be a DJ. Please vote by clicking the below reactions");
     await m.react("✅");
     await m.react("⛔");
@@ -27,6 +33,7 @@ async function command(params, message) {
     }
     else
         await m.edit(message.author.toString() + ", you didnt recieve enough votes to be a DJ");
+    return true;
 }
 /**
  * description of the command

@@ -11,14 +11,16 @@ async function command(params, message) {
     let algo = params.shift();
     let res = params.join(settings.delimiter || ' ');
     if (crypto.getHashes().indexOf(algo) === -1) {
-        message.channel.send('Invalid algorithm \n Valid hashing Algorithms are:\n' + crypto.getHashes().join(' , '));
-        return;
+        await message.channel.send('Invalid algorithm \n Valid hashing Algorithms are:\n' + crypto.getHashes().join(' , '));
+        return false;
     }
     res = checksum(res, algo);
     console.log(res); message.channel.send('hash of message: ' + res);
     if (message.attachments.size > 0) {
         res = message.attachments.first().url;
-        request(res).then(body => message.channel.send('Hash of file: ' + checksum(body, algo)));
+        let body = await request(res);
+        await message.channel.send('Hash of file: ' + checksum(body, algo));
+        return true;
     }
 }
 /**

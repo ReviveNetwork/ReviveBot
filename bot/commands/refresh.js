@@ -28,7 +28,6 @@ async function command(params, message) {
                     await message.channel.send(u.toString() + " unable to be linked");
             })
         });
-        return true;
     }
     else {
         const r = await  request({uri:'http://localhost/v0/discord/reverse_link/' + message.author.id, method:"POST"});
@@ -37,6 +36,7 @@ async function command(params, message) {
         else
             await message.channel.send(message.author.toString() + " unable to be linked");
     }
+    return true;
 }
 /**
  * description of the command

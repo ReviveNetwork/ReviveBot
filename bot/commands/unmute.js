@@ -10,12 +10,16 @@ async function command(params, message) {
             return r;
     })
     if (message.member.permissions.has("MANAGE_MESSAGES")) {
-        message.mentions.users
+        await Promise.all(message.mentions.users
             .map(u => message.guild.member(u))
-            .map(m => m.removeRole(muted))
+            .map(m => m.removeRole(muted)))
+        await message.reply(`Muted ${message.mentions.users.size} users`)
+        return true;
     }
-    else
-        message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
+    else {
+        await message.reply("You aren't Worthy\nhttps://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif")
+        return false
+    }
 }
 /**
  * description of the command

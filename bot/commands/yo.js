@@ -5,7 +5,8 @@
  * @param {*message} message
  */
 async function command(params, message) {
-    message.reply('yo bro');
+    await message.reply('yo bro');
+    return true;
 }
 /**
  * description of the command

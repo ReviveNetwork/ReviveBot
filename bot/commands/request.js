@@ -6,12 +6,14 @@ const settings = require('./../../settings.json');
  * @param {*message} message
  */
 async function command(params, message) {
-    if (!settings.owners.includes(message.author.id))
-        return await message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif');
+    if (!settings.owners.includes(message.author.id)) {
+        await message.reply('https://media.tenor.com/images/c472d1ee8c75a50f700bd028cc1b10b9/tenor.gif');
+        return false;
+    }
     var msg = params.join(" ");
     if (msg.startsWith('{'))
         msg = JSON.parse(msg)
-    message.channel.send(await request(msg), { code: 'javascript' });
+    await message.channel.send(await request(msg), { code: 'javascript' });
 }
 /**
  * description of the command

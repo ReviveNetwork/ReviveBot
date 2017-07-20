@@ -4,7 +4,13 @@
 const commands = {};
 const settings = require('./../settings.json');
 const list = require('./commandlist');
-const access_log = [];
+let access_log = false;
+try {
+    access_log = require('./../access_log.json');
+}
+catch (e) {
+    access_log = [];
+}
 const getcommands = () => {
     Object.entries(list).forEach(
         ([key, value]) => {
@@ -20,27 +26,52 @@ const getError = function (err) {
         return err
 }
 module.exports = {
-    execute: function (cmd, params, message) {
+    execute: async function (cmd, params, message) {
         if (commands[cmd]) {
-            access_log.push({
-                time: message.createdTimestamp,
-                author: message.author.id,
-                command: cmd,
-                fun: commands[cmd].fun,
-                normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
-            });
             if (commands[cmd].fun) {
                 let commandsexec = access_log.filter(ac => (ac.command == cmd) && (ac.time > message.createdTimestamp - 30000) && ac.normalChannel && ac.fun).size;
                 if (commandsexec > 5) {
-                    return message.reply("Please use " +
+                    await message.reply("Please use " +
                         message.client.channels.find(ch =>
                             ch.name.toLowerCase().includes("bot") || ch.name.toLowerCase().includes("test")
                         ).toString()
                         + " for spamming the bot"
                     )
+                    access_log.push({
+                        time: message.createdTimestamp,
+                        author: message.author.id,
+                        command: cmd,
+                        fun: commands[cmd].fun,
+                        denied: true,
+                        success: false,
+                        channel: message.channel.id,
+                        normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
+                    });
                 }
             }
-            commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error', split: true }))//.then(message.delete(3000));
+            commands[cmd].execute(params, message).then(
+                mr => access_log.push({
+                    time: message.createdTimestamp,
+                    author: message.author.id,
+                    command: cmd,
+                    success: mr,
+                    denied: false,
+                    fun: commands[cmd].fun,
+                    normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
+                })
+            ).catch(err => {
+                access_log.push({
+                    time: message.createdTimestamp,
+                    author: message.author.id,
+                    command: cmd,
+                    success: false,
+                    denied: false,
+                    error: err.stack,
+                    fun: commands[cmd].fun,
+                    normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
+                })
+                message.channel.send(getError(err), { code: 'error', split: true }).catch(console.log)
+            })
         }
         else if (cmd === 'help')
             help(message);
