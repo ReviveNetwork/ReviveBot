@@ -8,5 +8,5 @@ require('./modules/hotline');
 require('./modules/api');
 require('./modules/ingame');
 require('./modules/saveAccessLog');
-//require('./modules/influx');
+require('./modules/influx');
 //require('./modules/accept');
