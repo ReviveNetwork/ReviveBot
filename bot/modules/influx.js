@@ -1,4 +1,5 @@
 const influx = require('./../../influx');
+const Message = require('./../../orm/Message');
 const bot = require('./../bot.js');
 let ready = false;
 bot.on('ready', async function () {
