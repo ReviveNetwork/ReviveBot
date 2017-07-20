@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const settings = require('./../settings.json');
-const client = new Discord.Client();
+const client = new Discord.Client({disableEveryone:true});
 
 var dt = process.env.DISCORD_TOKEN || settings.token || process.argv[2];
 
