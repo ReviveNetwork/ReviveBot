@@ -6,7 +6,7 @@ const discourse_events = require('./../lib/discourse_events')
 let app = express();
 const path = require('path');
 let ready = false;
-
+const commands = require('./../commands');
 app.use(bodyParser.json())
 bot.on('ready', () => { ready = true; });
 app.post('/push/user/:userId/updated', function (req, res) {
@@ -41,8 +41,12 @@ app.post('/push/user/:userId/:userId2/transfer', function (req, res) {
     res.end();
 });
 app.get('/sql/messages', function (req, res) {
-    var file = path.resolve(__dirname, '..', '..', 'dev.sqlite3');
-    res.download(file); // Set disposition and send it.
+    res.send('updated');
+    res.end();
+});
+app.get('/logs', function (req, res) {
+    res.jsonp(commands.access_log);
+    res.end();
 });
 app.post('/notify', function (req, res) {
     if (!ready) return;

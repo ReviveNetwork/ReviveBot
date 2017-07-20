@@ -4,6 +4,7 @@
 const commands = {};
 const settings = require('./../settings.json');
 const list = require('./commandlist');
+const access_log = [];
 const getcommands = () => {
     Object.entries(list).forEach(
         ([key, value]) => {
@@ -21,15 +22,30 @@ const getError = function (err) {
 module.exports = {
     execute: function (cmd, params, message) {
         if (commands[cmd]) {
-            let bm = message.channel.messages.filter(m => (m.author.id == message.client.user.id) && (m.createdTimestamp > Date.now() - 15000)).size
-            
-            if (bm >=2 && commands[cmd].fun && !(message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")))
-                return message.reply("Dont abuse me");
+            access_log.push({
+                time: message.createdTimestamp,
+                author: message.author.id,
+                command: cmd,
+                fun: commands[cmd].fun,
+                normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
+            });
+            if (commands[cmd].fun) {
+                let commandsexec = access_log.filter(ac => (ac.command == cmd) && (ac.time > message.createdTimestamp - 30000) && ac.normalChannel && ac.fun).size;
+                if (commandsexec > 5) {
+                    return message.reply("Please use " +
+                        message.client.channels.find(ch =>
+                            ch.name.toLowerCase().includes("bot") || ch.name.toLowerCase().includes("test")
+                        ).toString()
+                        + " for spamming the bot"
+                    )
+                }
+            }
             commands[cmd].execute(params, message).catch(err => message.channel.send(getError(err), { code: 'error', split: true }))//.then(message.delete(3000));
         }
         else if (cmd === 'help')
             help(message);
-    }
+    },
+    access_log: access_log
 }
 function help(message) {
     let res = "";
