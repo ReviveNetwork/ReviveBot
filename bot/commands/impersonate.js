@@ -19,7 +19,7 @@ async function command(params, message) {
     if (params.length < 1)
         await message.channel.send("No argument provided", { code: 'error' });
     else
-        await message.channel.send(params.join(" "));
+        await message.channel.send(params.join(" "),{disableEveryone:true});
     await message.guild.me.setNickname(bot.user.username);
     //await bot.user.setAvatar(ava);
 }
