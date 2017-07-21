@@ -26,8 +26,8 @@ async function command(params, message) {
             await message.reply("He hasn't used any bot commands since " + moment(access_log[0].time).fromNow());
         }
         else {
-            let res = `${user.toString()} has used ${logs_for_user.length} since ${moment(access_log[0].time).fromNow()}`;
-            logs_for_user.map((l) => {
+            let res = `${user.toString()} has used ${logs_for_user.length} since ${moment(access_log[0].time).fromNow()}. Showing last 50 usages`;
+            logs_for_user.slice(0,50).map((l) => {
                 res = res + "\n" + moment(l.time).fromNow() + " - ~" + l.command + " " + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
             })
             await message.channel.send(res, { split: true, code: 'xl' });
