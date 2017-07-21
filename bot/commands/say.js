@@ -1,3 +1,4 @@
+const settings = require('./../../settings.json');
 const bot = require('./../bot');
 /**
  * This method should return the response directly to the channel
