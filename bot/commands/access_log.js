@@ -13,7 +13,7 @@ async function command(params, message) {
             let logs_for_channel = access_log.filter(ac => ac.channel == message.channel.id);
             let res = `${logs_for_channel.length} have been used in #${message.channel.name} since ${moment(access_log[0].time).fromNow()}`;
             logs_for_channel.map((l) => {
-                res = res + `\n ${moment(l.time)} - ~${l.command} by ${message.client.users.get(l.author).tag}` + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
+                res = res + `\n ${moment(l.time).fromNow()} - ~${l.command} by ${(message.client.users.get(l.author)?message.client.users.get(l.author).tag:"<@"+l.author+">")}` + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
             })
             await message.channel.send(res, { split: true, code: 'xl' });
         }
@@ -28,7 +28,7 @@ async function command(params, message) {
         else {
             let res = `${user.toString()} has used ${logs_for_user.length} since ${moment(access_log[0].time).fromNow()}`;
             logs_for_user.map((l) => {
-                res = res + "\n" + moment(l.time) + " - ~" + l.command + " " + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
+                res = res + "\n" + moment(l.time).fromNow() + " - ~" + l.command + " " + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
             })
             await message.channel.send(res, { split: true, code: 'xl' });
         }
