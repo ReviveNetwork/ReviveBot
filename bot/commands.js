@@ -29,6 +29,17 @@ module.exports = {
     execute: async function (cmd, params, message) {
         if (commands[cmd]) {
             if (commands[cmd].fun) {
+                if (settings["disabled-channels"].includes(message.channel.id))
+                    return access_log.push({
+                        time: message.createdTimestamp,
+                        author: message.author.id,
+                        command: cmd,
+                        fun: commands[cmd].fun,
+                        denied: true,
+                        success: false,
+                        channel: message.channel.id,
+                        normalChannel: (!message.channel.name.toLowerCase().includes("bot") && !message.channel.name.toLowerCase().includes("command") && !message.channel.name.toLowerCase().includes("test"))
+                    })
                 let commandsexec = access_log.filter(ac => (ac.command == cmd) && (ac.time > message.createdTimestamp - 30000) && ac.normalChannel && ac.fun).size;
                 if (commandsexec > 5) {
                     await message.reply("Please use " +

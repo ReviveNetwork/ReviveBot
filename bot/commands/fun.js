@@ -1,4 +1,4 @@
-
+const settings = require('./../../settings.json');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
@@ -7,16 +7,14 @@
 async function command(params, message) {
     let permissions = message.channel.permissionsFor(message.member);
     if (permissions.has("MANAGE_MESSAGES")) {
-        if (message.mentions.users && message.mentions.users.first()) {
-            await Promise.all(message.mentions.users
-                .map(u => {
-                    message.channel.overwritePermissions(u, { 'SEND_MESSAGES': false }, "Muted");
-                }))
-            await message.reply("Muted " + message.mentions.users.size + " users");
-
+        if (!settings["disabled-channels"].includes(message.channel.id)) {
+            settings["disabled-channels"].push(message.channel.id);
+            message.reply("Disabled fun commands in this channel")
         }
         else {
-            await message.reply("No one to mute");
+            let index = settings["disabled-channels"].indexOf(message.channel.id);
+            settings["disabled-channels"].splice(index, 1);
+            message.reply("Enabled fun commands in this channel")
         }
         return true;
     }
@@ -28,7 +26,7 @@ async function command(params, message) {
 /**
  * description of the command
  */
-const description = "Mutes a user";
+const description = "Disable/enable the bot fun commands in a particular channel";
 /**
  * Define Exports
  */
@@ -37,3 +35,4 @@ module.exports = {
     description: description,
     mod: true
 };
+

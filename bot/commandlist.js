@@ -27,7 +27,7 @@ module.exports = {
     "8ball": "8ball",
     "slowmov": "slowmov",
     "whoisplaying": "whoisplaying",
-    "impersonate": "impersonate",
+    "say": "say",
     "delete": "delete",
     "exec": "exec",
     "query": "query",
@@ -39,5 +39,5 @@ module.exports = {
     "unmute": "unmute",
     "dj": "dj",
     "hi": "hello",
-    "access_log":"access_log"
+    "access_log": "access_log"
 }

@@ -14,15 +14,16 @@ module.exports = async function (user, noDM) {
     catch (e) {
         throw "API Error";
     }
-    if (info.hasOwnProperty('error')) 
-    {
-        if(!noDM)
-        {
+    if (info.hasOwnProperty('error')) {
+        if (!noDM) {
             user.send("To link your discord account with your battlelog account follow the link given below\n"
                 + "https://battlelog.co/discord_link.php");
-                console.log("User " + user.username + " Not Linked. DMing user to link now");
+            console.log("User " + user.username + " Not Linked. DMing user to link now");
         }
         await member.removeRole('275317218911322112');
+        await member.removeRole("273105185566359562");
+        await member.setNickname(member.user.username);
+        await member.removeRole("318990525539680257");
         return false;
     }
     await member.addRole('275317218911322112');
@@ -32,24 +33,15 @@ module.exports = async function (user, noDM) {
     } else {
         if (member.roles.get("273105185566359562"))
             await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
-        }
-    if(info.banned == 1)
-    {
-        info.username = "[BANNED] "+info.username;
+    }
+    if (info.banned == 1) {
+        info.username = "[BANNED] " + info.username;
         if (!member.roles.get("318990525539680257"))
             await member.addRole(guild.roles.get("318990525539680257")).then(user.send('Role added: BANNED'));
     }
-    else
-    {
+    else {
         if (member.roles.get("318990525539680257"))
-            await member.removeRole(guild.roles.get("318990525539680257")).then(user.send('Role removed: BANNED'));   
-    }
-    if (info.is_donator) {
-        if (!member.roles.get("273105185566359562"))
-            await member.addRole(guild.roles.get("273105185566359562")).then(user.send('Role added: donators'));
-    } else {
-        if (member.roles.get("273105185566359562"))
-            await member.removeRole(guild.roles.get("273105185566359562")).then(user.send('Role removed: donators'));
+            await member.removeRole(guild.roles.get("318990525539680257")).then(user.send('Role removed: BANNED'));
     }
     if (member.kickable)
         await member.setNickname(info.username);
