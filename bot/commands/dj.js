@@ -30,10 +30,12 @@ async function command(params, message) {
     if (yes > no && (yes + no > 6)) {
         await m.edit(message.author.toString() + " is now a DJ");
         await message.member.addRole(message.guild.roles.find("name", "DJ"));
+        return true;
     }
     else
         await m.edit(message.author.toString() + ", you didnt recieve enough votes to be a DJ");
-    return true;
+     return false;
+   
 }
 /**
  * description of the command
