@@ -29,7 +29,7 @@ module.exports = {
     execute: async function (cmd, params, message) {
         if (commands[cmd]) {
             if (commands[cmd].fun) {
-                if (settings["disabled-channels"].includes(message.channel.id))
+                if (settings["disabled-channels"].includes(message.channel.id) && !settings.owners.includes(message.author.id))
                     return access_log.push({
                         time: message.createdTimestamp,
                         author: message.author.id,
