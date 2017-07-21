@@ -11,8 +11,9 @@ async function command(params, message) {
         let user = message.mentions.users.first();
         if (!user || user == null) {
             let logs_for_channel = access_log.filter(ac => ac.channel == message.channel.id);
+            logs_for_channel.reverse()
             let res = `${logs_for_channel.length} have been used in #${message.channel.name} since ${moment(access_log[0].time).fromNow()}. Showing last 50 usages`;
-            logs_for_channel.slice(0, -50).map((l) => {
+            logs_for_channel.slice(0,50).map((l) => {
                 res = res + `\n ${moment(l.time).fromNow()} - ~${l.command} by ${(message.client.users.get(l.author)?message.client.users.get(l.author).tag:"<@"+l.author+">")} ` + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
             })
             await message.channel.send(res, { split: true, code: 'xl' });
@@ -23,12 +24,13 @@ async function command(params, message) {
             return false;
         }
         let logs_for_user = access_log.filter(ac => ac.author == user.id);
+        logs_for_user.reverse()
         if (logs_for_user.length < 1) {
             await message.reply("He hasn't used any bot commands since " + moment(access_log[0].time).fromNow());
         }
         else {
             let res = `${user.tag} has used ${logs_for_user.length} since ${moment(access_log[0].time).fromNow()}. Showing last 50 usages`;
-            logs_for_user.slice(0, -50).map((l) => {
+            logs_for_user.slice(0, 50).map((l) => {
                 res = res + "\n" + moment(l.time).fromNow() + " - ~" + l.command + " " + ((l.success) ? "Success" : "Failed") + ((l.error) ? " because of error" : "") + ((l.channel) ? ` - ${message.client.channels.get(l.channel).name}` : "")
             })
             await message.channel.send(res, { split: true, code: 'xl' });
