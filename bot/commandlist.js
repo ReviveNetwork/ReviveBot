@@ -34,6 +34,7 @@ module.exports = {
     "cmute": "cmute",
     "cunmute": "cunmute",
     "mute": "mute",
+    "fun":"fun",
     "unmute": "unmute",
     "mute": "mute",
     "unmute": "unmute",

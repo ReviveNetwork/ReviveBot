@@ -13,7 +13,6 @@ async function command(params, message) {
         return false;
     }
     if (!member.roles.get("335972667322662923")) {
-        await message.reply("you are not an alpha member");
         return false;
     }
     let key = await request({
