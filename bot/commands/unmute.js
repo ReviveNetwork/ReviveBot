@@ -13,7 +13,7 @@ async function command(params, message) {
         await Promise.all(message.mentions.users
             .map(u => message.guild.member(u))
             .map(m => m.removeRole(muted)))
-        await message.reply(`Muted ${message.mentions.users.size} users`)
+        await message.reply(`Unmuted ${message.mentions.users.size} users`)
         return true;
     }
     else {
