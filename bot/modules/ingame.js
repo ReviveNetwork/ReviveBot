@@ -6,7 +6,7 @@ let guild;
 const updateIngame = async function () {
   if (!guild && !ingame) return;
 
-  let playing = await request('http://localhost/v0/discord/online');
+  let playing = await request('http://' + (process.env.REVIVE_API || 'localhost') + '/v0/discord/online');
   playing = JSON.parse(playing);
 
   let toRemove = ingame.members.filter(function (m) {

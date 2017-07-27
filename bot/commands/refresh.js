@@ -9,7 +9,7 @@ const request = require('request-promise-native');
 async function command(params, message) {
     if (params.length >= 1) {
         message.mentions.users.map(async function (u) {
-            const r = await request({uri:'http://localhost/v0/discord/reverse_link/' + u.id, method:"POST"});
+            const r = await request({ uri: 'http://' + (process.env.REVIVE_API || 'localhost') + '/v0/discord/reverse_link/' + u.id, method: "POST" });
             if (r == "ok")
                 await message.channel.send(u.toString() + " sucessfully linked");
             else
@@ -21,7 +21,9 @@ async function command(params, message) {
             r.members.map(async function (m) {
                 let u = m.user;
                 console.log("refreshing " + u.username);
-                const r = await  request({uri:'http://localhost/v0/discord/reverse_link/' + u.id, method:"POST"});
+                const r = await request({
+                    uri: 'http://' + (process.env.REVIVE_API || 'localhost') + '/v0/discord/reverse_link/' + u.id, method: "POST"
+                });
                 if (r == "ok")
                     await message.channel.send(u.toString() + " sucessfully linked");
                 else
@@ -30,7 +32,9 @@ async function command(params, message) {
         });
     }
     else {
-        const r = await  request({uri:'http://localhost/v0/discord/reverse_link/' + message.author.id, method:"POST"});
+        const r = await request({
+            uri: 'http://' + (process.env.REVIVE_API || 'localhost') + '/v0/discord/reverse_link/' + message.author.id, method: "POST"
+        });
         if (r == "ok")
             await message.channel.send(message.author.toString() + " sucessfully linked");
         else

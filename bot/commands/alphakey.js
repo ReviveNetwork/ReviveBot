@@ -17,7 +17,7 @@ async function command(params, message) {
     }
     let key = await request({
         method: "POST",
-        uri: "http://localhost/v0/discord/beta/" + message.author.id
+        uri: "http://" + (process.env.REVIVE_API || 'localhost') + "/v0/discord/beta/" + message.author.id
     });
     key = JSON.parse(key);
     if (key.error) {

@@ -4,7 +4,7 @@ const md = require('to-markdown');
 const MessageEmbed = require('discord.js').MessageEmbed;
 const mentionReg = /\[@[a-z]*\]\(\/u\/[a-z]*\)/igm;
 const did_from_uname = async function (uname) {
-    let res = await request('http://localhost/v0/discord/did_from_uname/' + encodeURIComponent(uname));
+    let res = await request('http://' + (process.env.REVIVE_API || 'localhost') + '/v0/discord/did_from_uname/' + encodeURIComponent(uname));
     console.log(res);
     res = JSON.parse(res);
     return res.id;

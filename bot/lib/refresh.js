@@ -8,7 +8,7 @@ module.exports = async function (user, noDM) {
     //console.log(user);
     var id = user.id;
     console.log(id);
-    let body = await request("http://localhost/v0/discord/userinfo/" + id)
+    let body = await request("http://" + (process.env.REVIVE_API || 'localhost') + "/v0/discord/userinfo/" + id)
     console.log(body);
     try { var info = JSON.parse(body); }
     catch (e) {
