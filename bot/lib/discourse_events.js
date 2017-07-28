@@ -31,7 +31,7 @@ module.exports = {
                 let u = m.match(/@[a-z]*/i)[0].substring(1);
                 toMention.push({
                     name: u,
-                    message: 'You were mentioned by ' + body.post.username + ' in ' + body.base_url + '/t/' + body.post.topic_slug + '/' + body.post.topic_id + '/' + body.post.post_number
+                    message: 'You were mentioned by ' + body.post.username + ' in ' + body.base_url + '/p/' + body.post.post_number
                 });
             });
         }
@@ -43,7 +43,7 @@ module.exports = {
                 if (p.username === body.post.username)
                     toMention.push({
                         name: p.username,
-                        message: 'You were DMed by ' + body.post.username + ' in ' + body.base_url + '/t/' + body.post.topic_slug + '/' + body.post.topic_id + '/' + body.post.post_number
+                        message: 'You were DMed by ' + body.post.username + ' in ' + body.base_url + '/p/' + body.post.post_number
                     });
             })
         }
