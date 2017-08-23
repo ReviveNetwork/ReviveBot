@@ -14,5 +14,6 @@
         "323175153779474432"
     ],
     "identifier": "~",
-    "delimiter": " "
+    "delimiter": " ",
+    "debug": true
 }
