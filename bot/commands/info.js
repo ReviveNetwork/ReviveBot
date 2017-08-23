@@ -18,7 +18,7 @@ async function command(params, message) {
 	let atleastOne = false;
 	if (id === message.author.id) all = true;
 	let arr = [];
-	let body = await request("http://revive-bot-discord.revive.systems/v0/discord/userinfo/" + id);
+	let body = await request('http://' + (process.env.REVIVE_API || 'localhost') + "/v0/discord/userinfo/" + id);
 	try {
 		body = JSON.parse(body)
 	} catch (e) {
