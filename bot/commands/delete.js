@@ -1,4 +1,5 @@
 const bot = require('./../bot');
+const settings = require('./../../settings.json');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
@@ -30,8 +31,15 @@ async function command(params, message) {
     if (params[0] && !isNaN(parseInt(params[0])))
         limit = parseInt(params[0]);
     if (limit > 100) {
-        await message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100").then(m => m.delete(10000));
-        return false;
+        if (!settings.owners.includes(message.author.id)) {
+            await message.channel.send("Too many messages to delete. Max messages that i can delete at once is 100").then(m => m.delete(10000));
+            return false;
+        }
+        else {
+            let num = await recursiveDelete(message.channel, limit);
+            await message.channel.send("Deleted " + num + " messages").then(m => m.delete(10000));
+            return true;
+        }
     }
     let messages = await channel.fetchMessages({ limit: limit });
     if (messages.size < 2) {
@@ -69,3 +77,18 @@ module.exports = {
     description: description,
     mod: true
 };
+
+async function recursiveDelete(channel, limit) {
+    if (limit > 100) {
+        await channel.bulkDelete(100);
+        limit -= 100;
+        let num = await recursiveDelete(channel, limit);
+        return num + 100;
+    }
+    else if (limit > 2) {
+        await channel.bulkDelete(limit);
+        return limit;
+    }
+    else
+        return 0;
+}
