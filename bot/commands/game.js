@@ -12,20 +12,12 @@ async function command(params, message) {
         await message.reply("Revive Network Members only");
         return false;
     }
-    if (settings["game-roles"][params[0]]) {
-        if (member.roles.get(settings["game-roles"][params[0]])) {
-            await message.reply('You already have the role');
-            return false;
-        }
-        await member.addRole(settings["game-roles"][params[0]]);
-        await message.reply("Added " + params[0]);
-        return true;
+    if (params[0].toLowerCase() == "all") {
+        await Promise.all(settings["game-roles"].map(r => member.addRole(r)));
+        await message.reply("done");
     }
-    else {
-        await message.reply("Not a valid game. Valid games are " + Object.keys(settings["game-roles"]).join(", "));
-        return false;
-    }
-    return false;
+    return await Promse.all(params.map(p => addGame(p.toLowerCase(), message))).reduce((p, c) => p || c);
+
 }
 /**
  * description of the command
@@ -39,3 +31,19 @@ module.exports = {
     description: description,
     custom: true
 };
+async function addGame(game, message) {
+    if (settings["game-roles"][game]) {
+        if (member.roles.get(settings["game-roles"][game])) {
+            await message.reply('You already have the role');
+            return false;
+        }
+        await member.addRole(settings["game-roles"][game]);
+        await message.reply("Added " + game);
+        return true;
+    }
+    else {
+        await message.reply("Not a valid game. Valid games are " + Object.keys(settings["game-roles"]).join(", "));
+        return false;
+    }
+    return false;
+}
