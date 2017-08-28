@@ -41,5 +41,5 @@ module.exports = {
     "dj": "dj",
     "hi": "hello",
     "access_log": "access_log",
-    "game": "game"
+    //"game": "game"
 }
