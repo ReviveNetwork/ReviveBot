@@ -18,7 +18,7 @@ async function command(params, message) {
             return false;
         }
         await member.addRole(settings["game-roles"][params[0]]);
-        await message.reply("Added " + settings["game-roles"][params[0]]);
+        await message.reply("Added " + params[0]);
         return true;
     }
     else {
