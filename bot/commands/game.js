@@ -5,6 +5,7 @@
  * @param {*message} message
  */
 const settings = require('./../../settings.json');
+const bot = require('./../bot');
 async function command(params, message) {
     const member = bot.guilds.get("184536578654339072").member(message.author);
     if (!member) {
