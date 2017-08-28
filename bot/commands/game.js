@@ -22,7 +22,7 @@ async function command(params, message) {
         return true;
     }
     else {
-        await message.reply("Game not found");
+        await message.reply("Not a valid game. Valid games are " + Object.keys(settings["game-roles"]).join(", "));
         return false;
     }
     return false;
