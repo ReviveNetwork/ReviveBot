@@ -34,11 +34,12 @@ module.exports = {
     "cmute": "cmute",
     "cunmute": "cunmute",
     "mute": "mute",
-    "fun":"fun",
+    "fun": "fun",
     "unmute": "unmute",
     "mute": "mute",
     "unmute": "unmute",
     "dj": "dj",
     "hi": "hello",
-    "access_log": "access_log"
+    "access_log": "access_log",
+    "game": "game"
 }

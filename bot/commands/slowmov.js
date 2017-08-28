@@ -8,12 +8,18 @@ const request = require('request-promise-native');
 const exec = require('child_process').exec;
 async function command(params, message) {
     if (settings.owners.includes(message.author.id)) {
-        if (settings.slowmov) {
-            settings.slowmov = false;
+        if (settings.slowmov && settings.slowmov.includes(message.channel.id)) {
+            if (typeof settings.slowmov == "object")
+                settings.slowmov.splice(settings.slowmov.indexOf(message.channel.id), 1);
+            else
+                settings.slowmov = [message.channel.id];
             await message.reply("Slowmov disabled")
         }
         else {
-            settings.slowmov = true;
+            if (typeof settings.slowmov == "object")
+                settings.slowmov.push(message.channel.id);
+            else
+                settings.slowmov = [message.channel.id];
             await message.reply("Slowmov enabled")
         }
         return true;

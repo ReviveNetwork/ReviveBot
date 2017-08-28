@@ -12,9 +12,11 @@ module.exports = async function (message) {
         message.delete();
         message.channel.overwritePermissions(muted, { 'SEND_MESSAGES': false }, "Muted").catch(() => console.log("i tried my best"));
     }
+    if (!settings.slowmov || !settings.slowmov.includes(message.channel.id)) return; //ignore if slowmov disabled
+
     if (message.channel.name.toLowerCase().includes("bot") || message.channel.name.toLowerCase().includes("command") || message.channel.name.toLowerCase().includes("test")) return;
 
-    if (settings.slowmov && message.channel.deletable && !message.member.permissions.has("MANAGE_MESSAGES") && message.channel.messages) {
+    if (message.channel.deletable && !message.member.permissions.has("MANAGE_MESSAGES") && message.channel.messages) {
         let messages = message.channel.messages.filter(m => m.author.id == message.author.id).filter(m => m.createdTimestamp > Date.now() - 12000);
         if (messages.size > 3) {
             let duration = 10000;
