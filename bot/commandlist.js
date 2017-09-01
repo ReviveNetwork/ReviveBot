@@ -21,7 +21,7 @@ module.exports = {
     "request": "request",
     "status": "status",
     "quote": "quote",
-    "emojify": "emojify",
+   // "emojify": "emojify",
     "emoji": "emoji",
     "http": "http",
     "8ball": "8ball",
