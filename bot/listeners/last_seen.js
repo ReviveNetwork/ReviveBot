@@ -1,4 +1,5 @@
 const UserLastSeen = require('./../../orm/UserLastSeen');
+const knex = require('./../../knex')
 module.exports.message = message => {
     createLastSeen(message.author.id);
 };
