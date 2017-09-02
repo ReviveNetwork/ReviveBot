@@ -2,7 +2,7 @@
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('users_last_seen', function (t) {
         t.string('id').notNull();
-        t.integer('timestamp').notNull().defaultTo(0);
+        t.timestamp('timestamp').notNull().defaultTo(0);
     });
 };
 
