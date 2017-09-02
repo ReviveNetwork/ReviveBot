@@ -3,7 +3,8 @@ module.exports = {
         require('./saveMessage'),
         require('./slowmov'),
         require('./digest'),
-        require('./help')
+        require('./help'),
+        require('./last_seen').message
     ],
     guildMemberAdd: [
         require('./welcome')
@@ -19,5 +20,8 @@ module.exports = {
     ],
     messageReactionAdd: [
         require('./reactionNav').reactionAdd
+    ],
+    presenceUpdate: [
+        require('./last_seen').presence
     ]
 }
