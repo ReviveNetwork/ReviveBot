@@ -47,6 +47,6 @@ module.exports = {
     "dj": "dj",
     "hi": "hello",
     "access_log": "access_log",
-    "al":"al"
+    "al":"access_log"
     //"game": "game"
 }
