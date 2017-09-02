@@ -7,7 +7,5 @@ module.exports.presence = member => {
 }
 function createLastSeen(userid, timestamp) {
     //console.log(`${userid} last seen at ${timestamp}`);
-    new UserLastSeen({
-        id: userid
-    }).save().catch(() => console.log("Unable to save last seen for " + userid));
+    knex('users_last_seen').insert({ id: userid }).catch(() => console.log("Unable to save last seen for " + userid));
 }
