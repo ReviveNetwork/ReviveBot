@@ -3,7 +3,7 @@ module.exports.message = message => {
     createLastSeen(message.author.id, message.createdTimestamp);
 };
 module.exports.presence = member => {
-    createLastSeen(member.author.id, Date.now());
+    createLastSeen(member.user.id, Date.now());
 }
 function createLastSeen(userid, timestamp) {
     new UserLastSeen({
