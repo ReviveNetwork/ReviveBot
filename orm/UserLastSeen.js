@@ -1,7 +1,6 @@
 const bookshelf = require('./../bookshelf');
-const Message = require('./Message')
-var User = bookshelf.Model.extend({
+var users_last_seen = bookshelf.Model.extend({
     tableName: 'users_last_seen',
     hasTimestamps: false
 });
-module.exports = User;
+module.exports = users_last_seen;
