@@ -21,10 +21,10 @@ module.exports = {
     "request": "request",
     "status": "status",
     "quote": "quote",
-    "q":"quote",
-   // "emojify": "emojify",
+    "q": "quote",
+    // "emojify": "emojify",
     "emoji": "emoji",
-    "e":"emoji",
+    "e": "emoji",
     "http": "http",
     "8ball": "8ball",
     "slowmov": "slowmov",
@@ -35,10 +35,10 @@ module.exports = {
     "query": "query",
     "cmute": "cmute",
     "cunmute": "cunmute",
-    "cm":"cmute",
-    "cum":"cunmute",
-    "m":"mute",
-    "um":"unmute",
+    "cm": "cmute",
+    "cum": "cunmute",
+    "m": "mute",
+    "um": "unmute",
     "mute": "mute",
     "fun": "fun",
     "unmute": "unmute",
@@ -47,6 +47,7 @@ module.exports = {
     "dj": "dj",
     "hi": "hello",
     "access_log": "access_log",
-    "al":"access_log"
+    "al": "access_log",
+    "whois": "whois"
     //"game": "game"
 }

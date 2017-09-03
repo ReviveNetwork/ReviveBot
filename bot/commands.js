@@ -14,7 +14,12 @@ catch (e) {
 const getcommands = () => {
     Object.entries(list).forEach(
         ([key, value]) => {
-            commands[key] = require('./commands/' + value);
+            try {
+                commands[key] = require('./commands/' + value);
+            }
+            catch (e) {
+                console.log(`unable to link ${key} command to ${value} controller:\n${e}`)
+            }
         }
     );
 }
