@@ -5,7 +5,7 @@ const request = require('request-promise-native');
  * @param {*message} message
  */
 async function command(params, message) {
-    if (params.length === 0) {
+    if (params.length < 1) {
         await message.reply("Usage:\n~whois <name> - shows what a discord name of revive user is \n(the user should have linked his forum account with his discord account)");
         return false;
     }
