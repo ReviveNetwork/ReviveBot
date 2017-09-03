@@ -18,7 +18,7 @@ async function command(params, message) {
         }
         if (body.error)
             return `${name} either does not exist or has not linked his discord account yet.`;
-        return `${name} is <@${body.id}>`;
+        return name + " has discord id: `" + body.id + "` and is called " + ((bot.users.get(body.id)) ? bot.users.get(body.id).tag : ("<@" + body.id + ">"));
     }));
     res = res.join("\n\r");
     message.reply(res);
