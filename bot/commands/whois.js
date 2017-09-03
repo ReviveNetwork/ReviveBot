@@ -1,4 +1,5 @@
 const request = require('request-promise-native');
+const bot = require('./../bot');
 /**
  * This method should return the response directly to the channel
  * @param {*string array} params 
